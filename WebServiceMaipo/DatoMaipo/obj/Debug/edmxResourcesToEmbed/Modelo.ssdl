@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="PAIS">
+    <Key>
+      <PropertyRef Name="ID_PAIS" />
+    </Key>
+    <Property Name="ID_PAIS" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_PAIS" Type="varchar2" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="ID_ROL" />
+    </Key>
+    <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_ROL" Type="varchar2" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_USUARIO" Type="varchar2" MaxLength="30" Nullable="false" />
+    <Property Name="CONTRASENIA" Type="varchar2" MaxLength="99" Nullable="false" />
+    <Property Name="IS_HABILITADO" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ID_ROL_USUARIO">
+    <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROL">
+        <PropertyRef Name="ID_ROL" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <AssociationSet Name="FK_ID_ROL_USUARIO" Association="Self.FK_ID_ROL_USUARIO">
+      <End Role="ROL" EntitySet="ROL" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
