@@ -17,7 +17,7 @@ namespace LibreriaMaipo.Modelo
 
         private String _isHabilitado;
 
-        private int _idRol;
+        private Rol _rol;
 
         public int IdUsuario
         {
@@ -67,15 +67,15 @@ namespace LibreriaMaipo.Modelo
             }
         }
 
-        public int IdRol
+        public Rol Rol
         {
             get
             {
-                return _idRol;
+                return _rol;
             }
             set
             {
-                _idRol = value;
+                _rol = value;
             }
         }
 
@@ -90,7 +90,7 @@ namespace LibreriaMaipo.Modelo
             this.NombreUsuario = String.Empty;
             this.Contrasenia = String.Empty;
             this.IsHabilitado = "0";
-            this.IdRol = 0;
+            this.Rol = new Rol();
         }
     }
 }
