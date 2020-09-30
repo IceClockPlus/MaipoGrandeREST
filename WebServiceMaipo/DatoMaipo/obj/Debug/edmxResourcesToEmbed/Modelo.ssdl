@@ -23,6 +23,7 @@
     <Property Name="CONTRASENIA" Type="varchar2" MaxLength="99" Nullable="false" />
     <Property Name="IS_HABILITADO" Type="char" MaxLength="1" Nullable="false" />
     <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TOKEN" Type="varchar2" MaxLength="50" />
   </EntityType>
   <Association Name="FK_ID_ROL_USUARIO">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />

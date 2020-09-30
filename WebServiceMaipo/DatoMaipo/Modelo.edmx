@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="PAIS">
           <Key>
             <PropertyRef Name="ID_PAIS" />
@@ -28,6 +28,7 @@
           <Property Name="CONTRASENIA" Type="varchar2" MaxLength="99" Nullable="false" />
           <Property Name="IS_HABILITADO" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOKEN" Type="varchar2" MaxLength="50" />
         </EntityType>
         <Association Name="FK_ID_ROL_USUARIO">
           <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
@@ -50,8 +51,7 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -80,6 +80,7 @@
           <Property Name="IS_HABILITADO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="ROL" Relationship="Self.FK_ID_ROL_USUARIO" FromRole="USUARIO" ToRole="ROL" />
+          <Property Name="TOKEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_ID_ROL_USUARIO">
           <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
@@ -127,6 +128,7 @@
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="Model.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
                 <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
                 <ScalarProperty Name="CONTRASENIA" ColumnName="CONTRASENIA" />

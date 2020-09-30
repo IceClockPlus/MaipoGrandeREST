@@ -19,6 +19,7 @@ namespace DatoMaipo
         public string CONTRASENIA { get; set; }
         public string IS_HABILITADO { get; set; }
         public decimal ID_ROL { get; set; }
+        public string TOKEN { get; set; }
     
         public virtual ROL ROL { get; set; }
     }

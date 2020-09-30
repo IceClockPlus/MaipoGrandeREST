@@ -20,6 +20,9 @@ namespace WebServiceMaipo
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            //Enviar los controllers en json serializado
+            var formatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            formatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
            
            
 

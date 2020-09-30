@@ -25,6 +25,7 @@
     <Property Name="IS_HABILITADO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <NavigationProperty Name="ROL" Relationship="Self.FK_ID_ROL_USUARIO" FromRole="USUARIO" ToRole="ROL" />
+    <Property Name="TOKEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_ID_ROL_USUARIO">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
