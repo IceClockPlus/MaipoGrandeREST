@@ -6,35 +6,43 @@ using System.Net.Http;
 using System.Web.Http;
 using WebServiceMaipo.Models.WS;
 using DatoMaipo;
+using LibreriaMaipo.Modelo;
 
 namespace WebServiceMaipo.Controllers
 {
     public class AccessController : ApiController
     {
-        public Reply Login([FromBody]AccessViewModel model)
+        public IHttpActionResult Login([FromBody]AccessViewModel model)
         {
             Reply reply = new Reply();
-            reply.result = 0;
+            reply.Result = 0;
 
             try
             {
                 using(DBEntities db = new DBEntities())
                 {
                     //Buscar usuario cuyo nombre y contraseña coincidan
-                    var lst = db.USUARIO.Where(x => 
-                    x.NOMBRE_USUARIO == model.nombreUsuario && x.CONTRASENIA == model.contrasenia);
+                    var lst = db.USUARIO.Include("ROL").Where(x => 
+                    x.NOMBRE_USUARIO == model.NombreUsuario && x.CONTRASENIA == model.Contrasenia);
 
                     //Revisar si existe el usuario
                     if (lst.Count() > 0)
                     {
-                        reply.result = 1;
-                        //Generar token
-                        reply.data = Guid.NewGuid().ToString();
+                        reply.Result = 1;
 
-                        //Obtener usuario
+                        //Obtener usuario de la consulta
                         USUARIO usr = lst.First();
+                        //Creacion de objeto usuario con los de usr
+                        Usuario usuario = new Usuario();
+                        usuario.IdUsuario = (int)usr.ID_USUARIO;
+                        usuario.NombreUsuario = usr.NOMBRE_USUARIO;
+                        usuario.IsHabilitado = usr.IS_HABILITADO;
+                        usuario.Token = Guid.NewGuid().ToString();
+                        usuario.NombreRol = usr.ROL.NOMBRE_ROL;
+                        reply.Data = usuario;
+
                         //Ingresar el token generado en el usuario
-                        usr.TOKEN = (String)reply.data;
+                        usr.TOKEN = usuario.Token;
                         //Se realiza la modificación
                         db.Entry(usr).State = System.Data.EntityState.Modified;
                         //Confirmación del cambio
@@ -42,7 +50,7 @@ namespace WebServiceMaipo.Controllers
                     }
                     else
                     {
-                        reply.message = "Usuario o contraseña incorrecto";
+                        return Unauthorized();
                     }
 
                 }
@@ -51,10 +59,12 @@ namespace WebServiceMaipo.Controllers
             catch (Exception ex)
             {
 
-                reply.message = "Ocurrio un error inesperado";
+                reply.Message = "Ocurrio un error inesperado";
             }
-            return reply;
+            return Ok(reply);
         }
+
+        
 
     }
 }

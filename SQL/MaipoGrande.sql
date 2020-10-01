@@ -30,10 +30,9 @@ CHECK(Is_Habilitado IN('0','1'));
 INSERT ALL
 INTO ROL VALUES(1,'Administrador')
 INTO ROL VALUES(2,'Cliente Interno')
-INTO ROL VALUES(3,'Cliente Externo')
-INTO ROL VALUES(4,'Productor')
-INTO ROL VALUES(5,'Transportista')
-INTO ROL VALUES(6,'Consultor')
+INTO ROL VALUES(3,'Productor')
+INTO ROL VALUES(4,'Transportista')
+INTO ROL VALUES(5,'Consultor')
 SELECT 1 FROM DUAL;
 
 --SECUENCIA PARA LAS ID DE USUARIO
@@ -44,8 +43,12 @@ NOCYCLE
 NOCACHE;
 
 
-INSERT INTO USUARIO VALUES(seq_usuario.nextval,'AleAravenam','supergrenade','1',1);
-INSERT INTO USUARIO VALUES(seq_usuario.nextval,'MatPacheco','hollowknight','1',3);
+INSERT INTO USUARIO VALUES(seq_usuario.nextval,'AleAravenam','supergrenade','1',null,1);
+INSERT INTO USUARIO VALUES(seq_usuario.nextval,'MatPacheco','1234','1','1',2);
+INSERT INTO USUARIO VALUES(seq_usuario.nextval,'MatAstudillo','123','1','1',3);
+INSERT INTO USUARIO VALUES(seq_usuario.nextval,'CamHernandez','123','1','1',4);
+INSERT INTO USUARIO VALUES(seq_usuario.nextval,'NicoRiveras','123','1','1',5);
+
 --Insercion de Paises
 
 

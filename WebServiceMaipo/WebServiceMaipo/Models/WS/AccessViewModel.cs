@@ -10,7 +10,7 @@ namespace WebServiceMaipo.Models.WS
     /// </summary>
     public class AccessViewModel
     {
-        public String nombreUsuario { get; set; }
-        public String contrasenia { get; set; }
+        public String NombreUsuario { get; set; }
+        public String Contrasenia { get; set; }
     }
 }

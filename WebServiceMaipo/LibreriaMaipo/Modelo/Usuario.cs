@@ -19,7 +19,7 @@ namespace LibreriaMaipo.Modelo
 
         private String _token;
 
-        private Rol _rol;
+        private String _nombreRol;
 
         public int IdUsuario
         {
@@ -74,15 +74,15 @@ namespace LibreriaMaipo.Modelo
             get { return _token; }
             set { _token = value; }
         }
-        public Rol Rol
+        public String NombreRol
         {
             get
             {
-                return _rol;
+                return _nombreRol;
             }
             set
             {
-                _rol = value;
+                _nombreRol = value;
             }
         }
 
@@ -98,7 +98,7 @@ namespace LibreriaMaipo.Modelo
             this.Contrasenia = String.Empty;
             this.IsHabilitado = "0";
             this.Token = String.Empty;
-            this.Rol = new Rol();
+            this.NombreRol = String.Empty;
         }
     }
 }

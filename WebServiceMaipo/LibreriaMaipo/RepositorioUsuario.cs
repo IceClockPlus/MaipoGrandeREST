@@ -24,8 +24,7 @@ namespace LibreriaMaipo
                     u.NombreUsuario = x.NOMBRE_USUARIO;
                     u.Contrasenia = x.CONTRASENIA;
                     u.IsHabilitado = x.IS_HABILITADO;
-                    u.Rol.IdRol = (int)x.ID_ROL;
-                    u.Rol.NombreRol = x.ROL.NOMBRE_ROL;
+                    u.NombreRol = x.ROL.NOMBRE_ROL;
                     lista.Add(u);
                 }
 
@@ -53,8 +52,7 @@ namespace LibreriaMaipo
                 user.NombreUsuario = u.NOMBRE_USUARIO;
                 user.Contrasenia = u.CONTRASENIA;
                 user.IsHabilitado = u.IS_HABILITADO;
-                user.Rol.IdRol = (int)u.ID_ROL;
-                user.Rol.NombreRol = u.ROL.NOMBRE_ROL;
+                user.NombreRol = u.ROL.NOMBRE_ROL;
 
 
             }
