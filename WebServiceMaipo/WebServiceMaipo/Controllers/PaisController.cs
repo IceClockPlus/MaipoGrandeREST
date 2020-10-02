@@ -10,10 +10,10 @@ namespace WebServiceMaipo.Controllers
 {
     public class PaisController : ApiController
     {
-        public IEnumerable<Pais> Get()
-        {
-            var lista = RepositorioPaises.listarPaises();
-            return lista;
-        }
+        //public IEnumerable<Pais> Get()
+        //{
+            //var lista = RepositorioPaises.listarPaises();
+            //return lista;
+        //}
     }
 }

@@ -53,9 +53,6 @@
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositorioPaises.cs" />
-    <Compile Include="RepositorioUsuario.cs" />
-    <Compile Include="Tools\CommonBC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,0 +1,26 @@
+﻿<Page x:Class="MaipoGrandeApp.AgregarUsuario"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MaipoGrandeApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="364" d:DesignWidth="800"
+      Title="AgregarUsuario">
+
+    <Grid Background="White">
+        <DataGrid x:Name="dataPerfiles" HorizontalAlignment="Left" Height="195" Margin="22,27,0,0" VerticalAlignment="Top" Width="249"/>
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="382,27,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="538,27,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
+        <Button x:Name="btnCargar" Content="Cargar" HorizontalAlignment="Left" Margin="382,91,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="538,91,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
+        <TextBox x:Name="txtAgregarUsuario"  HorizontalAlignment="Left" Height="23" Margin="362,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtAgregarContraseña" HorizontalAlignment="Left" Height="23" Margin="522,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.406,0.585"/>
+        <CheckBox x:Name="CheckHabilitar" Content="Habilitar Usuario" HorizontalAlignment="Left" Margin="522,269,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CbRol" HorizontalAlignment="Left" Margin="362,261,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbRol_SelectionChanged">
+            <ComboBoxItem Content="Seleccionar" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <Label x:Name="lbAgregarUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="362,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbAgregarContraseña" Content="Contraseña" HorizontalAlignment="Left" Margin="522,161,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

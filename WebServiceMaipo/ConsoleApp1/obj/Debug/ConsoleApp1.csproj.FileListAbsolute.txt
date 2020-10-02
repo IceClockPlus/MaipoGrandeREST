@@ -38,12 +38,9 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\ConsoleApp1.p
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\EntityFramework.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\LibreriaMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\Oracle.ManagedDataAccess.dll
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\DatoMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\LibreriaMaipo.pdb
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\LibreriaMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\EntityFramework.xml
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\DatoMaipo.pdb
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\bin\Debug\DatoMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete

@@ -10,8 +10,6 @@ namespace WebServiceMaipo.Models.WS
     /// </summary>
     public class Reply
     {
-        public int Result { get; set; }
         public object Data { get; set; }
-        public String Message { get; set; }
     }
 }
