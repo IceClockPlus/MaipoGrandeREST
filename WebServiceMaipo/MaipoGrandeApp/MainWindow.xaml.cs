@@ -43,59 +43,83 @@ namespace MaipoGrandeApp
             request.AddParameter("contrasenia", txtContraseña.Password);
             IRestResponse response = client.Execute(request);
             var result = response.Content;
+
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-
+                //Convertir datos Json en el objeto usuario
                 var usuario = JsonConvert.DeserializeObject<Usuario>(result);
-                
-                
-                    if (usuario.NombreRol == "Administrador")
-                    {
-                        if (usuario.IsHabilitado == "1")
-                        {
-                            this.Visibility = Visibility.Hidden;
-                            MenuPrincipal menu = new MenuPrincipal(usuario);
-                            menu.Title = "Administrador";
-                            menu.Visibility = Visibility.Visible;
-                            menu.btnReportes.Visibility = Visibility.Hidden;
-                        }
-                        else
-                        {
-                            await this.ShowMessageAsync("Error", "Usuario no habilitado");
-                        }
 
-                    }
-                    else if (usuario.NombreRol == "Consultor")
+                //Validar que el usuario este habilitado
+                if (this.VerificarHabilitado(usuario.IsHabilitado) == true)
+                {
+                    //Generar la vista en base al rol del usuario conectado
+                    switch (usuario.NombreRol)
                     {
-                        if (usuario.IsHabilitado == "1")
-                        {
-                            this.Visibility = Visibility.Hidden;
-                            MenuPrincipal menu = new MenuPrincipal(usuario);
-                            menu.Title = "Consultor";
-                            menu.Visibility = Visibility.Visible;
-                            menu.btnGrafico.Visibility = Visibility.Hidden;
-                            menu.btnPerfilUsuario.Visibility = Visibility.Hidden;
-                            menu.btnPerfiTransporte.Visibility = Visibility.Hidden;
-                            menu.btnTienda.Visibility = Visibility.Hidden;
-                        }
-                        else
-                        {
-                            await this.ShowMessageAsync("Error", "Usuario no habilitado");
-                        }
-
+                        case "Administrador":
+                            this.MostrarVistaAdmin(usuario);
+                            break;
+                        case "Consultor":
+                            this.MostrarVistaConsultor(usuario);
+                            break;
+                        default:
+                            await this.ShowMessageAsync("Error", "Usuario no permitido");
+                            break;
                     }
-                    else
-                    {
-                        await this.ShowMessageAsync("Error", "Usuario con rol no valido");
-                    }
-                
-
+                }
+                else
+                {
+                    await this.ShowMessageAsync("Error", "Usuario no habilitado");
+                }
+        
             }
             else
             {
                 await this.ShowMessageAsync("Inicio sesion", "Datos no validos");
             }
 
+        }
+
+        /// <summary>
+        /// Valida si el usuario esta habilitado
+        /// </summary>
+        /// <param name="habilitado"></param>
+        /// <returns></returns>
+        public Boolean VerificarHabilitado(string habilitado)
+        {
+            if (habilitado.Equals("0"))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        /// <summary>
+        /// Generar la vista para el usuario administrador
+        /// </summary>
+        /// <param name="usr"></param>
+        public void MostrarVistaAdmin(Usuario usr)
+        {
+            this.Visibility = Visibility.Hidden;
+            MenuPrincipal menu = new MenuPrincipal(usr);
+            menu.Title = "Administrador";
+            menu.Visibility = Visibility.Visible;
+            menu.btnReportes.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Generar vista para el usuario consultor
+        /// </summary>
+        /// <param name="usr"></param>
+        public void MostrarVistaConsultor(Usuario usr)
+        {
+            this.Visibility = Visibility.Hidden;
+            MenuPrincipal menu = new MenuPrincipal(usr);
+            menu.Title = "Consultor";
+            menu.Visibility = Visibility.Visible;
+            menu.btnGrafico.Visibility = Visibility.Hidden;
+            menu.btnPerfilUsuario.Visibility = Visibility.Hidden;
+            menu.btnPerfiTransporte.Visibility = Visibility.Hidden;
+            menu.btnTienda.Visibility = Visibility.Hidden;
         }
     }
 }

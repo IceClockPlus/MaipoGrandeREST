@@ -211,14 +211,6 @@
       <Project>{edf8f873-3ede-4e4a-bfce-9641648c8945}</Project>
       <Name>LibreriaMaipo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MaipoGrandeSolucion\MaipoGrandeSolucion.Datos\MaipoGrandeSolucion.Datos.csproj">
-      <Project>{0610a1ab-5f66-49b2-bf0a-429b25158b88}</Project>
-      <Name>MaipoGrandeSolucion.Datos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MaipoGrandeSolucion\MaipoGrandeSolucion.WebService\MaipoGrandeSolucion.WebService.csproj">
-      <Project>{00753c76-71cd-498e-87f5-9593e37dbae9}</Project>
-      <Name>MaipoGrandeSolucion.WebService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imagenes\Reportes.jpeg" />

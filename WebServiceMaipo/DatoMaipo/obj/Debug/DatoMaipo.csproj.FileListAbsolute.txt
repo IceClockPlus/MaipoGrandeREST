@@ -28,3 +28,4 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.cspro
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.csproj.CopyComplete
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.csprojAssemblyReference.cache
