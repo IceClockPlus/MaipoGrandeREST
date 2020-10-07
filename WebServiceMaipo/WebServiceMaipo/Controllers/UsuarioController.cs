@@ -11,11 +11,11 @@ namespace WebServiceMaipo.Controllers
 {
     public class UsuarioController : ApiController
     {
-        public IEnumerable<Usuario> get()
-        {
-            var list = RepositorioUsuario.listar();
-            return list;
-        }
+        //public IEnumerable<Usuario> get()
+        //{
+         //   var list = RepositorioUsuario.listar();
+          //  return list;
+        //}
 
     }
 }

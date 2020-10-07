@@ -15,7 +15,7 @@ namespace WebServiceMaipo.Controllers
         public IHttpActionResult Login([FromBody]AccessViewModel model)
         {
             Reply reply = new Reply();
-            reply.Result = 0;
+            Usuario usuario = new Usuario();
 
             try
             {
@@ -28,12 +28,10 @@ namespace WebServiceMaipo.Controllers
                     //Revisar si existe el usuario
                     if (lst.Count() > 0)
                     {
-                        reply.Result = 1;
 
                         //Obtener usuario de la consulta
                         USUARIO usr = lst.First();
                         //Creacion de objeto usuario con los de usr
-                        Usuario usuario = new Usuario();
                         usuario.IdUsuario = (int)usr.ID_USUARIO;
                         usuario.NombreUsuario = usr.NOMBRE_USUARIO;
                         usuario.IsHabilitado = usr.IS_HABILITADO;
@@ -58,10 +56,9 @@ namespace WebServiceMaipo.Controllers
             }
             catch (Exception ex)
             {
-
-                reply.Message = "Ocurrio un error inesperado";
+                ex.Message.ToString();
             }
-            return Ok(reply);
+            return Ok(usuario);
         }
 
         
