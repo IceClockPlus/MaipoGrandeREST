@@ -37,8 +37,9 @@ namespace MaipoGrandeApp
         {
             RestClient client = new RestClient("http://localhost:54192/api");
 
-
+            //Creacion de la solicitud rest
             RestRequest request = new RestRequest("/Access/Login", Method.POST);
+            //Parametros para iniciar sesion
             request.AddParameter("nombreUsuario", txtUsuario.Text);
             request.AddParameter("contrasenia", txtContraseña.Password);
             IRestResponse response = client.Execute(request);

@@ -12,21 +12,16 @@ namespace DatoMaipo
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class ESTADOPEDIDO
     {
-        public USUARIO()
+        public ESTADOPEDIDO()
         {
-            this.CLIENTE = new HashSet<CLIENTE>();
+            this.PEDIDO = new HashSet<PEDIDO>();
         }
     
-        public decimal ID_USUARIO { get; set; }
-        public string NOMBRE_USUARIO { get; set; }
-        public string CONTRASENIA { get; set; }
-        public string IS_HABILITADO { get; set; }
-        public decimal ID_ROL { get; set; }
-        public string TOKEN { get; set; }
+        public decimal IDESTADOPEDIDO { get; set; }
+        public string DESCRIPCIONESTADO { get; set; }
     
-        public virtual ROL ROL { get; set; }
-        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
+        public virtual ICollection<PEDIDO> PEDIDO { get; set; }
     }
 }

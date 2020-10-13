@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatoMaipo", "DatoMaipo\Dato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaipoGrandeApp", "MaipoGrandeApp\MaipoGrandeApp.csproj", "{4D30B4F3-9C2E-49B0-80C4-18C8C0B27E61}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logs", "Logs", "{B3279C91-E903-4572-A78A-1660FC06B69B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

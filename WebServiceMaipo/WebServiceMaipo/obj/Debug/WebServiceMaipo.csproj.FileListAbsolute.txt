@@ -283,6 +283,7 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\vbc.rsp
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\VBCSCompiler.exe
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\VBCSCompiler.exe.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\Antlr3.Runtime.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\DatoMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\EntityFramework.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\LibreriaMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -306,7 +307,8 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\System.Web.WebP
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\System.Web.WebPages.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\System.Web.WebPages.Razor.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\WebGrease.dll
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\DatoMaipo.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\DatoMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\DatoMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\LibreriaMaipo.pdb
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\LibreriaMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\EntityFramework.xml
@@ -329,8 +331,6 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\System.Web.WebP
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\System.Web.WebPages.Razor.xml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\Antlr3.Runtime.pdb
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\DatoMaipo.pdb
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\DatoMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\es\System.Net.Http.Formatting.resources.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\es\System.Web.Helpers.resources.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\es\System.Web.Http.resources.dll

@@ -7,6 +7,7 @@ using System.Web.Http;
 using WebServiceMaipo.Models.WS;
 using DatoMaipo;
 using LibreriaMaipo.Modelo;
+using System.Data.Entity;
 
 namespace WebServiceMaipo.Controllers
 {
@@ -21,6 +22,7 @@ namespace WebServiceMaipo.Controllers
             {
                 using(DBEntities db = new DBEntities())
                 {
+                    
                     //Buscar usuario cuyo nombre y contraseña coincidan
                     var lst = db.USUARIO.Include("ROL").Where(x => 
                     x.NOMBRE_USUARIO == model.NombreUsuario && x.CONTRASENIA == model.Contrasenia);

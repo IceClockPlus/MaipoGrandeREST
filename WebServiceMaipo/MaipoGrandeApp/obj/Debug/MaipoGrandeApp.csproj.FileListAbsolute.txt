@@ -154,14 +154,14 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\ControlzEx
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\LibreriaMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\MahApps.Metro.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Windows.Interactivity.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\DatoMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\LibreriaMaipo.pdb
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\LibreriaMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\ControlzEx.pdb
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\EntityFramework.xml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\MahApps.Metro.pdb
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\MahApps.Metro.xml
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\Newtonsoft.Json.xml
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\RestSharp.xml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\DatoMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\DatoMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MaipoGrandeApp.csprojAssemblyReference.cache
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\Resources\Icons.baml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\Resources\IconsNonShared.baml

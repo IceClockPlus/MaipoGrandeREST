@@ -9,6 +9,16 @@
         <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.USUARIO" Width="2" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_ID_ROL_USUARIO" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.CLIENTE" Width="1.5" PointX="5.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.ESTADOPEDIDO" Width="1.5" PointX="6.125" PointY="5.375" />
+        <EntityTypeShape EntityType="Model.PEDIDO" Width="1.5" PointX="8" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.DETALLEPEDIDO" Width="1.5" PointX="10.25" PointY="1.125" />
+        <AssociationConnector Association="Model.FK_IDCLIENTE_PEDIDO" />
+        <AssociationConnector Association="Model.FK_IDUSUARIO_CLIENTE" />
+        <AssociationConnector Association="Model.FK_ESTADOPEDIDO_PEDIDO" />
+        <AssociationConnector Association="Model.FK_IDPEDIDO_DETALLEPEDIDO" />
+        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="10.75" PointY="4.875" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTO_DETALLEPEDIDO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

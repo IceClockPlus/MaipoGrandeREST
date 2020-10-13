@@ -29,5 +29,68 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTE">
+      <EntityTypeMapping TypeName="Model.CLIENTE">
+        <MappingFragment StoreEntitySet="CLIENTE">
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="TELEFONOCLIENTE" ColumnName="TELEFONOCLIENTE" />
+          <ScalarProperty Name="DIRECCIONCLIENTE" ColumnName="DIRECCIONCLIENTE" />
+          <ScalarProperty Name="APELLIDOCLIENTE" ColumnName="APELLIDOCLIENTE" />
+          <ScalarProperty Name="NOMBRECLIENTE" ColumnName="NOMBRECLIENTE" />
+          <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADOPEDIDO">
+      <EntityTypeMapping TypeName="Model.ESTADOPEDIDO">
+        <MappingFragment StoreEntitySet="ESTADOPEDIDO">
+          <ScalarProperty Name="DESCRIPCIONESTADO" ColumnName="DESCRIPCIONESTADO" />
+          <ScalarProperty Name="IDESTADOPEDIDO" ColumnName="IDESTADOPEDIDO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEDIDO">
+      <EntityTypeMapping TypeName="Model.PEDIDO">
+        <MappingFragment StoreEntitySet="PEDIDO">
+          <ScalarProperty Name="IDESTADOPEDIDO" ColumnName="IDESTADOPEDIDO" />
+          <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+          <ScalarProperty Name="DIRECCIONPEDIDO" ColumnName="DIRECCIONPEDIDO" />
+          <ScalarProperty Name="FECHAENTREGA" ColumnName="FECHAENTREGA" />
+          <ScalarProperty Name="FECHAPEDIDO" ColumnName="FECHAPEDIDO" />
+          <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLEPEDIDO">
+      <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
+        <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+          <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTO">
+      <EntityTypeMapping TypeName="Model.PRODUCTO">
+        <MappingFragment StoreEntitySet="PRODUCTO">
+          <ScalarProperty Name="BANNERPRODUCTO" ColumnName="BANNERPRODUCTO" />
+          <ScalarProperty Name="IMAGENPRODUCTO" ColumnName="IMAGENPRODUCTO" />
+          <ScalarProperty Name="PRECIOESTIMADO" ColumnName="PRECIOESTIMADO" />
+          <ScalarProperty Name="NOMBREPRODUCTO" ColumnName="NOMBREPRODUCTO" />
+          <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PRODUCTO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Model.Store.SP_INSERT_PRODUCTO">
+            <ScalarProperty Name="BANNERPRODUCTO" ParameterName="BANNERPRODUCTO" />
+            <ScalarProperty Name="IMAGENPRODUCTO" ParameterName="IMAGENPRODUCTO" />
+            <ScalarProperty Name="PRECIOESTIMADO" ParameterName="PRECIOESTIMADO" />
+            <ScalarProperty Name="NOMBREPRODUCTO" ParameterName="NOMBREPRODUCTO" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_INSERT_PRODUCTO" FunctionName="Model.Store.SP_INSERT_PRODUCTO" />
   </EntityContainerMapping>
 </Mapping>

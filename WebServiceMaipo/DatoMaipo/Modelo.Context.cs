@@ -12,6 +12,9 @@ namespace DatoMaipo
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class DBEntities : DbContext
     {
@@ -28,5 +31,31 @@ namespace DatoMaipo
         public DbSet<PAIS> PAIS { get; set; }
         public DbSet<ROL> ROL { get; set; }
         public DbSet<USUARIO> USUARIO { get; set; }
+        public DbSet<CLIENTE> CLIENTE { get; set; }
+        public DbSet<ESTADOPEDIDO> ESTADOPEDIDO { get; set; }
+        public DbSet<PEDIDO> PEDIDO { get; set; }
+        public DbSet<DETALLEPEDIDO> DETALLEPEDIDO { get; set; }
+        public DbSet<PRODUCTO> PRODUCTO { get; set; }
+    
+        public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
+        {
+            var nOMBREPRODUCTOParameter = nOMBREPRODUCTO != null ?
+                new ObjectParameter("NOMBREPRODUCTO", nOMBREPRODUCTO) :
+                new ObjectParameter("NOMBREPRODUCTO", typeof(string));
+    
+            var pRECIOESTIMADOParameter = pRECIOESTIMADO.HasValue ?
+                new ObjectParameter("PRECIOESTIMADO", pRECIOESTIMADO) :
+                new ObjectParameter("PRECIOESTIMADO", typeof(decimal));
+    
+            var iMAGENPRODUCTOParameter = iMAGENPRODUCTO != null ?
+                new ObjectParameter("IMAGENPRODUCTO", iMAGENPRODUCTO) :
+                new ObjectParameter("IMAGENPRODUCTO", typeof(string));
+    
+            var bANNERPRODUCTOParameter = bANNERPRODUCTO != null ?
+                new ObjectParameter("BANNERPRODUCTO", bANNERPRODUCTO) :
+                new ObjectParameter("BANNERPRODUCTO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PRODUCTO", nOMBREPRODUCTOParameter, pRECIOESTIMADOParameter, iMAGENPRODUCTOParameter, bANNERPRODUCTOParameter);
+        }
     }
 }

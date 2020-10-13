@@ -1,11 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="IDCLIENTE" />
+    </Key>
+    <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRECLIENTE" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="APELLIDOCLIENTE" Type="varchar2" MaxLength="50" />
+    <Property Name="DIRECCIONCLIENTE" Type="varchar2" MaxLength="40" Nullable="false" />
+    <Property Name="TELEFONOCLIENTE" Type="varchar2" MaxLength="12" Nullable="false" />
+    <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="DETALLEPEDIDO">
+    <Key>
+      <PropertyRef Name="IDPEDIDO" />
+      <PropertyRef Name="IDPRODUCTO" />
+      <PropertyRef Name="CANTIDAD" />
+    </Key>
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESTADOPEDIDO">
+    <Key>
+      <PropertyRef Name="IDESTADOPEDIDO" />
+    </Key>
+    <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="20" Nullable="false" />
+  </EntityType>
   <EntityType Name="PAIS">
     <Key>
       <PropertyRef Name="ID_PAIS" />
     </Key>
     <Property Name="ID_PAIS" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PAIS" Type="varchar2" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PEDIDO">
+    <Key>
+      <PropertyRef Name="IDPEDIDO" />
+    </Key>
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FECHAPEDIDO" Type="date" Nullable="false" />
+    <Property Name="FECHAENTREGA" Type="date" />
+    <Property Name="DIRECCIONPEDIDO" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="IDPRODUCTO" />
+    </Key>
+    <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBREPRODUCTO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="PRECIOESTIMADO" Type="float" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="IMAGENPRODUCTO" Type="varchar2" MaxLength="500" />
+    <Property Name="BANNERPRODUCTO" Type="varchar2" MaxLength="500" />
   </EntityType>
   <EntityType Name="ROL">
     <Key>
@@ -25,6 +76,18 @@
     <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TOKEN" Type="varchar2" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_ESTADOPEDIDO_PEDIDO">
+    <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOPEDIDO">
+        <PropertyRef Name="IDESTADOPEDIDO" />
+      </Principal>
+      <Dependent Role="PEDIDO">
+        <PropertyRef Name="IDESTADOPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ID_ROL_USUARIO">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
@@ -37,13 +100,98 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDCLIENTE_PEDIDO">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="IDCLIENTE" />
+      </Principal>
+      <Dependent Role="PEDIDO">
+        <PropertyRef Name="IDCLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPEDIDO_DETALLEPEDIDO">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="DETALLEPEDIDO" Type="Self.DETALLEPEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="DETALLEPEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTO_DETALLEPEDIDO">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="DETALLEPEDIDO" Type="Self.DETALLEPEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="DETALLEPEDIDO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDUSUARIO_CLIENTE">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="CLIENTE">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
+    <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
+    <Parameter Name="IMAGENPRODUCTO" Type="varchar2" Mode="In" />
+    <Parameter Name="BANNERPRODUCTO" Type="varchar2" Mode="In" />
+  </Function>
   <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ROL" EntityType="Self.ROL" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" store:Type="Tables" store:Schema="FERIAVIRTUAL">
+      <DefiningQuery>SELECT 
+"DETALLEPEDIDO"."IDPEDIDO" AS "IDPEDIDO", 
+"DETALLEPEDIDO"."IDPRODUCTO" AS "IDPRODUCTO", 
+"DETALLEPEDIDO"."CANTIDAD" AS "CANTIDAD"
+FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Self.FK_ESTADOPEDIDO_PEDIDO">
+      <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
     <AssociationSet Name="FK_ID_ROL_USUARIO" Association="Self.FK_ID_ROL_USUARIO">
       <End Role="ROL" EntitySet="ROL" />
       <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDCLIENTE_PEDIDO" Association="Self.FK_IDCLIENTE_PEDIDO">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPEDIDO_DETALLEPEDIDO" Association="Self.FK_IDPEDIDO_DETALLEPEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTO_DETALLEPEDIDO" Association="Self.FK_IDPRODUCTO_DETALLEPEDIDO">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDUSUARIO_CLIENTE" Association="Self.FK_IDUSUARIO_CLIENTE">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

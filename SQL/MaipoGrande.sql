@@ -7,6 +7,7 @@ CREATE TABLE Usuario(
 Id_Usuario INTEGER PRIMARY KEY,
 Nombre_Usuario VARCHAR2(30) UNIQUE NOT NULL,
 Contrasenia VARCHAR2(99) NOT NULL,
+Correo VARCHAR2(50) NOT NULL,
 Is_Habilitado CHAR(1) NOT NULL,
 Token VARCHAR2(50),
 Id_Rol INTEGER NOT NULL
@@ -29,7 +30,7 @@ CHECK(Is_Habilitado IN('0','1'));
 --Inserción de los roles del sistema--
 INSERT ALL
 INTO ROL VALUES(1,'Administrador')
-INTO ROL VALUES(2,'Cliente Interno')
+INTO ROL VALUES(2,'Cliente')
 INTO ROL VALUES(3,'Productor')
 INTO ROL VALUES(4,'Transportista')
 INTO ROL VALUES(5,'Consultor')
