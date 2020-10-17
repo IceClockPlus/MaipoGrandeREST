@@ -36,6 +36,8 @@ namespace DatoMaipo
         public DbSet<PEDIDO> PEDIDO { get; set; }
         public DbSet<DETALLEPEDIDO> DETALLEPEDIDO { get; set; }
         public DbSet<PRODUCTO> PRODUCTO { get; set; }
+        public DbSet<CONTRATO> CONTRATO { get; set; }
+        public DbSet<PRODUCTOR> PRODUCTOR { get; set; }
     
         public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
         {
@@ -56,6 +58,35 @@ namespace DatoMaipo
                 new ObjectParameter("BANNERPRODUCTO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PRODUCTO", nOMBREPRODUCTOParameter, pRECIOESTIMADOParameter, iMAGENPRODUCTOParameter, bANNERPRODUCTOParameter);
+        }
+    
+        public virtual int SP_INSERT_PEDIDO(Nullable<System.DateTime> fECHAPEDIDO, Nullable<System.DateTime> fECHAENTREGA, string dIRECCIONPEDIDO, Nullable<decimal> iDCLIENTE, Nullable<decimal> iDESTADOPEDIDO, string cIUDAD, ObjectParameter rESULTADO)
+        {
+            var fECHAPEDIDOParameter = fECHAPEDIDO.HasValue ?
+                new ObjectParameter("FECHAPEDIDO", fECHAPEDIDO) :
+                new ObjectParameter("FECHAPEDIDO", typeof(System.DateTime));
+    
+            var fECHAENTREGAParameter = fECHAENTREGA.HasValue ?
+                new ObjectParameter("FECHAENTREGA", fECHAENTREGA) :
+                new ObjectParameter("FECHAENTREGA", typeof(System.DateTime));
+    
+            var dIRECCIONPEDIDOParameter = dIRECCIONPEDIDO != null ?
+                new ObjectParameter("DIRECCIONPEDIDO", dIRECCIONPEDIDO) :
+                new ObjectParameter("DIRECCIONPEDIDO", typeof(string));
+    
+            var iDCLIENTEParameter = iDCLIENTE.HasValue ?
+                new ObjectParameter("IDCLIENTE", iDCLIENTE) :
+                new ObjectParameter("IDCLIENTE", typeof(decimal));
+    
+            var iDESTADOPEDIDOParameter = iDESTADOPEDIDO.HasValue ?
+                new ObjectParameter("IDESTADOPEDIDO", iDESTADOPEDIDO) :
+                new ObjectParameter("IDESTADOPEDIDO", typeof(decimal));
+    
+            var cIUDADParameter = cIUDAD != null ?
+                new ObjectParameter("CIUDAD", cIUDAD) :
+                new ObjectParameter("CIUDAD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PEDIDO", fECHAPEDIDOParameter, fECHAENTREGAParameter, dIRECCIONPEDIDOParameter, iDCLIENTEParameter, iDESTADOPEDIDOParameter, cIUDADParameter, rESULTADO);
         }
     }
 }

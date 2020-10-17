@@ -265,3 +265,131 @@ INTO PAIS VALUES(242, 'Sáhara Occidental')
 INTO PAIS VALUES(243, 'Yemen')
 INTO PAIS VALUES(246, 'Puerto Rico')
 SELECT 1 FROM DUAL;
+
+
+/*Creacion de la tabla de clientes*/
+CREATE TABLE Cliente(
+IdCliente INTEGER PRIMARY KEY,
+NombreCliente VARCHAR2(50) NOT NULL,
+ApellidoCliente VARCHAR2(50),
+DireccionCliente VARCHAR2(40) NOT NULL,
+TelefonoCliente VARCHAR2(12) NOT NULL,
+IdUsuario INTEGER NOT NULL
+);
+
+/*Llave foranea de la tabla cliente con Usuario*/
+ALTER TABLE Cliente 
+ADD CONSTRAINT fk_idusuario_cliente
+FOREIGN KEY(IdUsuario) REFERENCES Usuario(Id_Usuario);
+
+/*Creacion de tabla del estado de pedidos*/
+CREATE TABLE EstadoPedido(
+IdEstadoPedido INTEGER NOT NULL,
+DescripcionEstado VARCHAR2(20) NOT NULL
+);
+
+/*Primary key de EstadoPedido*/
+ALTER TABLE EstadoPedido
+ADD CONSTRAINT pk_idestadopedido
+PRIMARY KEY(IdEstadoPedido);
+
+/*Creacion de la tabla de productos*/
+CREATE TABLE Producto(
+IdProducto INTEGER PRIMARY KEY,
+NombreProducto VARCHAR2(25) NOT NULL,
+PrecioEstimado FLOAT(10) NOT NULL,
+ImagenProducto VARCHAR2(500),
+BannerProducto VARCHAR2(500)
+);
+
+
+/*Creacion de la tabla de los pedidos*/
+CREATE TABLE Pedido(
+IdPedido INTEGER PRIMARY KEY,
+FechaPedido DATE NOT NULL,
+FechaEntrega DATE,
+DireccionPedido VARCHAR2(50) NOT NULL,
+IdCliente INTEGER NOT NULL,
+IdEstadoPedido INTEGER NOT NULL
+);
+/*Llave foranea de la tabla Pedido con EstadoPedido*/
+ALTER TABLE Pedido 
+ADD CONSTRAINT fk_estadopedido_pedido
+FOREIGN KEY(IdEstadoPedido) REFERENCES EstadoPedido(IdEstadoPedido);
+
+/*Llave foranea de la tabla Pedido con Cliente*/
+ALTER TABLE Pedido
+ADD CONSTRAINT fk_idcliente_pedido
+FOREIGN KEY(IdCliente) REFERENCES Cliente(IdCliente);
+
+
+/*Creacion de la tabla del detalle de los pedidos*/
+CREATE TABLE DetallePedido(
+IdPedido INTEGER NOT NULL,
+IdProducto INTEGER NOT NULL,
+Cantidad INTEGER NOT NULL
+);
+
+/*Llave foranea de la tabla DetallePedido con Pedido*/
+ALTER TABLE DetallePedido
+ADD CONSTRAINT fk_idpedido_detallepedido
+FOREIGN KEY(IdPedido) REFERENCES Pedido(IdPedido);
+
+/*Llave foranea de la tabla DetallePedido con Producto*/
+ALTER TABLE DetallePedido
+ADD CONSTRAINT fk_idproducto_detallepedido
+FOREIGN KEY(IdProducto) REFERENCES Producto(IdProducto);
+
+--Secuencia de IdProducto
+CREATE SEQUENCE SEQ_PRODUCTO
+INCREMENT BY 1
+START WITH 1
+NOCYCLE
+NOCACHE;
+
+--Insercion de Productos
+INSERT INTO Producto VALUES(SEQ_PRODUCTO.NEXTVAL,'Lechuga Escarola',2,'https://i.imgur.com/AOfBNhY.jpg',NULL);
+INSERT INTO Producto VALUES(SEQ_PRODUCTO.NEXTVAL,'Platano Oriental',3,'https://i.imgur.com/XGGgSmp.jpg',NULL);
+INSERT INTO Producto VALUES(SEQ_PRODUCTO.NEXTVAL,'Manzanas Pacific Rouse',1,'https://i.imgur.com/DGuNq4g.jpg',NULL);
+INSERT INTO Producto VALUES(SEQ_PRODUCTO.NEXTVAL,'Naranja Navel',0.7,'https://i.imgur.com/bzyI8Wj.jpg',NULL);
+INSERT INTO Producto VALUES(SEQ_PRODUCTO.NEXTVAL,'Durazno Cachabano',1.2,'https://i.imgur.com/oUjfVaW.jpg',NULL);
+
+--Creacion de Tabla Productor
+CREATE TABLE Productor(
+IdProductor INTEGER PRIMARY KEY,
+NombreProductor VARCHAR2(50) NOT NULL,
+DireccionProductor VARCHAR2(50) NOT NULL,
+IdUsuario INTEGER NOT NULL
+);
+
+ALTER TABLE Productor
+ADD(TelefonoProductro VARCHAR2(12) NOT NULL);
+
+--Creacion de Tabla Contrato
+CREATE TABLE Contrato(
+IdContrato INTEGER PRIMARY KEY,
+FechaCreacion DATE NOT NULL,
+FechaTermino DATE NOT NULL,
+PorcComision FLOAT(3) NOT NULL,
+Vigente NUMBER(1) NOT NULL,
+IdProductor INTEGER NOT NULL
+);
+
+--Añadir clave foranea de IdUsuario a la tabla PRODUCTOR
+ALTER TABLE PRODUCTOR 
+ADD CONSTRAINT fk_idusuario_productor
+FOREIGN KEY(IdUsuario) REFERENCES Usuario(Id_Usuario);
+
+--Añadir clave foranea de IdProductor a la tabla CONTRATO
+ALTER TABLE CONTRATO 
+ADD CONSTRAINT fk_idproductor_contrato
+FOREIGN KEY(IdProductor) REFERENCES Productor(IdProductor);
+
+
+CREATE SEQUENCE SEQ_PEDIDO
+INCREMENT BY 1
+START WITH 1000
+NOCYCLE
+NOCACHE;
+
+SELECT SEQ_PEDIDO.CURRVAL FROM DUAL;

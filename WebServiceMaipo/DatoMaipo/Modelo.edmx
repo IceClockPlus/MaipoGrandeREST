@@ -11,10 +11,20 @@
           </Key>
           <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRECLIENTE" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="APELLIDOCLIENTE" Type="varchar2" MaxLength="50" />
           <Property Name="DIRECCIONCLIENTE" Type="varchar2" MaxLength="40" Nullable="false" />
           <Property Name="TELEFONOCLIENTE" Type="varchar2" MaxLength="12" Nullable="false" />
           <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONTRATO">
+          <Key>
+            <PropertyRef Name="IDCONTRATO" />
+          </Key>
+          <Property Name="IDCONTRATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHACREACION" Type="date" Nullable="false" />
+          <Property Name="FECHATERMINO" Type="date" Nullable="false" />
+          <Property Name="PORCCOMISION" Type="float" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="VIGENTE" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -52,6 +62,7 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
           <Property Name="DIRECCIONPEDIDO" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CIUDAD" Type="varchar2" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PRODUCTO">
           <Key>
@@ -62,6 +73,16 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
           <Property Name="PRECIOESTIMADO" Type="float" Precision="10" Scale="0" Nullable="false" />
           <Property Name="IMAGENPRODUCTO" Type="varchar2" MaxLength="500" />
           <Property Name="BANNERPRODUCTO" Type="varchar2" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PRODUCTOR">
+          <Key>
+            <PropertyRef Name="IDPRODUCTOR" />
+          </Key>
+          <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBREPRODUCTOR" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="DIRECCIONPRODUCTOR" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TELEFONOPRODUCTRO" Type="varchar2" MaxLength="12" Nullable="false" />
         </EntityType>
         <EntityType Name="ROL">
           <Key>
@@ -141,6 +162,18 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDPRODUCTOR_CONTRATO">
+          <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+          <End Role="CONTRATO" Type="Self.CONTRATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOR">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Principal>
+            <Dependent Role="CONTRATO">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IDUSUARIO_CLIENTE">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
@@ -153,6 +186,18 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDUSUARIO_PRODUCTOR">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="PRODUCTOR">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
           <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
@@ -161,10 +206,12 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
         </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <EntitySet Name="PRODUCTOR" EntityType="Self.PRODUCTOR" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ROL" EntityType="Self.ROL" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" store:Type="Tables" store:Schema="FERIAVIRTUAL">
@@ -194,9 +241,17 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
           </AssociationSet>
+          <AssociationSet Name="FK_IDPRODUCTOR_CONTRATO" Association="Self.FK_IDPRODUCTOR_CONTRATO">
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+            <End Role="CONTRATO" EntitySet="CONTRATO" />
+          </AssociationSet>
           <AssociationSet Name="FK_IDUSUARIO_CLIENTE" Association="Self.FK_IDUSUARIO_CLIENTE">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDUSUARIO_PRODUCTOR" Association="Self.FK_IDUSUARIO_PRODUCTOR">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -230,6 +285,7 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           <NavigationProperty Name="ROL" Relationship="Self.FK_ID_ROL_USUARIO" FromRole="USUARIO" ToRole="ROL" />
           <Property Name="TOKEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="USUARIO" ToRole="CLIENTE" />
+          <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="USUARIO" ToRole="PRODUCTOR" />
         </EntityType>
         <Association Name="FK_ID_ROL_USUARIO">
           <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
@@ -282,6 +338,25 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
             <Parameter Name="IMAGENPRODUCTO" Mode="In" Type="String" />
             <Parameter Name="BANNERPRODUCTO" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="CONTRATO" EntityType="Model.CONTRATO" />
+          <EntitySet Name="PRODUCTOR" EntityType="Model.PRODUCTOR" />
+          <AssociationSet Name="FK_IDPRODUCTOR_CONTRATO" Association="Model.FK_IDPRODUCTOR_CONTRATO">
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+            <End Role="CONTRATO" EntitySet="CONTRATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDUSUARIO_PRODUCTOR" Association="Model.FK_IDUSUARIO_PRODUCTOR">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+          </AssociationSet>
+          <FunctionImport Name="SP_INSERT_PEDIDO">
+            <Parameter Name="FECHAPEDIDO" Mode="In" Type="DateTime" />
+            <Parameter Name="FECHAENTREGA" Mode="In" Type="DateTime" />
+            <Parameter Name="DIRECCIONPEDIDO" Mode="In" Type="String" />
+            <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
+            <Parameter Name="IDESTADOPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="CIUDAD" Mode="In" Type="String" />
+            <Parameter Name="RESULTADO" Mode="Out" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
           <Key>
@@ -289,7 +364,6 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           </Key>
           <Property Name="IDCLIENTE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
           <Property Name="NOMBRECLIENTE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APELLIDOCLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DIRECCIONCLIENTE" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="TELEFONOCLIENTE" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
@@ -317,6 +391,7 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDCLIENTE_PEDIDO" FromRole="PEDIDO" ToRole="CLIENTE" />
           <NavigationProperty Name="ESTADOPEDIDO" Relationship="Model.FK_ESTADOPEDIDO_PEDIDO" FromRole="PEDIDO" ToRole="ESTADOPEDIDO" />
           <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="PEDIDO" ToRole="DETALLEPEDIDO" />
+          <Property Name="CIUDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DETALLEPEDIDO">
           <Key>
@@ -401,6 +476,54 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CONTRATO">
+          <Key>
+            <PropertyRef Name="IDCONTRATO" />
+          </Key>
+          <Property Name="IDCONTRATO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="FECHACREACION" Type="DateTime" Nullable="false" />
+          <Property Name="FECHATERMINO" Type="DateTime" Nullable="false" />
+          <Property Name="PORCCOMISION" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="VIGENTE" Type="Int16" Nullable="false" />
+          <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDPRODUCTOR_CONTRATO" FromRole="CONTRATO" ToRole="PRODUCTOR" />
+        </EntityType>
+        <EntityType Name="PRODUCTOR">
+          <Key>
+            <PropertyRef Name="IDPRODUCTOR" />
+          </Key>
+          <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NOMBREPRODUCTOR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCIONPRODUCTOR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="CONTRATO" Relationship="Model.FK_IDPRODUCTOR_CONTRATO" FromRole="PRODUCTOR" ToRole="CONTRATO" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="PRODUCTOR" ToRole="USUARIO" />
+          <Property Name="TELEFONOPRODUCTRO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_IDPRODUCTOR_CONTRATO">
+          <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
+          <End Type="Model.CONTRATO" Role="CONTRATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOR">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Principal>
+            <Dependent Role="CONTRATO">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDUSUARIO_PRODUCTOR">
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="PRODUCTOR">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -441,7 +564,6 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
                 <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
                 <ScalarProperty Name="TELEFONOCLIENTE" ColumnName="TELEFONOCLIENTE" />
                 <ScalarProperty Name="DIRECCIONCLIENTE" ColumnName="DIRECCIONCLIENTE" />
-                <ScalarProperty Name="APELLIDOCLIENTE" ColumnName="APELLIDOCLIENTE" />
                 <ScalarProperty Name="NOMBRECLIENTE" ColumnName="NOMBRECLIENTE" />
                 <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
               </MappingFragment>
@@ -458,6 +580,7 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           <EntitySetMapping Name="PEDIDO">
             <EntityTypeMapping TypeName="Model.PEDIDO">
               <MappingFragment StoreEntitySet="PEDIDO">
+                <ScalarProperty Name="CIUDAD" ColumnName="CIUDAD" />
                 <ScalarProperty Name="IDESTADOPEDIDO" ColumnName="IDESTADOPEDIDO" />
                 <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
                 <ScalarProperty Name="DIRECCIONPEDIDO" ColumnName="DIRECCIONPEDIDO" />
@@ -498,6 +621,29 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_INSERT_PRODUCTO" FunctionName="Model.Store.SP_INSERT_PRODUCTO" />
+          <EntitySetMapping Name="CONTRATO">
+            <EntityTypeMapping TypeName="Model.CONTRATO">
+              <MappingFragment StoreEntitySet="CONTRATO">
+                <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+                <ScalarProperty Name="VIGENTE" ColumnName="VIGENTE" />
+                <ScalarProperty Name="PORCCOMISION" ColumnName="PORCCOMISION" />
+                <ScalarProperty Name="FECHATERMINO" ColumnName="FECHATERMINO" />
+                <ScalarProperty Name="FECHACREACION" ColumnName="FECHACREACION" />
+                <ScalarProperty Name="IDCONTRATO" ColumnName="IDCONTRATO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOR">
+            <EntityTypeMapping TypeName="Model.PRODUCTOR">
+              <MappingFragment StoreEntitySet="PRODUCTOR">
+                <ScalarProperty Name="TELEFONOPRODUCTRO" ColumnName="TELEFONOPRODUCTRO" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="DIRECCIONPRODUCTOR" ColumnName="DIRECCIONPRODUCTOR" />
+                <ScalarProperty Name="NOMBREPRODUCTOR" ColumnName="NOMBREPRODUCTOR" />
+                <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

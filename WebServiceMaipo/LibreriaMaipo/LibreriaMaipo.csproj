@@ -50,13 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoUsuario.cs" />
+    <Compile Include="MantenedorPedido.cs" />
     <Compile Include="MantenedorProducto.cs" />
+    <Compile Include="Modelo\ItemPedido.cs" />
+    <Compile Include="Modelo\EstadoPedido.cs" />
     <Compile Include="Modelo\Pais.cs" />
     <Compile Include="Modelo\Pedido.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
+    <Compile Include="TiposUsuario\Cliente.cs" />
+    <Compile Include="TiposUsuario\Productor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TiposUsuario\TipoUsuario.cs" />
+    <Compile Include="UsuarioFactory\ClienteFactory.cs" />
+    <Compile Include="UsuarioFactory\ProductorFactory.cs" />
+    <Compile Include="UsuarioFactory\TipoUsuarioFactory.cs" />
+    <Compile Include="VerificadorToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -68,5 +79,6 @@
       <Name>DatoMaipo</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

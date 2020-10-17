@@ -21,7 +21,6 @@ namespace DatoMaipo
     
         public decimal IDCLIENTE { get; set; }
         public string NOMBRECLIENTE { get; set; }
-        public string APELLIDOCLIENTE { get; set; }
         public string DIRECCIONCLIENTE { get; set; }
         public string TELEFONOCLIENTE { get; set; }
         public decimal IDUSUARIO { get; set; }

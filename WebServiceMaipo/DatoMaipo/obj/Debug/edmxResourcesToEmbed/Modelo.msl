@@ -35,7 +35,6 @@
           <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
           <ScalarProperty Name="TELEFONOCLIENTE" ColumnName="TELEFONOCLIENTE" />
           <ScalarProperty Name="DIRECCIONCLIENTE" ColumnName="DIRECCIONCLIENTE" />
-          <ScalarProperty Name="APELLIDOCLIENTE" ColumnName="APELLIDOCLIENTE" />
           <ScalarProperty Name="NOMBRECLIENTE" ColumnName="NOMBRECLIENTE" />
           <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
         </MappingFragment>
@@ -52,6 +51,7 @@
     <EntitySetMapping Name="PEDIDO">
       <EntityTypeMapping TypeName="Model.PEDIDO">
         <MappingFragment StoreEntitySet="PEDIDO">
+          <ScalarProperty Name="CIUDAD" ColumnName="CIUDAD" />
           <ScalarProperty Name="IDESTADOPEDIDO" ColumnName="IDESTADOPEDIDO" />
           <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
           <ScalarProperty Name="DIRECCIONPEDIDO" ColumnName="DIRECCIONPEDIDO" />
@@ -92,5 +92,28 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_INSERT_PRODUCTO" FunctionName="Model.Store.SP_INSERT_PRODUCTO" />
+    <EntitySetMapping Name="CONTRATO">
+      <EntityTypeMapping TypeName="Model.CONTRATO">
+        <MappingFragment StoreEntitySet="CONTRATO">
+          <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+          <ScalarProperty Name="VIGENTE" ColumnName="VIGENTE" />
+          <ScalarProperty Name="PORCCOMISION" ColumnName="PORCCOMISION" />
+          <ScalarProperty Name="FECHATERMINO" ColumnName="FECHATERMINO" />
+          <ScalarProperty Name="FECHACREACION" ColumnName="FECHACREACION" />
+          <ScalarProperty Name="IDCONTRATO" ColumnName="IDCONTRATO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTOR">
+      <EntityTypeMapping TypeName="Model.PRODUCTOR">
+        <MappingFragment StoreEntitySet="PRODUCTOR">
+          <ScalarProperty Name="TELEFONOPRODUCTRO" ColumnName="TELEFONOPRODUCTRO" />
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="DIRECCIONPRODUCTOR" ColumnName="DIRECCIONPRODUCTOR" />
+          <ScalarProperty Name="NOMBREPRODUCTOR" ColumnName="NOMBREPRODUCTOR" />
+          <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

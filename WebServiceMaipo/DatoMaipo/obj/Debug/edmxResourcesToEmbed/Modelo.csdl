@@ -27,6 +27,7 @@
     <NavigationProperty Name="ROL" Relationship="Self.FK_ID_ROL_USUARIO" FromRole="USUARIO" ToRole="ROL" />
     <Property Name="TOKEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="USUARIO" ToRole="CLIENTE" />
+    <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="USUARIO" ToRole="PRODUCTOR" />
   </EntityType>
   <Association Name="FK_ID_ROL_USUARIO">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
@@ -79,6 +80,25 @@
       <Parameter Name="IMAGENPRODUCTO" Mode="In" Type="String" />
       <Parameter Name="BANNERPRODUCTO" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="CONTRATO" EntityType="Model.CONTRATO" />
+    <EntitySet Name="PRODUCTOR" EntityType="Model.PRODUCTOR" />
+    <AssociationSet Name="FK_IDPRODUCTOR_CONTRATO" Association="Model.FK_IDPRODUCTOR_CONTRATO">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="CONTRATO" EntitySet="CONTRATO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDUSUARIO_PRODUCTOR" Association="Model.FK_IDUSUARIO_PRODUCTOR">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+    </AssociationSet>
+    <FunctionImport Name="SP_INSERT_PEDIDO">
+      <Parameter Name="FECHAPEDIDO" Mode="In" Type="DateTime" />
+      <Parameter Name="FECHAENTREGA" Mode="In" Type="DateTime" />
+      <Parameter Name="DIRECCIONPEDIDO" Mode="In" Type="String" />
+      <Parameter Name="IDCLIENTE" Mode="In" Type="Decimal" />
+      <Parameter Name="IDESTADOPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="CIUDAD" Mode="In" Type="String" />
+      <Parameter Name="RESULTADO" Mode="Out" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>
@@ -86,7 +106,6 @@
     </Key>
     <Property Name="IDCLIENTE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <Property Name="NOMBRECLIENTE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="APELLIDOCLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DIRECCIONCLIENTE" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="TELEFONOCLIENTE" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
@@ -114,6 +133,7 @@
     <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDCLIENTE_PEDIDO" FromRole="PEDIDO" ToRole="CLIENTE" />
     <NavigationProperty Name="ESTADOPEDIDO" Relationship="Model.FK_ESTADOPEDIDO_PEDIDO" FromRole="PEDIDO" ToRole="ESTADOPEDIDO" />
     <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="PEDIDO" ToRole="DETALLEPEDIDO" />
+    <Property Name="CIUDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DETALLEPEDIDO">
     <Key>
@@ -195,6 +215,54 @@
       </Principal>
       <Dependent Role="DETALLEPEDIDO">
         <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CONTRATO">
+    <Key>
+      <PropertyRef Name="IDCONTRATO" />
+    </Key>
+    <Property Name="IDCONTRATO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="FECHACREACION" Type="DateTime" Nullable="false" />
+    <Property Name="FECHATERMINO" Type="DateTime" Nullable="false" />
+    <Property Name="PORCCOMISION" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="VIGENTE" Type="Int16" Nullable="false" />
+    <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDPRODUCTOR_CONTRATO" FromRole="CONTRATO" ToRole="PRODUCTOR" />
+  </EntityType>
+  <EntityType Name="PRODUCTOR">
+    <Key>
+      <PropertyRef Name="IDPRODUCTOR" />
+    </Key>
+    <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="NOMBREPRODUCTOR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCIONPRODUCTOR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="CONTRATO" Relationship="Model.FK_IDPRODUCTOR_CONTRATO" FromRole="PRODUCTOR" ToRole="CONTRATO" />
+    <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="PRODUCTOR" ToRole="USUARIO" />
+    <Property Name="TELEFONOPRODUCTRO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDPRODUCTOR_CONTRATO">
+    <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
+    <End Type="Model.CONTRATO" Role="CONTRATO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="CONTRATO">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDUSUARIO_PRODUCTOR">
+    <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="PRODUCTOR">
+        <PropertyRef Name="IDUSUARIO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
