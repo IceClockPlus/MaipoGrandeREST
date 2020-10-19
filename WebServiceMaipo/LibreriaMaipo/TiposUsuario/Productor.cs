@@ -11,12 +11,17 @@ namespace LibreriaMaipo
 {
     class Productor : TipoUsuario
     {
+        public override void ObtenerDatosPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Obtener los datos del productor en base a la id de usuario de este
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <returns></returns>
-        public override bool GetDatosByIdUsuario(int idUsuario)
+        public override bool ObtenerDatosPorIdUsuario(int idUsuario)
         {
             try
             {

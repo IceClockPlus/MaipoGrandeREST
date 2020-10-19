@@ -51,6 +51,7 @@
     <EntitySetMapping Name="PEDIDO">
       <EntityTypeMapping TypeName="Model.PEDIDO">
         <MappingFragment StoreEntitySet="PEDIDO">
+          <ScalarProperty Name="PAIS" ColumnName="PAIS" />
           <ScalarProperty Name="CIUDAD" ColumnName="CIUDAD" />
           <ScalarProperty Name="IDESTADOPEDIDO" ColumnName="IDESTADOPEDIDO" />
           <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
@@ -64,6 +65,7 @@
     <EntitySetMapping Name="DETALLEPEDIDO">
       <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
         <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+          <ScalarProperty Name="CALIDAD" ColumnName="CALIDAD" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
           <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
           <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />

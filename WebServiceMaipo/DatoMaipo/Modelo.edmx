@@ -33,10 +33,12 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
             <PropertyRef Name="IDPEDIDO" />
             <PropertyRef Name="IDPRODUCTO" />
             <PropertyRef Name="CANTIDAD" />
+            <PropertyRef Name="CALIDAD" />
           </Key>
           <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CALIDAD" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="ESTADOPEDIDO">
           <Key>
@@ -63,6 +65,7 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
           <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="CIUDAD" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PAIS" Type="varchar2" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PRODUCTO">
           <Key>
@@ -218,7 +221,8 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
             <DefiningQuery>SELECT 
 "DETALLEPEDIDO"."IDPEDIDO" AS "IDPEDIDO", 
 "DETALLEPEDIDO"."IDPRODUCTO" AS "IDPRODUCTO", 
-"DETALLEPEDIDO"."CANTIDAD" AS "CANTIDAD"
+"DETALLEPEDIDO"."CANTIDAD" AS "CANTIDAD", 
+"DETALLEPEDIDO"."CALIDAD" AS "CALIDAD"
 FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Self.FK_ESTADOPEDIDO_PEDIDO">
@@ -392,18 +396,21 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           <NavigationProperty Name="ESTADOPEDIDO" Relationship="Model.FK_ESTADOPEDIDO_PEDIDO" FromRole="PEDIDO" ToRole="ESTADOPEDIDO" />
           <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="PEDIDO" ToRole="DETALLEPEDIDO" />
           <Property Name="CIUDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PAIS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DETALLEPEDIDO">
           <Key>
             <PropertyRef Name="IDPEDIDO" />
             <PropertyRef Name="IDPRODUCTO" />
             <PropertyRef Name="CANTIDAD" />
+            <PropertyRef Name="CALIDAD" />
           </Key>
           <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
           <Property Name="IDPRODUCTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
           <Property Name="CANTIDAD" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
           <NavigationProperty Name="PEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="DETALLEPEDIDO" ToRole="PEDIDO" />
           <NavigationProperty Name="PRODUCTO" Relationship="Model.FK_IDPRODUCTO_DETALLEPEDIDO" FromRole="DETALLEPEDIDO" ToRole="PRODUCTO" />
+          <Property Name="CALIDAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_IDCLIENTE_PEDIDO">
           <End Type="Model.CLIENTE" Role="CLIENTE" Multiplicity="1" />
@@ -580,6 +587,7 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           <EntitySetMapping Name="PEDIDO">
             <EntityTypeMapping TypeName="Model.PEDIDO">
               <MappingFragment StoreEntitySet="PEDIDO">
+                <ScalarProperty Name="PAIS" ColumnName="PAIS" />
                 <ScalarProperty Name="CIUDAD" ColumnName="CIUDAD" />
                 <ScalarProperty Name="IDESTADOPEDIDO" ColumnName="IDESTADOPEDIDO" />
                 <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
@@ -593,6 +601,7 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
           <EntitySetMapping Name="DETALLEPEDIDO">
             <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
               <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+                <ScalarProperty Name="CALIDAD" ColumnName="CALIDAD" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
                 <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
                 <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />

@@ -4,20 +4,30 @@ using LibreriaMaipo.UsuarioFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LibreriaMaipo.Modelo
 {
+    [DataContract]
     public class Usuario
     {
+
+        [DataMember]
         public int IdUsuario { get; set; }
-        public String NombreUsuario { get; set; }
-        public String Contrasenia { get; set; }
-        public String IsHabilitado { get; set; }
-        public String Token { get; set; }
-        public String NombreRol { get; set; }
-        //public TipoUsuario TipoUsuario { get; set; }
+        [DataMember]
+        public string NombreUsuario { get; set; }
+        [DataMember]
+        public string Contrasenia { get; set; }
+        [DataMember]
+        public string IsHabilitado { get; set; }
+        [DataMember]
+        public string Token { get; set; }
+        [DataMember]
+        public string NombreRol { get; set; }
+        [DataMember]
+        public TipoUsuario TipoUsuario { get; set; }
         public Usuario()
         {
             this.InitClass();
@@ -26,11 +36,11 @@ namespace LibreriaMaipo.Modelo
         private void InitClass()
         {
             this.IdUsuario = 0;
-            this.NombreUsuario = String.Empty;
-            this.Contrasenia = String.Empty;
+            this.NombreUsuario = string.Empty;
+            this.Contrasenia = string.Empty;
             this.IsHabilitado = "0";
-            this.Token = String.Empty;
-            this.NombreRol = String.Empty;
+            this.Token = string.Empty;
+            this.NombreRol = string.Empty;
         }
     }
 }

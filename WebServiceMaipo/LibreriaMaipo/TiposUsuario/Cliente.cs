@@ -11,13 +11,34 @@ namespace LibreriaMaipo.TiposUsuario
 {
     [DataContract]
     public class Cliente : TipoUsuario
-    {   
+    {
+        public override void ObtenerDatosPorId(int id)
+        {
+            using(var db = new DBEntities())
+            {
+                try
+                {
+                    var clienteBuscado = db.CLIENTE.Where(cli => cli.IDCLIENTE == id).FirstOrDefault();
+                    this.Id = (int)clienteBuscado.IDCLIENTE;
+                    this.Nombre = clienteBuscado.NOMBRECLIENTE;
+                    this.Direccion = clienteBuscado.DIRECCIONCLIENTE;
+                    this.Telefono = clienteBuscado.TELEFONOCLIENTE;
+
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.StackTrace);
+                }
+
+            }
+        }
+
         /// <summary>
         /// Buscar los datos del cliente en base a su id de usuario
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <returns></returns>
-        public override bool GetDatosByIdUsuario(int idUsuario)
+        public override bool ObtenerDatosPorIdUsuario(int idUsuario)
         {
             try
             {

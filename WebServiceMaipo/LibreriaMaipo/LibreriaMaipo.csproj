@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoUsuario.cs" />
-    <Compile Include="MantenedorPedido.cs" />
+    <Compile Include="RepositorioDetallePedido.cs" />
+    <Compile Include="RepositorioEstadoPedido.cs" />
+    <Compile Include="RepositorioPedido.cs" />
     <Compile Include="MantenedorProducto.cs" />
     <Compile Include="Modelo\ItemPedido.cs" />
     <Compile Include="Modelo\EstadoPedido.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
+    <Compile Include="RepositorioUsuario.cs" />
     <Compile Include="TiposUsuario\Cliente.cs" />
     <Compile Include="TiposUsuario\Productor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

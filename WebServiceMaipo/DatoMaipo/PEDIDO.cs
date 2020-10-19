@@ -26,6 +26,7 @@ namespace DatoMaipo
         public decimal IDCLIENTE { get; set; }
         public decimal IDESTADOPEDIDO { get; set; }
         public string CIUDAD { get; set; }
+        public string PAIS { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ESTADOPEDIDO ESTADOPEDIDO { get; set; }

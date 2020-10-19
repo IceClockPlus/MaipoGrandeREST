@@ -19,7 +19,10 @@ namespace LibreriaMaipo.Modelo
         /// Campo que especifica el producto que se va a solicitar
         /// </summary>
         public Producto Producto { get; set; }
-
+        /// <summary>
+        /// Campo que indica la calidad del producto solicitado
+        /// </summary>
+        public string Calidad { get; set; }
 
         public ItemPedido()
         {
@@ -29,6 +32,7 @@ namespace LibreriaMaipo.Modelo
         private void InitClass()
         {
             this.Cantidad = 0;
+            this.Calidad = string.Empty;
             this.Producto = new Producto();
         }
     }

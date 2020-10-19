@@ -134,18 +134,21 @@
     <NavigationProperty Name="ESTADOPEDIDO" Relationship="Model.FK_ESTADOPEDIDO_PEDIDO" FromRole="PEDIDO" ToRole="ESTADOPEDIDO" />
     <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="PEDIDO" ToRole="DETALLEPEDIDO" />
     <Property Name="CIUDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PAIS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DETALLEPEDIDO">
     <Key>
       <PropertyRef Name="IDPEDIDO" />
       <PropertyRef Name="IDPRODUCTO" />
       <PropertyRef Name="CANTIDAD" />
+      <PropertyRef Name="CALIDAD" />
     </Key>
     <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <Property Name="IDPRODUCTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <Property Name="CANTIDAD" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <NavigationProperty Name="PEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="DETALLEPEDIDO" ToRole="PEDIDO" />
     <NavigationProperty Name="PRODUCTO" Relationship="Model.FK_IDPRODUCTO_DETALLEPEDIDO" FromRole="DETALLEPEDIDO" ToRole="PRODUCTO" />
+    <Property Name="CALIDAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDCLIENTE_PEDIDO">
     <End Type="Model.CLIENTE" Role="CLIENTE" Multiplicity="1" />

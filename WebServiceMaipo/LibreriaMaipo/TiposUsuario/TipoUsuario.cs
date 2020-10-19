@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LibreriaMaipo.TiposUsuario
 {
+    [DataContract]
     public abstract class TipoUsuario
     {
+        [DataMember]
         public int Id { get; set; }
+        [DataMember]
         public String Nombre { get; set; }
+        [DataMember]
         public String Direccion { get; set; }
+        [DataMember]
         public String Telefono { get; set; }
 
         public TipoUsuario()
@@ -26,7 +32,9 @@ namespace LibreriaMaipo.TiposUsuario
             this.Telefono = String.Empty;
         }
 
-        public abstract bool GetDatosByIdUsuario(int idUsuario);
-        
+        public abstract bool ObtenerDatosPorIdUsuario(int idUsuario);
+        public abstract void ObtenerDatosPorId(int id);
+
+
     }
 }
