@@ -1,5 +1,6 @@
 ﻿using LibreriaMaipo;
 using LibreriaMaipo.Modelo;
+using LibreriaMaipo.Proceso;
 using LibreriaMaipo.TiposUsuario;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,11 @@ namespace WebServiceMaipo.Controllers
                 pedido.FechaEntrega = modelPedido.FechaEntrega;
                 pedido.DetallePedido = modelPedido.DetallePedido;
 
-                RepositorioPedido.AgregarPedido(pedido);
-                return CreatedAtRoute("ObtenerPedido", new {id = pedido.IdPedido },pedido);
+                ProcesoPedido proceso = new ProcesoPedido();
+                proceso.Pedido = pedido;
+                proceso.RegistrarNuevoPedido();
+
+                return Ok();
                 
             }
             catch (Exception)
@@ -44,7 +48,6 @@ namespace WebServiceMaipo.Controllers
             }
 
         }
-        [Route("",Name ="ObtenerPedido")]
         public IHttpActionResult GetPedido(int id)
         {
             try

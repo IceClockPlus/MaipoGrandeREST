@@ -12,6 +12,32 @@ namespace LibreriaMaipo
 {
     public class RepositorioUsuario
     {
+
+        public static void Agregar(Usuario usuario)
+        {
+            using(var db = new DBEntities())
+            {
+                try
+                {
+                    USUARIO user = new USUARIO();
+                    user.NOMBRE_USUARIO = usuario.NombreUsuario;
+                    user.CONTRASENIA = usuario.Contrasenia;
+                    user.IS_HABILITADO = usuario.IsHabilitado;
+                    user.ID_ROL = 2;
+
+                    db.USUARIO.Add(user);
+                    db.SaveChanges();
+                    usuario.IdUsuario = (int)user.ID_USUARIO;
+
+                }catch(Exception ex)
+                {
+                    throw;
+                }
+
+            }
+
+        }
+
         public static Usuario GetUsuarioByToken(String token)
         {
             Usuario user = new Usuario();

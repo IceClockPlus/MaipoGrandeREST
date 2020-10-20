@@ -18,6 +18,7 @@ namespace DatoMaipo
         public decimal IDPRODUCTO { get; set; }
         public decimal CANTIDAD { get; set; }
         public string CALIDAD { get; set; }
+        public decimal IDDETALLEPEDIDO { get; set; }
     
         public virtual PEDIDO PEDIDO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }

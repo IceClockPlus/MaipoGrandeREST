@@ -19,7 +19,7 @@
     <Key>
       <PropertyRef Name="ID_USUARIO" />
     </Key>
-    <Property Name="ID_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CONTRASENIA" Type="String" MaxLength="99" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="IS_HABILITADO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
@@ -54,20 +54,20 @@
     <EntitySet Name="PEDIDO" EntityType="Model.PEDIDO" />
     <EntitySet Name="DETALLEPEDIDO" EntityType="Model.DETALLEPEDIDO" />
     <AssociationSet Name="FK_IDCLIENTE_PEDIDO" Association="Model.FK_IDCLIENTE_PEDIDO">
-      <End Role="CLIENTE" EntitySet="CLIENTE" />
-      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End EntitySet="CLIENTE" Role="CLIENTE" />
+      <End EntitySet="PEDIDO" Role="PEDIDO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDUSUARIO_CLIENTE" Association="Model.FK_IDUSUARIO_CLIENTE">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="CLIENTE" EntitySet="CLIENTE" />
     </AssociationSet>
     <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Model.FK_ESTADOPEDIDO_PEDIDO">
-      <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
-      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End EntitySet="ESTADOPEDIDO" Role="ESTADOPEDIDO" />
+      <End EntitySet="PEDIDO" Role="PEDIDO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDPEDIDO_DETALLEPEDIDO" Association="Model.FK_IDPEDIDO_DETALLEPEDIDO">
-      <End Role="PEDIDO" EntitySet="PEDIDO" />
-      <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
+      <End EntitySet="PEDIDO" Role="PEDIDO" />
+      <End EntitySet="DETALLEPEDIDO" Role="DETALLEPEDIDO" />
     </AssociationSet>
     <EntitySet Name="PRODUCTO" EntityType="Model.PRODUCTO" />
     <AssociationSet Name="FK_IDPRODUCTO_DETALLEPEDIDO" Association="Model.FK_IDPRODUCTO_DETALLEPEDIDO">
@@ -124,24 +124,21 @@
     <Key>
       <PropertyRef Name="IDPEDIDO" />
     </Key>
-    <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="FECHAPEDIDO" Type="DateTime" Nullable="false" />
+    <Property Name="IDPEDIDO" Nullable="false" Precision="38" Scale="0" Type="Decimal" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHAPEDIDO" Nullable="false" Type="DateTime" />
     <Property Name="FECHAENTREGA" Type="DateTime" />
-    <Property Name="DIRECCIONPEDIDO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IDCLIENTE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="IDESTADOPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="DIRECCIONPEDIDO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="IDCLIENTE" Nullable="false" Precision="38" Scale="0" Type="Decimal" />
+    <Property Name="IDESTADOPEDIDO" Nullable="false" Precision="38" Scale="0" Type="Decimal" />
     <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDCLIENTE_PEDIDO" FromRole="PEDIDO" ToRole="CLIENTE" />
     <NavigationProperty Name="ESTADOPEDIDO" Relationship="Model.FK_ESTADOPEDIDO_PEDIDO" FromRole="PEDIDO" ToRole="ESTADOPEDIDO" />
     <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="PEDIDO" ToRole="DETALLEPEDIDO" />
-    <Property Name="CIUDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PAIS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CIUDAD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="PAIS" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
   </EntityType>
   <EntityType Name="DETALLEPEDIDO">
     <Key>
-      <PropertyRef Name="IDPEDIDO" />
-      <PropertyRef Name="IDPRODUCTO" />
-      <PropertyRef Name="CANTIDAD" />
-      <PropertyRef Name="CALIDAD" />
+      <PropertyRef Name="IDDETALLEPEDIDO" />
     </Key>
     <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <Property Name="IDPRODUCTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
@@ -149,10 +146,11 @@
     <NavigationProperty Name="PEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="DETALLEPEDIDO" ToRole="PEDIDO" />
     <NavigationProperty Name="PRODUCTO" Relationship="Model.FK_IDPRODUCTO_DETALLEPEDIDO" FromRole="DETALLEPEDIDO" ToRole="PRODUCTO" />
     <Property Name="CALIDAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IDDETALLEPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <Association Name="FK_IDCLIENTE_PEDIDO">
-    <End Type="Model.CLIENTE" Role="CLIENTE" Multiplicity="1" />
-    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="*" />
+    <End Type="Model.CLIENTE" Multiplicity="1" Role="CLIENTE" />
+    <End Type="Model.PEDIDO" Multiplicity="*" Role="PEDIDO" />
     <ReferentialConstraint>
       <Principal Role="CLIENTE">
         <PropertyRef Name="IDCLIENTE" />
@@ -175,8 +173,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ESTADOPEDIDO_PEDIDO">
-    <End Type="Model.ESTADOPEDIDO" Role="ESTADOPEDIDO" Multiplicity="1" />
-    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="*" />
+    <End Type="Model.ESTADOPEDIDO" Multiplicity="1" Role="ESTADOPEDIDO" />
+    <End Type="Model.PEDIDO" Multiplicity="*" Role="PEDIDO" />
     <ReferentialConstraint>
       <Principal Role="ESTADOPEDIDO">
         <PropertyRef Name="IDESTADOPEDIDO" />
@@ -187,8 +185,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDPEDIDO_DETALLEPEDIDO">
-    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
-    <End Type="Model.DETALLEPEDIDO" Role="DETALLEPEDIDO" Multiplicity="*" />
+    <End Type="Model.PEDIDO" Multiplicity="1" Role="PEDIDO" />
+    <End Type="Model.DETALLEPEDIDO" Multiplicity="*" Role="DETALLEPEDIDO" />
     <ReferentialConstraint>
       <Principal Role="PEDIDO">
         <PropertyRef Name="IDPEDIDO" />

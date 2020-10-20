@@ -12,6 +12,10 @@ namespace LibreriaMaipo.Modelo
     public class ItemPedido
     {
         /// <summary>
+        /// Campo de identidad del item que se ha solicitado
+        /// </summary>
+        public int IdItemPedido { get; set; }
+        /// <summary>
         /// Campo que indica la cantidad en kilos del producto que se solicita
         /// </summary>
         public int Cantidad { get; set; }
@@ -31,6 +35,7 @@ namespace LibreriaMaipo.Modelo
 
         private void InitClass()
         {
+            this.IdItemPedido = 0;
             this.Cantidad = 0;
             this.Calidad = string.Empty;
             this.Producto = new Producto();

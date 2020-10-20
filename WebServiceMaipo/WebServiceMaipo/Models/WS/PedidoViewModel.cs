@@ -6,9 +6,8 @@ using System.Web;
 
 namespace WebServiceMaipo.Models.WS
 {
-    public class PedidoViewModel
+    public class PedidoViewModel:SecurityViewModel
     {
-        public string Token { get; set; }
         public string DireccionPedido { get; set; }
         public DateTime FechaPedido { get; set; }
         public Nullable<DateTime> FechaEntrega { get; set; }

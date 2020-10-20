@@ -13,18 +13,28 @@ namespace LibreriaMaipo
 {
     public class RepositorioPedido
     {
+        /// <summary>
+        /// Obtener datos del Pedido segun su id de pedido
+        /// </summary>
+        /// <param name="idPedido"></param>
+        /// <returns></returns>
         public static Pedido ObtenerPedidoPorId(int idPedido)
         {
+            //Creacion de una factory de Cliente
             TipoUsuarioFactory factory = new ClienteFactory();
             using (var db = new DBEntities())
             {
                 try
                 {
+                    //Realizar consulta para obtener datos del pedido
                     var queryPedido = db.PEDIDO.Include("CLIENTE").Where(pedido => pedido.IDPEDIDO == idPedido).FirstOrDefault();
+                    
+                    //Devolver null si la consulta no entrega resultados
                     if(queryPedido == null)
                     {
                         return null;
                     }
+
                     Pedido p = new Pedido();
                     p.IdPedido = (int)queryPedido.IDPEDIDO;
                     p.FechaPedido = queryPedido.FECHAPEDIDO;
@@ -32,12 +42,16 @@ namespace LibreriaMaipo
                     p.Direccion = queryPedido.DIRECCIONPEDIDO;
                     p.Ciudad = queryPedido.CIUDAD;
                     p.Pais = queryPedido.PAIS;
-
+                    
+                    //Crear una instancia cliente con el uso de ClienteFactory
                     TipoUsuario cli = factory.createTipoUsuario();
+                    //Recuperar datos del cliente por su id
                     cli.ObtenerDatosPorId((int)queryPedido.IDCLIENTE);
-                    p.Cliente = (Cliente)cli;
-                    p.EstadoPedido = RepositorioEstadoPedido.ObtenerEstadoPedidoById((int)queryPedido.IDESTADOPEDIDO);
 
+                    p.Cliente = (Cliente)cli;
+                    //Obtener el estado del pedido por su id
+                    p.EstadoPedido = RepositorioEstadoPedido.ObtenerEstadoPedidoById((int)queryPedido.IDESTADOPEDIDO);
+                    //Obtener el detalle del pedido por id
                     p.DetallePedido = RepositorioDetallePedido.ObtenerDetallePedido((int)p.IdPedido);
                     return p;
                
@@ -45,9 +59,6 @@ namespace LibreriaMaipo
                 {
                     return null;
                 }
-
-
-
             }
 
         }
@@ -72,24 +83,10 @@ namespace LibreriaMaipo
                     //Agregar Pedido a la base de datos
                     db.PEDIDO.Add(pedidoAgregar);
                     //Confirmar el adicion del pedido en la base de datos
-                    //Se recupera la id del pedido generada por medio del DbContext
-                    int idPedido = (int)pedidoAgregar.IDPEDIDO;
-
-
-                    foreach (ItemPedido item in pedido.DetallePedido)
-                    {
-                        DETALLEPEDIDO detalle = new DETALLEPEDIDO()
-                        {
-                            CANTIDAD = item.Cantidad,
-                            CALIDAD = item.Calidad,
-                            IDPEDIDO = pedido.IdPedido,
-                            IDPRODUCTO = item.Producto.IdProducto
-                        };
-                        db.DETALLEPEDIDO.Add(detalle);
-
-                    }
-
                     db.SaveChanges();
+                    //Se recupera la id del pedido generada por medio del DbContext
+                    pedido.IdPedido = (int)pedidoAgregar.IDPEDIDO;
+
                 }
                 catch (Exception ex)
                 {

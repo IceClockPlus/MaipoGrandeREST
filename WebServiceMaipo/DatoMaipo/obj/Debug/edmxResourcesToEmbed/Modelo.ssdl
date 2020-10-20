@@ -21,19 +21,15 @@
     <Property Name="VIGENTE" Type="number" Precision="1" Scale="0" Nullable="false" />
     <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="DETALLEPEDIDO">
     <Key>
-      <PropertyRef Name="IDPEDIDO" />
-      <PropertyRef Name="IDPRODUCTO" />
-      <PropertyRef Name="CANTIDAD" />
-      <PropertyRef Name="CALIDAD" />
+      <PropertyRef Name="IDDETALLEPEDIDO" />
     </Key>
     <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CALIDAD" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="IDDETALLEPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ESTADOPEDIDO">
     <Key>
@@ -53,7 +49,7 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
     <Key>
       <PropertyRef Name="IDPEDIDO" />
     </Key>
-    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FECHAPEDIDO" Type="date" Nullable="false" />
     <Property Name="FECHAENTREGA" Type="date" />
     <Property Name="DIRECCIONPEDIDO" Type="varchar2" MaxLength="50" Nullable="false" />
@@ -93,7 +89,7 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
     <Key>
       <PropertyRef Name="ID_USUARIO" />
     </Key>
-    <Property Name="ID_USUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_USUARIO" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="NOMBRE_USUARIO" Type="varchar2" MaxLength="30" Nullable="false" />
     <Property Name="CONTRASENIA" Type="varchar2" MaxLength="99" Nullable="false" />
     <Property Name="IS_HABILITADO" Type="char" MaxLength="1" Nullable="false" />
@@ -205,6 +201,7 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -212,14 +209,6 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
     <EntitySet Name="PRODUCTOR" EntityType="Self.PRODUCTOR" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ROL" EntityType="Self.ROL" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERIAVIRTUAL" store:Type="Tables" />
-    <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" store:Type="Tables" store:Schema="FERIAVIRTUAL">
-      <DefiningQuery>SELECT 
-"DETALLEPEDIDO"."IDPEDIDO" AS "IDPEDIDO", 
-"DETALLEPEDIDO"."IDPRODUCTO" AS "IDPRODUCTO", 
-"DETALLEPEDIDO"."CANTIDAD" AS "CANTIDAD", 
-"DETALLEPEDIDO"."CALIDAD" AS "CALIDAD"
-FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Self.FK_ESTADOPEDIDO_PEDIDO">
       <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />

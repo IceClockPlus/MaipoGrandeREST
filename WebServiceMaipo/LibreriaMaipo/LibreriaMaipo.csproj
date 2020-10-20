@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoUsuario.cs" />
+    <Compile Include="Proceso\ProcesoPedido.cs" />
     <Compile Include="RepositorioDetallePedido.cs" />
     <Compile Include="RepositorioEstadoPedido.cs" />
     <Compile Include="RepositorioPedido.cs" />

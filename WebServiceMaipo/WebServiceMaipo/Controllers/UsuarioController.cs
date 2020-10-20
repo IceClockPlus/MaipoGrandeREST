@@ -34,6 +34,24 @@ namespace WebServiceMaipo.Controllers
             }
         }
 
+        [HttpPost]
+        public IHttpActionResult RegistrarUsuario([FromBody] Usuario modelUser)
+        {
+            try
+            {
+                RepositorioUsuario.Agregar(modelUser);
+                return Ok();
+
+
+            }catch(Exception ex)
+            {
+                ex.Message.ToString();
+                return BadRequest();
+            }
+
+
+        }
+
 
     }
 }
