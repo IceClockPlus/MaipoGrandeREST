@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\WS\AccessViewModel.cs" />
+    <Compile Include="Models\WS\DetallePedidoModel.cs" />
     <Compile Include="Models\WS\PedidoViewModel.cs" />
     <Compile Include="Models\WS\Reply.cs" />
     <Compile Include="Models\WS\SecurityViewModel.cs" />

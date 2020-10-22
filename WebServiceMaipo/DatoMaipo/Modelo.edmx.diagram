@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ee8d7e68587740fc8d197cff7eb5ee7a" Name="Diagram1" ZoomLevel="94">
-        <EntityTypeShape EntityType="Model.PAIS" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PAIS" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.USUARIO" Width="2" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_ID_ROL_USUARIO" ManuallyRouted="false" />

@@ -63,6 +63,10 @@ namespace LibreriaMaipo
 
         }
 
+        /// <summary>
+        /// Metodo para la adición del pedido a la base de datos
+        /// </summary>
+        /// <param name="pedido"></param>
         public static void AgregarPedido(Pedido pedido)
         {
             using (var db = new DBEntities())

@@ -21,7 +21,7 @@ namespace WebServiceMaipo.Controllers
 
                 Usuario user = RepositorioUsuario.GetUsuarioByToken(modelPedido.Token);
                 //Negar ejecucion si el usuario no es cliente o el token no existe
-                if (!(user.TipoUsuario is Cliente) || user == null)
+                if (!(user.TipoUsuario is Cliente ) || user == null)
                 {
                     return Unauthorized();
                 }
@@ -32,7 +32,15 @@ namespace WebServiceMaipo.Controllers
                 pedido.Pais = modelPedido.Pais;
                 pedido.FechaPedido = modelPedido.FechaPedido;
                 pedido.FechaEntrega = modelPedido.FechaEntrega;
-                pedido.DetallePedido = modelPedido.DetallePedido;
+
+                foreach(var det in modelPedido.DetallePedido)
+                {
+                    ItemPedido item = new ItemPedido();
+                    item.Cantidad = det.Cantidad;
+                    item.Calidad = det.Calidad;
+                    item.Producto.IdProducto = det.IdProducto;
+                    pedido.DetallePedido.Add(item);
+                }
 
                 ProcesoPedido proceso = new ProcesoPedido();
                 proceso.Pedido = pedido;
@@ -53,6 +61,7 @@ namespace WebServiceMaipo.Controllers
             try
             {
                 Pedido pedido = new Pedido();
+                //Obtener pedido por su id
                 pedido = RepositorioPedido.ObtenerPedidoPorId(id);
                 if(pedido == null)
                 {

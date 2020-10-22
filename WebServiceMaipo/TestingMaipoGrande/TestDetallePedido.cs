@@ -13,11 +13,11 @@ namespace TestingMaipoGrande
         public void BuscarDetallePedidoPorIdPedido()
         {
             //Arrange
-            int idPedido = 1003;
-            List<ItemPedido> listado = new List<ItemPedido>();
+            int idPedido = 11;
+
 
             //Act
-            listado = RepositorioDetallePedido.ObtenerDetallePedido(idPedido);
+            List<ItemPedido> listado = RepositorioDetallePedido.ObtenerDetallePedido(idPedido);
 
             //Assert
             Assert.IsNotNull(listado);
