@@ -119,6 +119,11 @@ namespace LibreriaMaipo
                         tipoUsuario = factory.createTipoUsuario();
                         tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
                         break;
+                    case "Transportista":
+                        factory = new TransportistaFactory();
+                        tipoUsuario = factory.createTipoUsuario();
+                        tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
+                        break;
                     default:
                         tipoUsuario = null;
                         break;

@@ -11,6 +11,30 @@ namespace LibreriaMaipo
 {
     public class RepositorioOfertaSubasta
     {
+        public static void AgregarOfertaSubasta(OfertaSubasta oferta, int idSubasta)
+        {
+            using (var db = new DBEntities())
+            {
+                try
+                {
+                    OFERTASUBASTA dbOferta = new OFERTASUBASTA();
+                    dbOferta.IDSUBASTA = idSubasta;
+                    dbOferta.SELECCIONADO = oferta.Seleccionado;
+                    dbOferta.IDTRANSPORTISTA = oferta.Transportista.Id;
+                    dbOferta.IDTIPOTRANSPORTE = oferta.TipoTransporte.IdTipo;
+                    dbOferta.PRECIOOFERTA = (decimal)oferta.PrecioOferta;
+                    dbOferta.FECHAOFERTA = oferta.FechaOferta;
+                    db.OFERTASUBASTA.Add(dbOferta);
+                    db.SaveChanges();
+                }
+                catch (Exception ex) 
+                {
+                    ex.InnerException.ToString();
+                }
+
+            }
+        }
+
         public static List<OfertaSubasta> ListarOfertaPorIdSubasta(int idSubasta)
         {
             //Creacion de una factory de Cliente
