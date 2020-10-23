@@ -14,9 +14,26 @@ namespace WebServiceMaipo.Controllers
     public class OfertaSubastaController : ApiController
     {
         // GET: api/OfertaSubasta
-        public IEnumerable<string> Get()
+        [Route("api/BusquedaOfertaSubasta/")]
+        public IEnumerable<OfertaSubasta> GetOfertaSubasta([FromBody] SecurityViewModel model)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                Usuario usr = this.Validate(model.Token);
+                if (!(usr.TipoUsuario is Transportista))
+                {
+                    return null;
+                }
+
+                List<OfertaSubasta> listadoOfertas = RepositorioOfertaSubasta.ListarPorIdTransportista(usr.TipoUsuario.Id);
+                return listadoOfertas;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+
         }
 
         // GET: api/OfertaSubasta/5

@@ -35,9 +35,48 @@ namespace LibreriaMaipo
             }
         }
 
+        public static List<OfertaSubasta> ListarPorIdTransportista(int idTransportista)
+        {
+            //Creacion de una factory de Transportista
+            TipoUsuarioFactory factory = new TransportistaFactory();
+            using (var db = new DBEntities())
+            {
+                try
+                {
+                    List<OfertaSubasta> listado = new List<OfertaSubasta>();
+                    var queryOfertas = db.OFERTASUBASTA.Where(ofer => ofer.IDTRANSPORTISTA == idTransportista).ToList();
+
+                    foreach (var oferta in queryOfertas)
+                    {
+                        OfertaSubasta ofertaSubasta = new OfertaSubasta();
+                        ofertaSubasta.IdOferta = (int)oferta.IDOFERTA;
+                        ofertaSubasta.FechaOferta = oferta.FECHAOFERTA;
+                        ofertaSubasta.Seleccionado = oferta.SELECCIONADO;
+                        ofertaSubasta.PrecioOferta = (float)oferta.PRECIOOFERTA;
+                        ofertaSubasta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
+                        ofertaSubasta.Transportista.ObtenerDatosPorId(idTransportista);
+
+                        TipoTransporte tipo = new TipoTransporte();
+                        tipo.ObtenerTipoTransportepPorId((int)oferta.IDTIPOTRANSPORTE);
+                        ofertaSubasta.TipoTransporte = tipo;
+                        listado.Add(ofertaSubasta);
+                    }
+                    return listado;
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+            }
+
+
+        }
+
         public static List<OfertaSubasta> ListarOfertaPorIdSubasta(int idSubasta)
         {
-            //Creacion de una factory de Cliente
+            //Creacion de una factory de Transportista
             TipoUsuarioFactory factory = new TransportistaFactory();
             using (var db = new DBEntities())
             {
@@ -52,6 +91,7 @@ namespace LibreriaMaipo
                         ofertaSubasta.IdOferta = (int)oferta.IDOFERTA;
                         ofertaSubasta.FechaOferta = oferta.FECHAOFERTA;
                         ofertaSubasta.Seleccionado = oferta.SELECCIONADO;
+                        ofertaSubasta.PrecioOferta = (float)oferta.PRECIOOFERTA;
                         ofertaSubasta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
                         ofertaSubasta.Transportista.ObtenerDatosPorId((int)oferta.IDTRANSPORTISTA);
 
