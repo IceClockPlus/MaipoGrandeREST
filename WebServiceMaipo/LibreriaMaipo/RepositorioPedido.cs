@@ -63,6 +63,45 @@ namespace LibreriaMaipo
 
         }
 
+        public static List<Pedido> ObtenerPedidoPorIdCliente(int idCliente)
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+            //Creacion de una factory de Cliente
+            using (var db = new DBEntities())
+            {
+                try
+                {
+                    var queryPedido = db.PEDIDO.Where(pedido => pedido.IDCLIENTE == idCliente).ToList();
+
+                    foreach (var p in queryPedido)
+                    {
+                        Pedido pedido = new Pedido();
+                        pedido.IdPedido = (int)p.IDPEDIDO;
+                        pedido.Cliente.Id = idCliente;
+                        pedido.FechaPedido = p.FECHAPEDIDO;
+                        pedido.FechaEntrega = p.FECHAENTREGA;
+                        pedido.Ciudad = p.CIUDAD;
+                        pedido.Direccion = p.DIRECCIONPEDIDO;
+                        pedido.Pais = p.PAIS;
+                        pedido.EstadoPedido = RepositorioEstadoPedido.ObtenerEstadoPedidoById((int)p.IDESTADOPEDIDO);
+                        pedido.DetallePedido = RepositorioDetallePedido.ObtenerDetallePedido(pedido.IdPedido);
+
+                        pedidos.Add(pedido);
+                    }
+                    return pedidos;
+                }
+                catch (Exception ex)
+                {
+                    ex.InnerException.ToString();
+                    return null;
+                }
+
+            }
+
+
+        }
+
+
         /// <summary>
         /// Metodo para la adición del pedido a la base de datos
         /// </summary>

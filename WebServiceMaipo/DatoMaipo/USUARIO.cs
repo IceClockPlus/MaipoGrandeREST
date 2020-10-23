@@ -18,6 +18,7 @@ namespace DatoMaipo
         {
             this.CLIENTE = new HashSet<CLIENTE>();
             this.PRODUCTOR = new HashSet<PRODUCTOR>();
+            this.TRANSPORTISTA = new HashSet<TRANSPORTISTA>();
         }
     
         public decimal ID_USUARIO { get; set; }
@@ -30,5 +31,6 @@ namespace DatoMaipo
         public virtual ROL ROL { get; set; }
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
         public virtual ICollection<PRODUCTOR> PRODUCTOR { get; set; }
+        public virtual ICollection<TRANSPORTISTA> TRANSPORTISTA { get; set; }
     }
 }

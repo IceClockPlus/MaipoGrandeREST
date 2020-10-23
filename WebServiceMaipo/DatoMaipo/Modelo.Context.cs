@@ -38,6 +38,12 @@ namespace DatoMaipo
         public DbSet<PRODUCTO> PRODUCTO { get; set; }
         public DbSet<CONTRATO> CONTRATO { get; set; }
         public DbSet<PRODUCTOR> PRODUCTOR { get; set; }
+        public DbSet<OFERTAPRODUCTO> OFERTAPRODUCTO { get; set; }
+        public DbSet<SUBASTA> SUBASTA { get; set; }
+        public DbSet<ESTADOSUBASTA> ESTADOSUBASTA { get; set; }
+        public DbSet<OFERTASUBASTA> OFERTASUBASTA { get; set; }
+        public DbSet<TIPOTRANSPORTE> TIPOTRANSPORTE { get; set; }
+        public DbSet<TRANSPORTISTA> TRANSPORTISTA { get; set; }
     
         public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
         {

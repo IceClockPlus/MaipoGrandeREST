@@ -12,17 +12,31 @@
         <EntityTypeShape EntityType="Model.CLIENTE" Width="1.5" PointX="5.75" PointY="0.875" />
         <EntityTypeShape EntityType="Model.ESTADOPEDIDO" Width="1.5" PointX="8" PointY="4.875" />
         <EntityTypeShape EntityType="Model.PEDIDO" PointX="7.875" PointY="1" Width="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLEPEDIDO" Width="1.5" PointX="10.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLEPEDIDO" Width="1.5" PointX="10.125" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_IDCLIENTE_PEDIDO" />
         <AssociationConnector Association="Model.FK_IDUSUARIO_CLIENTE" />
         <AssociationConnector Association="Model.FK_ESTADOPEDIDO_PEDIDO" />
         <AssociationConnector Association="Model.FK_IDPEDIDO_DETALLEPEDIDO" />
-        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="10.25" PointY="4.25" />
+        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="12.375" PointY="2.125" />
         <AssociationConnector Association="Model.FK_IDPRODUCTO_DETALLEPEDIDO" />
-        <EntityTypeShape EntityType="Model.CONTRATO" Width="1.5" PointX="5.5" PointY="5.25" />
-        <EntityTypeShape EntityType="Model.PRODUCTOR" Width="1.5" PointX="3.25" PointY="5.25" />
+        <EntityTypeShape EntityType="Model.CONTRATO" Width="1.5" PointX="5.375" PointY="4.125" />
+        <EntityTypeShape EntityType="Model.PRODUCTOR" Width="1.5" PointX="3.125" PointY="6.25" />
         <AssociationConnector Association="Model.FK_IDPRODUCTOR_CONTRATO" />
         <AssociationConnector Association="Model.FK_IDUSUARIO_PRODUCTOR" />
+        <EntityTypeShape EntityType="Model.OFERTAPRODUCTO" Width="1.5" PointX="10.75" PointY="7" />
+        <EntityTypeShape EntityType="Model.SUBASTA" Width="1.5" PointX="6.5" PointY="8.375" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTO_OFERTAPROD" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTOR_OFERTAPROD" />
+        <AssociationConnector Association="Model.FK_IDPEDIDO_SUBASTA" />
+        <EntityTypeShape EntityType="Model.ESTADOSUBASTA" Width="1.5" PointX="1.625" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_ESTADOSUBASTA" />
+        <EntityTypeShape EntityType="Model.OFERTASUBASTA" Width="1.5" PointX="8.75" PointY="11" />
+        <EntityTypeShape EntityType="Model.TIPOTRANSPORTE" Width="1.5" PointX="6.5" PointY="15.625" />
+        <EntityTypeShape EntityType="Model.TRANSPORTISTA" Width="1.5" PointX="5.75" PointY="12.125" />
+        <AssociationConnector Association="Model.FK_IDSUBASTA_OFERTA" />
+        <AssociationConnector Association="Model.FK_IDTRANSPORTISTA_OFERTA" />
+        <AssociationConnector Association="Model.FK_TIPOTRANSPOR_OFERTA" />
+        <AssociationConnector Association="Model.FK_IDUSUARIO_TRANSPORTISTA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -118,5 +118,68 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OFERTAPRODUCTO">
+      <EntityTypeMapping TypeName="Model.OFERTAPRODUCTO">
+        <MappingFragment StoreEntitySet="OFERTAPRODUCTO">
+          <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+          <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+          <ScalarProperty Name="SELECCIONADO" ColumnName="SELECCIONADO" />
+          <ScalarProperty Name="PRECIOCLP" ColumnName="PRECIOCLP" />
+          <ScalarProperty Name="PRECIOUSD" ColumnName="PRECIOUSD" />
+          <ScalarProperty Name="IDOFERTA" ColumnName="IDOFERTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUBASTA">
+      <EntityTypeMapping TypeName="Model.SUBASTA">
+        <MappingFragment StoreEntitySet="SUBASTA">
+          <ScalarProperty Name="IDESTADOSUBASTA" ColumnName="IDESTADOSUBASTA" />
+          <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+          <ScalarProperty Name="FECHATERMINO" ColumnName="FECHATERMINO" />
+          <ScalarProperty Name="FECHAINICIO" ColumnName="FECHAINICIO" />
+          <ScalarProperty Name="IDSUBASTA" ColumnName="IDSUBASTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADOSUBASTA">
+      <EntityTypeMapping TypeName="Model.ESTADOSUBASTA">
+        <MappingFragment StoreEntitySet="ESTADOSUBASTA">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDESTADO" ColumnName="IDESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OFERTASUBASTA">
+      <EntityTypeMapping TypeName="Model.OFERTASUBASTA">
+        <MappingFragment StoreEntitySet="OFERTASUBASTA">
+          <ScalarProperty Name="IDSUBASTA" ColumnName="IDSUBASTA" />
+          <ScalarProperty Name="IDTIPOTRANSPORTE" ColumnName="IDTIPOTRANSPORTE" />
+          <ScalarProperty Name="IDTRANSPORTISTA" ColumnName="IDTRANSPORTISTA" />
+          <ScalarProperty Name="FECHAOFERTA" ColumnName="FECHAOFERTA" />
+          <ScalarProperty Name="SELECCIONADO" ColumnName="SELECCIONADO" />
+          <ScalarProperty Name="PRECIOOFERTA" ColumnName="PRECIOOFERTA" />
+          <ScalarProperty Name="IDOFERTA" ColumnName="IDOFERTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOTRANSPORTE">
+      <EntityTypeMapping TypeName="Model.TIPOTRANSPORTE">
+        <MappingFragment StoreEntitySet="TIPOTRANSPORTE">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDTIPO" ColumnName="IDTIPO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRANSPORTISTA">
+      <EntityTypeMapping TypeName="Model.TRANSPORTISTA">
+        <MappingFragment StoreEntitySet="TRANSPORTISTA">
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="TELEFONOTRANSPORTISTA" ColumnName="TELEFONOTRANSPORTISTA" />
+          <ScalarProperty Name="DIRECCIONTRANSPORTISTA" ColumnName="DIRECCIONTRANSPORTISTA" />
+          <ScalarProperty Name="NOMBRETRANSPORTISTA" ColumnName="NOMBRETRANSPORTISTA" />
+          <ScalarProperty Name="IDTTRANSPORTISTA" ColumnName="IDTTRANSPORTISTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

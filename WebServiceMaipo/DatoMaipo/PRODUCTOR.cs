@@ -17,6 +17,7 @@ namespace DatoMaipo
         public PRODUCTOR()
         {
             this.CONTRATO = new HashSet<CONTRATO>();
+            this.OFERTAPRODUCTO = new HashSet<OFERTAPRODUCTO>();
         }
     
         public decimal IDPRODUCTOR { get; set; }
@@ -27,5 +28,6 @@ namespace DatoMaipo
     
         public virtual ICollection<CONTRATO> CONTRATO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        public virtual ICollection<OFERTAPRODUCTO> OFERTAPRODUCTO { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace DatoMaipo
         public PRODUCTO()
         {
             this.DETALLEPEDIDO = new HashSet<DETALLEPEDIDO>();
+            this.OFERTAPRODUCTO = new HashSet<OFERTAPRODUCTO>();
         }
     
         public decimal IDPRODUCTO { get; set; }
@@ -26,5 +27,6 @@ namespace DatoMaipo
         public string BANNERPRODUCTO { get; set; }
     
         public virtual ICollection<DETALLEPEDIDO> DETALLEPEDIDO { get; set; }
+        public virtual ICollection<OFERTAPRODUCTO> OFERTAPRODUCTO { get; set; }
     }
 }

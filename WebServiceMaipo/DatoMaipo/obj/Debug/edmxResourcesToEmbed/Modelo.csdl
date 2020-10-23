@@ -28,6 +28,7 @@
     <Property Name="TOKEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="USUARIO" ToRole="CLIENTE" />
     <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="USUARIO" ToRole="PRODUCTOR" />
+    <NavigationProperty Name="TRANSPORTISTA" Relationship="Model.FK_IDUSUARIO_TRANSPORTISTA" FromRole="USUARIO" ToRole="TRANSPORTISTA" />
   </EntityType>
   <Association Name="FK_ID_ROL_USUARIO">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
@@ -99,6 +100,44 @@
       <Parameter Name="CIUDAD" Mode="In" Type="String" />
       <Parameter Name="RESULTADO" Mode="Out" Type="Decimal" />
     </FunctionImport>
+    <EntitySet Name="OFERTAPRODUCTO" EntityType="Model.OFERTAPRODUCTO" />
+    <EntitySet Name="SUBASTA" EntityType="Model.SUBASTA" />
+    <AssociationSet Name="FK_IDPRODUCTO_OFERTAPROD" Association="Model.FK_IDPRODUCTO_OFERTAPROD">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTOR_OFERTAPROD" Association="Model.FK_IDPRODUCTOR_OFERTAPROD">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPEDIDO_SUBASTA" Association="Model.FK_IDPEDIDO_SUBASTA">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="SUBASTA" EntitySet="SUBASTA" />
+    </AssociationSet>
+    <EntitySet Name="ESTADOSUBASTA" EntityType="Model.ESTADOSUBASTA" />
+    <AssociationSet Name="FK_ESTADOSUBASTA" Association="Model.FK_ESTADOSUBASTA">
+      <End Role="ESTADOSUBASTA" EntitySet="ESTADOSUBASTA" />
+      <End Role="SUBASTA" EntitySet="SUBASTA" />
+    </AssociationSet>
+    <EntitySet Name="OFERTASUBASTA" EntityType="Model.OFERTASUBASTA" />
+    <EntitySet Name="TIPOTRANSPORTE" EntityType="Model.TIPOTRANSPORTE" />
+    <EntitySet Name="TRANSPORTISTA" EntityType="Model.TRANSPORTISTA" />
+    <AssociationSet Name="FK_IDSUBASTA_OFERTA" Association="Model.FK_IDSUBASTA_OFERTA">
+      <End Role="SUBASTA" EntitySet="SUBASTA" />
+      <End Role="OFERTASUBASTA" EntitySet="OFERTASUBASTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTRANSPORTISTA_OFERTA" Association="Model.FK_IDTRANSPORTISTA_OFERTA">
+      <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+      <End Role="OFERTASUBASTA" EntitySet="OFERTASUBASTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPOTRANSPOR_OFERTA" Association="Model.FK_TIPOTRANSPOR_OFERTA">
+      <End Role="TIPOTRANSPORTE" EntitySet="TIPOTRANSPORTE" />
+      <End Role="OFERTASUBASTA" EntitySet="OFERTASUBASTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDUSUARIO_TRANSPORTISTA" Association="Model.FK_IDUSUARIO_TRANSPORTISTA">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>
@@ -135,6 +174,7 @@
     <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPEDIDO_DETALLEPEDIDO" FromRole="PEDIDO" ToRole="DETALLEPEDIDO" />
     <Property Name="CIUDAD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
     <Property Name="PAIS" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="SUBASTA" Relationship="Model.FK_IDPEDIDO_SUBASTA" FromRole="PEDIDO" ToRole="SUBASTA" />
   </EntityType>
   <EntityType Name="DETALLEPEDIDO">
     <Key>
@@ -206,6 +246,7 @@
     <Property Name="IMAGENPRODUCTO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="BANNERPRODUCTO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPRODUCTO_DETALLEPEDIDO" FromRole="PRODUCTO" ToRole="DETALLEPEDIDO" />
+    <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTO_OFERTAPROD" FromRole="PRODUCTO" ToRole="OFERTAPRODUCTO" />
   </EntityType>
   <Association Name="FK_IDPRODUCTO_DETALLEPEDIDO">
     <End Type="Model.PRODUCTO" Role="PRODUCTO" Multiplicity="1" />
@@ -242,6 +283,7 @@
     <NavigationProperty Name="CONTRATO" Relationship="Model.FK_IDPRODUCTOR_CONTRATO" FromRole="PRODUCTOR" ToRole="CONTRATO" />
     <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="PRODUCTOR" ToRole="USUARIO" />
     <Property Name="TELEFONOPRODUCTRO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="PRODUCTOR" ToRole="OFERTAPRODUCTO" />
   </EntityType>
   <Association Name="FK_IDPRODUCTOR_CONTRATO">
     <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
@@ -263,6 +305,171 @@
         <PropertyRef Name="ID_USUARIO" />
       </Principal>
       <Dependent Role="PRODUCTOR">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OFERTAPRODUCTO">
+    <Key>
+      <PropertyRef Name="IDOFERTA" />
+    </Key>
+    <Property Name="IDOFERTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRECIOUSD" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="PRECIOCLP" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="SELECCIONADO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="IDPRODUCTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Model.FK_IDPRODUCTO_OFERTAPROD" FromRole="OFERTAPRODUCTO" ToRole="PRODUCTO" />
+    <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="OFERTAPRODUCTO" ToRole="PRODUCTOR" />
+  </EntityType>
+  <EntityType Name="SUBASTA">
+    <Key>
+      <PropertyRef Name="IDSUBASTA" />
+    </Key>
+    <Property Name="IDSUBASTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHAINICIO" Type="DateTime" Nullable="false" />
+    <Property Name="FECHATERMINO" Type="DateTime" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="PEDIDO" Relationship="Model.FK_IDPEDIDO_SUBASTA" FromRole="SUBASTA" ToRole="PEDIDO" />
+    <Property Name="IDESTADOSUBASTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="ESTADOSUBASTA" Relationship="Model.FK_ESTADOSUBASTA" FromRole="SUBASTA" ToRole="ESTADOSUBASTA" />
+    <NavigationProperty Name="OFERTASUBASTA" Relationship="Model.FK_IDSUBASTA_OFERTA" FromRole="SUBASTA" ToRole="OFERTASUBASTA" />
+  </EntityType>
+  <Association Name="FK_IDPRODUCTO_OFERTAPROD">
+    <End Type="Model.PRODUCTO" Role="PRODUCTO" Multiplicity="1" />
+    <End Type="Model.OFERTAPRODUCTO" Role="OFERTAPRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="OFERTAPRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTOR_OFERTAPROD">
+    <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
+    <End Type="Model.OFERTAPRODUCTO" Role="OFERTAPRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="OFERTAPRODUCTO">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPEDIDO_SUBASTA">
+    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+    <End Type="Model.SUBASTA" Role="SUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="SUBASTA">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ESTADOSUBASTA">
+    <Key>
+      <PropertyRef Name="IDESTADO" />
+    </Key>
+    <Property Name="IDESTADO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SUBASTA" Relationship="Model.FK_ESTADOSUBASTA" FromRole="ESTADOSUBASTA" ToRole="SUBASTA" />
+  </EntityType>
+  <Association Name="FK_ESTADOSUBASTA">
+    <End Type="Model.ESTADOSUBASTA" Role="ESTADOSUBASTA" Multiplicity="1" />
+    <End Type="Model.SUBASTA" Role="SUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOSUBASTA">
+        <PropertyRef Name="IDESTADO" />
+      </Principal>
+      <Dependent Role="SUBASTA">
+        <PropertyRef Name="IDESTADOSUBASTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OFERTASUBASTA">
+    <Key>
+      <PropertyRef Name="IDOFERTA" />
+    </Key>
+    <Property Name="IDOFERTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRECIOOFERTA" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="SELECCIONADO" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAOFERTA" Type="DateTime" Nullable="false" />
+    <Property Name="IDTRANSPORTISTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="IDTIPOTRANSPORTE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="IDSUBASTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="SUBASTA" Relationship="Model.FK_IDSUBASTA_OFERTA" FromRole="OFERTASUBASTA" ToRole="SUBASTA" />
+    <NavigationProperty Name="TRANSPORTISTA" Relationship="Model.FK_IDTRANSPORTISTA_OFERTA" FromRole="OFERTASUBASTA" ToRole="TRANSPORTISTA" />
+    <NavigationProperty Name="TIPOTRANSPORTE" Relationship="Model.FK_TIPOTRANSPOR_OFERTA" FromRole="OFERTASUBASTA" ToRole="TIPOTRANSPORTE" />
+  </EntityType>
+  <EntityType Name="TIPOTRANSPORTE">
+    <Key>
+      <PropertyRef Name="IDTIPO" />
+    </Key>
+    <Property Name="IDTIPO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OFERTASUBASTA" Relationship="Model.FK_TIPOTRANSPOR_OFERTA" FromRole="TIPOTRANSPORTE" ToRole="OFERTASUBASTA" />
+  </EntityType>
+  <EntityType Name="TRANSPORTISTA">
+    <Key>
+      <PropertyRef Name="IDTTRANSPORTISTA" />
+    </Key>
+    <Property Name="IDTTRANSPORTISTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="NOMBRETRANSPORTISTA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCIONTRANSPORTISTA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONOTRANSPORTISTA" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="OFERTASUBASTA" Relationship="Model.FK_IDTRANSPORTISTA_OFERTA" FromRole="TRANSPORTISTA" ToRole="OFERTASUBASTA" />
+    <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_TRANSPORTISTA" FromRole="TRANSPORTISTA" ToRole="USUARIO" />
+  </EntityType>
+  <Association Name="FK_IDSUBASTA_OFERTA">
+    <End Type="Model.SUBASTA" Role="SUBASTA" Multiplicity="1" />
+    <End Type="Model.OFERTASUBASTA" Role="OFERTASUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBASTA">
+        <PropertyRef Name="IDSUBASTA" />
+      </Principal>
+      <Dependent Role="OFERTASUBASTA">
+        <PropertyRef Name="IDSUBASTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTRANSPORTISTA_OFERTA">
+    <End Type="Model.TRANSPORTISTA" Role="TRANSPORTISTA" Multiplicity="1" />
+    <End Type="Model.OFERTASUBASTA" Role="OFERTASUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRANSPORTISTA">
+        <PropertyRef Name="IDTTRANSPORTISTA" />
+      </Principal>
+      <Dependent Role="OFERTASUBASTA">
+        <PropertyRef Name="IDTRANSPORTISTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPOTRANSPOR_OFERTA">
+    <End Type="Model.TIPOTRANSPORTE" Role="TIPOTRANSPORTE" Multiplicity="1" />
+    <End Type="Model.OFERTASUBASTA" Role="OFERTASUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOTRANSPORTE">
+        <PropertyRef Name="IDTIPO" />
+      </Principal>
+      <Dependent Role="OFERTASUBASTA">
+        <PropertyRef Name="IDTIPOTRANSPORTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDUSUARIO_TRANSPORTISTA">
+    <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="Model.TRANSPORTISTA" Role="TRANSPORTISTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="TRANSPORTISTA">
         <PropertyRef Name="IDUSUARIO" />
       </Dependent>
     </ReferentialConstraint>

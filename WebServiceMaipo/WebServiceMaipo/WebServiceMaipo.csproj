@@ -188,15 +188,19 @@
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\SubastaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\WSResponse\SubastaViewResponse.cs" />
     <Compile Include="Models\WS\AccessViewModel.cs" />
     <Compile Include="Models\WS\DetallePedidoModel.cs" />
+    <Compile Include="Models\WS\OfertaSubastaModelView.cs" />
     <Compile Include="Models\WS\PedidoViewModel.cs" />
     <Compile Include="Models\WS\Reply.cs" />
     <Compile Include="Models\WS\SecurityViewModel.cs" />
+    <Compile Include="Models\WS\SubastaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
