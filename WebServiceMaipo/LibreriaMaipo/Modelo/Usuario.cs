@@ -28,6 +28,8 @@ namespace LibreriaMaipo.Modelo
         public string NombreRol { get; set; }
         [DataMember]
         public TipoUsuario TipoUsuario { get; set; }
+        [DataMember]
+        public Pais Pais { get; set; }
         public Usuario()
         {
             this.InitClass();
@@ -40,6 +42,7 @@ namespace LibreriaMaipo.Modelo
             this.Contrasenia = string.Empty;
             this.IsHabilitado = "0";
             this.Token = string.Empty;
+            this.Pais = new Pais();
             this.NombreRol = string.Empty;
         }
     }

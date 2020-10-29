@@ -12,16 +12,16 @@ namespace DatoMaipo
     using System;
     using System.Collections.Generic;
     
-    public partial class PAIS
+    public partial class PRODUCCION
     {
-        public PAIS()
-        {
-            this.USUARIO = new HashSet<USUARIO>();
-        }
+        public decimal IDPRODUCCION { get; set; }
+        public Nullable<decimal> PRECIOPREMIUM { get; set; }
+        public Nullable<decimal> PRECIOESTANDAR { get; set; }
+        public Nullable<decimal> PRECIOLOWER { get; set; }
+        public decimal IDPRODUCTOR { get; set; }
+        public decimal IDPRODUCTO { get; set; }
     
-        public decimal ID_PAIS { get; set; }
-        public string NOMBRE_PAIS { get; set; }
-    
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
+        public virtual PRODUCTO PRODUCTO { get; set; }
+        public virtual PRODUCTOR PRODUCTOR { get; set; }
     }
 }

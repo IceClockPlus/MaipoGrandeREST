@@ -20,6 +20,8 @@
     <EntitySetMapping Name="USUARIO">
       <EntityTypeMapping TypeName="Model.USUARIO">
         <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="IDPAIS" ColumnName="IDPAIS" />
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
           <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
           <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
           <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
@@ -178,6 +180,18 @@
           <ScalarProperty Name="DIRECCIONTRANSPORTISTA" ColumnName="DIRECCIONTRANSPORTISTA" />
           <ScalarProperty Name="NOMBRETRANSPORTISTA" ColumnName="NOMBRETRANSPORTISTA" />
           <ScalarProperty Name="IDTTRANSPORTISTA" ColumnName="IDTTRANSPORTISTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCCION">
+      <EntityTypeMapping TypeName="Model.PRODUCCION">
+        <MappingFragment StoreEntitySet="PRODUCCION">
+          <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+          <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+          <ScalarProperty Name="PRECIOLOWER" ColumnName="PRECIOLOWER" />
+          <ScalarProperty Name="PRECIOESTANDAR" ColumnName="PRECIOESTANDAR" />
+          <ScalarProperty Name="PRECIOPREMIUM" ColumnName="PRECIOPREMIUM" />
+          <ScalarProperty Name="IDPRODUCCION" ColumnName="IDPRODUCCION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

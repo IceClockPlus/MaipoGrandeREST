@@ -47,6 +47,7 @@ namespace WebServiceMaipo.Controllers
         {
             try
             {
+                //Validar el token enviado en la solicitud
                 Usuario usr = this.Validate(model.Token);
                 if (!(usr.TipoUsuario is Transportista))
                 {

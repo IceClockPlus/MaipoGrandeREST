@@ -88,6 +88,17 @@
     <Property Name="CIUDAD" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="PAIS" Type="varchar2" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="PRODUCCION">
+    <Key>
+      <PropertyRef Name="IDPRODUCCION" />
+    </Key>
+    <Property Name="IDPRODUCCION" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRECIOPREMIUM" Type="float" Precision="10" Scale="0" />
+    <Property Name="PRECIOESTANDAR" Type="float" Precision="10" Scale="0" />
+    <Property Name="PRECIOLOWER" Type="float" Precision="10" Scale="0" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="PRODUCTO">
     <Key>
       <PropertyRef Name="IDPRODUCTO" />
@@ -152,6 +163,8 @@
     <Property Name="IS_HABILITADO" Type="char" MaxLength="1" Nullable="false" />
     <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TOKEN" Type="varchar2" MaxLength="50" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
+    <Property Name="IDPAIS" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <Association Name="FK_ESTADOPEDIDO_PEDIDO">
     <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
@@ -198,6 +211,18 @@
       </Principal>
       <Dependent Role="PEDIDO">
         <PropertyRef Name="IDCLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPAIS_USUARIO">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="ID_PAIS" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="IDPAIS" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -249,6 +274,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDPRODUCTO_PRODUCCION">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="PRODUCCION" Type="Self.PRODUCCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="PRODUCCION">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDPRODUCTOR_CONTRATO">
     <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
     <End Role="CONTRATO" Type="Self.CONTRATO" Multiplicity="*" />
@@ -269,6 +306,18 @@
         <PropertyRef Name="IDPRODUCTOR" />
       </Principal>
       <Dependent Role="OFERTAPRODUCTO">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTOR_PRODUCCION">
+    <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+    <End Role="PRODUCCION" Type="Self.PRODUCCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="PRODUCCION">
         <PropertyRef Name="IDPRODUCTOR" />
       </Dependent>
     </ReferentialConstraint>
@@ -361,6 +410,7 @@
     <EntitySet Name="OFERTASUBASTA" EntityType="Self.OFERTASUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="PRODUCCION" EntityType="Self.PRODUCCION" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PRODUCTOR" EntityType="Self.PRODUCTOR" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ROL" EntityType="Self.ROL" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -384,6 +434,10 @@
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDPAIS_USUARIO" Association="Self.FK_IDPAIS_USUARIO">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDPEDIDO_DETALLEPEDIDO" Association="Self.FK_IDPEDIDO_DETALLEPEDIDO">
       <End Role="PEDIDO" EntitySet="PEDIDO" />
       <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
@@ -400,6 +454,10 @@
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
       <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTO_PRODUCCION" Association="Self.FK_IDPRODUCTO_PRODUCCION">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="PRODUCCION" EntitySet="PRODUCCION" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDPRODUCTOR_CONTRATO" Association="Self.FK_IDPRODUCTOR_CONTRATO">
       <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
       <End Role="CONTRATO" EntitySet="CONTRATO" />
@@ -407,6 +465,10 @@
     <AssociationSet Name="FK_IDPRODUCTOR_OFERTAPROD" Association="Self.FK_IDPRODUCTOR_OFERTAPROD">
       <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
       <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTOR_PRODUCCION" Association="Self.FK_IDPRODUCTOR_PRODUCCION">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="PRODUCCION" EntitySet="PRODUCCION" />
     </AssociationSet>
     <AssociationSet Name="FK_IDSUBASTA_OFERTA" Association="Self.FK_IDSUBASTA_OFERTA">
       <End Role="SUBASTA" EntitySet="SUBASTA" />

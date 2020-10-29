@@ -31,7 +31,7 @@ namespace LibreriaMaipo
 
                 }catch(Exception ex)
                 {
-                    throw;
+                    ex.InnerException.ToString();
                 }
 
             }
@@ -56,6 +56,7 @@ namespace LibreriaMaipo
                     user.IsHabilitado = userDb.IS_HABILITADO;
                     user.NombreRol = userDb.ROL.NOMBRE_ROL;
                     user.TipoUsuario = GetTipoUsuario(user.NombreRol, user.IdUsuario);
+                    user.Pais = RepositorioPais.BuscarPorId((int)userDb.IDPAIS);
                 }
                 return user;
 

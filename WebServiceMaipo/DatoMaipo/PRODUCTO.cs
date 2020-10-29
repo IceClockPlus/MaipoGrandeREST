@@ -18,6 +18,7 @@ namespace DatoMaipo
         {
             this.DETALLEPEDIDO = new HashSet<DETALLEPEDIDO>();
             this.OFERTAPRODUCTO = new HashSet<OFERTAPRODUCTO>();
+            this.PRODUCCION = new HashSet<PRODUCCION>();
         }
     
         public decimal IDPRODUCTO { get; set; }
@@ -28,5 +29,6 @@ namespace DatoMaipo
     
         public virtual ICollection<DETALLEPEDIDO> DETALLEPEDIDO { get; set; }
         public virtual ICollection<OFERTAPRODUCTO> OFERTAPRODUCTO { get; set; }
+        public virtual ICollection<PRODUCCION> PRODUCCION { get; set; }
     }
 }

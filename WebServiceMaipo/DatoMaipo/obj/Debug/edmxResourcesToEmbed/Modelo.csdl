@@ -6,6 +6,7 @@
     </Key>
     <Property Name="ID_PAIS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PAIS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDPAIS_USUARIO" FromRole="PAIS" ToRole="USUARIO" />
   </EntityType>
   <EntityType Name="ROL">
     <Key>
@@ -29,6 +30,9 @@
     <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="USUARIO" ToRole="CLIENTE" />
     <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="USUARIO" ToRole="PRODUCTOR" />
     <NavigationProperty Name="TRANSPORTISTA" Relationship="Model.FK_IDUSUARIO_TRANSPORTISTA" FromRole="USUARIO" ToRole="TRANSPORTISTA" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDPAIS" Type="Decimal" Precision="38" Scale="0" />
+    <NavigationProperty Name="PAIS" Relationship="Model.FK_IDPAIS_USUARIO" FromRole="USUARIO" ToRole="PAIS" />
   </EntityType>
   <Association Name="FK_ID_ROL_USUARIO">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
@@ -137,6 +141,19 @@
     <AssociationSet Name="FK_IDUSUARIO_TRANSPORTISTA" Association="Model.FK_IDUSUARIO_TRANSPORTISTA">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPAIS_USUARIO" Association="Model.FK_IDPAIS_USUARIO">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <EntitySet Name="PRODUCCION" EntityType="Model.PRODUCCION" />
+    <AssociationSet Name="FK_IDPRODUCTO_PRODUCCION" Association="Model.FK_IDPRODUCTO_PRODUCCION">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="PRODUCCION" EntitySet="PRODUCCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTOR_PRODUCCION" Association="Model.FK_IDPRODUCTOR_PRODUCCION">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="PRODUCCION" EntitySet="PRODUCCION" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="CLIENTE">
@@ -247,6 +264,7 @@
     <Property Name="BANNERPRODUCTO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPRODUCTO_DETALLEPEDIDO" FromRole="PRODUCTO" ToRole="DETALLEPEDIDO" />
     <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTO_OFERTAPROD" FromRole="PRODUCTO" ToRole="OFERTAPRODUCTO" />
+    <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTO_PRODUCCION" FromRole="PRODUCTO" ToRole="PRODUCCION" />
   </EntityType>
   <Association Name="FK_IDPRODUCTO_DETALLEPEDIDO">
     <End Type="Model.PRODUCTO" Role="PRODUCTO" Multiplicity="1" />
@@ -284,6 +302,7 @@
     <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="PRODUCTOR" ToRole="USUARIO" />
     <Property Name="TELEFONOPRODUCTRO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="PRODUCTOR" ToRole="OFERTAPRODUCTO" />
+    <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCTOR" ToRole="PRODUCCION" />
   </EntityType>
   <Association Name="FK_IDPRODUCTOR_CONTRATO">
     <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
@@ -471,6 +490,55 @@
       </Principal>
       <Dependent Role="TRANSPORTISTA">
         <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPAIS_USUARIO">
+    <End Type="Model.PAIS" Role="PAIS" Multiplicity="0..1" />
+    <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="ID_PAIS" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="IDPAIS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PRODUCCION">
+    <Key>
+      <PropertyRef Name="IDPRODUCCION" />
+    </Key>
+    <Property Name="IDPRODUCCION" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRECIOPREMIUM" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="PRECIOESTANDAR" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="PRECIOLOWER" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="IDPRODUCTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Model.FK_IDPRODUCTO_PRODUCCION" FromRole="PRODUCCION" ToRole="PRODUCTO" />
+    <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCCION" ToRole="PRODUCTOR" />
+  </EntityType>
+  <Association Name="FK_IDPRODUCTO_PRODUCCION">
+    <End Type="Model.PRODUCTO" Role="PRODUCTO" Multiplicity="1" />
+    <End Type="Model.PRODUCCION" Role="PRODUCCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="PRODUCCION">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTOR_PRODUCCION">
+    <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
+    <End Type="Model.PRODUCCION" Role="PRODUCCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="PRODUCCION">
+        <PropertyRef Name="IDPRODUCTOR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace WebServiceMaipo.Models.WS
 {
+    [DataContract]
     public class SecurityViewModel
     {
-        public String Token { get; set; }
+        [DataMember]
+        public string Token { get; set; }
     }
 }

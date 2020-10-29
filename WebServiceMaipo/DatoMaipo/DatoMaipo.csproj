@@ -93,6 +93,9 @@
     <Compile Include="PEDIDO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="PRODUCCION.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="PRODUCTO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

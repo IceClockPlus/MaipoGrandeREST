@@ -38,7 +38,7 @@ namespace WebServiceMaipo.Controllers
                     ItemPedido item = new ItemPedido();
                     item.Cantidad = det.Cantidad;
                     item.Calidad = det.Calidad;
-                    item.Producto.IdProducto = det.IdProducto;
+                    item.Producto.IdProducto = det.Producto.IdProducto;
                     pedido.DetallePedido.Add(item);
                 }
 

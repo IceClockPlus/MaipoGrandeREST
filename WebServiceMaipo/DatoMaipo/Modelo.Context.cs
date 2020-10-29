@@ -44,6 +44,7 @@ namespace DatoMaipo
         public DbSet<OFERTASUBASTA> OFERTASUBASTA { get; set; }
         public DbSet<TIPOTRANSPORTE> TIPOTRANSPORTE { get; set; }
         public DbSet<TRANSPORTISTA> TRANSPORTISTA { get; set; }
+        public DbSet<PRODUCCION> PRODUCCION { get; set; }
     
         public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
         {

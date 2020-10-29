@@ -7,11 +7,15 @@ CREATE TABLE Usuario(
 Id_Usuario INTEGER PRIMARY KEY,
 Nombre_Usuario VARCHAR2(30) UNIQUE NOT NULL,
 Contrasenia VARCHAR2(99) NOT NULL,
-Correo VARCHAR2(50) NOT NULL,
 Is_Habilitado CHAR(1) NOT NULL,
 Token VARCHAR2(50),
 Id_Rol INTEGER NOT NULL
 );
+
+ALTER TABLE Usuario
+ADD(Correo VARCHAR2(50),
+    IdPais INTEGER);
+
 
 CREATE TABLE Pais(
 Id_Pais INTEGER PRIMARY KEY,
@@ -26,6 +30,11 @@ FOREIGN KEY(Id_Rol) REFERENCES Rol(Id_Rol);
 --Limitar valores que adquiere IS_HABILITADO
 ALTER TABLE Usuario ADD CONSTRAINT chk_habilitado_usuario
 CHECK(Is_Habilitado IN('0','1'));
+
+ALTER TABLE Usuario
+ADD CONSTRAINT fk_idpais_usuario
+FOREIGN KEY(IdPais) REFERENCES Pais(Id_Pais);
+
 
 --Inserción de los roles del sistema--
 INSERT ALL

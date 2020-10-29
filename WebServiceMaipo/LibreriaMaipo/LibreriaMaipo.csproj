@@ -54,12 +54,14 @@
     <Compile Include="Modelo\EstadoSubasta.cs" />
     <Compile Include="Modelo\OfertaProducto.cs" />
     <Compile Include="Modelo\OfertaSubasta.cs" />
+    <Compile Include="Modelo\Produccion.cs" />
     <Compile Include="Modelo\Subasta.cs" />
     <Compile Include="Modelo\TipoTransporte.cs" />
     <Compile Include="Proceso\ProcesoPedido.cs" />
     <Compile Include="RepositorioDetallePedido.cs" />
     <Compile Include="RepositorioEstadoPedido.cs" />
     <Compile Include="RepositorioOfertaSubasta.cs" />
+    <Compile Include="RepositorioPais.cs" />
     <Compile Include="RepositorioPedido.cs" />
     <Compile Include="MantenedorProducto.cs" />
     <Compile Include="Modelo\ItemPedido.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
+    <Compile Include="RepositorioProduccion.cs" />
     <Compile Include="RepositorioSubasta.cs" />
     <Compile Include="RepositorioUsuario.cs" />
     <Compile Include="TiposUsuario\Cliente.cs" />
@@ -80,7 +83,6 @@
     <Compile Include="UsuarioFactory\ProductorFactory.cs" />
     <Compile Include="UsuarioFactory\TipoUsuarioFactory.cs" />
     <Compile Include="UsuarioFactory\TransportistaFactory.cs" />
-    <Compile Include="VerificadorToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

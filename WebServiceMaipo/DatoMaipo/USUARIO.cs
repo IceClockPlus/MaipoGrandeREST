@@ -27,10 +27,13 @@ namespace DatoMaipo
         public string IS_HABILITADO { get; set; }
         public decimal ID_ROL { get; set; }
         public string TOKEN { get; set; }
+        public string CORREO { get; set; }
+        public Nullable<decimal> IDPAIS { get; set; }
     
         public virtual ROL ROL { get; set; }
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
         public virtual ICollection<PRODUCTOR> PRODUCTOR { get; set; }
         public virtual ICollection<TRANSPORTISTA> TRANSPORTISTA { get; set; }
+        public virtual PAIS PAIS { get; set; }
     }
 }

@@ -29,6 +29,8 @@ namespace LibreriaMaipo
                     usuario.NombreUsuario = usuarioBuscado.NOMBRE_USUARIO;
                     usuario.IsHabilitado = usuarioBuscado.IS_HABILITADO;
                     usuario.NombreRol = usuarioBuscado.ROL.NOMBRE_ROL;
+                    //Recuperar objeto pais desde la base de datos
+                    usuario.Pais = RepositorioPais.BuscarPorId((int)usuarioBuscado.IDPAIS);
 
                     /*Si el usuario esta validado para usar el sistema, se le genera un token de acceso*/
                     if (this.VerificarHabilitado(usuario.IsHabilitado))

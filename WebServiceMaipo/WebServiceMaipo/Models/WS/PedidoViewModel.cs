@@ -21,7 +21,7 @@ namespace WebServiceMaipo.Models.WS
         [DataMember]
         public string Pais { get; set; }
         [DataMember]
-        public List<DetallePedidoModel> DetallePedido { get; set; }
+        public List<ItemPedido> DetallePedido { get; set; }
 
 
     }

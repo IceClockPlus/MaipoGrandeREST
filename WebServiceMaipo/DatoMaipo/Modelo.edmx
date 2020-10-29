@@ -93,6 +93,17 @@
           <Property Name="CIUDAD" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="PAIS" Type="varchar2" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="PRODUCCION">
+          <Key>
+            <PropertyRef Name="IDPRODUCCION" />
+          </Key>
+          <Property Name="IDPRODUCCION" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRECIOPREMIUM" Type="float" Precision="10" Scale="0" />
+          <Property Name="PRECIOESTANDAR" Type="float" Precision="10" Scale="0" />
+          <Property Name="PRECIOLOWER" Type="float" Precision="10" Scale="0" />
+          <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="PRODUCTO">
           <Key>
             <PropertyRef Name="IDPRODUCTO" />
@@ -157,6 +168,8 @@
           <Property Name="IS_HABILITADO" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="TOKEN" Type="varchar2" MaxLength="50" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" />
+          <Property Name="IDPAIS" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <Association Name="FK_ESTADOPEDIDO_PEDIDO">
           <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
@@ -203,6 +216,18 @@
             </Principal>
             <Dependent Role="PEDIDO">
               <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDPAIS_USUARIO">
+          <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAIS">
+              <PropertyRef Name="ID_PAIS" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDPAIS" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -254,6 +279,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDPRODUCTO_PRODUCCION">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCCION" Type="Self.PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Principal>
+            <Dependent Role="PRODUCCION">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IDPRODUCTOR_CONTRATO">
           <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
           <End Role="CONTRATO" Type="Self.CONTRATO" Multiplicity="*" />
@@ -274,6 +311,18 @@
               <PropertyRef Name="IDPRODUCTOR" />
             </Principal>
             <Dependent Role="OFERTAPRODUCTO">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDPRODUCTOR_PRODUCCION">
+          <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+          <End Role="PRODUCCION" Type="Self.PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOR">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Principal>
+            <Dependent Role="PRODUCCION">
               <PropertyRef Name="IDPRODUCTOR" />
             </Dependent>
           </ReferentialConstraint>
@@ -366,6 +415,7 @@
           <EntitySet Name="OFERTASUBASTA" EntityType="Self.OFERTASUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <EntitySet Name="PRODUCCION" EntityType="Self.PRODUCCION" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PRODUCTOR" EntityType="Self.PRODUCTOR" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ROL" EntityType="Self.ROL" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -389,6 +439,10 @@
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="PEDIDO" EntitySet="PEDIDO" />
           </AssociationSet>
+          <AssociationSet Name="FK_IDPAIS_USUARIO" Association="Self.FK_IDPAIS_USUARIO">
+            <End Role="PAIS" EntitySet="PAIS" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
           <AssociationSet Name="FK_IDPEDIDO_DETALLEPEDIDO" Association="Self.FK_IDPEDIDO_DETALLEPEDIDO">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
             <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
@@ -405,6 +459,10 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
           </AssociationSet>
+          <AssociationSet Name="FK_IDPRODUCTO_PRODUCCION" Association="Self.FK_IDPRODUCTO_PRODUCCION">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCCION" EntitySet="PRODUCCION" />
+          </AssociationSet>
           <AssociationSet Name="FK_IDPRODUCTOR_CONTRATO" Association="Self.FK_IDPRODUCTOR_CONTRATO">
             <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
             <End Role="CONTRATO" EntitySet="CONTRATO" />
@@ -412,6 +470,10 @@
           <AssociationSet Name="FK_IDPRODUCTOR_OFERTAPROD" Association="Self.FK_IDPRODUCTOR_OFERTAPROD">
             <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
             <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDPRODUCTOR_PRODUCCION" Association="Self.FK_IDPRODUCTOR_PRODUCCION">
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+            <End Role="PRODUCCION" EntitySet="PRODUCCION" />
           </AssociationSet>
           <AssociationSet Name="FK_IDSUBASTA_OFERTA" Association="Self.FK_IDSUBASTA_OFERTA">
             <End Role="SUBASTA" EntitySet="SUBASTA" />
@@ -448,6 +510,7 @@
           </Key>
           <Property Name="ID_PAIS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_PAIS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDPAIS_USUARIO" FromRole="PAIS" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="ROL">
           <Key>
@@ -471,6 +534,9 @@
           <NavigationProperty Name="CLIENTE" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="USUARIO" ToRole="CLIENTE" />
           <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="USUARIO" ToRole="PRODUCTOR" />
           <NavigationProperty Name="TRANSPORTISTA" Relationship="Model.FK_IDUSUARIO_TRANSPORTISTA" FromRole="USUARIO" ToRole="TRANSPORTISTA" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDPAIS" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="PAIS" Relationship="Model.FK_IDPAIS_USUARIO" FromRole="USUARIO" ToRole="PAIS" />
         </EntityType>
         <Association Name="FK_ID_ROL_USUARIO">
           <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
@@ -579,6 +645,19 @@
           <AssociationSet Name="FK_IDUSUARIO_TRANSPORTISTA" Association="Model.FK_IDUSUARIO_TRANSPORTISTA">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDPAIS_USUARIO" Association="Model.FK_IDPAIS_USUARIO">
+            <End Role="PAIS" EntitySet="PAIS" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <EntitySet Name="PRODUCCION" EntityType="Model.PRODUCCION" />
+          <AssociationSet Name="FK_IDPRODUCTO_PRODUCCION" Association="Model.FK_IDPRODUCTO_PRODUCCION">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCCION" EntitySet="PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDPRODUCTOR_PRODUCCION" Association="Model.FK_IDPRODUCTOR_PRODUCCION">
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+            <End Role="PRODUCCION" EntitySet="PRODUCCION" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CLIENTE">
@@ -689,6 +768,7 @@
           <Property Name="BANNERPRODUCTO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DETALLEPEDIDO" Relationship="Model.FK_IDPRODUCTO_DETALLEPEDIDO" FromRole="PRODUCTO" ToRole="DETALLEPEDIDO" />
           <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTO_OFERTAPROD" FromRole="PRODUCTO" ToRole="OFERTAPRODUCTO" />
+          <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTO_PRODUCCION" FromRole="PRODUCTO" ToRole="PRODUCCION" />
         </EntityType>
         <Association Name="FK_IDPRODUCTO_DETALLEPEDIDO">
           <End Type="Model.PRODUCTO" Role="PRODUCTO" Multiplicity="1" />
@@ -726,6 +806,7 @@
           <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_PRODUCTOR" FromRole="PRODUCTOR" ToRole="USUARIO" />
           <Property Name="TELEFONOPRODUCTRO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="PRODUCTOR" ToRole="OFERTAPRODUCTO" />
+          <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCTOR" ToRole="PRODUCCION" />
         </EntityType>
         <Association Name="FK_IDPRODUCTOR_CONTRATO">
           <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
@@ -916,6 +997,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDPAIS_USUARIO">
+          <End Type="Model.PAIS" Role="PAIS" Multiplicity="0..1" />
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAIS">
+              <PropertyRef Name="ID_PAIS" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDPAIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PRODUCCION">
+          <Key>
+            <PropertyRef Name="IDPRODUCCION" />
+          </Key>
+          <Property Name="IDPRODUCCION" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRECIOPREMIUM" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="PRECIOESTANDAR" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="PRECIOLOWER" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDPRODUCTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Model.FK_IDPRODUCTO_PRODUCCION" FromRole="PRODUCCION" ToRole="PRODUCTO" />
+          <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCCION" ToRole="PRODUCTOR" />
+        </EntityType>
+        <Association Name="FK_IDPRODUCTO_PRODUCCION">
+          <End Type="Model.PRODUCTO" Role="PRODUCTO" Multiplicity="1" />
+          <End Type="Model.PRODUCCION" Role="PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Principal>
+            <Dependent Role="PRODUCCION">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDPRODUCTOR_PRODUCCION">
+          <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
+          <End Type="Model.PRODUCCION" Role="PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOR">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Principal>
+            <Dependent Role="PRODUCCION">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -941,6 +1071,8 @@
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="Model.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="IDPAIS" ColumnName="IDPAIS" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
                 <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
                 <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
@@ -1099,6 +1231,18 @@
                 <ScalarProperty Name="DIRECCIONTRANSPORTISTA" ColumnName="DIRECCIONTRANSPORTISTA" />
                 <ScalarProperty Name="NOMBRETRANSPORTISTA" ColumnName="NOMBRETRANSPORTISTA" />
                 <ScalarProperty Name="IDTTRANSPORTISTA" ColumnName="IDTTRANSPORTISTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCCION">
+            <EntityTypeMapping TypeName="Model.PRODUCCION">
+              <MappingFragment StoreEntitySet="PRODUCCION">
+                <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+                <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+                <ScalarProperty Name="PRECIOLOWER" ColumnName="PRECIOLOWER" />
+                <ScalarProperty Name="PRECIOESTANDAR" ColumnName="PRECIOESTANDAR" />
+                <ScalarProperty Name="PRECIOPREMIUM" ColumnName="PRECIOPREMIUM" />
+                <ScalarProperty Name="IDPRODUCCION" ColumnName="IDPRODUCCION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
