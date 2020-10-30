@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibreriaMaipo.UsuarioFactory
 {
-    abstract class TipoUsuarioFactory
+    public abstract class TipoUsuarioFactory
     {
         public abstract TipoUsuario createTipoUsuario();
     }

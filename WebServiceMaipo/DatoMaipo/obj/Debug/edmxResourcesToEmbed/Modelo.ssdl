@@ -30,6 +30,7 @@
     <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CALIDAD" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="IDDETALLEPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="ESTADOPEDIDO">
     <Key>
@@ -394,6 +395,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_ACTUALIZAR_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PDIRECCION" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDCLIENTE" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+    <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
+    <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
+  </Function>
   <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />

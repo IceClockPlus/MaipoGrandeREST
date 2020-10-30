@@ -18,7 +18,7 @@ namespace LibreriaMaipo.Modelo
         /// <summary>
         /// Campo que muestra la descripcion del estado del pedido
         /// </summary>
-        public String DescripcionEstado { get; set; }
+        public string DescripcionEstado { get; set; }
 
         public EstadoPedido()
         {
@@ -28,7 +28,7 @@ namespace LibreriaMaipo.Modelo
         private void InitClass()
         {
             this.IdEstado = 0;
-            this.DescripcionEstado = String.Empty;
+            this.DescripcionEstado = string.Empty;
         }
     }
 }

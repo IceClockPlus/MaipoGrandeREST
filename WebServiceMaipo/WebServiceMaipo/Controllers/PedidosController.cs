@@ -77,6 +77,54 @@ namespace WebServiceMaipo.Controllers
 
         }
 
+        [HttpPut]
+        public HttpResponseMessage Put([FromBody] Pedido pedido)
+        {
+            try
+            {
+
+                if (pedido.Update())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, pedido);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, pedido);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        public void GetAll()
+        {
+            /*
+            try
+            {
+                Pedido ped = new Pedido();
+                var listaPedido = ped.ReadAll();
+                if (listaPedido.Count > 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, listaPedido);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            */
+        }
 
     }
 }

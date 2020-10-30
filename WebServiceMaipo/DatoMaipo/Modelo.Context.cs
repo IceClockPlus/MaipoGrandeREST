@@ -95,5 +95,42 @@ namespace DatoMaipo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PEDIDO", fECHAPEDIDOParameter, fECHAENTREGAParameter, dIRECCIONPEDIDOParameter, iDCLIENTEParameter, iDESTADOPEDIDOParameter, cIUDADParameter, rESULTADO);
         }
+    
+        public virtual int SP_ACTUALIZAR_PEDIDO(Nullable<decimal> pID, Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, string pDIRECCION, Nullable<decimal> pIDCLIENTE, Nullable<decimal> pIDESTADO, string pCIUDAD, string pPAIS)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pDIRECCIONParameter = pDIRECCION != null ?
+                new ObjectParameter("PDIRECCION", pDIRECCION) :
+                new ObjectParameter("PDIRECCION", typeof(string));
+    
+            var pIDCLIENTEParameter = pIDCLIENTE.HasValue ?
+                new ObjectParameter("PIDCLIENTE", pIDCLIENTE) :
+                new ObjectParameter("PIDCLIENTE", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            var pCIUDADParameter = pCIUDAD != null ?
+                new ObjectParameter("PCIUDAD", pCIUDAD) :
+                new ObjectParameter("PCIUDAD", typeof(string));
+    
+            var pPAISParameter = pPAIS != null ?
+                new ObjectParameter("PPAIS", pPAIS) :
+                new ObjectParameter("PPAIS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_PEDIDO", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pDIRECCIONParameter, pIDCLIENTEParameter, pIDESTADOParameter, pCIUDADParameter, pPAISParameter);
+        }
     }
 }

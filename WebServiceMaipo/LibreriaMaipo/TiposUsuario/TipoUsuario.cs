@@ -35,6 +35,8 @@ namespace LibreriaMaipo.TiposUsuario
         public abstract bool ObtenerDatosPorIdUsuario(int idUsuario);
         public abstract void ObtenerDatosPorId(int id);
 
+        public abstract List<TipoUsuario> ListarTodos();
+
 
     }
 }

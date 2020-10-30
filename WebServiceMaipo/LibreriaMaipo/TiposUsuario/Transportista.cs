@@ -9,6 +9,11 @@ namespace LibreriaMaipo.TiposUsuario
 {
     public class Transportista : TipoUsuario
     {
+        public override List<TipoUsuario> ListarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void ObtenerDatosPorId(int id)
         {
             using (var db = new DBEntities())

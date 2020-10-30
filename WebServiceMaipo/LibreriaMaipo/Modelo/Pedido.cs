@@ -1,4 +1,5 @@
-﻿using LibreriaMaipo.TiposUsuario;
+﻿using DatoMaipo;
+using LibreriaMaipo.TiposUsuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,5 +51,24 @@ namespace LibreriaMaipo.Modelo
             this.DetallePedido = new List<ItemPedido>();
         }
 
+
+        public bool Update()
+        {
+            try
+            {
+                using (var bd = new DBEntities())
+                {
+                    bd.SP_ACTUALIZAR_PEDIDO(this.IdPedido, this.FechaPedido, this.FechaEntrega, this.Direccion, this.Cliente.Id, this.EstadoPedido.IdEstado, this.Ciudad, this.Pais);
+                    
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
     }
 }

@@ -67,6 +67,7 @@
     <EntitySetMapping Name="DETALLEPEDIDO">
       <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
         <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+          <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
           <ScalarProperty Name="IDDETALLEPEDIDO" ColumnName="IDDETALLEPEDIDO" />
           <ScalarProperty Name="CALIDAD" ColumnName="CALIDAD" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -195,5 +196,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_ACTUALIZAR_PEDIDO" FunctionName="Model.Store.SP_ACTUALIZAR_PEDIDO" />
   </EntityContainerMapping>
 </Mapping>

@@ -62,7 +62,7 @@ namespace WebServiceMaipo.Controllers
         }
 
         // PUT: api/Produccion/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]ProduccionViewModel model)
         {
         }
 

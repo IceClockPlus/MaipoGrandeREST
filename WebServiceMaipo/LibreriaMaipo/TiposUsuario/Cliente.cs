@@ -12,6 +12,11 @@ namespace LibreriaMaipo.TiposUsuario
     [DataContract]
     public class Cliente : TipoUsuario
     {
+        public override List<TipoUsuario> ListarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void ObtenerDatosPorId(int id)
         {
             using(var db = new DBEntities())
@@ -27,7 +32,7 @@ namespace LibreriaMaipo.TiposUsuario
                 }
                 catch(Exception ex)
                 {
-                    throw new Exception(ex.StackTrace);
+                    Console.WriteLine(ex.Message);
                 }
 
             }
