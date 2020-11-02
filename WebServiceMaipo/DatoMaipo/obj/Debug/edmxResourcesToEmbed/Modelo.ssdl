@@ -6,22 +6,31 @@
     </Key>
     <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRECLIENTE" Type="varchar2" MaxLength="50" Nullable="false" />
-    <Property Name="APELLIDOCLIENTE" Type="varchar2" MaxLength="50" />
     <Property Name="DIRECCIONCLIENTE" Type="varchar2" MaxLength="40" Nullable="false" />
     <Property Name="TELEFONOCLIENTE" Type="varchar2" MaxLength="12" Nullable="false" />
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="CONTRATO">
+    <Key>
+      <PropertyRef Name="IDCONTRATO" />
+    </Key>
+    <Property Name="IDCONTRATO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FECHACREACION" Type="date" Nullable="false" />
+    <Property Name="FECHATERMINO" Type="date" Nullable="false" />
+    <Property Name="PORCCOMISION" Type="float" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="VIGENTE" Type="number" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="DETALLEPEDIDO">
     <Key>
-      <PropertyRef Name="IDPEDIDO" />
-      <PropertyRef Name="IDPRODUCTO" />
-      <PropertyRef Name="CANTIDAD" />
+      <PropertyRef Name="IDDETALLEPEDIDO" />
     </Key>
     <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CALIDAD" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="IDDETALLEPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="ESTADOPEDIDO">
     <Key>
@@ -29,6 +38,36 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
     </Key>
     <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESTADOSUBASTA">
+    <Key>
+      <PropertyRef Name="IDESTADO" />
+    </Key>
+    <Property Name="IDESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OFERTAPRODUCTO">
+    <Key>
+      <PropertyRef Name="IDOFERTA" />
+    </Key>
+    <Property Name="IDOFERTA" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRECIOUSD" Type="float" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="PRECIOCLP" Type="float" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="SELECCIONADO" Type="varchar2" MaxLength="1" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OFERTASUBASTA">
+    <Key>
+      <PropertyRef Name="IDOFERTA" />
+    </Key>
+    <Property Name="IDOFERTA" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRECIOOFERTA" Type="float" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="SELECCIONADO" Type="varchar2" MaxLength="1" Nullable="false" />
+    <Property Name="FECHAOFERTA" Type="date" Nullable="false" />
+    <Property Name="IDTRANSPORTISTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDTIPOTRANSPORTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDSUBASTA" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
@@ -41,12 +80,25 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
     <Key>
       <PropertyRef Name="IDPEDIDO" />
     </Key>
-    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FECHAPEDIDO" Type="date" Nullable="false" />
     <Property Name="FECHAENTREGA" Type="date" />
     <Property Name="DIRECCIONPEDIDO" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CIUDAD" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="PAIS" Type="varchar2" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCCION">
+    <Key>
+      <PropertyRef Name="IDPRODUCCION" />
+    </Key>
+    <Property Name="IDPRODUCCION" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRECIOPREMIUM" Type="float" Precision="10" Scale="0" />
+    <Property Name="PRECIOESTANDAR" Type="float" Precision="10" Scale="0" />
+    <Property Name="PRECIOLOWER" Type="float" Precision="10" Scale="0" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PRODUCTO">
     <Key>
@@ -58,6 +110,16 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
     <Property Name="IMAGENPRODUCTO" Type="varchar2" MaxLength="500" />
     <Property Name="BANNERPRODUCTO" Type="varchar2" MaxLength="500" />
   </EntityType>
+  <EntityType Name="PRODUCTOR">
+    <Key>
+      <PropertyRef Name="IDPRODUCTOR" />
+    </Key>
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBREPRODUCTOR" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="DIRECCIONPRODUCTOR" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TELEFONOPRODUCTRO" Type="varchar2" MaxLength="12" Nullable="false" />
+  </EntityType>
   <EntityType Name="ROL">
     <Key>
       <PropertyRef Name="ID_ROL" />
@@ -65,16 +127,45 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
     <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_ROL" Type="varchar2" MaxLength="15" Nullable="false" />
   </EntityType>
+  <EntityType Name="SUBASTA">
+    <Key>
+      <PropertyRef Name="IDSUBASTA" />
+    </Key>
+    <Property Name="IDSUBASTA" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHAINICIO" Type="date" Nullable="false" />
+    <Property Name="FECHATERMINO" Type="date" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDESTADOSUBASTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TIPOTRANSPORTE">
+    <Key>
+      <PropertyRef Name="IDTIPO" />
+    </Key>
+    <Property Name="IDTIPO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TRANSPORTISTA">
+    <Key>
+      <PropertyRef Name="IDTTRANSPORTISTA" />
+    </Key>
+    <Property Name="IDTTRANSPORTISTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRETRANSPORTISTA" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="DIRECCIONTRANSPORTISTA" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="TELEFONOTRANSPORTISTA" Type="varchar2" MaxLength="12" Nullable="false" />
+    <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="USUARIO">
     <Key>
       <PropertyRef Name="ID_USUARIO" />
     </Key>
-    <Property Name="ID_USUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_USUARIO" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="NOMBRE_USUARIO" Type="varchar2" MaxLength="30" Nullable="false" />
     <Property Name="CONTRASENIA" Type="varchar2" MaxLength="99" Nullable="false" />
     <Property Name="IS_HABILITADO" Type="char" MaxLength="1" Nullable="false" />
     <Property Name="ID_ROL" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TOKEN" Type="varchar2" MaxLength="50" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
+    <Property Name="IDPAIS" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <Association Name="FK_ESTADOPEDIDO_PEDIDO">
     <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
@@ -85,6 +176,18 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
       </Principal>
       <Dependent Role="PEDIDO">
         <PropertyRef Name="IDESTADOPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTADOSUBASTA">
+    <End Role="ESTADOSUBASTA" Type="Self.ESTADOSUBASTA" Multiplicity="1" />
+    <End Role="SUBASTA" Type="Self.SUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOSUBASTA">
+        <PropertyRef Name="IDESTADO" />
+      </Principal>
+      <Dependent Role="SUBASTA">
+        <PropertyRef Name="IDESTADOSUBASTA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -112,6 +215,18 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDPAIS_USUARIO">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="ID_PAIS" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="IDPAIS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDPEDIDO_DETALLEPEDIDO">
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
     <End Role="DETALLEPEDIDO" Type="Self.DETALLEPEDIDO" Multiplicity="*" />
@@ -120,6 +235,18 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
         <PropertyRef Name="IDPEDIDO" />
       </Principal>
       <Dependent Role="DETALLEPEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPEDIDO_SUBASTA">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="SUBASTA" Type="Self.SUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="SUBASTA">
         <PropertyRef Name="IDPEDIDO" />
       </Dependent>
     </ReferentialConstraint>
@@ -136,6 +263,90 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDPRODUCTO_OFERTAPROD">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="OFERTAPRODUCTO" Type="Self.OFERTAPRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="OFERTAPRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTO_PRODUCCION">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="PRODUCCION" Type="Self.PRODUCCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="PRODUCCION">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTOR_CONTRATO">
+    <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+    <End Role="CONTRATO" Type="Self.CONTRATO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="CONTRATO">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTOR_OFERTAPROD">
+    <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+    <End Role="OFERTAPRODUCTO" Type="Self.OFERTAPRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="OFERTAPRODUCTO">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPRODUCTOR_PRODUCCION">
+    <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+    <End Role="PRODUCCION" Type="Self.PRODUCCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="PRODUCCION">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDSUBASTA_OFERTA">
+    <End Role="SUBASTA" Type="Self.SUBASTA" Multiplicity="1" />
+    <End Role="OFERTASUBASTA" Type="Self.OFERTASUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBASTA">
+        <PropertyRef Name="IDSUBASTA" />
+      </Principal>
+      <Dependent Role="OFERTASUBASTA">
+        <PropertyRef Name="IDSUBASTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTRANSPORTISTA_OFERTA">
+    <End Role="TRANSPORTISTA" Type="Self.TRANSPORTISTA" Multiplicity="1" />
+    <End Role="OFERTASUBASTA" Type="Self.OFERTASUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRANSPORTISTA">
+        <PropertyRef Name="IDTTRANSPORTISTA" />
+      </Principal>
+      <Dependent Role="OFERTASUBASTA">
+        <PropertyRef Name="IDTRANSPORTISTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDUSUARIO_CLIENTE">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
@@ -148,6 +359,52 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDUSUARIO_PRODUCTOR">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="PRODUCTOR">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDUSUARIO_TRANSPORTISTA">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="TRANSPORTISTA" Type="Self.TRANSPORTISTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="TRANSPORTISTA">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPOTRANSPOR_OFERTA">
+    <End Role="TIPOTRANSPORTE" Type="Self.TIPOTRANSPORTE" Multiplicity="1" />
+    <End Role="OFERTASUBASTA" Type="Self.OFERTASUBASTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOTRANSPORTE">
+        <PropertyRef Name="IDTIPO" />
+      </Principal>
+      <Dependent Role="OFERTASUBASTA">
+        <PropertyRef Name="IDTIPOTRANSPORTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_ACTUALIZAR_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PDIRECCION" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDCLIENTE" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+    <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
+    <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
+  </Function>
   <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
@@ -156,22 +413,29 @@ advertencia 6002: La tabla o vista 'FERIAVIRTUAL.DETALLEPEDIDO' no tiene definid
   </Function>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="ESTADOSUBASTA" EntityType="Self.ESTADOSUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="OFERTAPRODUCTO" EntityType="Self.OFERTAPRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="OFERTASUBASTA" EntityType="Self.OFERTASUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="PRODUCCION" EntityType="Self.PRODUCCION" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="PRODUCTOR" EntityType="Self.PRODUCTOR" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ROL" EntityType="Self.ROL" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="SUBASTA" EntityType="Self.SUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="TIPOTRANSPORTE" EntityType="Self.TIPOTRANSPORTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="TRANSPORTISTA" EntityType="Self.TRANSPORTISTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERIAVIRTUAL" store:Type="Tables" />
-    <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" store:Type="Tables" store:Schema="FERIAVIRTUAL">
-      <DefiningQuery>SELECT 
-"DETALLEPEDIDO"."IDPEDIDO" AS "IDPEDIDO", 
-"DETALLEPEDIDO"."IDPRODUCTO" AS "IDPRODUCTO", 
-"DETALLEPEDIDO"."CANTIDAD" AS "CANTIDAD"
-FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Self.FK_ESTADOPEDIDO_PEDIDO">
       <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTADOSUBASTA" Association="Self.FK_ESTADOSUBASTA">
+      <End Role="ESTADOSUBASTA" EntitySet="ESTADOSUBASTA" />
+      <End Role="SUBASTA" EntitySet="SUBASTA" />
     </AssociationSet>
     <AssociationSet Name="FK_ID_ROL_USUARIO" Association="Self.FK_ID_ROL_USUARIO">
       <End Role="ROL" EntitySet="ROL" />
@@ -181,17 +445,65 @@ FROM "FERIAVIRTUAL"."DETALLEPEDIDO" "DETALLEPEDIDO"</DefiningQuery>
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDPAIS_USUARIO" Association="Self.FK_IDPAIS_USUARIO">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDPEDIDO_DETALLEPEDIDO" Association="Self.FK_IDPEDIDO_DETALLEPEDIDO">
       <End Role="PEDIDO" EntitySet="PEDIDO" />
       <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPEDIDO_SUBASTA" Association="Self.FK_IDPEDIDO_SUBASTA">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="SUBASTA" EntitySet="SUBASTA" />
     </AssociationSet>
     <AssociationSet Name="FK_IDPRODUCTO_DETALLEPEDIDO" Association="Self.FK_IDPRODUCTO_DETALLEPEDIDO">
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
       <End Role="DETALLEPEDIDO" EntitySet="DETALLEPEDIDO" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTO_OFERTAPROD" Association="Self.FK_IDPRODUCTO_OFERTAPROD">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTO_PRODUCCION" Association="Self.FK_IDPRODUCTO_PRODUCCION">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="PRODUCCION" EntitySet="PRODUCCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTOR_CONTRATO" Association="Self.FK_IDPRODUCTOR_CONTRATO">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="CONTRATO" EntitySet="CONTRATO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTOR_OFERTAPROD" Association="Self.FK_IDPRODUCTOR_OFERTAPROD">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="OFERTAPRODUCTO" EntitySet="OFERTAPRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPRODUCTOR_PRODUCCION" Association="Self.FK_IDPRODUCTOR_PRODUCCION">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="PRODUCCION" EntitySet="PRODUCCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDSUBASTA_OFERTA" Association="Self.FK_IDSUBASTA_OFERTA">
+      <End Role="SUBASTA" EntitySet="SUBASTA" />
+      <End Role="OFERTASUBASTA" EntitySet="OFERTASUBASTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTRANSPORTISTA_OFERTA" Association="Self.FK_IDTRANSPORTISTA_OFERTA">
+      <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+      <End Role="OFERTASUBASTA" EntitySet="OFERTASUBASTA" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDUSUARIO_CLIENTE" Association="Self.FK_IDUSUARIO_CLIENTE">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="CLIENTE" EntitySet="CLIENTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDUSUARIO_PRODUCTOR" Association="Self.FK_IDUSUARIO_PRODUCTOR">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDUSUARIO_TRANSPORTISTA" Association="Self.FK_IDUSUARIO_TRANSPORTISTA">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPOTRANSPOR_OFERTA" Association="Self.FK_TIPOTRANSPOR_OFERTA">
+      <End Role="TIPOTRANSPORTE" EntitySet="TIPOTRANSPORTE" />
+      <End Role="OFERTASUBASTA" EntitySet="OFERTASUBASTA" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

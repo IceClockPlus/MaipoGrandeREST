@@ -36,6 +36,15 @@ namespace DatoMaipo
         public DbSet<PEDIDO> PEDIDO { get; set; }
         public DbSet<DETALLEPEDIDO> DETALLEPEDIDO { get; set; }
         public DbSet<PRODUCTO> PRODUCTO { get; set; }
+        public DbSet<CONTRATO> CONTRATO { get; set; }
+        public DbSet<PRODUCTOR> PRODUCTOR { get; set; }
+        public DbSet<OFERTAPRODUCTO> OFERTAPRODUCTO { get; set; }
+        public DbSet<SUBASTA> SUBASTA { get; set; }
+        public DbSet<ESTADOSUBASTA> ESTADOSUBASTA { get; set; }
+        public DbSet<OFERTASUBASTA> OFERTASUBASTA { get; set; }
+        public DbSet<TIPOTRANSPORTE> TIPOTRANSPORTE { get; set; }
+        public DbSet<TRANSPORTISTA> TRANSPORTISTA { get; set; }
+        public DbSet<PRODUCCION> PRODUCCION { get; set; }
     
         public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
         {
@@ -56,6 +65,72 @@ namespace DatoMaipo
                 new ObjectParameter("BANNERPRODUCTO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PRODUCTO", nOMBREPRODUCTOParameter, pRECIOESTIMADOParameter, iMAGENPRODUCTOParameter, bANNERPRODUCTOParameter);
+        }
+    
+        public virtual int SP_INSERT_PEDIDO(Nullable<System.DateTime> fECHAPEDIDO, Nullable<System.DateTime> fECHAENTREGA, string dIRECCIONPEDIDO, Nullable<decimal> iDCLIENTE, Nullable<decimal> iDESTADOPEDIDO, string cIUDAD, ObjectParameter rESULTADO)
+        {
+            var fECHAPEDIDOParameter = fECHAPEDIDO.HasValue ?
+                new ObjectParameter("FECHAPEDIDO", fECHAPEDIDO) :
+                new ObjectParameter("FECHAPEDIDO", typeof(System.DateTime));
+    
+            var fECHAENTREGAParameter = fECHAENTREGA.HasValue ?
+                new ObjectParameter("FECHAENTREGA", fECHAENTREGA) :
+                new ObjectParameter("FECHAENTREGA", typeof(System.DateTime));
+    
+            var dIRECCIONPEDIDOParameter = dIRECCIONPEDIDO != null ?
+                new ObjectParameter("DIRECCIONPEDIDO", dIRECCIONPEDIDO) :
+                new ObjectParameter("DIRECCIONPEDIDO", typeof(string));
+    
+            var iDCLIENTEParameter = iDCLIENTE.HasValue ?
+                new ObjectParameter("IDCLIENTE", iDCLIENTE) :
+                new ObjectParameter("IDCLIENTE", typeof(decimal));
+    
+            var iDESTADOPEDIDOParameter = iDESTADOPEDIDO.HasValue ?
+                new ObjectParameter("IDESTADOPEDIDO", iDESTADOPEDIDO) :
+                new ObjectParameter("IDESTADOPEDIDO", typeof(decimal));
+    
+            var cIUDADParameter = cIUDAD != null ?
+                new ObjectParameter("CIUDAD", cIUDAD) :
+                new ObjectParameter("CIUDAD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PEDIDO", fECHAPEDIDOParameter, fECHAENTREGAParameter, dIRECCIONPEDIDOParameter, iDCLIENTEParameter, iDESTADOPEDIDOParameter, cIUDADParameter, rESULTADO);
+        }
+    
+        public virtual int SP_ACTUALIZAR_PEDIDO(Nullable<decimal> pID, Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, string pDIRECCION, Nullable<decimal> pIDCLIENTE, Nullable<decimal> pIDESTADO, string pCIUDAD, string pPAIS)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pDIRECCIONParameter = pDIRECCION != null ?
+                new ObjectParameter("PDIRECCION", pDIRECCION) :
+                new ObjectParameter("PDIRECCION", typeof(string));
+    
+            var pIDCLIENTEParameter = pIDCLIENTE.HasValue ?
+                new ObjectParameter("PIDCLIENTE", pIDCLIENTE) :
+                new ObjectParameter("PIDCLIENTE", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            var pCIUDADParameter = pCIUDAD != null ?
+                new ObjectParameter("PCIUDAD", pCIUDAD) :
+                new ObjectParameter("PCIUDAD", typeof(string));
+    
+            var pPAISParameter = pPAIS != null ?
+                new ObjectParameter("PPAIS", pPAIS) :
+                new ObjectParameter("PPAIS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_PEDIDO", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pDIRECCIONParameter, pIDCLIENTEParameter, pIDESTADOParameter, pCIUDADParameter, pPAISParameter);
         }
     }
 }

@@ -4,21 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ee8d7e68587740fc8d197cff7eb5ee7a" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.PAIS" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+      <Diagram DiagramId="ee8d7e68587740fc8d197cff7eb5ee7a" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="Model.PAIS" Width="1.5" PointX="0.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.USUARIO" Width="2" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_ID_ROL_USUARIO" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model.CLIENTE" Width="1.5" PointX="5.75" PointY="0.875" />
-        <EntityTypeShape EntityType="Model.ESTADOPEDIDO" Width="1.5" PointX="6.125" PointY="5.375" />
-        <EntityTypeShape EntityType="Model.PEDIDO" Width="1.5" PointX="8" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.DETALLEPEDIDO" Width="1.5" PointX="10.25" PointY="1.125" />
+        <EntityTypeShape EntityType="Model.ESTADOPEDIDO" Width="1.5" PointX="8.5" PointY="5.375" />
+        <EntityTypeShape EntityType="Model.PEDIDO" PointX="7.875" PointY="1.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLEPEDIDO" Width="1.5" PointX="10.25" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_IDCLIENTE_PEDIDO" />
         <AssociationConnector Association="Model.FK_IDUSUARIO_CLIENTE" />
         <AssociationConnector Association="Model.FK_ESTADOPEDIDO_PEDIDO" />
         <AssociationConnector Association="Model.FK_IDPEDIDO_DETALLEPEDIDO" />
-        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="10.75" PointY="4.875" />
+        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="12.375" PointY="2.125" />
         <AssociationConnector Association="Model.FK_IDPRODUCTO_DETALLEPEDIDO" />
+        <EntityTypeShape EntityType="Model.CONTRATO" Width="1.5" PointX="0.5" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.PRODUCTOR" Width="1.5" PointX="2.625" PointY="6.875" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTOR_CONTRATO" />
+        <AssociationConnector Association="Model.FK_IDUSUARIO_PRODUCTOR" />
+        <EntityTypeShape EntityType="Model.OFERTAPRODUCTO" Width="1.5" PointX="12.25" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.SUBASTA" Width="1.5" PointX="6.875" PointY="8.625" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTO_OFERTAPROD" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTOR_OFERTAPROD" />
+        <AssociationConnector Association="Model.FK_IDPEDIDO_SUBASTA" />
+        <EntityTypeShape EntityType="Model.ESTADOSUBASTA" Width="1.5" PointX="1.625" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_ESTADOSUBASTA" />
+        <EntityTypeShape EntityType="Model.OFERTASUBASTA" Width="1.5" PointX="8.75" PointY="11" />
+        <EntityTypeShape EntityType="Model.TIPOTRANSPORTE" Width="1.5" PointX="11.875" PointY="12.25" />
+        <EntityTypeShape EntityType="Model.TRANSPORTISTA" Width="1.5" PointX="5.25" PointY="12" />
+        <AssociationConnector Association="Model.FK_IDSUBASTA_OFERTA" />
+        <AssociationConnector Association="Model.FK_IDTRANSPORTISTA_OFERTA" />
+        <AssociationConnector Association="Model.FK_TIPOTRANSPOR_OFERTA" />
+        <AssociationConnector Association="Model.FK_IDUSUARIO_TRANSPORTISTA" />
+        <AssociationConnector Association="Model.FK_IDPAIS_USUARIO" />
+        <EntityTypeShape EntityType="Model.PRODUCCION" Width="1.5" PointX="14.625" PointY="4.25" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTO_PRODUCCION" />
+        <AssociationConnector Association="Model.FK_IDPRODUCTOR_PRODUCCION" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

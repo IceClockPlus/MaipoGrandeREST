@@ -14,13 +14,13 @@ namespace LibreriaMaipo.Modelo
         [DataMember]
         public int IdProducto { get; set; }
         [DataMember]
-        public String NombreProducto { get; set; }
+        public string NombreProducto { get; set; }
         [DataMember]
         public float PrecioEstimado { get; set; }
         [DataMember]
-        public String ImagenProducto { get; set; }
+        public string ImagenProducto { get; set; }
         [DataMember]
-        public String BannerProducto { get; set; }
+        public string BannerProducto { get; set; }
 
         public Producto()
         {
@@ -30,10 +30,10 @@ namespace LibreriaMaipo.Modelo
         private void InitClass()
         {
             this.IdProducto = 0;
-            this.NombreProducto = String.Empty;
+            this.NombreProducto = string.Empty;
             this.PrecioEstimado = 0;
-            this.ImagenProducto = String.Empty;
-            this.BannerProducto = String.Empty;
+            this.ImagenProducto = string.Empty;
+            this.BannerProducto = string.Empty;
 
         }
 

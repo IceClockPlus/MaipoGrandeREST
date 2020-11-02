@@ -14,7 +14,14 @@ namespace DatoMaipo
     
     public partial class PAIS
     {
+        public PAIS()
+        {
+            this.USUARIO = new HashSet<USUARIO>();
+        }
+    
         public decimal ID_PAIS { get; set; }
         public string NOMBRE_PAIS { get; set; }
+    
+        public virtual ICollection<USUARIO> USUARIO { get; set; }
     }
 }
