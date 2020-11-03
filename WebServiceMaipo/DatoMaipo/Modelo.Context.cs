@@ -132,5 +132,156 @@ namespace DatoMaipo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_PEDIDO", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pDIRECCIONParameter, pIDCLIENTEParameter, pIDESTADOParameter, pCIUDADParameter, pPAISParameter);
         }
+    
+        public virtual int SP_ACTUALIZAR_CONTRATO(Nullable<decimal> pID, Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pPORCCOMISION, string pVIGENTE, Nullable<decimal> pIDPRODUCTOR)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pPORCCOMISIONParameter = pPORCCOMISION.HasValue ?
+                new ObjectParameter("PPORCCOMISION", pPORCCOMISION) :
+                new ObjectParameter("PPORCCOMISION", typeof(decimal));
+    
+            var pVIGENTEParameter = pVIGENTE != null ?
+                new ObjectParameter("PVIGENTE", pVIGENTE) :
+                new ObjectParameter("PVIGENTE", typeof(string));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_CONTRATO", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pPORCCOMISIONParameter, pVIGENTEParameter, pIDPRODUCTORParameter);
+        }
+    
+        public virtual int SP_ACTUALIZAR_SUBASTA(Nullable<decimal> pID, Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDESTADOSUBASTA)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDESTADOSUBASTAParameter = pIDESTADOSUBASTA.HasValue ?
+                new ObjectParameter("PIDESTADOSUBASTA", pIDESTADOSUBASTA) :
+                new ObjectParameter("PIDESTADOSUBASTA", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_SUBASTA", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pIDPEDIDOParameter, pIDESTADOSUBASTAParameter);
+        }
+    
+        public virtual int SP_ELIMINAR_CONTRATO(Nullable<decimal> pID)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ELIMINAR_CONTRATO", pIDParameter);
+        }
+    
+        public virtual int SP_ELIMINAR_SUBASTA(Nullable<decimal> pID)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ELIMINAR_SUBASTA", pIDParameter);
+        }
+    
+        public virtual int SP_INSERTAR_CONTRATO(Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pPORCCOMISION, string pVIGENTE, Nullable<decimal> pIDPRODUCTOR)
+        {
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pPORCCOMISIONParameter = pPORCCOMISION.HasValue ?
+                new ObjectParameter("PPORCCOMISION", pPORCCOMISION) :
+                new ObjectParameter("PPORCCOMISION", typeof(decimal));
+    
+            var pVIGENTEParameter = pVIGENTE != null ?
+                new ObjectParameter("PVIGENTE", pVIGENTE) :
+                new ObjectParameter("PVIGENTE", typeof(string));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTAR_CONTRATO", pFECHACREACIONParameter, pFECHATERMINOParameter, pPORCCOMISIONParameter, pVIGENTEParameter, pIDPRODUCTORParameter);
+        }
+    
+        public virtual int SP_INSERT_SUBASTA(Nullable<System.DateTime> pFECHAINICIO, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pIDESTADOSUBASTA, Nullable<decimal> pIDPEDIDO)
+        {
+            var pFECHAINICIOParameter = pFECHAINICIO.HasValue ?
+                new ObjectParameter("PFECHAINICIO", pFECHAINICIO) :
+                new ObjectParameter("PFECHAINICIO", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pIDESTADOSUBASTAParameter = pIDESTADOSUBASTA.HasValue ?
+                new ObjectParameter("PIDESTADOSUBASTA", pIDESTADOSUBASTA) :
+                new ObjectParameter("PIDESTADOSUBASTA", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_SUBASTA", pFECHAINICIOParameter, pFECHATERMINOParameter, pIDESTADOSUBASTAParameter, pIDPEDIDOParameter);
+        }
+    
+        public virtual int SP_INSERT_USUARIO(string pNOMBREUSUARIO, string pCONTRASENIA, string pISHABILITADO, Nullable<decimal> pIDROL, string pTOKEN, string pCORREO, Nullable<decimal> pIDPAIS)
+        {
+            var pNOMBREUSUARIOParameter = pNOMBREUSUARIO != null ?
+                new ObjectParameter("PNOMBREUSUARIO", pNOMBREUSUARIO) :
+                new ObjectParameter("PNOMBREUSUARIO", typeof(string));
+    
+            var pCONTRASENIAParameter = pCONTRASENIA != null ?
+                new ObjectParameter("PCONTRASENIA", pCONTRASENIA) :
+                new ObjectParameter("PCONTRASENIA", typeof(string));
+    
+            var pISHABILITADOParameter = pISHABILITADO != null ?
+                new ObjectParameter("PISHABILITADO", pISHABILITADO) :
+                new ObjectParameter("PISHABILITADO", typeof(string));
+    
+            var pIDROLParameter = pIDROL.HasValue ?
+                new ObjectParameter("PIDROL", pIDROL) :
+                new ObjectParameter("PIDROL", typeof(decimal));
+    
+            var pTOKENParameter = pTOKEN != null ?
+                new ObjectParameter("PTOKEN", pTOKEN) :
+                new ObjectParameter("PTOKEN", typeof(string));
+    
+            var pCORREOParameter = pCORREO != null ?
+                new ObjectParameter("PCORREO", pCORREO) :
+                new ObjectParameter("PCORREO", typeof(string));
+    
+            var pIDPAISParameter = pIDPAIS.HasValue ?
+                new ObjectParameter("PIDPAIS", pIDPAIS) :
+                new ObjectParameter("PIDPAIS", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_USUARIO", pNOMBREUSUARIOParameter, pCONTRASENIAParameter, pISHABILITADOParameter, pIDROLParameter, pTOKENParameter, pCORREOParameter, pIDPAISParameter);
+        }
     }
 }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\App.xaml
-5-1034991959
+121763964065
 
-7885594950
-241716495908
-AgregarUsuario.xaml;MainWindow.xaml;MenuPrincipal.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;
+14241693319
+25-1184980154
+AgregarUsuario.xaml;ControlarContratos.xaml;IngresarVenta.xaml;MainWindow.xaml;MenuPrincipal.xaml;NotificarEstado.xaml;ProcesoVenta.xaml;Reportes.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;RevisarPedidos.xaml;SubastasTransporte.xaml;
 
-False
+True
 

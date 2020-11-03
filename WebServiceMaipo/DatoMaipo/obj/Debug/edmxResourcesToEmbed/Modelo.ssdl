@@ -395,6 +395,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_ACTUALIZAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PPORCCOMISION" Type="number" Mode="In" />
+    <Parameter Name="PVIGENTE" Type="char" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_ACTUALIZAR_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PID" Type="number" Mode="In" />
     <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
@@ -405,11 +413,46 @@
     <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
     <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
   </Function>
+  <Function Name="SP_ACTUALIZAR_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_ELIMINAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_ELIMINAR_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERTAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PPORCCOMISION" Type="number" Mode="In" />
+    <Parameter Name="PVIGENTE" Type="char" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
     <Parameter Name="IMAGENPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="BANNERPRODUCTO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PFECHAINICIO" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PNOMBREUSUARIO" Type="varchar2" Mode="In" />
+    <Parameter Name="PCONTRASENIA" Type="varchar2" Mode="In" />
+    <Parameter Name="PISHABILITADO" Type="char" Mode="In" />
+    <Parameter Name="PIDROL" Type="number" Mode="In" />
+    <Parameter Name="PTOKEN" Type="varchar2" Mode="In" />
+    <Parameter Name="PCORREO" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDPAIS" Type="number" Mode="In" />
   </Function>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />

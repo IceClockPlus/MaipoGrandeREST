@@ -400,6 +400,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_ACTUALIZAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PID" Type="number" Mode="In" />
+          <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+          <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+          <Parameter Name="PPORCCOMISION" Type="number" Mode="In" />
+          <Parameter Name="PVIGENTE" Type="char" Mode="In" />
+          <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_ACTUALIZAR_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PID" Type="number" Mode="In" />
           <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
@@ -410,11 +418,46 @@
           <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
           <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
         </Function>
+        <Function Name="SP_ACTUALIZAR_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PID" Type="number" Mode="In" />
+          <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+          <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+          <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_ELIMINAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_ELIMINAR_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERTAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+          <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+          <Parameter Name="PPORCCOMISION" Type="number" Mode="In" />
+          <Parameter Name="PVIGENTE" Type="char" Mode="In" />
+          <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
           <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
           <Parameter Name="IMAGENPRODUCTO" Type="varchar2" Mode="In" />
           <Parameter Name="BANNERPRODUCTO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERT_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PFECHAINICIO" Type="date" Mode="In" />
+          <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+          <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERT_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PNOMBREUSUARIO" Type="varchar2" Mode="In" />
+          <Parameter Name="PCONTRASENIA" Type="varchar2" Mode="In" />
+          <Parameter Name="PISHABILITADO" Type="char" Mode="In" />
+          <Parameter Name="PIDROL" Type="number" Mode="In" />
+          <Parameter Name="PTOKEN" Type="varchar2" Mode="In" />
+          <Parameter Name="PCORREO" Type="varchar2" Mode="In" />
+          <Parameter Name="PIDPAIS" Type="number" Mode="In" />
         </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -679,6 +722,49 @@
             <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
             <Parameter Name="PCIUDAD" Mode="In" Type="String" />
             <Parameter Name="PPAIS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ACTUALIZAR_CONTRATO">
+            <Parameter Name="PID" Mode="In" Type="Decimal" />
+            <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+            <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+            <Parameter Name="PPORCCOMISION" Mode="In" Type="Decimal" />
+            <Parameter Name="PVIGENTE" Mode="In" Type="String" />
+            <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ACTUALIZAR_SUBASTA">
+            <Parameter Name="PID" Mode="In" Type="Decimal" />
+            <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+            <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDESTADOSUBASTA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ELIMINAR_CONTRATO">
+            <Parameter Name="PID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ELIMINAR_SUBASTA">
+            <Parameter Name="PID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERTAR_CONTRATO">
+            <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+            <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+            <Parameter Name="PPORCCOMISION" Mode="In" Type="Decimal" />
+            <Parameter Name="PVIGENTE" Mode="In" Type="String" />
+            <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERT_SUBASTA">
+            <Parameter Name="PFECHAINICIO" Mode="In" Type="DateTime" />
+            <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+            <Parameter Name="PIDESTADOSUBASTA" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERT_USUARIO">
+            <Parameter Name="PNOMBREUSUARIO" Mode="In" Type="String" />
+            <Parameter Name="PCONTRASENIA" Mode="In" Type="String" />
+            <Parameter Name="PISHABILITADO" Mode="In" Type="String" />
+            <Parameter Name="PIDROL" Mode="In" Type="Decimal" />
+            <Parameter Name="PTOKEN" Mode="In" Type="String" />
+            <Parameter Name="PCORREO" Mode="In" Type="String" />
+            <Parameter Name="PIDPAIS" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
@@ -1182,6 +1268,13 @@
                 <ScalarProperty Name="IDCONTRATO" ColumnName="IDCONTRATO" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="Model.CONTRATO">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Model.Store.SP_INSERTAR_CONTRATO" />
+                <UpdateFunction FunctionName="Model.Store.SP_ACTUALIZAR_CONTRATO" />
+                <DeleteFunction FunctionName="Model.Store.SP_ELIMINAR_CONTRATO" />
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTOR">
             <EntityTypeMapping TypeName="Model.PRODUCTOR">
@@ -1270,6 +1363,13 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_ACTUALIZAR_PEDIDO" FunctionName="Model.Store.SP_ACTUALIZAR_PEDIDO" />
+          <FunctionImportMapping FunctionImportName="SP_ACTUALIZAR_CONTRATO" FunctionName="Model.Store.SP_ACTUALIZAR_CONTRATO" />
+          <FunctionImportMapping FunctionImportName="SP_ACTUALIZAR_SUBASTA" FunctionName="Model.Store.SP_ACTUALIZAR_SUBASTA" />
+          <FunctionImportMapping FunctionImportName="SP_ELIMINAR_CONTRATO" FunctionName="Model.Store.SP_ELIMINAR_CONTRATO" />
+          <FunctionImportMapping FunctionImportName="SP_ELIMINAR_SUBASTA" FunctionName="Model.Store.SP_ELIMINAR_SUBASTA" />
+          <FunctionImportMapping FunctionImportName="SP_INSERTAR_CONTRATO" FunctionName="Model.Store.SP_INSERTAR_CONTRATO" />
+          <FunctionImportMapping FunctionImportName="SP_INSERT_SUBASTA" FunctionName="Model.Store.SP_INSERT_SUBASTA" />
+          <FunctionImportMapping FunctionImportName="SP_INSERT_USUARIO" FunctionName="Model.Store.SP_INSERT_USUARIO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

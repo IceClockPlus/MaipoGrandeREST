@@ -101,8 +101,21 @@ namespace WebServiceMaipo.Controllers
         }
 
         [HttpGet]
-        public void GetAll()
+        public IEnumerable<Pedido> GetAll()
         {
+
+            try
+            {
+                List<Pedido> pedidos = new List<Pedido>();
+                pedidos = RepositorioPedido.ReadAll();
+                return pedidos;
+
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Pedido>();
+            }
             /*
             try
             {

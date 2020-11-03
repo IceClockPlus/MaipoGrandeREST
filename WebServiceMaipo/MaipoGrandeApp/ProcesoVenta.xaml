@@ -1,0 +1,49 @@
+﻿<Page x:Class="MaipoGrandeApp.ProcesoVenta"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:MaipoGrandeApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="614" d:DesignWidth="792"
+      Title="ProcesoVenta">
+
+    <Grid Background="White">
+        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="247" Margin="78,127,0,0" VerticalAlignment="Top" Width="219" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha inicio" Binding="{Binding FechaInicio}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Entrega" Binding="{Binding FechaEntrega}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding cliente.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado" Binding="{Binding estado.Descripcion}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ciudad" Binding="{Binding Ciudad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pais" Binding="{Binding Pais}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dataProducto" HorizontalAlignment="Left" Height="247" Margin="512,127,0,0" VerticalAlignment="Top" Width="219" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdProducto}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre producto" Binding="{Binding NombreProducto}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Precio" Binding="{Binding PrecioEstimado}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dataDetalle" HorizontalAlignment="Left" Height="185" Margin="78,419,0,0" VerticalAlignment="Top" Width="653" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre producto" Binding="{Binding producto.NombreProducto}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pedido" Binding="{Binding pedido.Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Precio Total" Binding="{Binding PrecioTotal}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Productor Asignado" Binding="{Binding productor.Nombre}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="341,264,0,0" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Cantidad" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnCrear" Content="Crear" HorizontalAlignment="Left" Margin="341,345,0,0" VerticalAlignment="Top" Width="120" Click="btnCrear_Click"/>
+        <Label x:Name="lbTablaPedidos" Content="Tabla Pedidos" HorizontalAlignment="Left" Margin="78,91,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="lbTablaProductos" Content="Tabla Productos" HorizontalAlignment="Left" Margin="512,91,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="lbTablaDetalle" Content="Tabla Detalle" HorizontalAlignment="Left" Margin="78,383,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="lbProceso" Content="Proceso de Venta" HorizontalAlignment="Left" Margin="314,10,0,0" VerticalAlignment="Top" FontSize="22"/>
+    </Grid>
+</Page>

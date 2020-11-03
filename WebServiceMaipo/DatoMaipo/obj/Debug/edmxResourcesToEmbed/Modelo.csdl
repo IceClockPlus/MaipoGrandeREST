@@ -165,6 +165,49 @@
       <Parameter Name="PCIUDAD" Mode="In" Type="String" />
       <Parameter Name="PPAIS" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_ACTUALIZAR_CONTRATO">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+      <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PPORCCOMISION" Mode="In" Type="Decimal" />
+      <Parameter Name="PVIGENTE" Mode="In" Type="String" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ACTUALIZAR_SUBASTA">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+      <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADOSUBASTA" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ELIMINAR_CONTRATO">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ELIMINAR_SUBASTA">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERTAR_CONTRATO">
+      <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PPORCCOMISION" Mode="In" Type="Decimal" />
+      <Parameter Name="PVIGENTE" Mode="In" Type="String" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_SUBASTA">
+      <Parameter Name="PFECHAINICIO" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PIDESTADOSUBASTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_USUARIO">
+      <Parameter Name="PNOMBREUSUARIO" Mode="In" Type="String" />
+      <Parameter Name="PCONTRASENIA" Mode="In" Type="String" />
+      <Parameter Name="PISHABILITADO" Mode="In" Type="String" />
+      <Parameter Name="PIDROL" Mode="In" Type="Decimal" />
+      <Parameter Name="PTOKEN" Mode="In" Type="String" />
+      <Parameter Name="PCORREO" Mode="In" Type="String" />
+      <Parameter Name="PIDPAIS" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>
