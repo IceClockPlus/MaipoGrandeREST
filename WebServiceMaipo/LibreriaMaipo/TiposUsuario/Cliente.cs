@@ -12,9 +12,42 @@ namespace LibreriaMaipo.TiposUsuario
     [DataContract]
     public class Cliente : TipoUsuario
     {
-        public override List<TipoUsuario> ListarTodos()
+        /// <summary>
+        /// Listar todos los clientes registrados
+        /// </summary>
+        /// <returns></returns>
+        public override List<TipoUsuario> ReadAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<TipoUsuario> list = new List<TipoUsuario>();
+                using (var db = new DBEntities())
+                {
+                    var listadoTransportista = db.CLIENTE.ToList();
+                    if (listadoTransportista.Count > 0)
+                    {
+                        foreach (var t in listadoTransportista)
+                        {
+                            Transportista trans = new Transportista();
+                            trans.Id = (int)t.IDCLIENTE;
+                            trans.Nombre = t.NOMBRECLIENTE;
+                            trans.Direccion = t.DIRECCIONCLIENTE;
+                            trans.Telefono = t.TELEFONOCLIENTE;
+
+                            list.Add(trans);
+
+                        }
+                    }
+
+                    return list;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<TipoUsuario>();
+            }
         }
 
         public override void ObtenerDatosPorId(int id)
@@ -43,7 +76,7 @@ namespace LibreriaMaipo.TiposUsuario
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <returns></returns>
-        public override bool ObtenerDatosPorIdUsuario(int idUsuario)
+        public override bool ReadById(int idUsuario)
         {
             try
             {

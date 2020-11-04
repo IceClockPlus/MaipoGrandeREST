@@ -46,7 +46,7 @@ namespace MaipoGrandeApp
                     NombreUsuario = txtAgregarUsuario.Text,
                     Contrasenia = txtAgregarContraseña.Text,
                     IsHabilitado = txtHabilitar.Text,
-                    rol = new Rol
+                    Rol = new Rol
                     {
                         IdRol = CbRol.SelectedIndex + 1
                     },

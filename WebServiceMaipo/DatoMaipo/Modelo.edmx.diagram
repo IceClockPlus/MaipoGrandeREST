@@ -41,6 +41,9 @@
         <EntityTypeShape EntityType="Model.PRODUCCION" Width="1.5" PointX="14.625" PointY="4.25" />
         <AssociationConnector Association="Model.FK_IDPRODUCTO_PRODUCCION" />
         <AssociationConnector Association="Model.FK_IDPRODUCTOR_PRODUCCION" />
+        <EntityTypeShape EntityType="Model.PARTICIPACION" Width="1.5" PointX="15.125" PointY="8.5" />
+        <AssociationConnector Association="Model.FK_PEDIDO_PARTICIPACION" />
+        <AssociationConnector Association="Model.FK_PRODUCTOR_PARTICIPACION" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

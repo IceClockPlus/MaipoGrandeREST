@@ -11,14 +11,14 @@
 
     <Grid Background="White">
         <Button x:Name="btnAgregarContrato" Content="Agregar" HorizontalAlignment="Left" Margin="49,432,0,0" VerticalAlignment="Top" Width="113" Click="btnAgregarContrato_Click"/>
-        <DataGrid x:Name="dataContratos" HorizontalAlignment="Left" Height="162" Margin="49,466,0,0" VerticalAlignment="Top" Width="703">
+        <DataGrid x:Name="dataContratos" HorizontalAlignment="Left" Height="162" Margin="49,466,0,0" VerticalAlignment="Top" Width="703" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Fecha Inicio" Binding="{Binding FechaCreacion, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Fecha Termino" Binding="{Binding FechaTermino, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Porcentaje comision" Binding="{Binding PorcComision}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Vigencia" Binding="{Binding Vigente}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Numero productor" Binding="{Binding productor.Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Numero productor" Binding="{Binding Productor.Id}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <DatePicker x:Name="dateFechaInicio" HorizontalAlignment="Left" Margin="49,287,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.51,0.423"/>

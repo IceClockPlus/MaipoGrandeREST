@@ -90,6 +90,9 @@
     <Compile Include="PAIS.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="PARTICIPACION.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="PEDIDO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

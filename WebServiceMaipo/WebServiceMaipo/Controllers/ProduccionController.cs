@@ -13,6 +13,43 @@ namespace WebServiceMaipo.Controllers
     public class ProduccionController : ApiController
     {
         [HttpGet]
+        public IEnumerable<Produccion>ObtenerProduccion(int idProductor)
+        {
+            try
+            {
+                List<Produccion> list = new List<Produccion>();
+                list = RepositorioProduccion.ObtenerPorIdProductor(idProductor);
+                return list;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return (IEnumerable<Produccion>)NotFound();
+            }
+
+        }
+
+        [HttpGet]
+        [Route("api/Produccion/")]
+        public IEnumerable<Produccion> ObtenerProduccion()
+        {
+            try
+            {
+                List<Produccion> list = new List<Produccion>();
+                Produccion produccion = new Produccion();
+                list = produccion.ReadAll();
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return (IEnumerable<Produccion>)NotFound();
+            }
+
+        }
+
+        [HttpGet]
         [Route("api/ProduccionProductor/")]
         public IEnumerable<Produccion> ObtenerProduccionProductor(SecurityViewModel model)
        {

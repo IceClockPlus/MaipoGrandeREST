@@ -28,6 +28,7 @@ namespace MaipoGrandeApp
     public partial class ProcesoVenta : Page
     {
         private MenuPrincipal main;
+
         public ProcesoVenta(MenuPrincipal m)
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace MaipoGrandeApp
             CargarTabla();
             CargarTablaPedido();
             CargarTablaProducto();
+            CargarComboEstadoPedido();
         }
 
         /// <summary>
@@ -68,11 +70,29 @@ namespace MaipoGrandeApp
             }
             */
         }
+        private void CargarComboEstadoPedido()
+        {
+            RestClient client = new RestClient("http://localhost:54192/api");
+            RestRequest request = new RestRequest("/EstadoPedido", Method.GET);
+            var response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var estadoPedidos = JsonConvert.DeserializeObject<List<EstadoPedido>>(response.Content);
+                foreach (var item in estadoPedidos)
+                {
+                    cbxEstadoPedido.Items.Add(item.DescripcionEstado);
+                }
+
+
+            }
+
+
+        }
 
         private void CargarTablaPedido()
         {
             RestClient client = new RestClient("http://localhost:54192/api");
-            RestRequest request = new RestRequest("/Pedido", Method.GET);
+            RestRequest request = new RestRequest("/Pedidos", Method.GET);
             var response = client.Execute(request);
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -179,6 +199,36 @@ namespace MaipoGrandeApp
                 Console.WriteLine(ex);
             }
             */
+        }
+
+        private void cbxEstadoPedido_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string estado = cbxEstadoPedido.SelectedItem.ToString();
+            
+            RestClient client = new RestClient("http://localhost:54192/api");
+            RestRequest request = new RestRequest("/Pedidos", Method.GET);
+            var response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var pedido = JsonConvert.DeserializeObject<List<Pedido>>(response.Content);
+                var list = pedido.Where(p => p.EstadoPedido.DescripcionEstado == estado);
+                dataPedido.ItemsSource = list;
+            }
+            
+
+        }
+
+        private void ObtenerDetallePedido()
+        {
+            var detalle = (Pedido)dataPedido.SelectedItem;
+
+            dataDetalle.ItemsSource = detalle.DetallePedido;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.ObtenerDetallePedido();
         }
     }
 }

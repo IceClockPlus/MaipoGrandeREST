@@ -57,6 +57,7 @@ namespace LibreriaMaipo
                     user.NombreRol = userDb.ROL.NOMBRE_ROL;
                     user.TipoUsuario = GetTipoUsuario(user.NombreRol, user.IdUsuario);
                     user.Pais = RepositorioPais.BuscarPorId((int)userDb.IDPAIS);
+                    user.Correo = userDb.CORREO;
                 }
                 return user;
 
@@ -113,17 +114,17 @@ namespace LibreriaMaipo
                     case "Cliente":
                         factory = new ClienteFactory();
                         tipoUsuario = factory.createTipoUsuario();
-                        tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
+                        tipoUsuario.ReadById(idUsr);
                         break;
                     case "Productor":
                         factory = new ProductorFactory();
                         tipoUsuario = factory.createTipoUsuario();
-                        tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
+                        tipoUsuario.ReadById(idUsr);
                         break;
                     case "Transportista":
                         factory = new TransportistaFactory();
                         tipoUsuario = factory.createTipoUsuario();
-                        tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
+                        tipoUsuario.ReadById(idUsr);
                         break;
                     default:
                         tipoUsuario = null;

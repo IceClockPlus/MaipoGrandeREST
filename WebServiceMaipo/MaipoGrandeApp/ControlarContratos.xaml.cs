@@ -45,7 +45,7 @@ namespace MaipoGrandeApp
                     FechaTermino = (DateTime)dateFechaTermino.SelectedDate,
                     PorcComision = int.Parse(txtComision.Text),
                     Vigente = txtVigente.Text,
-                    productor = new Productor 
+                    Productor = new Productor 
                     {
                         Id = int.Parse(txtIdProductor.Text)
                     }
@@ -79,6 +79,9 @@ namespace MaipoGrandeApp
             }
         }
 
+        /// <summary>
+        /// Cargar tabla con los contratos registrados
+        /// </summary>
         private void CargarTabla()
         {
             RestClient client = new RestClient("http://localhost:54192/api");
@@ -120,7 +123,7 @@ namespace MaipoGrandeApp
                                 FechaTermino = (DateTime)dateActualizarTermino.SelectedDate,
                                 PorcComision = int.Parse(txtComisionActualizar.Text),
                                 Vigente = txtVigenciaActualizar.Text,
-                                productor = new Productor
+                                Productor = new Productor
                                 {
                                     Id = int.Parse(txtIdproductorActualizar.Text)
                                 }
@@ -188,7 +191,7 @@ namespace MaipoGrandeApp
             {
                 var con = JsonConvert.DeserializeObject<Contrato>(result);
 
-                txtIdProductor.Text = con.productor.Id.ToString();
+                txtIdProductor.Text = con.Productor.Id.ToString();
                 txtVigente.Text = con.Vigente;
                 txtComision.Text = con.PorcComision.ToString();
                 dateFechaInicio.SelectedDate = con.FechaCreacion;

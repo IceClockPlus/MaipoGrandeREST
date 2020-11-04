@@ -44,13 +44,13 @@ namespace MaipoGrandeApp
                 {
                     FechaInicio = (DateTime)dateFechaInicio.SelectedDate,
                     FechaTermino = (DateTime)dateFechaTermino.SelectedDate,
-                    pedido = new Pedido 
+                    Pedido = new Pedido 
                     {
-                        Id = int.Parse(txtIdPedido.Text)
+                        IdPedido = int.Parse(txtIdPedido.Text)
                     },
-                    estado = new EstadoSubasta 
+                    EstadoSubasta = new EstadoSubasta 
                     {
-                        Id = int.Parse(txtIdEstadoSubasta.Text) 
+                        IdEstadoSubasta = int.Parse(txtIdEstadoSubasta.Text) 
                     } 
                 };
 
@@ -95,8 +95,8 @@ namespace MaipoGrandeApp
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var sub = JsonConvert.DeserializeObject<Subasta>(result);
-                txtIdPedido.Text = sub.pedido.Id.ToString();
-                txtIdEstadoSubasta.Text = sub.estado.Id.ToString();
+                txtIdPedido.Text = sub.Pedido.IdPedido.ToString();
+                txtIdEstadoSubasta.Text = sub.EstadoSubasta.IdEstadoSubasta.ToString();
                 dateFechaInicio.SelectedDate = sub.FechaInicio;
                 dateFechaTermino.SelectedDate = sub.FechaTermino;
                 DeshabilitarBtn();
@@ -167,16 +167,16 @@ namespace MaipoGrandeApp
                             Subasta sub = new Subasta
                             {
 
-                                Id = int.Parse(txtActualizarID.Text),
+                                IdSubasta = int.Parse(txtActualizarID.Text),
                                 FechaInicio = (DateTime)dateActualizarInicio.SelectedDate,
                                 FechaTermino = (DateTime)dateActualizarTermino.SelectedDate,
-                                pedido = new Pedido
+                                Pedido = new Pedido
                                 {
-                                    Id = int.Parse(txtIdPedidoActualizar.Text)
+                                    IdPedido = int.Parse(txtIdPedidoActualizar.Text)
                                 },
-                                estado = new EstadoSubasta
+                                EstadoSubasta = new EstadoSubasta
                                 {
-                                    Id = int.Parse(txtEstadoActualizar.Text)
+                                    IdEstadoSubasta = int.Parse(txtEstadoActualizar.Text)
                                 }
                             };
 

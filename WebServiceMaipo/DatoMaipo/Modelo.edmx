@@ -81,6 +81,15 @@
           <Property Name="ID_PAIS" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_PAIS" Type="varchar2" MaxLength="50" />
         </EntityType>
+        <EntityType Name="PARTICIPACION">
+          <Key>
+            <PropertyRef Name="IDPARTICIPACION" />
+          </Key>
+          <Property Name="IDPARTICIPACION" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADOPARTICIPACION" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="PEDIDO">
           <Key>
             <PropertyRef Name="IDPEDIDO" />
@@ -388,6 +397,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PEDIDO_PARTICIPACION">
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+          <End Role="PARTICIPACION" Type="Self.PARTICIPACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IDPEDIDO" />
+            </Principal>
+            <Dependent Role="PARTICIPACION">
+              <PropertyRef Name="IDPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTOR_PARTICIPACION">
+          <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+          <End Role="PARTICIPACION" Type="Self.PARTICIPACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOR">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Principal>
+            <Dependent Role="PARTICIPACION">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TIPOTRANSPOR_OFERTA">
           <End Role="TIPOTRANSPORTE" Type="Self.TIPOTRANSPORTE" Multiplicity="1" />
           <End Role="OFERTASUBASTA" Type="Self.OFERTASUBASTA" Multiplicity="*" />
@@ -438,6 +471,10 @@
           <Parameter Name="PVIGENTE" Type="char" Mode="In" />
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_INSERT_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
           <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
@@ -459,6 +496,19 @@
           <Parameter Name="PCORREO" Type="varchar2" Mode="In" />
           <Parameter Name="PIDPAIS" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_UPDATE_DETALLE_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PID" Type="number" Mode="In" />
+          <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
+          <Parameter Name="PCANTIDAD" Type="number" Mode="In" />
+          <Parameter Name="PCALIDAD" Type="varchar2" Mode="In" />
+          <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PID" Type="number" Mode="In" />
+          <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+          <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -468,6 +518,7 @@
           <EntitySet Name="OFERTAPRODUCTO" EntityType="Self.OFERTAPRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="OFERTASUBASTA" EntityType="Self.OFERTASUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <EntitySet Name="PARTICIPACION" EntityType="Self.PARTICIPACION" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PRODUCCION" EntityType="Self.PRODUCCION" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -548,6 +599,14 @@
           <AssociationSet Name="FK_IDUSUARIO_TRANSPORTISTA" Association="Self.FK_IDUSUARIO_TRANSPORTISTA">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PEDIDO_PARTICIPACION" Association="Self.FK_PEDIDO_PARTICIPACION">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTOR_PARTICIPACION" Association="Self.FK_PRODUCTOR_PARTICIPACION">
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+            <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
           </AssociationSet>
           <AssociationSet Name="FK_TIPOTRANSPOR_OFERTA" Association="Self.FK_TIPOTRANSPOR_OFERTA">
             <End Role="TIPOTRANSPORTE" EntitySet="TIPOTRANSPORTE" />
@@ -739,10 +798,10 @@
             <Parameter Name="PIDESTADOSUBASTA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_ELIMINAR_CONTRATO">
-            <Parameter Name="PID" Mode="In" Type="Decimal" />
+          <Parameter Name="PID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_ELIMINAR_SUBASTA">
-            <Parameter Name="PID" Mode="In" Type="Decimal" />
+          <Parameter Name="PID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_INSERTAR_CONTRATO">
             <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
@@ -765,6 +824,32 @@
             <Parameter Name="PTOKEN" Mode="In" Type="String" />
             <Parameter Name="PCORREO" Mode="In" Type="String" />
             <Parameter Name="PIDPAIS" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_DETALLE_PEDIDO">
+            <Parameter Name="PID" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PCANTIDAD" Mode="In" Type="Decimal" />
+            <Parameter Name="PCALIDAD" Mode="In" Type="String" />
+            <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <EntitySet Name="PARTICIPACION" EntityType="Model.PARTICIPACION" />
+          <AssociationSet Name="FK_PEDIDO_PARTICIPACION" Association="Model.FK_PEDIDO_PARTICIPACION">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTOR_PARTICIPACION" Association="Model.FK_PRODUCTOR_PARTICIPACION">
+            <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+            <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
+          </AssociationSet>
+          <FunctionImport Name="SP_INSERT_PARTICIPACION">
+            <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_PARTICIPACION">
+            <Parameter Name="PID" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="PESTADO" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
@@ -803,6 +888,7 @@
           <Property Name="CIUDAD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="PAIS" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="SUBASTA" Relationship="Model.FK_IDPEDIDO_SUBASTA" FromRole="PEDIDO" ToRole="SUBASTA" />
+          <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PEDIDO_PARTICIPACION" FromRole="PEDIDO" ToRole="PARTICIPACION" />
         </EntityType>
         <EntityType Name="DETALLEPEDIDO">
           <Key>
@@ -915,6 +1001,7 @@
           <Property Name="TELEFONOPRODUCTRO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="PRODUCTOR" ToRole="OFERTAPRODUCTO" />
           <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCTOR" ToRole="PRODUCCION" />
+          <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PRODUCTOR_PARTICIPACION" FromRole="PRODUCTOR" ToRole="PARTICIPACION" />
         </EntityType>
         <Association Name="FK_IDPRODUCTOR_CONTRATO">
           <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
@@ -1154,6 +1241,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PARTICIPACION">
+          <Key>
+            <PropertyRef Name="IDPARTICIPACION" />
+          </Key>
+          <Property Name="IDPARTICIPACION" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="ESTADOPARTICIPACION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PEDIDO" Relationship="Model.FK_PEDIDO_PARTICIPACION" FromRole="PARTICIPACION" ToRole="PEDIDO" />
+          <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_PRODUCTOR_PARTICIPACION" FromRole="PARTICIPACION" ToRole="PRODUCTOR" />
+        </EntityType>
+        <Association Name="FK_PEDIDO_PARTICIPACION">
+          <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+          <End Type="Model.PARTICIPACION" Role="PARTICIPACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IDPEDIDO" />
+            </Principal>
+            <Dependent Role="PARTICIPACION">
+              <PropertyRef Name="IDPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTOR_PARTICIPACION">
+          <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
+          <End Type="Model.PARTICIPACION" Role="PARTICIPACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOR">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Principal>
+            <Dependent Role="PARTICIPACION">
+              <PropertyRef Name="IDPRODUCTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1268,13 +1390,6 @@
                 <ScalarProperty Name="IDCONTRATO" ColumnName="IDCONTRATO" />
               </MappingFragment>
             </EntityTypeMapping>
-            <EntityTypeMapping TypeName="Model.CONTRATO">
-              <ModificationFunctionMapping>
-                <InsertFunction FunctionName="Model.Store.SP_INSERTAR_CONTRATO" />
-                <UpdateFunction FunctionName="Model.Store.SP_ACTUALIZAR_CONTRATO" />
-                <DeleteFunction FunctionName="Model.Store.SP_ELIMINAR_CONTRATO" />
-              </ModificationFunctionMapping>
-            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTOR">
             <EntityTypeMapping TypeName="Model.PRODUCTOR">
@@ -1370,6 +1485,19 @@
           <FunctionImportMapping FunctionImportName="SP_INSERTAR_CONTRATO" FunctionName="Model.Store.SP_INSERTAR_CONTRATO" />
           <FunctionImportMapping FunctionImportName="SP_INSERT_SUBASTA" FunctionName="Model.Store.SP_INSERT_SUBASTA" />
           <FunctionImportMapping FunctionImportName="SP_INSERT_USUARIO" FunctionName="Model.Store.SP_INSERT_USUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_DETALLE_PEDIDO" FunctionName="Model.Store.SP_UPDATE_DETALLE_PEDIDO" />
+          <EntitySetMapping Name="PARTICIPACION">
+            <EntityTypeMapping TypeName="Model.PARTICIPACION">
+              <MappingFragment StoreEntitySet="PARTICIPACION">
+                <ScalarProperty Name="ESTADOPARTICIPACION" ColumnName="ESTADOPARTICIPACION" />
+                <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+                <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+                <ScalarProperty Name="IDPARTICIPACION" ColumnName="IDPARTICIPACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_INSERT_PARTICIPACION" FunctionName="Model.Store.SP_INSERT_PARTICIPACION" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_PARTICIPACION" FunctionName="Model.Store.SP_UPDATE_PARTICIPACION" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

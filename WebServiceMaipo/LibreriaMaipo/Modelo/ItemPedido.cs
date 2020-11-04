@@ -1,4 +1,6 @@
-﻿using LibreriaMaipo.TiposUsuario;
+﻿using DatoMaipo;
+using LibreriaMaipo.TiposUsuario;
+using LibreriaMaipo.UsuarioFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,10 +51,68 @@ namespace LibreriaMaipo.Modelo
             this.Productor = new Productor();
         }
 
-
-        public void Agregar(int idPedido)
+        public List<ItemPedido> ReadAll()
         {
+            try
+            {
+                TipoUsuarioFactory factory = new ProductorFactory();
+                //Crear listado del detalle a devolver
+                List<ItemPedido> list = new List<ItemPedido>();
+                using (var db = new DBEntities())
+                {
+                    var listadoDetalle = db.DETALLEPEDIDO.ToList();
+                    if(listadoDetalle.Count > 0)
+                    {
+                        foreach(var det in listadoDetalle)
+                        {
+                            ItemPedido item = new ItemPedido();
+                            item.IdItemPedido = (int)det.IDDETALLEPEDIDO;
+                            item.Calidad = det.CALIDAD;
+                            item.Cantidad = (int)det.CANTIDAD;
 
+                            item.Producto = MantenedorProducto.BuscarPorId((int)det.IDPRODUCTO);
+
+                            TipoUsuario productor = factory.createTipoUsuario();
+                            productor.ObtenerDatosPorId((int)det.IDPRODUCTOR.GetValueOrDefault());
+
+                            item.Productor = (Productor)productor;
+
+                            list.Add(item);
+                        }
+
+                    }
+                    return list;
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<ItemPedido>();
+            }
+
+
+
+        }
+
+        public bool Update()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+
+                    db.SP_UPDATE_DETALLE_PEDIDO(this.IdItemPedido, this.Producto.IdProducto, this.Cantidad, this.Calidad, this.Productor.Id);
+                    return true;
+
+                }
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
 
 
         }

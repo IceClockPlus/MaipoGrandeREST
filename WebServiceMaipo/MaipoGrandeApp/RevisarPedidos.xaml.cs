@@ -33,62 +33,101 @@ namespace MaipoGrandeApp
         {
             InitializeComponent();
             main = m;
-            CargarTabla();
             CargarTablaProductor();
             CargarTablaProducto();
+            NotificarEstado();
         }
 
 
-
-        private void CargarTabla()
+        /// <summary>
+        /// Cargar detalle del pedido
+        /// </summary>
+        private void CargarTabla(int idPedido)
         {
             RestClient client = new RestClient("http://localhost:54192/api");
-            RestRequest request = new RestRequest("/DetallePedido", Method.GET);
+            RestRequest request = new RestRequest("/DetallePedidos/{idPedido}", Method.GET);
+            request.AddParameter("idPedido", idPedido);
             var response = client.Execute(request);
+            
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var pedido = JsonConvert.DeserializeObject<List<DetallePedido>>(response.Content);
+                var pedido = JsonConvert.DeserializeObject<List<ItemPedido>>(response.Content);
                 dataPedido.ItemsSource = pedido;
             }
+            
         }
 
+        /// <summary>
+        /// Obtiene y muestra los datos de los productores
+        /// </summary>
         private void CargarTablaProductor()
         {
             RestClient client = new RestClient("http://localhost:54192/api");
-            RestRequest request = new RestRequest("/Productor", Method.GET);
+            RestRequest request = new RestRequest("/Produccion", Method.GET);
             var response = client.Execute(request);
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var productor = JsonConvert.DeserializeObject<List<Productor>>(response.Content);
+                var productor = JsonConvert.DeserializeObject<List<Produccion>>(response.Content);
                 dataProductor.ItemsSource = productor;
             }
         }
 
+        /// <summary>
+        /// Muestra las participaciones
+        /// </summary>
         private void CargarTablaProducto()
         {
             RestClient client = new RestClient("http://localhost:54192/api");
-            RestRequest request = new RestRequest("/Productos", Method.GET);
+            RestRequest request = new RestRequest("/Participacion", Method.GET);
             var response = client.Execute(request);
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var producto = JsonConvert.DeserializeObject<List<Producto>>(response.Content);
-                dataProducto.ItemsSource = producto;
+                var participaciones = JsonConvert.DeserializeObject<List<Participacion>>(response.Content);
+                dataProducto.ItemsSource = participaciones;
             }
         }
 
 
         private void btnAsignar_Click(object sender, RoutedEventArgs e) { }
 
-        private void btnAsignar_Click_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Notifica la cantidad de productores que han aceptado la participacion
+        /// </summary>
+        private void NotificarEstado()
         {
+            int participanteAceptados = 0;
+
+            RestClient client = new RestClient("http://localhost:54192/api");
+            RestRequest request = new RestRequest("/Participacion", Method.GET);
+            var response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var participaciones = JsonConvert.DeserializeObject<List<Participacion>>(response.Content);
+                foreach(Participacion p in participaciones)
+                {
+                    if (p.EstadoParticipacion.Equals("Aceptado"))
+                    {
+                        participanteAceptados = +1;
+                    }
+             
+                }
+
+                MessageBox.Show("Se han encontrado " + participanteAceptados+ " invitacion aceptada", "Notificacion Participacion");
+
+            }
+
+
+        }
+
+
+        private void btnAsignar_Click_1(object sender, RoutedEventArgs e)
+        { 
+            /*
             var productor = (Productor)dataProductor.SelectedItem;
             var DetallePedido = (DetallePedido)dataPedido.SelectedItem;
             var producto = (Producto)dataProducto.SelectedItem;
-
-            
-
+           
             DetallePedido.productor = productor;
-
             try
             {
                 
@@ -108,13 +147,11 @@ namespace MaipoGrandeApp
 
                             if (response2.StatusCode == System.Net.HttpStatusCode.OK)
                             {
-                                //var pedido2 = JsonConvert.DeserializeObject<Pedido>(response2.ToString());
 
                                 MailMessage msg = new MailMessage();
                                 msg.To.Add(DetallePedido.productor.usuario.Correo);
                                 msg.Subject = "Detalle Pedido";
                                 msg.SubjectEncoding = Encoding.UTF8;
-                                //msg.Bcc.Add(txtCopia.Text);
 
                                 msg.Body = "Se le a asigando el siguiente pedido: id: "+ DetallePedido.Id + ", Fecha de Pedido: "+ DetallePedido.pedido.FechaInicio.ToString("d") +", Fecha de entrega: " + DetallePedido.pedido.FechaEntrega.ToString("d") + 
                                 ", Direccion: " + DetallePedido.pedido.Direccion + ", Cliente: " + DetallePedido.pedido.cliente.Nombre + ", Estado Pedido: " + DetallePedido.pedido.estado.Descripcion + ", Ubicacion: " + DetallePedido.pedido.Ciudad + " - " +
@@ -143,9 +180,7 @@ namespace MaipoGrandeApp
                                 }
                             
                                 main.Mensaje("Detalle Pedido", "Pedido Actualizado con exito. (Notificacion enviada a productor.)");
-                                /*HabilitarBtn();
-                                LimpiarCampos();
-                                flyActualizarContra.IsOpen = false;*/
+                              
                                 CargarTabla();
                             }
                             else
@@ -165,6 +200,25 @@ namespace MaipoGrandeApp
 
                 Console.WriteLine(ex);
             }
+            */
+        }
+
+
+        private void btn_Detalle_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                var participacion = (Participacion)dataProducto.SelectedItem;
+                int idPedido = participacion.IdPedido;
+                this.CargarTabla(idPedido);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }

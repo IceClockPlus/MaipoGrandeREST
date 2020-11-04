@@ -23,26 +23,67 @@ namespace LibreriaMaipo.Modelo
             this.Descripcion = string.Empty;
         }
 
-        public void ObtenerTipoTransportepPorId(int id)
+        /// <summary>
+        /// Obtener el tipo de transporte de acuerdo a su id
+        /// </summary>
+        /// <returns></returns>
+        public bool GetById()
         {
-            using(var db = new DBEntities())
+            try
             {
-                try
+                using (var db = new DBEntities())
                 {
-                    TIPOTRANSPORTE t = db.TIPOTRANSPORTE.Where(tipo => tipo.IDTIPO == id).FirstOrDefault();
-                    this.IdTipo = (int)t.IDTIPO;
-                    this.Descripcion = t.DESCRIPCION;
+                    TIPOTRANSPORTE t = db.TIPOTRANSPORTE.Where(tipo => tipo.IDTIPO == this.IdTipo).FirstOrDefault();
+                    if(t != null)
+                    {
+                        this.Descripcion = t.DESCRIPCION;
+                        return true;
+                    }
+                    return false;
 
-
-                }catch(Exception ex)
-                {
-
-                } 
-
-
-
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
 
         }
+        /// <summary>
+        /// Listar todos los tipos de transportes disponibles
+        /// </summary>
+        /// <returns></returns>
+        public List<TipoTransporte> ReadAll()
+        {
+            try
+            {
+                List<TipoTransporte> list = new List<TipoTransporte>();
+                using (var db = new DBEntities())
+                {
+                    var listadoTransportes = db.TIPOTRANSPORTE.ToList();
+                    if (listadoTransportes.Count > 0)
+                    {
+                        foreach(var t in listadoTransportes)
+                        {
+                            TipoTransporte tipo = new TipoTransporte();
+                            tipo.IdTipo = (int)t.IDTIPO;
+                            tipo.Descripcion = t.DESCRIPCION;
+                            list.Add(tipo);
+
+                        }
+
+                    }
+                    return list;
+
+                }
+
+            }catch(Exception ex)
+            {
+                return new List<TipoTransporte>();
+            }
+        }
+
+
     }
 }

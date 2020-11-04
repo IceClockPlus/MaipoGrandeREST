@@ -76,6 +76,15 @@
     <Property Name="ID_PAIS" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PAIS" Type="varchar2" MaxLength="50" />
   </EntityType>
+  <EntityType Name="PARTICIPACION">
+    <Key>
+      <PropertyRef Name="IDPARTICIPACION" />
+    </Key>
+    <Property Name="IDPARTICIPACION" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ESTADOPARTICIPACION" Type="varchar2" MaxLength="20" Nullable="false" />
+  </EntityType>
   <EntityType Name="PEDIDO">
     <Key>
       <PropertyRef Name="IDPEDIDO" />
@@ -383,6 +392,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PEDIDO_PARTICIPACION">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="PARTICIPACION" Type="Self.PARTICIPACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="PARTICIPACION">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTOR_PARTICIPACION">
+    <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+    <End Role="PARTICIPACION" Type="Self.PARTICIPACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="PARTICIPACION">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TIPOTRANSPOR_OFERTA">
     <End Role="TIPOTRANSPORTE" Type="Self.TIPOTRANSPORTE" Multiplicity="1" />
     <End Role="OFERTASUBASTA" Type="Self.OFERTASUBASTA" Multiplicity="*" />
@@ -433,6 +466,10 @@
     <Parameter Name="PVIGENTE" Type="char" Mode="In" />
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
   </Function>
+  <Function Name="SP_INSERT_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
@@ -454,6 +491,19 @@
     <Parameter Name="PCORREO" Type="varchar2" Mode="In" />
     <Parameter Name="PIDPAIS" Type="number" Mode="In" />
   </Function>
+  <Function Name="SP_UPDATE_DETALLE_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PCANTIDAD" Type="number" Mode="In" />
+    <Parameter Name="PCALIDAD" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+  </Function>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -463,6 +513,7 @@
     <EntitySet Name="OFERTAPRODUCTO" EntityType="Self.OFERTAPRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="OFERTASUBASTA" EntityType="Self.OFERTASUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="PARTICIPACION" EntityType="Self.PARTICIPACION" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PRODUCCION" EntityType="Self.PRODUCCION" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -543,6 +594,14 @@
     <AssociationSet Name="FK_IDUSUARIO_TRANSPORTISTA" Association="Self.FK_IDUSUARIO_TRANSPORTISTA">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDIDO_PARTICIPACION" Association="Self.FK_PEDIDO_PARTICIPACION">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTOR_PARTICIPACION" Association="Self.FK_PRODUCTOR_PARTICIPACION">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
     </AssociationSet>
     <AssociationSet Name="FK_TIPOTRANSPOR_OFERTA" Association="Self.FK_TIPOTRANSPOR_OFERTA">
       <End Role="TIPOTRANSPORTE" EntitySet="TIPOTRANSPORTE" />

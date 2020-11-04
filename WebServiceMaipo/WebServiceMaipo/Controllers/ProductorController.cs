@@ -13,13 +13,14 @@ namespace WebServiceMaipo.Controllers
     public class ProductorController : ApiController
     {
         // GET: api/Productor
-        public IEnumerable<TipoUsuario> Get()
+        [HttpGet]
+        public IEnumerable<TipoUsuario> ObtenerProductores()
         {
             try
             {
                 TipoUsuarioFactory factory = new ProductorFactory();
                 TipoUsuario prod = factory.createTipoUsuario();
-                List<TipoUsuario> listado = prod.ListarTodos();
+                List<TipoUsuario> listado = prod.ReadAll();
                 return listado;
             }
             catch (Exception ex)
@@ -30,7 +31,7 @@ namespace WebServiceMaipo.Controllers
         }
 
         // GET: api/Productor/5
-        public string Get(int id)
+        public string ObtenerProductor(int id)
         {
             return "value";
         }

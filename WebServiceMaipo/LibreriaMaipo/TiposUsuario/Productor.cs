@@ -17,12 +17,15 @@ namespace LibreriaMaipo
             {
                 try
                 {
-                    var clienteBuscado = db.PRODUCTOR.Where(cli => cli.IDPRODUCTOR == id).FirstOrDefault();
-                    this.Id = (int)clienteBuscado.IDPRODUCTOR;
-                    this.Nombre = clienteBuscado.NOMBREPRODUCTOR;
-                    this.Direccion = clienteBuscado.DIRECCIONPRODUCTOR;
-                    this.Telefono = clienteBuscado.TELEFONOPRODUCTRO;
-
+                    var productor = db.PRODUCTOR.FirstOrDefault(prod => prod.IDPRODUCTOR == id);
+                    if(productor != null)
+                    {
+                        this.Id = (int)productor.IDPRODUCTOR;
+                        this.Nombre = productor.NOMBREPRODUCTOR;
+                        this.Direccion = productor.DIRECCIONPRODUCTOR;
+                        this.Telefono = productor.TELEFONOPRODUCTRO;
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -37,7 +40,7 @@ namespace LibreriaMaipo
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <returns></returns>
-        public override bool ObtenerDatosPorIdUsuario(int idUsuario)
+        public override bool ReadById(int idUsuario)
         {
             try
             {
@@ -66,7 +69,11 @@ namespace LibreriaMaipo
             }
         }
 
-        public override List<TipoUsuario> ListarTodos()
+        /// <summary>
+        /// Listar todos los productores registrados
+        /// </summary>
+        /// <returns></returns>
+        public override List<TipoUsuario> ReadAll()
         {
             try
             {
@@ -96,7 +103,7 @@ namespace LibreriaMaipo
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                return new List<TipoUsuario>();
             }
         }
 

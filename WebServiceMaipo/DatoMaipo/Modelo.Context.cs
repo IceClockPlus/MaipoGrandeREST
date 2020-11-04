@@ -45,6 +45,7 @@ namespace DatoMaipo
         public DbSet<TIPOTRANSPORTE> TIPOTRANSPORTE { get; set; }
         public DbSet<TRANSPORTISTA> TRANSPORTISTA { get; set; }
         public DbSet<PRODUCCION> PRODUCCION { get; set; }
+        public DbSet<PARTICIPACION> PARTICIPACION { get; set; }
     
         public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
         {
@@ -282,6 +283,65 @@ namespace DatoMaipo
                 new ObjectParameter("PIDPAIS", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_USUARIO", pNOMBREUSUARIOParameter, pCONTRASENIAParameter, pISHABILITADOParameter, pIDROLParameter, pTOKENParameter, pCORREOParameter, pIDPAISParameter);
+        }
+    
+        public virtual int SP_UPDATE_DETALLE_PEDIDO(Nullable<decimal> pID, Nullable<decimal> pIDPRODUCTO, Nullable<decimal> pCANTIDAD, string pCALIDAD, Nullable<decimal> pIDPRODUCTOR)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pIDPRODUCTOParameter = pIDPRODUCTO.HasValue ?
+                new ObjectParameter("PIDPRODUCTO", pIDPRODUCTO) :
+                new ObjectParameter("PIDPRODUCTO", typeof(decimal));
+    
+            var pCANTIDADParameter = pCANTIDAD.HasValue ?
+                new ObjectParameter("PCANTIDAD", pCANTIDAD) :
+                new ObjectParameter("PCANTIDAD", typeof(decimal));
+    
+            var pCALIDADParameter = pCALIDAD != null ?
+                new ObjectParameter("PCALIDAD", pCALIDAD) :
+                new ObjectParameter("PCALIDAD", typeof(string));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DETALLE_PEDIDO", pIDParameter, pIDPRODUCTOParameter, pCANTIDADParameter, pCALIDADParameter, pIDPRODUCTORParameter);
+        }
+    
+        public virtual int SP_INSERT_PARTICIPACION(Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pIDPEDIDO)
+        {
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PARTICIPACION", pIDPRODUCTORParameter, pIDPEDIDOParameter);
+        }
+    
+        public virtual int SP_UPDATE_PARTICIPACION(Nullable<decimal> pID, Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pIDPEDIDO, string pESTADO)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pESTADOParameter = pESTADO != null ?
+                new ObjectParameter("PESTADO", pESTADO) :
+                new ObjectParameter("PESTADO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PARTICIPACION", pIDParameter, pIDPRODUCTORParameter, pIDPEDIDOParameter, pESTADOParameter);
         }
     }
 }

@@ -10,33 +10,37 @@
       Title="RevisarPedidos">
 
     <Grid Background="White" Margin="0,0,-44,0">
-        <DataGrid x:Name="dataPedido" Margin="223,374,136,20" AutoGenerateColumns="False">
+        <DataGrid x:Name="dataPedido" Margin="223,374,136,20" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Id Pedido" Binding="{Binding pedido.Id }"></DataGridTextColumn>
-                <DataGridTextColumn Header="Producto" Binding="{Binding producto.NombreProducto}" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdItemPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Producto" Binding="{Binding Producto.NombreProducto}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Precio Total" Binding="{Binding PrecioTotal}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Productor" Binding="{Binding productor.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Calidad" Binding="{Binding Calidad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Productor" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dataProductor" HorizontalAlignment="Left" Height="242" AutoGenerateColumns="False" Margin="29,69,0,0" VerticalAlignment="Top" Width="341">
+        <DataGrid x:Name="dataProductor" HorizontalAlignment="Left" Height="242" AutoGenerateColumns="False" Margin="29,69,0,0" VerticalAlignment="Top" Width="395" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id" Binding="{Binding Productor.Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Producto" Binding="{Binding Producto.NombreProducto}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Precio Lower" Binding="{Binding PrecioLower}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Precio Estandar" Binding="{Binding PrecioEstandar}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Precio Premium" Binding="{Binding PrecioPremium}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAsignar" Content="Asignar" HorizontalAlignment="Left" Margin="29,393,0,0" VerticalAlignment="Top" Width="130" Click="btnAsignar_Click_1"/>
-        <DataGrid x:Name="dataProducto" HorizontalAlignment="Left" Height="242" Margin="451,69,0,0" VerticalAlignment="Top" Width="341" AutoGenerateColumns="False">
+        <DataGrid x:Name="dataProducto" HorizontalAlignment="Left" Height="242" Margin="451,69,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="False" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding IdProducto}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Nombre producto" Binding="{Binding NombreProducto}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Precio" Binding="{Binding PrecioEstimado}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdParticipacion}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Productor" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pedido" Binding="{Binding IdPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoParticipacion}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="lbTablaProductor" Content="Tabla Productor" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="lbTablaProductos" Content="Tabla Productos" HorizontalAlignment="Left" Margin="451,43,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="lbTablaProductos" Content="Tabla Participaciones" HorizontalAlignment="Left" Margin="451,43,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="lbTablaDetalle" Content="Tabla Detalle" HorizontalAlignment="Left" Margin="223,343,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="btn_Detalle" Content="Test" HorizontalAlignment="Left" Margin="532,316,0,0" VerticalAlignment="Top" Width="75" Click="btn_Detalle_Click"/>
     </Grid>
 </Page>

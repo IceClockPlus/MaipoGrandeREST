@@ -47,7 +47,7 @@ namespace MaipoGrandeApp
 
             SmtpClient client = new SmtpClient();
 
-            client.Credentials = new NetworkCredential("mapacheco75@gmail.com","matias29031998");
+            client.Credentials = new NetworkCredential("mapacheco75@gmail.com", "matias29031998");
 
             client.Port = 587;
             client.EnableSsl = true;
@@ -56,38 +56,41 @@ namespace MaipoGrandeApp
             try
             {
                 client.Send(msg);
-                MessageBox.Show("Mensaje Enviado","Correo");
+                MessageBox.Show("Mensaje Enviado", "Correo");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                MessageBox.Show("Mensaje no enviado","Correo");
+                MessageBox.Show("Mensaje no enviado", "Correo");
             }
         }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            RestClient cliente = new RestClient("http://localhost:54192/api");
-            RestRequest request = new RestRequest("/NotificarEstado", Method.GET);
-            request.AddParameter("id", txtNroPedido.Text);
-            var response = cliente.Execute(request);
-            var result = response.Content;
+            /*
+             RestClient cliente = new RestClient("http://localhost:54192/api");
+             RestRequest request = new RestRequest("/NotificarEstado", Method.GET);
+             request.AddParameter("id", txtNroPedido.Text);
+             var response = cliente.Execute(request);
+             var result = response.Content;
 
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                var pedido = JsonConvert.DeserializeObject<Pedido>(result);
+             if (response.StatusCode == HttpStatusCode.OK)
+             {
+                 var pedido = JsonConvert.DeserializeObject<Pedido>(result);
 
-                txtCorreoDestinatario.Text = pedido.cliente.usuario.Correo;
-                txtAsunto.Text = "Estado Pedido";
-                txtMensaje.Text = "El estado de su pedido es" + " " + pedido.estado.Descripcion;
-                txtCliente.Text = pedido.cliente.Nombre;
+                 txtCorreoDestinatario.Text = pedido.cliente.usuario.Correo;
+                 txtAsunto.Text = "Estado Pedido";
+                 txtMensaje.Text = "El estado de su pedido es" + " " + pedido.estado.Descripcion;
+                 txtCliente.Text = pedido.cliente.Nombre;
 
 
-            }
-            else
-            {
-                MessageBox.Show("Error, Pedido no encontrado", "Error al cargar");
-            }
+             }
+             else
+             {
+                 MessageBox.Show("Error, Pedido no encontrado", "Error al cargar");
+             }
+         }
+            */
         }
     }
 }

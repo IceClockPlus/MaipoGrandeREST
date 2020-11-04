@@ -26,6 +26,8 @@ E:\Proyectos\Portafolio\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.cs
 E:\Proyectos\Portafolio\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.csproj.CopyComplete
 E:\Proyectos\Portafolio\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.dll
 E:\Proyectos\Portafolio\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.csprojAssemblyReference.cache
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.csproj.CoreCompileInputs.cache
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Debug\LibreriaMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Debug\LibreriaMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Debug\LibreriaMaipo.pdb
@@ -35,8 +37,6 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Debug\Oracle.Mana
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Debug\DatoMaipo.pdb
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Debug\DatoMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Debug\EntityFramework.xml
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.csprojAssemblyReference.cache
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.csproj.CoreCompileInputs.cache
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.csproj.CopyComplete
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Debug\LibreriaMaipo.pdb

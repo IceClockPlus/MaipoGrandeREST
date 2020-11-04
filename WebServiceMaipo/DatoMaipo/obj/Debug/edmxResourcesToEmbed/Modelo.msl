@@ -109,13 +109,6 @@
           <ScalarProperty Name="IDCONTRATO" ColumnName="IDCONTRATO" />
         </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="Model.CONTRATO">
-        <ModificationFunctionMapping>
-          <InsertFunction FunctionName="Model.Store.SP_INSERTAR_CONTRATO" />
-          <UpdateFunction FunctionName="Model.Store.SP_ACTUALIZAR_CONTRATO" />
-          <DeleteFunction FunctionName="Model.Store.SP_ELIMINAR_CONTRATO" />
-        </ModificationFunctionMapping>
-      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRODUCTOR">
       <EntityTypeMapping TypeName="Model.PRODUCTOR">
@@ -211,5 +204,18 @@
     <FunctionImportMapping FunctionImportName="SP_INSERTAR_CONTRATO" FunctionName="Model.Store.SP_INSERTAR_CONTRATO" />
     <FunctionImportMapping FunctionImportName="SP_INSERT_SUBASTA" FunctionName="Model.Store.SP_INSERT_SUBASTA" />
     <FunctionImportMapping FunctionImportName="SP_INSERT_USUARIO" FunctionName="Model.Store.SP_INSERT_USUARIO" />
+    <FunctionImportMapping FunctionImportName="SP_UPDATE_DETALLE_PEDIDO" FunctionName="Model.Store.SP_UPDATE_DETALLE_PEDIDO" />
+    <EntitySetMapping Name="PARTICIPACION">
+      <EntityTypeMapping TypeName="Model.PARTICIPACION">
+        <MappingFragment StoreEntitySet="PARTICIPACION">
+          <ScalarProperty Name="ESTADOPARTICIPACION" ColumnName="ESTADOPARTICIPACION" />
+          <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+          <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
+          <ScalarProperty Name="IDPARTICIPACION" ColumnName="IDPARTICIPACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_INSERT_PARTICIPACION" FunctionName="Model.Store.SP_INSERT_PARTICIPACION" />
+    <FunctionImportMapping FunctionImportName="SP_UPDATE_PARTICIPACION" FunctionName="Model.Store.SP_UPDATE_PARTICIPACION" />
   </EntityContainerMapping>
 </Mapping>

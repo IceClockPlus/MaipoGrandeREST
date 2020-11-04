@@ -30,11 +30,43 @@ namespace WebServiceMaipo.Controllers
             }
 
         }
-
-        // GET: api/DetallePedido/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("api/DetallePedidos/")]
+        public IEnumerable<ItemPedido> ObtenerDetalles()
         {
-            return "value";
+            try
+            {
+                List<ItemPedido> detalles = new List<ItemPedido>();
+                ItemPedido item = new ItemPedido();
+                detalles = item.ReadAll();
+                return detalles;
+
+            }catch(Exception ex)
+            {
+                return new List<ItemPedido>();
+            }
+
+
+        }
+
+
+        [HttpGet]
+        [Route("api/DetallePedidos/{idPedido}")]
+        public IEnumerable<ItemPedido> Get(int idPedido)
+        {
+            try
+            {
+                List<ItemPedido> detalles = new List<ItemPedido>();
+                detalles = RepositorioDetallePedido.ObtenerDetallePedido(idPedido);
+                return detalles;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<ItemPedido>();
+            }
+
+
         }
 
         // POST: api/DetallePedido
@@ -43,8 +75,24 @@ namespace WebServiceMaipo.Controllers
         }
 
         // PUT: api/DetallePedido/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromBody]ItemPedido model)
         {
+            try
+            {
+                if (model.Update())
+                {
+                    return Ok();
+                }
+
+                return NotFound();
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+
+
         }
 
         // DELETE: api/DetallePedido/5

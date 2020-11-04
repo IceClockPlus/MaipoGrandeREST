@@ -1,0 +1,11 @@
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Release\DatoMaipo.dll.config
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Release\DatoMaipo.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Release\DatoMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Release\EntityFramework.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Release\Oracle.ManagedDataAccess.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Release\EntityFramework.xml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Release\DatoMaipo.csprojAssemblyReference.cache
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Release\DatoMaipo.csproj.CoreCompileInputs.cache
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Release\DatoMaipo.csproj.CopyComplete
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Release\DatoMaipo.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Release\DatoMaipo.pdb

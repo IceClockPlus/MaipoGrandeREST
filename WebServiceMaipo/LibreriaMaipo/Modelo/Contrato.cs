@@ -111,10 +111,11 @@ namespace LibreriaMaipo.Modelo
                             contrato.Id = (int)c.IDCONTRATO;
                             contrato.FechaCreacion = c.FECHACREACION;
                             contrato.FechaTermino = c.FECHATERMINO;
+                            contrato.PorcComision = (float)c.PORCCOMISION;
                             contrato.Vigente = c.VIGENTE.ToString();
                             TipoUsuario prod = factory.createTipoUsuario();
                             //Recuperar datos del cliente por su id
-                            prod.ObtenerDatosPorId(this.Id);
+                            prod.ObtenerDatosPorId((int)c.IDPRODUCTOR);
                             contrato.Productor = (Productor)prod;
 
                             list.Add(contrato);
@@ -154,11 +155,11 @@ namespace LibreriaMaipo.Modelo
                     {
                         this.FechaCreacion = contrato.FECHACREACION;
                         this.FechaTermino = contrato.FECHATERMINO;
-                        this.PorcComision = (int)contrato.PORCCOMISION;
+                        this.PorcComision = (float)contrato.PORCCOMISION;
                         this.Vigente = contrato.VIGENTE.ToString();
                         TipoUsuario prod = factory.createTipoUsuario();
                         //Recuperar datos del cliente por su id
-                        prod.ObtenerDatosPorId(this.Id);
+                        prod.ObtenerDatosPorId((int)contrato.IDPRODUCTOR);
                         this.Productor = (Productor)prod;
 
                         obtenido = true;

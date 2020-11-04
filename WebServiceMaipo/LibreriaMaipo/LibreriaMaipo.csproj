@@ -55,6 +55,7 @@
     <Compile Include="Modelo\EstadoSubasta.cs" />
     <Compile Include="Modelo\OfertaProducto.cs" />
     <Compile Include="Modelo\OfertaSubasta.cs" />
+    <Compile Include="Modelo\Participacion.cs" />
     <Compile Include="Modelo\Produccion.cs" />
     <Compile Include="Modelo\Subasta.cs" />
     <Compile Include="Modelo\TipoTransporte.cs" />
