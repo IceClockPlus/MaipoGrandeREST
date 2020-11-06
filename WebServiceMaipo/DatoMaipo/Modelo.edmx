@@ -508,6 +508,14 @@
           <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_UPDATE_OFERTASUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDOFERTA" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOOFERTA" Type="number" Mode="In" />
+          <Parameter Name="PSELECCIONADO" Type="varchar2" Mode="In" />
+          <Parameter Name="PFECHAOFERTA" Type="date" Mode="In" />
+          <Parameter Name="PIDTRANSPORTISTA" Type="number" Mode="In" />
+          <Parameter Name="PIDTIPOTRANSPORTE" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_UPDATE_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PID" Type="number" Mode="In" />
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
@@ -856,6 +864,14 @@
             <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
             <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
             <Parameter Name="PESTADO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_OFERTASUBASTA">
+            <Parameter Name="PIDOFERTA" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOOFERTA" Mode="In" Type="Decimal" />
+            <Parameter Name="PSELECCIONADO" Mode="In" Type="String" />
+            <Parameter Name="PFECHAOFERTA" Mode="In" Type="DateTime" />
+            <Parameter Name="PIDTRANSPORTISTA" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDTIPOTRANSPORTE" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
@@ -1512,6 +1528,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_INSERT_PARTICIPACION" FunctionName="Model.Store.SP_INSERT_PARTICIPACION" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PARTICIPACION" FunctionName="Model.Store.SP_UPDATE_PARTICIPACION" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_OFERTASUBASTA" FunctionName="Model.Store.SP_UPDATE_OFERTASUBASTA" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -17,6 +17,7 @@ namespace LibreriaMaipo.Modelo
         public DateTime FechaOferta { get; set; }
         public Transportista Transportista { get; set; }
         public TipoTransporte TipoTransporte { get; set; }
+        public int IdSubasta { get; set; }
 
         public OfertaSubasta()
         {
@@ -31,6 +32,7 @@ namespace LibreriaMaipo.Modelo
             this.FechaOferta = DateTime.Today;
             this.Transportista = new Transportista();
             this.TipoTransporte = new TipoTransporte();
+            this.IdSubasta = 0;
         }
 
 
@@ -62,6 +64,7 @@ namespace LibreriaMaipo.Modelo
                             oferta.PrecioOferta = (float)ofe.PRECIOOFERTA;
                             oferta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
                             oferta.Transportista.ObtenerDatosPorId((int)ofe.IDTRANSPORTISTA);
+                            oferta.IdSubasta = (int)ofe.IDSUBASTA;
 
                             TipoTransporte tipo = new TipoTransporte();
                             tipo.IdTipo = (int)ofe.IDTIPOTRANSPORTE;
@@ -81,9 +84,30 @@ namespace LibreriaMaipo.Modelo
                 Console.WriteLine(ex.Message);
                 return new List<OfertaSubasta>();
             }
+        }
+
+        public bool Update()
+        {
+            try
+            {
+                using (var db =  new DBEntities())
+                {
+                    db.SP_UPDATE_OFERTASUBASTA(this.IdOferta, (decimal?)this.PrecioOferta, this.Seleccionado, this.FechaOferta, this.Transportista.Id, this.TipoTransporte.IdTipo);
+
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                return false;
+            }
 
 
         }
+
 
     }
 }

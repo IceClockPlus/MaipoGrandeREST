@@ -503,6 +503,14 @@
     <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
   </Function>
+  <Function Name="SP_UPDATE_OFERTASUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDOFERTA" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOOFERTA" Type="number" Mode="In" />
+    <Parameter Name="PSELECCIONADO" Type="varchar2" Mode="In" />
+    <Parameter Name="PFECHAOFERTA" Type="date" Mode="In" />
+    <Parameter Name="PIDTRANSPORTISTA" Type="number" Mode="In" />
+    <Parameter Name="PIDTIPOTRANSPORTE" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_UPDATE_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PID" Type="number" Mode="In" />
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />

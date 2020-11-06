@@ -9,14 +9,26 @@
       d:DesignHeight="700" d:DesignWidth="800"
       Title="SubastasTransporte">
 
-    <Grid Background="White"  >
+    <Grid Background="White">
+        <Label Content="Pedidos" FontSize="16" Margin="23,41,636,623"/>
+        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="136" Margin="23,82,0,0" VerticalAlignment="Top" Width="718" AutoGenerateColumns="False" IsReadOnly="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha inicio" Binding="{Binding FechaPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Entrega" Binding="{Binding FechaEntrega}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPedido.DescripcionEstado}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ciudad" Binding="{Binding Ciudad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pais" Binding="{Binding Pais}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
         <TextBox x:Name="txtID" Controls:TextBoxHelper.Watermark="Id Subasta" HorizontalAlignment="Left" Height="29" Margin="623,401,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118"/>
-        <DatePicker x:Name="dateFechaInicio" HorizontalAlignment="Left" Margin="23,261,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.38,0.607"/>
-        <DatePicker x:Name="dateFechaTermino" HorizontalAlignment="Left" Margin="269,261,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtIdEstadoSubasta" HorizontalAlignment="Left" Controls:TextBoxHelper.Watermark="Estado subasta" Height="23" Margin="269,169,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="145"/>
-        <TextBox x:Name="txtIdPedido" HorizontalAlignment="Left" Controls:TextBoxHelper.Watermark="Id Pedido" Height="23" Margin="23,169,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="145"/>
-        <Label x:Name="lbFechaInicio" Content="Fecha de Inicio" HorizontalAlignment="Left" Margin="23,230,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbFechaTermino" Content="Fecha de Termino" HorizontalAlignment="Left" Margin="269,230,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dateFechaInicio" HorizontalAlignment="Left" Margin="23,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.38,0.607"/>
+        <DatePicker x:Name="dateFechaTermino" HorizontalAlignment="Left" Margin="269,268,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbFechaInicio" Content="Fecha de Inicio" HorizontalAlignment="Left" Margin="23,238,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbFechaTermino" Content="Fecha de Termino" HorizontalAlignment="Left" Margin="269,238,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="tablaSubasta" IsReadOnly="True" HorizontalAlignment="Left" Height="219" Margin="50,435,0,0" VerticalAlignment="Top" Width="691" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdSubasta}"></DataGridTextColumn>
@@ -33,16 +45,16 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnAgregarSubasta" Content="Agregar" HorizontalAlignment="Left" Margin="50,401,0,0" VerticalAlignment="Top" Width="121" Click="BtnAgregarSubasta_Click"/>
+        <Button x:Name="BtnAgregarSubasta" Content="Agregar" HorizontalAlignment="Left" Margin="50,398,0,0" VerticalAlignment="Top" Width="121" Click="BtnAgregarSubasta_Click"/>
         <Button x:Name="btnCargar" Content="Cargar" HorizontalAlignment="Left" Margin="496,398,0,0" VerticalAlignment="Top" Width="122" Click="btnCargar_Click"/>
         <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="192,398,0,0" VerticalAlignment="Top" Width="122" Click="btnActualizar_Click"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="342,398,0,0" VerticalAlignment="Top" Width="122" Click="btnEliminar_Click"/>
 
         <Controls:FlyoutsControl >
-            <!--Flyout de las ofertas de los transportistas-->
-            <Controls:Flyout x:Name="flyOfertasTransportista" Width="623" Background="#FFF7955C" Opacity="0.8" Header="Ofertas Transportistas" Margin="177,0,0,214" HorizontalAlignment="Right" FlowDirection="RightToLeft">
+            <Controls:Flyout x:Name="flyOfertasTransportista" Width="623" Background="#FFF7955C" Opacity="0.8" Header="Ofertas Transportistas" Margin="177,0,0,214" HorizontalAlignment="Right" FlowDirection="RightToLeft" >
                 <Canvas HorizontalAlignment="Left" Height="414" Width="613">
-                    <DataGrid x:Name="GridOfertas" IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="True" Canvas.Left="10">
+                    <Button Content="Asignar" x:Name="BtnAsignarTransportista" Canvas.Left="254" Canvas.Top="256" Height="46" Width="94" RenderTransformOrigin="0.452,1.674" Click="BtnAsignarTransportista_Click"></Button>
+                    <DataGrid x:Name="GridOfertas" IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="True" Canvas.Left="10" Canvas.Top="36">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id Oferta" Binding="{Binding IdOferta}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Precio" Binding="{Binding PrecioOferta}"></DataGridTextColumn>
@@ -88,7 +100,5 @@
 
         </Controls:FlyoutsControl>
 
-        <Label x:Name="lbPedido" Content="Pedido" HorizontalAlignment="Left" Margin="23,138,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbEstado" Content="Estado" HorizontalAlignment="Left" Margin="269,138,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

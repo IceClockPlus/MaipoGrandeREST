@@ -30,7 +30,7 @@ namespace LibreriaMaipo.TiposUsuario
                             trans.Nombre = t.NOMBRETRANSPORTISTA;
                             trans.Direccion = t.DIRECCIONTRANSPORTISTA;
                             trans.Telefono = t.TELEFONOTRANSPORTISTA;
-
+                            this.Correo = t.CORREO;
                             list.Add(trans);
 
                         }
@@ -59,6 +59,7 @@ namespace LibreriaMaipo.TiposUsuario
                     this.Nombre = tran.NOMBRETRANSPORTISTA;
                     this.Direccion = tran.DIRECCIONTRANSPORTISTA;
                     this.Telefono = tran.TELEFONOTRANSPORTISTA;
+                    this.Correo = tran.CORREO;
 
                 }catch(Exception ex)
                 {
@@ -82,6 +83,7 @@ namespace LibreriaMaipo.TiposUsuario
                     this.Nombre = tran.NOMBRETRANSPORTISTA;
                     this.Direccion = tran.DIRECCIONTRANSPORTISTA;
                     this.Telefono = tran.TELEFONOTRANSPORTISTA;
+                    this.Correo = tran.CORREO;
                     return true; 
                 }
                 catch (Exception ex)

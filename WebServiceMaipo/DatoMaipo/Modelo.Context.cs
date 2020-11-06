@@ -347,5 +347,34 @@ namespace DatoMaipo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PARTICIPACION", pIDParameter, pIDPRODUCTORParameter, pIDPEDIDOParameter, pESTADOParameter);
         }
+    
+        public virtual int SP_UPDATE_OFERTASUBASTA(Nullable<decimal> pIDOFERTA, Nullable<decimal> pPRECIOOFERTA, string pSELECCIONADO, Nullable<System.DateTime> pFECHAOFERTA, Nullable<decimal> pIDTRANSPORTISTA, Nullable<decimal> pIDTIPOTRANSPORTE)
+        {
+            var pIDOFERTAParameter = pIDOFERTA.HasValue ?
+                new ObjectParameter("PIDOFERTA", pIDOFERTA) :
+                new ObjectParameter("PIDOFERTA", typeof(decimal));
+    
+            var pPRECIOOFERTAParameter = pPRECIOOFERTA.HasValue ?
+                new ObjectParameter("PPRECIOOFERTA", pPRECIOOFERTA) :
+                new ObjectParameter("PPRECIOOFERTA", typeof(decimal));
+    
+            var pSELECCIONADOParameter = pSELECCIONADO != null ?
+                new ObjectParameter("PSELECCIONADO", pSELECCIONADO) :
+                new ObjectParameter("PSELECCIONADO", typeof(string));
+    
+            var pFECHAOFERTAParameter = pFECHAOFERTA.HasValue ?
+                new ObjectParameter("PFECHAOFERTA", pFECHAOFERTA) :
+                new ObjectParameter("PFECHAOFERTA", typeof(System.DateTime));
+    
+            var pIDTRANSPORTISTAParameter = pIDTRANSPORTISTA.HasValue ?
+                new ObjectParameter("PIDTRANSPORTISTA", pIDTRANSPORTISTA) :
+                new ObjectParameter("PIDTRANSPORTISTA", typeof(decimal));
+    
+            var pIDTIPOTRANSPORTEParameter = pIDTIPOTRANSPORTE.HasValue ?
+                new ObjectParameter("PIDTIPOTRANSPORTE", pIDTIPOTRANSPORTE) :
+                new ObjectParameter("PIDTIPOTRANSPORTE", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_OFERTASUBASTA", pIDOFERTAParameter, pPRECIOOFERTAParameter, pSELECCIONADOParameter, pFECHAOFERTAParameter, pIDTRANSPORTISTAParameter, pIDTIPOTRANSPORTEParameter);
+        }
     }
 }

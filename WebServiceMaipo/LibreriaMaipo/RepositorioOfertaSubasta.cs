@@ -67,6 +67,7 @@ namespace LibreriaMaipo
                         ofertaSubasta.PrecioOferta = (float)oferta.PRECIOOFERTA;
                         ofertaSubasta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
                         ofertaSubasta.Transportista.ObtenerDatosPorId(idTransportista);
+                        ofertaSubasta.IdSubasta = (int)oferta.IDSUBASTA;
 
                         TipoTransporte tipo = new TipoTransporte();
                         tipo.IdTipo = (int)oferta.IDTIPOTRANSPORTE;
@@ -112,6 +113,7 @@ namespace LibreriaMaipo
                         ofertaSubasta.PrecioOferta = (float)oferta.PRECIOOFERTA;
                         ofertaSubasta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
                         ofertaSubasta.Transportista.ObtenerDatosPorId((int)oferta.IDTRANSPORTISTA);
+                        ofertaSubasta.IdSubasta = (int)oferta.IDSUBASTA;
 
                         TipoTransporte tipo = new TipoTransporte();
                         tipo.IdTipo = (int)oferta.IDTIPOTRANSPORTE;

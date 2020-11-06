@@ -116,28 +116,49 @@ namespace WebServiceMaipo.Controllers
                 Console.WriteLine(ex.Message);
                 return new List<Pedido>();
             }
-            /*
+            
+
+        }
+
+        [HttpGet]
+        [Route("api/PedidosCliente")]
+        public IEnumerable<Pedido>GetPedidosCliente([FromBody] SecurityViewModel model)
+        {
             try
             {
-                Pedido ped = new Pedido();
-                var listaPedido = ped.ReadAll();
-                if (listaPedido.Count > 0)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, listaPedido);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
-                }
+                Usuario user = this.Validate(model.Token);
+                List<Pedido> pedidos = new List<Pedido>();
+
+                pedidos = RepositorioPedido.ObtenerPedidoPorIdCliente(user.TipoUsuario.Id);
+                return pedidos;
+
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                Console.WriteLine(ex.Message);
+                return new List<Pedido>();
             }
-            */
+
+
         }
+
+        public Usuario Validate(string token)
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                usuario = RepositorioUsuario.GetUsuarioByToken(token);
+
+                return usuario;
+
+            }
+            catch (Exception ex)
+            {
+                return new Usuario();
+            }
+        }
+
 
     }
 }

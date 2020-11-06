@@ -1,14 +1,18 @@
 ﻿using LibreriaMaipo.Modelo;
+using LibreriaMaipo.TiposUsuario;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,6 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MailMessage = System.Net.Mail.MailMessage;
 
 namespace MaipoGrandeApp
 {
@@ -32,45 +37,61 @@ namespace MaipoGrandeApp
             InitializeComponent();
             main = m;
             CargarTabla();
+            this.CargarTablaPedido();
+        }
+
+        private void CargarTablaPedido()
+        {
+            RestClient client = new RestClient("http://localhost:54192/api");
+            RestRequest request = new RestRequest("/Pedidos", Method.GET);
+            var response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var pedidos = JsonConvert.DeserializeObject<List<Pedido>>(response.Content);
+                pedidos = pedidos.Where(p => p.EstadoPedido.IdEstado == 7).ToList();
+                dataPedido.ItemsSource = pedidos;
+            }
         }
 
         private void BtnAgregarSubasta_Click(object sender, RoutedEventArgs e)
         {
-             
             try
             {
-                Subasta subasta = new Subasta();
-                subasta.FechaInicio = (DateTime)dateFechaInicio.SelectedDate;
-                subasta.FechaTermino = (DateTime)dateFechaTermino.SelectedDate;
-                subasta.Pedido.IdPedido = int.Parse(txtIdPedido.Text);
-                subasta.EstadoSubasta.IdEstadoSubasta = 1;
-                
-
-                HttpClient client = new HttpClient();
-                var content = new StringContent(JsonConvert.SerializeObject(subasta), Encoding.UTF8, "application/json");
-                var response = client.PostAsync("http://localhost:54192/api/Subasta", content).Result;
-
-
-                Console.WriteLine(response);
-                
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                Pedido pedido = (Pedido)dataPedido.SelectedItem;
+                if (pedido != null)
                 {
-                    //var subasta = JsonConvert.DeserializeObject<Subasta>(response.ToString());
+                    Subasta subasta = new Subasta();
+                    subasta.Pedido = pedido;
+                    subasta.FechaInicio = (DateTime)dateFechaInicio.SelectedDate;
+                    subasta.FechaTermino = (DateTime)dateFechaTermino.SelectedDate;
+                    subasta.EstadoSubasta.IdEstadoSubasta = 1;
 
-                    MessageBox.Show("Subasta AGregada con exito","Subasta");
-                    LimpiarCampos();
-                    CargarTabla();
+                    HttpClient client = new HttpClient();
+                    var content = new StringContent(JsonConvert.SerializeObject(subasta), Encoding.UTF8, "application/json");
+                    var response = client.PostAsync("http://localhost:54192/api/Subasta", content).Result;
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        //var subasta = JsonConvert.DeserializeObject<Subasta>(response.ToString());
+
+                        MessageBox.Show("Subasta AGregada con exito", "Subasta");
+                        LimpiarCampos();
+                        CargarTabla();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Subasta no agregada", "Subasta");
+                    }
+
                 }
                 else
                 {
-                    MessageBox.Show("Subasta no agregada","Subasta");
+                    main.Mensaje("Aviso", "Debe selccionar un pedido de la lista");
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
             
         }
@@ -87,8 +108,8 @@ namespace MaipoGrandeApp
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var sub = JsonConvert.DeserializeObject<Subasta>(result);
-                txtIdPedido.Text = sub.Pedido.IdPedido.ToString();
-                txtIdEstadoSubasta.Text = sub.EstadoSubasta.IdEstadoSubasta.ToString();
+                //txtIdPedido.Text = sub.Pedido.IdPedido.ToString();
+                //txtIdEstadoSubasta.Text = sub.EstadoSubasta.IdEstadoSubasta.ToString();
                 dateFechaInicio.SelectedDate = sub.FechaInicio;
                 dateFechaTermino.SelectedDate = sub.FechaTermino;
                 DeshabilitarBtn();
@@ -105,8 +126,8 @@ namespace MaipoGrandeApp
         private void DeshabilitarBtn()
         {
             txtID.IsEnabled = false;
-            txtIdPedido.IsEnabled = false;
-            txtIdEstadoSubasta.IsEnabled = false;
+            //txtIdPedido.IsEnabled = false;
+            //txtIdEstadoSubasta.IsEnabled = false;
             dateFechaInicio.IsEnabled = false;
             dateFechaTermino.IsEnabled = false;
         }
@@ -114,8 +135,8 @@ namespace MaipoGrandeApp
         private void HabilitarBtn()
         {
             txtID.IsEnabled = true;
-            txtIdPedido.IsEnabled = true;
-            txtIdEstadoSubasta.IsEnabled = true;
+            //txtIdPedido.IsEnabled = true;
+            //txtIdEstadoSubasta.IsEnabled = true;
             dateFechaInicio.IsEnabled = true;
             dateFechaTermino.IsEnabled = true;
         }
@@ -123,8 +144,8 @@ namespace MaipoGrandeApp
         private void LimpiarCampos()
         {
             txtID.Clear();
-            txtIdPedido.Clear();
-            txtIdEstadoSubasta.Clear();
+            //txtIdPedido.Clear();
+            //txtIdEstadoSubasta.Clear();
             dateFechaInicio.SelectedDate = DateTime.Now;
             dateFechaTermino.SelectedDate = DateTime.Now;
         }
@@ -301,6 +322,92 @@ namespace MaipoGrandeApp
             }
         }
 
+        private void BtnAsignarTransportista_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OfertaSubasta oferta = (OfertaSubasta)GridOfertas.SelectedItem;
+                if(oferta != null)
+                {
+                    oferta.Seleccionado = "1";
+                    HttpClient client2 = new HttpClient();
+                    var content = new StringContent(JsonConvert.SerializeObject(oferta), Encoding.UTF8, "application/json");
+                    var response2 = client2.PutAsync("http://localhost:54192/api/OfertaSubasta", content).Result;
+
+                    if(response2.StatusCode == HttpStatusCode.OK)
+                    {
+                        flyOfertasTransportista.IsOpen = false;
+                        this.CerrarSubasta();
+                        this.CargarTabla();
+                        this.EnviarMensaje(oferta.Transportista);
+                        main.Mensaje("Transportista asignado", "El transportista ha sido asignado");
+                    }
+
+                }
+                else
+                {
+                    main.Mensaje("Debe seleccionar una oferta","Aviso");
+                }
+
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+        }
+
+        public void CerrarSubasta()
+        {
+            try
+            {
+                Subasta subasta = (Subasta)tablaSubasta.SelectedItem;
+                subasta.EstadoSubasta.IdEstadoSubasta = 2;
+
+                HttpClient client2 = new HttpClient();
+                var content = new StringContent(JsonConvert.SerializeObject(subasta), Encoding.UTF8, "application/json");
+                var response2 = client2.PutAsync("http://localhost:54192/api/Subasta", content).Result;
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        public void EnviarMensaje(Transportista t)
+        {
+            MailMessage msg = new MailMessage();
+            msg.To.Add(t.Correo);
+            msg.Subject = "Resultado Oferta";
+            msg.SubjectEncoding = Encoding.UTF8;
+
+            msg.Body = "Estimado "+ t.Nombre + ". Le informamos que su oferta ha sido seleccionada ";
+            msg.BodyEncoding = Encoding.UTF8;
+            msg.IsBodyHtml = true;
+            msg.From = new MailAddress("aravenapro98@gmail.com");
+
+            SmtpClient clientM = new SmtpClient();
+
+            clientM.Credentials = new NetworkCredential("maipograndeduoc7@gmail.com", "Duoc2020");
+
+            clientM.Port = 587;
+            clientM.EnableSsl = true;
+            clientM.Host = "smtp.gmail.com";
+            try
+            {
+                clientM.Send(msg);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
         /*private void llenarCB() 
         {

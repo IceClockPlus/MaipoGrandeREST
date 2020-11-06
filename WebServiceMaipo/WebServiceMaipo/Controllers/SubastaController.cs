@@ -90,8 +90,25 @@ namespace WebServiceMaipo.Controllers
         }
 
         // PUT: api/Subasta/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromBody] Subasta model)
         {
+            try
+            {
+                if (model.Update())
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // DELETE: api/Subasta/5

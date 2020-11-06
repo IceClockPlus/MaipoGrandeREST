@@ -235,6 +235,14 @@
       <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
       <Parameter Name="PESTADO" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_OFERTASUBASTA">
+      <Parameter Name="PIDOFERTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOOFERTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PSELECCIONADO" Mode="In" Type="String" />
+      <Parameter Name="PFECHAOFERTA" Mode="In" Type="DateTime" />
+      <Parameter Name="PIDTRANSPORTISTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDTIPOTRANSPORTE" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>
