@@ -46,8 +46,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="341,264,0,0" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Cantidad Productos" VerticalAlignment="Top" Width="129"/>
-        <Button x:Name="btnCrear" Content="Crear" HorizontalAlignment="Left" Margin="341,345,0,0" VerticalAlignment="Top" Width="120" Click="btnCrear_Click" ToolTip="Crear Detalle de Pedido"/>
         <Label x:Name="lbTablaPedidos" Content="Revisión de Pedidos" HorizontalAlignment="Left" Margin="78,91,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="lbTablaProductos" Content="Tabla Productos" HorizontalAlignment="Left" Margin="512,91,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="lbTablaDetalle" Content="Tabla Detalle" HorizontalAlignment="Left" Margin="78,383,0,0" VerticalAlignment="Top" FontSize="16"/>

@@ -70,6 +70,7 @@ namespace MaipoGrandeApp
             }
             */
         }
+
         private void CargarComboEstadoPedido()
         {
             RestClient client = new RestClient("http://localhost:54192/api");
@@ -112,94 +113,6 @@ namespace MaipoGrandeApp
             }
         }
 
-        /// <summary>
-        /// Boton para creacion de pedidos
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCrear_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            var producto = (Producto)dataProducto.SelectedItem;
-            var pedido = (Pedido)dataPedido.SelectedItem;
-            var detalle = new DetallePedido();
-
-            detalle.pedido.Id = pedido.Id;
-            detalle.producto.IdProducto = producto.IdProducto;
-            detalle.Cantidad = int.Parse(txtCantidad.Text);
-
-            try
-            {
-                //POST HttpClient
-                HttpClient client = new HttpClient();
-                //Serializa el objeto a enviar
-                var content = new StringContent(JsonConvert.SerializeObject(detalle), Encoding.UTF8, "application/json");
-                //Realizar solicitud
-                var response = client.PostAsync("http://localhost:54192/api/DetallePedido", content).Result;
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    RestClient client2 = new RestClient("http://localhost:54192/api");
-                    RestRequest request = new RestRequest("/Productor", Method.GET);
-                    var response2 = client2.Execute(request);
-                    
-
-                    if (response2.StatusCode == HttpStatusCode.OK)
-                    {
-                        var productor = JsonConvert.DeserializeObject<List<Productor>>(response2.Content);
-                        foreach (var item in productor)
-                        {
-                            MailMessage msg = new MailMessage();
-                            msg.To.Add(item.usuario.Correo);
-                            msg.Subject = "Detalle Pedido";
-                            msg.SubjectEncoding = Encoding.UTF8;
-                            //msg.Bcc.Add(txtCopia.Text);
-
-                            msg.Body = "Se a creado un nuevo proceso de ventas para su visualizacion";
-                            msg.BodyEncoding = Encoding.UTF8;
-                            msg.IsBodyHtml = true;
-                            msg.From = new MailAddress("mapacheco75@gmail.com");
-
-                            SmtpClient clientM = new SmtpClient();
-
-                            clientM.Credentials = new NetworkCredential("mapacheco75@gmail.com", "matias29031998");
-
-                            clientM.Port = 587;
-                            clientM.EnableSsl = true;
-                            clientM.Host = "smtp.gmail.com";
-
-                            try
-                            {
-                                clientM.Send(msg);
-
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine(ex);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        main.Mensaje("Error","Mensaje no enviado");
-                    }
-
-                    main.Mensaje("Detalle Pedido", "Detalle Pedido Creado con exito. (Notificacion enviada a productor.)");
-
-                    CargarTabla();
-                }
-                else
-                {
-                    main.Mensaje("Error", "Detalle Pedido no Creado");
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex);
-            }
-            */
-        }
 
         private void cbxEstadoPedido_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -225,6 +138,7 @@ namespace MaipoGrandeApp
 
             dataDetalle.ItemsSource = detalle.DetallePedido;
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -350,6 +264,8 @@ namespace MaipoGrandeApp
                 {
                     FlyAsignarProductor.IsOpen = false;
                 }
+                dataDetalle.ItemsSource = null;
+
             }
 
 

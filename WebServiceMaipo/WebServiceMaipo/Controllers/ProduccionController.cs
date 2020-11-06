@@ -71,7 +71,9 @@ namespace WebServiceMaipo.Controllers
    
 
         // POST: api/Produccion
-        public IHttpActionResult RegistrarProduccion([FromBody]ProduccionViewModel model)
+        [HttpPost]
+        [Route("api/ProduccionPost")]
+        public IHttpActionResult Post([FromBody]ProduccionViewModel model)
         {
             try
             {
