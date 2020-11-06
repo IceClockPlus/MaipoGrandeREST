@@ -58,7 +58,7 @@ namespace LibreriaMaipo
                             Descripcion = dbSubasta.ESTADOSUBASTA.DESCRIPCION
                         };
                         subasta.EstadoSubasta = estadoSubasta;
-                        subasta.OfertaSubasta = RepositorioOfertaSubasta.ListarOfertaPorIdSubasta(subasta.IdSubasta);
+                        subasta.OfertasSubasta = RepositorioOfertaSubasta.ListarOfertaPorIdSubasta(subasta.IdSubasta);
                         subasta.Pedido = RepositorioPedido.ObtenerPedidoPorId((int)dbSubasta.IDPEDIDO);
                         subastas.Add(subasta);
                     }

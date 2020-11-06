@@ -19,6 +19,7 @@ namespace WebServiceMaipo.Controllers
             {
                 Usuario user = this.Validate(model.Token);
                 List<ItemPedido> detalles = RepositorioDetallePedido.ListarPorIdProductor(user.TipoUsuario.Id);
+                detalles = detalles.Where(det => det.Estado == "Pendiente").ToList();
                 return detalles;
 
             }
@@ -30,6 +31,28 @@ namespace WebServiceMaipo.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("api/DetallePedidoHistorico")]
+        public IEnumerable<ItemPedido> DetallesHistoricos([FromBody] SecurityViewModel model)
+        {
+            try
+            {
+                Usuario user = this.Validate(model.Token);
+                List<ItemPedido> detalles = RepositorioDetallePedido.ListarPorIdProductor(user.TipoUsuario.Id);
+                detalles = detalles.Where(det => det.Estado != "Pendiente").ToList();
+                return detalles;
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                return new List<ItemPedido>();
+            }
+
+        }
+
         [HttpGet]
         [Route("api/DetallePedidos/")]
         public IEnumerable<ItemPedido> ObtenerDetalles()
@@ -74,7 +97,7 @@ namespace WebServiceMaipo.Controllers
         {
         }
 
-        // PUT: api/DetallePedido/5
+        // PUT: api/DetallePedido/
         public IHttpActionResult Put([FromBody]ItemPedido model)
         {
             try

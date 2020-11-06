@@ -9,6 +9,7 @@
     <Property Name="DIRECCIONCLIENTE" Type="varchar2" MaxLength="40" Nullable="false" />
     <Property Name="TELEFONOCLIENTE" Type="varchar2" MaxLength="12" Nullable="false" />
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="CONTRATO">
     <Key>
@@ -31,13 +32,14 @@
     <Property Name="CALIDAD" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="IDDETALLEPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" />
+    <Property Name="ESTADO" Type="varchar2" MaxLength="30" />
   </EntityType>
   <EntityType Name="ESTADOPEDIDO">
     <Key>
       <PropertyRef Name="IDESTADOPEDIDO" />
     </Key>
     <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="ESTADOSUBASTA">
     <Key>
@@ -128,6 +130,7 @@
     <Property Name="DIRECCIONPRODUCTOR" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TELEFONOPRODUCTRO" Type="varchar2" MaxLength="12" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="ROL">
     <Key>
@@ -162,6 +165,7 @@
     <Property Name="DIRECCIONTRANSPORTISTA" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="TELEFONOTRANSPORTISTA" Type="varchar2" MaxLength="12" Nullable="false" />
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -496,6 +500,7 @@
     <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
     <Parameter Name="PCANTIDAD" Type="number" Mode="In" />
     <Parameter Name="PCALIDAD" Type="varchar2" Mode="In" />
+    <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
   </Function>
   <Function Name="SP_UPDATE_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">

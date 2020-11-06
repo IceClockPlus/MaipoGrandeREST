@@ -1,5 +1,6 @@
 ﻿using DatoMaipo;
 using LibreriaMaipo.TiposUsuario;
+using LibreriaMaipo.UsuarioFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,51 @@ namespace LibreriaMaipo.Modelo
             this.DetallePedido = new List<ItemPedido>();
         }
 
+        public bool Read()
+        {
+            TipoUsuarioFactory factory = new ClienteFactory();
+            using (var db = new DBEntities())
+            {
+                try
+                {
+                    //Realizar consulta para obtener datos del pedido
+                    var pedido = db.PEDIDO.Where(p => p.IDPEDIDO == this.IdPedido).FirstOrDefault();
+
+                    //Devolver null si la consulta no entrega resultados
+                    if (pedido != null)
+                    {
+                        this.FechaPedido = pedido.FECHAPEDIDO;
+                        this.FechaEntrega = pedido.FECHAENTREGA;
+                        this.Direccion = pedido.DIRECCIONPEDIDO;
+                        this.Ciudad = pedido.CIUDAD;
+                        this.Pais = pedido.PAIS;
+                        //Crear una instancia cliente con el uso de ClienteFactory
+                        TipoUsuario cli = factory.createTipoUsuario();
+
+                        //Recuperar datos del cliente por su id
+                        cli.ObtenerDatosPorId((int)pedido.IDCLIENTE);
+                        this.Cliente = (Cliente)cli;
+
+                        //Obtener el estado del pedido por su id
+                        EstadoPedido estado = new EstadoPedido();
+                        estado.IdEstado = (int)pedido.IDESTADOPEDIDO;
+                        estado.Read();
+                        this.EstadoPedido = estado;
+
+                        //Obtener el detalle del pedido por id
+                        this.DetallePedido = ItemPedido.ReadByIdPedido(this.IdPedido);
+                        return true;
+                    }
+                    return false;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+        }
 
         public bool Update()
         {

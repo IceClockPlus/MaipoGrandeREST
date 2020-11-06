@@ -36,6 +36,24 @@ namespace WebServiceMaipo.Controllers
 
         }
 
+        [HttpGet]
+        [Route("api/OfertasSubasta/{idSubasta}")]
+        public IEnumerable<OfertaSubasta>GetOfertasByIdSubasta(int idSubasta)
+        {
+            List<OfertaSubasta> ofertas = new List<OfertaSubasta>();
+            try
+            {
+                ofertas = RepositorioOfertaSubasta.ListarOfertaPorIdSubasta(idSubasta);
+                return ofertas;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<OfertaSubasta>();
+            }
+
+        }
+
         // GET: api/OfertaSubasta/5
         public string Get(int id)
         {

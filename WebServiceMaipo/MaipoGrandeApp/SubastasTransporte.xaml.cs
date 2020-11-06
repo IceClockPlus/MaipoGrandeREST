@@ -37,25 +37,17 @@ namespace MaipoGrandeApp
         private void BtnAgregarSubasta_Click(object sender, RoutedEventArgs e)
         {
              
-
             try
             {
-                Subasta sub = new Subasta 
-                {
-                    FechaInicio = (DateTime)dateFechaInicio.SelectedDate,
-                    FechaTermino = (DateTime)dateFechaTermino.SelectedDate,
-                    Pedido = new Pedido 
-                    {
-                        IdPedido = int.Parse(txtIdPedido.Text)
-                    },
-                    EstadoSubasta = new EstadoSubasta 
-                    {
-                        IdEstadoSubasta = int.Parse(txtIdEstadoSubasta.Text) 
-                    } 
-                };
+                Subasta subasta = new Subasta();
+                subasta.FechaInicio = (DateTime)dateFechaInicio.SelectedDate;
+                subasta.FechaTermino = (DateTime)dateFechaTermino.SelectedDate;
+                subasta.Pedido.IdPedido = int.Parse(txtIdPedido.Text);
+                subasta.EstadoSubasta.IdEstadoSubasta = 1;
+                
 
                 HttpClient client = new HttpClient();
-                var content = new StringContent(JsonConvert.SerializeObject(sub), Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(subasta), Encoding.UTF8, "application/json");
                 var response = client.PostAsync("http://localhost:54192/api/Subasta", content).Result;
 
 
@@ -146,6 +138,27 @@ namespace MaipoGrandeApp
             {
                 var subasta = JsonConvert.DeserializeObject<List<Subasta>>(response.Content);
                 tablaSubasta.ItemsSource = subasta;
+            }
+        }
+
+        private void CargarTablaOfertas(int idSubasta)
+        {
+            try
+            {
+                RestClient client = new RestClient("http://localhost:54192/api");
+                RestRequest request = new RestRequest("/OfertasSubasta/{idSubasta}", Method.GET);
+                request.AddParameter("idSubasta", idSubasta);
+                var response = client.Execute(request);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var ofertas = JsonConvert.DeserializeObject<List<OfertaSubasta>>(response.Content);
+                    GridOfertas.ItemsSource = ofertas;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -268,6 +281,26 @@ namespace MaipoGrandeApp
             }
             
         }
+
+        /// <summary>
+        /// Despliega las ofertas de la subasta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnVerOfertas_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var subasta = (Subasta)tablaSubasta.SelectedItem;
+                this.CargarTablaOfertas(subasta.IdSubasta);
+                flyOfertasTransportista.IsOpen = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
 
         /*private void llenarCB() 
         {

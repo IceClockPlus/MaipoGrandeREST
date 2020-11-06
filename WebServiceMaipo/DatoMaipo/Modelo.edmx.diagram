@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="12.375" PointY="2.125" />
         <AssociationConnector Association="Model.FK_IDPRODUCTO_DETALLEPEDIDO" />
         <EntityTypeShape EntityType="Model.CONTRATO" Width="1.5" PointX="0.5" PointY="6.875" />
-        <EntityTypeShape EntityType="Model.PRODUCTOR" Width="1.5" PointX="2.625" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.PRODUCTOR" Width="1.5" PointX="2.625" PointY="6.75" />
         <AssociationConnector Association="Model.FK_IDPRODUCTOR_CONTRATO" />
         <AssociationConnector Association="Model.FK_IDUSUARIO_PRODUCTOR" />
         <EntityTypeShape EntityType="Model.OFERTAPRODUCTO" Width="1.5" PointX="12.25" PointY="7.75" />

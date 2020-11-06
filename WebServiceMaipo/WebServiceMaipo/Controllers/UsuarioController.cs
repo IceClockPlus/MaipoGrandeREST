@@ -13,6 +13,31 @@ namespace WebServiceMaipo.Controllers
 {
     public class UsuarioController : ApiController
     {
+        [HttpGet]
+        [Route("api/Usuario/{idUsuario}")]
+        public IHttpActionResult Get(int idUsuario)
+        {
+            try
+            {
+                Usuario user = new Usuario();
+                user = RepositorioUsuario.Read(idUsuario);
+                if(user != null)
+                {
+                    return Ok(user);
+
+                }
+                return NotFound();
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+
+            }
+
+        }
+
 
         public IHttpActionResult GetByToken([FromBody] SecurityViewModel model)
         {

@@ -285,7 +285,7 @@ namespace DatoMaipo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_USUARIO", pNOMBREUSUARIOParameter, pCONTRASENIAParameter, pISHABILITADOParameter, pIDROLParameter, pTOKENParameter, pCORREOParameter, pIDPAISParameter);
         }
     
-        public virtual int SP_UPDATE_DETALLE_PEDIDO(Nullable<decimal> pID, Nullable<decimal> pIDPRODUCTO, Nullable<decimal> pCANTIDAD, string pCALIDAD, Nullable<decimal> pIDPRODUCTOR)
+        public virtual int SP_UPDATE_DETALLE_PEDIDO(Nullable<decimal> pID, Nullable<decimal> pIDPRODUCTO, Nullable<decimal> pCANTIDAD, string pCALIDAD, string pESTADO, Nullable<decimal> pIDPRODUCTOR)
         {
             var pIDParameter = pID.HasValue ?
                 new ObjectParameter("PID", pID) :
@@ -303,11 +303,15 @@ namespace DatoMaipo
                 new ObjectParameter("PCALIDAD", pCALIDAD) :
                 new ObjectParameter("PCALIDAD", typeof(string));
     
+            var pESTADOParameter = pESTADO != null ?
+                new ObjectParameter("PESTADO", pESTADO) :
+                new ObjectParameter("PESTADO", typeof(string));
+    
             var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
                 new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
                 new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DETALLE_PEDIDO", pIDParameter, pIDPRODUCTOParameter, pCANTIDADParameter, pCALIDADParameter, pIDPRODUCTORParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DETALLE_PEDIDO", pIDParameter, pIDPRODUCTOParameter, pCANTIDADParameter, pCALIDADParameter, pESTADOParameter, pIDPRODUCTORParameter);
         }
     
         public virtual int SP_INSERT_PARTICIPACION(Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pIDPEDIDO)

@@ -29,13 +29,21 @@
                 <DataGridTextColumn Header="Precio" Binding="{Binding PrecioEstimado}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dataDetalle" HorizontalAlignment="Left" Height="185" Margin="78,419,0,0" VerticalAlignment="Top" Width="653" AutoGenerateColumns="False">
+        <DataGrid x:Name="dataDetalle" IsReadOnly="True" HorizontalAlignment="Left" Height="185" Margin="78,419,0,0" VerticalAlignment="Top" Width="653" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdItemPedido}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Nombre producto" Binding="{Binding Producto.NombreProducto}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Precio Total" Binding="{Binding Producto.PrecioEstimado}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Productor Asignado" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnAsignarProductor" Click="BtnAsignarProductor_Click" Content="Asignar" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="341,264,0,0" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Cantidad Productos" VerticalAlignment="Top" Width="129"/>
@@ -46,5 +54,27 @@
         <Label x:Name="lbProceso" Content="Proceso de Venta" HorizontalAlignment="Left" Margin="314,10,0,0" VerticalAlignment="Top" FontSize="22"/>
         <ComboBox x:Name="cbxEstadoPedido" HorizontalAlignment="Left" Margin="341,127,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxEstadoPedido_SelectionChanged" Controls:TextBoxHelper.Watermark="Filtro Pedido"/>
         <Button Content="Test" HorizontalAlignment="Left" Margin="361,295,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="FlyAsignarProductor" Width="724" Background="#FFF7955C" Opacity="0.8" Header="Asignar Productor" Margin="79,0,-11,214" HorizontalAlignment="Right" FlowDirection="RightToLeft"  >
+                <Canvas HorizontalAlignment="Left" Height="315" Width="724">
+                    <DataGrid x:Name="DataProduccion" IsReadOnly="True"  AutoGenerateColumns="False" Canvas.Left="108">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Producto" Binding="{Binding Producto.NombreProducto}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio Lower" Binding="{Binding PrecioLower}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio Estandar" Binding="{Binding PrecioEstandar}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio Premium" Binding="{Binding PrecioPremium}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="BtnEnviarSolicitud" Content="Asignar Productor" Canvas.Left="414" Canvas.Top="232" Width="144" Height="37" Click="BtnEnviarSolicitud_Click"/>
+                </Canvas>
+
+            </Controls:Flyout>
+
+
+        </Controls:FlyoutsControl>
+
     </Grid>
 </Page>

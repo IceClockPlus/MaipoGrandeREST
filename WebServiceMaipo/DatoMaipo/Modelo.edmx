@@ -14,6 +14,7 @@
           <Property Name="DIRECCIONCLIENTE" Type="varchar2" MaxLength="40" Nullable="false" />
           <Property Name="TELEFONOCLIENTE" Type="varchar2" MaxLength="12" Nullable="false" />
           <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="CONTRATO">
           <Key>
@@ -36,13 +37,14 @@
           <Property Name="CALIDAD" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="IDDETALLEPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" />
+          <Property Name="ESTADO" Type="varchar2" MaxLength="30" />
         </EntityType>
         <EntityType Name="ESTADOPEDIDO">
           <Key>
             <PropertyRef Name="IDESTADOPEDIDO" />
           </Key>
           <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="ESTADOSUBASTA">
           <Key>
@@ -133,6 +135,7 @@
           <Property Name="DIRECCIONPRODUCTOR" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="TELEFONOPRODUCTRO" Type="varchar2" MaxLength="12" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="ROL">
           <Key>
@@ -167,6 +170,7 @@
           <Property Name="DIRECCIONTRANSPORTISTA" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="TELEFONOTRANSPORTISTA" Type="varchar2" MaxLength="12" Nullable="false" />
           <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -501,6 +505,7 @@
           <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
           <Parameter Name="PCANTIDAD" Type="number" Mode="In" />
           <Parameter Name="PCALIDAD" Type="varchar2" Mode="In" />
+          <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
@@ -830,6 +835,7 @@
             <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
             <Parameter Name="PCANTIDAD" Mode="In" Type="Decimal" />
             <Parameter Name="PCALIDAD" Mode="In" Type="String" />
+            <Parameter Name="PESTADO" Mode="In" Type="String" />
             <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
           </FunctionImport>
           <EntitySet Name="PARTICIPACION" EntityType="Model.PARTICIPACION" />
@@ -863,6 +869,7 @@
           <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
           <NavigationProperty Name="PEDIDO" Relationship="Model.FK_IDCLIENTE_PEDIDO" FromRole="CLIENTE" ToRole="PEDIDO" />
           <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="CLIENTE" ToRole="USUARIO" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ESTADOPEDIDO">
           <Key>
@@ -902,6 +909,7 @@
           <Property Name="CALIDAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IDDETALLEPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDPRODUCTOR" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ESTADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_IDCLIENTE_PEDIDO">
           <End Type="Model.CLIENTE" Multiplicity="1" Role="CLIENTE" />
@@ -1002,6 +1010,7 @@
           <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="PRODUCTOR" ToRole="OFERTAPRODUCTO" />
           <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCTOR" ToRole="PRODUCCION" />
           <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PRODUCTOR_PARTICIPACION" FromRole="PRODUCTOR" ToRole="PARTICIPACION" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_IDPRODUCTOR_CONTRATO">
           <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
@@ -1143,6 +1152,7 @@
           <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
           <NavigationProperty Name="OFERTASUBASTA" Relationship="Model.FK_IDTRANSPORTISTA_OFERTA" FromRole="TRANSPORTISTA" ToRole="OFERTASUBASTA" />
           <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_TRANSPORTISTA" FromRole="TRANSPORTISTA" ToRole="USUARIO" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_IDSUBASTA_OFERTA">
           <End Type="Model.SUBASTA" Role="SUBASTA" Multiplicity="1" />
@@ -1315,6 +1325,7 @@
           <EntitySetMapping Name="CLIENTE">
             <EntityTypeMapping TypeName="Model.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
                 <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
                 <ScalarProperty Name="TELEFONOCLIENTE" ColumnName="TELEFONOCLIENTE" />
                 <ScalarProperty Name="DIRECCIONCLIENTE" ColumnName="DIRECCIONCLIENTE" />
@@ -1348,6 +1359,7 @@
           <EntitySetMapping Name="DETALLEPEDIDO">
             <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
               <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
                 <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
                 <ScalarProperty Name="IDDETALLEPEDIDO" ColumnName="IDDETALLEPEDIDO" />
                 <ScalarProperty Name="CALIDAD" ColumnName="CALIDAD" />
@@ -1394,6 +1406,7 @@
           <EntitySetMapping Name="PRODUCTOR">
             <EntityTypeMapping TypeName="Model.PRODUCTOR">
               <MappingFragment StoreEntitySet="PRODUCTOR">
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
                 <ScalarProperty Name="TELEFONOPRODUCTRO" ColumnName="TELEFONOPRODUCTRO" />
                 <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
                 <ScalarProperty Name="DIRECCIONPRODUCTOR" ColumnName="DIRECCIONPRODUCTOR" />
@@ -1457,6 +1470,7 @@
           <EntitySetMapping Name="TRANSPORTISTA">
             <EntityTypeMapping TypeName="Model.TRANSPORTISTA">
               <MappingFragment StoreEntitySet="TRANSPORTISTA">
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
                 <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
                 <ScalarProperty Name="TELEFONOTRANSPORTISTA" ColumnName="TELEFONOTRANSPORTISTA" />
                 <ScalarProperty Name="DIRECCIONTRANSPORTISTA" ColumnName="DIRECCIONTRANSPORTISTA" />

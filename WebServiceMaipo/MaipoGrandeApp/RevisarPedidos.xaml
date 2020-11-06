@@ -23,6 +23,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Productor.Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Correo" Binding="{Binding Productor.Correo}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Producto" Binding="{Binding Producto.NombreProducto}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Precio Lower" Binding="{Binding PrecioLower}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Precio Estandar" Binding="{Binding PrecioEstandar}"></DataGridTextColumn>
@@ -30,7 +31,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAsignar" Content="Asignar" HorizontalAlignment="Left" Margin="29,393,0,0" VerticalAlignment="Top" Width="130" Click="btnAsignar_Click_1"/>
-        <DataGrid x:Name="dataProducto" HorizontalAlignment="Left" Height="242" Margin="451,69,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="False" IsReadOnly="True" >
+        <DataGrid x:Name="dataProducto" HorizontalAlignment="Left" Height="242" Margin="451,69,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dataProducto_SelectionChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdParticipacion}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Productor" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>

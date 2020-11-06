@@ -20,6 +20,7 @@ namespace DatoMaipo
         public string CALIDAD { get; set; }
         public decimal IDDETALLEPEDIDO { get; set; }
         public Nullable<decimal> IDPRODUCTOR { get; set; }
+        public string ESTADO { get; set; }
     
         public virtual PEDIDO PEDIDO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }

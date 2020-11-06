@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -121,72 +122,74 @@ namespace MaipoGrandeApp
 
 
         private void btnAsignar_Click_1(object sender, RoutedEventArgs e)
-        { 
-            /*
-            var productor = (Productor)dataProductor.SelectedItem;
-            var DetallePedido = (DetallePedido)dataPedido.SelectedItem;
-            var producto = (Producto)dataProducto.SelectedItem;
-           
-            DetallePedido.productor = productor;
+        {
             try
             {
-                
-                
+                var participacion = (Participacion)dataProducto.SelectedItem;
+                Productor productor = participacion.Productor;
+                //Recuperar item 
+
+                if (participacion.EstadoParticipacion.Equals("Aceptado"))
+                {
+                    var ItemPedido = (ItemPedido)dataPedido.SelectedItem;
+                    ItemPedido.Productor = productor;
+                    //Confirmacion
                     MessageBoxResult messageBox = MessageBox.Show("¿Esta seguro de actualizar?", "Confirmacion", MessageBoxButton.YesNo);
+
                     if (messageBox == MessageBoxResult.Yes)
                     {
-                       
-
-                            HttpClient cliente = new HttpClient();
-                            var content = new StringContent(JsonConvert.SerializeObject(DetallePedido), Encoding.UTF8, "application/json");
-                            var response2 = cliente.PutAsync("http://localhost:54192/api/DetallePedido", content).Result;
 
 
-                            Console.WriteLine(response2);
+                        HttpClient cliente = new HttpClient();
+                        var content = new StringContent(JsonConvert.SerializeObject(ItemPedido), Encoding.UTF8, "application/json");
+                        var response2 = cliente.PutAsync("http://localhost:54192/api/DetallePedido", content).Result;
 
 
-                            if (response2.StatusCode == System.Net.HttpStatusCode.OK)
+                        Console.WriteLine(response2);
+
+
+                        if (response2.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+
+                            MailMessage msg = new MailMessage();
+                            msg.To.Add(participacion.Productor.Correo);
+                            msg.Subject = "Detalle Pedido";
+                            msg.SubjectEncoding = Encoding.UTF8;
+
+                            msg.Body = "Se le ha asigando la siguiente solicitud: " + ItemPedido.IdItemPedido + ", Fecha de Solicitud: " + DateTime.Now.ToString() + " Producto:"+ItemPedido.Producto.NombreProducto+" Cantidad:"+ItemPedido.Cantidad+" Calidad:"+ItemPedido.Calidad/*+ ", Fecha de entrega: " + DetallePedido.pedido.FechaEntrega.ToString("d") +
+                            ", Direccion: " + DetallePedido.pedido.Direccion + ", Cliente: " + DetallePedido.pedido.cliente.Nombre + ", Estado Pedido: " + DetallePedido.pedido.estado.Descripcion + ", Ubicacion: " + DetallePedido.pedido.Ciudad + " - " +
+                            DetallePedido.pedido.Pais + ", Productor asignado: " + DetallePedido.productor.Nombre*/;
+                            msg.BodyEncoding = Encoding.UTF8;
+                            msg.IsBodyHtml = true;
+                            msg.From = new MailAddress("aravenapro98@gmail.com");
+
+                            SmtpClient clientM = new SmtpClient();
+
+                            clientM.Credentials = new NetworkCredential("maipograndeduoc7@gmail.com", "Duoc2020");
+
+                            clientM.Port = 587;
+                            clientM.EnableSsl = true;
+                            clientM.Host = "smtp.gmail.com";
+
+                            try
                             {
+                                clientM.Send(msg);
+                                CargarTablaProducto();
 
-                                MailMessage msg = new MailMessage();
-                                msg.To.Add(DetallePedido.productor.usuario.Correo);
-                                msg.Subject = "Detalle Pedido";
-                                msg.SubjectEncoding = Encoding.UTF8;
-
-                                msg.Body = "Se le a asigando el siguiente pedido: id: "+ DetallePedido.Id + ", Fecha de Pedido: "+ DetallePedido.pedido.FechaInicio.ToString("d") +", Fecha de entrega: " + DetallePedido.pedido.FechaEntrega.ToString("d") + 
-                                ", Direccion: " + DetallePedido.pedido.Direccion + ", Cliente: " + DetallePedido.pedido.cliente.Nombre + ", Estado Pedido: " + DetallePedido.pedido.estado.Descripcion + ", Ubicacion: " + DetallePedido.pedido.Ciudad + " - " +
-                                DetallePedido.pedido.Pais + ", Productor asignado: " + DetallePedido.productor.Nombre;
-                                msg.BodyEncoding = Encoding.UTF8;
-                                msg.IsBodyHtml = true;
-                                msg.From = new MailAddress("mapacheco75@gmail.com");
-
-                                SmtpClient clientM = new SmtpClient();
-
-                                clientM.Credentials = new NetworkCredential("mapacheco75@gmail.com", "matias29031998");
-                            
-                                clientM.Port = 587;
-                                clientM.EnableSsl = true;
-                                clientM.Host = "smtp.gmail.com";
-
-                                try
-                                {
-                                    clientM.Send(msg);
-                                    CargarTabla();
-                                    
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex);
-                                }
-                            
-                                main.Mensaje("Detalle Pedido", "Pedido Actualizado con exito. (Notificacion enviada a productor.)");
-                              
-                                CargarTabla();
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                main.Mensaje("Error", "Detalle Pedido no Actualizado");
+                                Console.WriteLine(ex);
                             }
+
+                            main.Mensaje("Detalle Pedido", "Pedido Actualizado con exito. (Notificacion enviada a productor.)");
+
+                            CargarTablaProducto();
+                        }
+                        else
+                        {
+                            main.Mensaje("Error", "Detalle Pedido no Actualizado");
+                        }
                     }
                     else if (messageBox == MessageBoxResult.No)
                     {
@@ -194,13 +197,18 @@ namespace MaipoGrandeApp
                     }
 
 
+
+                }
+                else
+                {
+                    main.Mensaje("Error", "El productor no ha aceptado la invitacion");
+                }
             }
             catch (Exception ex)
             {
 
-                Console.WriteLine(ex);
             }
-            */
+
         }
 
 
@@ -219,6 +227,21 @@ namespace MaipoGrandeApp
                 Console.WriteLine(ex.Message);
             }
 
+        }
+
+        private void dataProducto_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var participacion = (Participacion)dataProducto.SelectedItem;
+                int idPedido = participacion.IdPedido;
+                this.CargarTabla(idPedido);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

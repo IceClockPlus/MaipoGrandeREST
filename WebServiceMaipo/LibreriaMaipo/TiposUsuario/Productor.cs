@@ -24,6 +24,7 @@ namespace LibreriaMaipo
                         this.Nombre = productor.NOMBREPRODUCTOR;
                         this.Direccion = productor.DIRECCIONPRODUCTOR;
                         this.Telefono = productor.TELEFONOPRODUCTRO;
+                        this.Correo = productor.CORREO;
                     }
                     
                 }
@@ -57,6 +58,7 @@ namespace LibreriaMaipo
                     this.Nombre = prodBuscado.NOMBREPRODUCTOR;
                     this.Direccion = prodBuscado.DIRECCIONPRODUCTOR;
                     this.Telefono = prodBuscado.TELEFONOPRODUCTRO;
+                    this.Correo = prodBuscado.CORREO;
 
                     return true;
 
@@ -92,6 +94,7 @@ namespace LibreriaMaipo
                         productor.Nombre = pro.NOMBREPRODUCTOR;
                         productor.Direccion = pro.DIRECCIONPRODUCTOR;
                         productor.Telefono = pro.TELEFONOPRODUCTRO;
+                        productor.Correo = pro.CORREO;
                         listado.Add(productor);
 
                     }

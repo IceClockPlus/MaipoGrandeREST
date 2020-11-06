@@ -24,6 +24,7 @@ namespace DatoMaipo
         public string DIRECCIONTRANSPORTISTA { get; set; }
         public string TELEFONOTRANSPORTISTA { get; set; }
         public decimal IDUSUARIO { get; set; }
+        public string CORREO { get; set; }
     
         public virtual ICollection<OFERTASUBASTA> OFERTASUBASTA { get; set; }
         public virtual USUARIO USUARIO { get; set; }

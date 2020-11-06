@@ -14,7 +14,7 @@ namespace LibreriaMaipo.Modelo
         public DateTime FechaTermino { get; set; }
         public EstadoSubasta EstadoSubasta { get; set; }
         public Pedido Pedido { get; set; }
-        public List<OfertaSubasta> OfertaSubasta { get; set; }
+        public List<OfertaSubasta> OfertasSubasta { get; set; }
 
         public Subasta()
         {
@@ -28,7 +28,7 @@ namespace LibreriaMaipo.Modelo
             this.FechaTermino = DateTime.Today;
             this.EstadoSubasta = new EstadoSubasta();
             this.Pedido = new Pedido();
-            this.OfertaSubasta = new List<OfertaSubasta>();
+            this.OfertasSubasta = new List<OfertaSubasta>();
         }
 
 
@@ -89,23 +89,86 @@ namespace LibreriaMaipo.Modelo
         /// Obtener la subasta de acuerdo a la id asignada a la instancia
         /// </summary>
         /// <returns></returns>
-        public void Read()
+        public bool Read()
         {
             try
             {
                 using (var db = new DBEntities())
                 {
                     SUBASTA subasta = db.SUBASTA.Where(sb => sb.IDSUBASTA == this.IdSubasta).FirstOrDefault();
+                    if(subasta != null)
+                    {
+                        this.FechaInicio = subasta.FECHAINICIO;
+                        this.FechaTermino = subasta.FECHATERMINO;
 
+                        //Obtener Estado subasta
+                        EstadoSubasta estado = new EstadoSubasta();
+                        estado.IdEstadoSubasta = (int)subasta.IDESTADOSUBASTA;
+                        estado.Read();
+                        this.EstadoSubasta = estado;
 
+                        //Obtener el pedido asociada a la subasta
+                        Pedido pedido = new Pedido();
+                        pedido.IdPedido = (int)subasta.IDPEDIDO;
+                        pedido.Read();
+                        this.Pedido = pedido;
+                        this.OfertasSubasta = OfertaSubasta.ReadByIdSubasta(this.IdSubasta);
 
+                        return true;
+                    }
+
+                    return false;
                 }
 
             }catch(Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
+                return false;
             }
 
+        }
+
+        public List<Subasta> ReadAll()
+        {
+            List<Subasta> list = new List<Subasta>();
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    var listadoSubastas = db.SUBASTA.ToList();
+                    if (listadoSubastas.Count() > 0)
+                    {
+                        foreach(var s in listadoSubastas)
+                        {
+                            Subasta subasta = new Subasta();
+                            subasta.IdSubasta = (int)s.IDSUBASTA;
+                            subasta.FechaInicio = s.FECHAINICIO;
+                            subasta.FechaTermino = s.FECHATERMINO;
+
+                            //Obtener Estado subasta
+                            EstadoSubasta estado = new EstadoSubasta();
+                            estado.IdEstadoSubasta = (int)s.IDESTADOSUBASTA;
+                            estado.Read();
+                            subasta.EstadoSubasta = estado;
+
+                            //Obtener el pedido asociada a la subasta
+                            Pedido pedido = new Pedido();
+                            pedido.IdPedido = (int)s.IDPEDIDO;
+                            pedido.Read();
+                            subasta.Pedido = pedido;
+                            subasta.OfertasSubasta = OfertaSubasta.ReadByIdSubasta(this.IdSubasta);
+                            list.Add(subasta);
+                        }
+                    }
+
+                    return list;
+                }
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Subasta>();
+            }
         }
 
 

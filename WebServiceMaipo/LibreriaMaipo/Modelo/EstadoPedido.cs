@@ -32,6 +32,33 @@ namespace LibreriaMaipo.Modelo
             this.DescripcionEstado = string.Empty;
         }
 
+        /// <summary>
+        /// Obtener datos de estado de pedido segun la id de esta
+        /// </summary>
+        /// <returns></returns>
+        public bool Read()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    var estado = db.ESTADOPEDIDO.Where(est => est.IDESTADOPEDIDO == this.IdEstado).FirstOrDefault();
+                    if(estado != null)
+                    {
+                        this.DescripcionEstado = estado.DESCRIPCIONESTADO;
+                        return true;
+                    }
+                    return false;
+                }
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+
         public List<EstadoPedido> ReadAll()
         {
             try

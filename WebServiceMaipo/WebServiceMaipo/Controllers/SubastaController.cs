@@ -27,9 +27,29 @@ namespace WebServiceMaipo.Controllers
         }
 
         // GET: api/Subasta/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            try
+            {
+                Subasta subasta = new Subasta();
+                subasta.IdSubasta = id;
+                if (subasta.Read())
+                {
+                    return Ok(subasta);
+
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+
+
         }
 
         [HttpGet]
@@ -50,18 +70,15 @@ namespace WebServiceMaipo.Controllers
         }
 
         // POST: api/Subasta
-        public IHttpActionResult PostSubasta([FromBody] SubastaViewModel model)
+        public IHttpActionResult PostSubasta([FromBody] Subasta model)
         {
             try
             {
-                //Asignacion de valores
-                Subasta subasta = new Subasta();
-                subasta.FechaInicio = model.FechaInicio;
-                subasta.FechaTermino = model.FechaTermino;
-                subasta.Pedido.IdPedido = model.IdPedido;
-
-                RepositorioSubasta.Agregar(subasta);
-                return Ok();
+                if (model.Agregar())
+                {
+                    return Ok();
+                }
+                return BadRequest();
             }
             catch (Exception ex)
             {

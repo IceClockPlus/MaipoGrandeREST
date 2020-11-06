@@ -228,7 +228,133 @@ namespace MaipoGrandeApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.ObtenerDetallePedido();
+
+            try
+            {
+                Pedido pedido = (Pedido)dataPedido.SelectedItem;
+                int total = pedido.DetallePedido.Count();
+                int aceptados = pedido.DetallePedido.Where(d => d.Estado == "Aceptado").Count();
+                if(aceptados == total)
+                {
+                    pedido.EstadoPedido.IdEstado = 7;
+                    HttpClient cliente = new HttpClient();
+                    var content = new StringContent(JsonConvert.SerializeObject(pedido), Encoding.UTF8, "application/json");
+                    var response = cliente.PutAsync("http://localhost:54192/api/Pedidos", content).Result;
+
+                }
+                else
+                {
+                    main.Mensaje("Aviso", "Para subastar un transporte, es necesario que todas las solicitudes esten aceptadas");
+                }
+
+                this.ObtenerDetallePedido();
+            }
+            catch (Exception ex)
+            {
+                main.Mensaje("Aviso", "Debe seleccionar un pedido del listado");
+            }
+            finally
+            {
+                this.CargarTablaPedido();
+            }
+
+
+
+
+        }
+
+        private void BtnAsignarProductor_Click(object sender, RoutedEventArgs e)
+        {
+            //Despliega Flyout de asignacion
+            var Item = (ItemPedido)dataDetalle.SelectedItem;
+            int idProducto = Item.Producto.IdProducto;
+
+
+            this.CargarProduccion(idProducto);
+            FlyAsignarProductor.IsOpen = true;
+
+        }
+
+
+        private void CargarProduccion(int idProducto)
+        {
+            try
+            {
+                RestClient client = new RestClient("http://localhost:54192/api");
+                RestRequest request = new RestRequest("/Produccion", Method.GET);
+                var response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var produccion = JsonConvert.DeserializeObject<List<Produccion>>(response.Content);
+                    var ls = produccion.Where(p => p.Producto.IdProducto == idProducto).ToList();
+                    DataProduccion.ItemsSource = ls;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message); 
+            }
+        }
+
+        private void BtnEnviarSolicitud_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            try
+            {
+                ItemPedido Item = (ItemPedido)dataDetalle.SelectedItem;
+                Item.Estado = "Pendiente";
+                var Produccion = (Produccion)DataProduccion.SelectedItem;
+                Item.Productor = Produccion.Productor;
+                
+                //Realizar llamada a la API
+                HttpClient cliente = new HttpClient();
+                var content = new StringContent(JsonConvert.SerializeObject(Item), Encoding.UTF8, "application/json");
+                var response2 = cliente.PutAsync("http://localhost:54192/api/DetallePedido", content).Result;
+
+                if(response2.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    MailMessage msg = new MailMessage();
+                    msg.To.Add(Item.Productor.Correo);
+                    msg.Subject = "Detalle Pedido";
+                    msg.SubjectEncoding = Encoding.UTF8;
+
+                    msg.Body = "Se le ha asigando la siguiente solicitud: " + Item.IdItemPedido + ", Fecha de Solicitud: " + DateTime.Now.ToString() + " Producto:" + Item.Producto.NombreProducto + " Cantidad:" + Item.Cantidad + " Calidad:" + Item.Calidad/*+ ", Fecha de entrega: " + DetallePedido.pedido.FechaEntrega.ToString("d") +
+                            ", Direccion: " + DetallePedido.pedido.Direccion + ", Cliente: " + DetallePedido.pedido.cliente.Nombre + ", Estado Pedido: " + DetallePedido.pedido.estado.Descripcion + ", Ubicacion: " + DetallePedido.pedido.Ciudad + " - " +
+                            DetallePedido.pedido.Pais + ", Productor asignado: " + DetallePedido.productor.Nombre*/;
+                    msg.BodyEncoding = Encoding.UTF8;
+                    msg.IsBodyHtml = true;
+                    msg.From = new MailAddress("aravenapro98@gmail.com");
+
+                    SmtpClient clientM = new SmtpClient();
+
+                    clientM.Credentials = new NetworkCredential("maipograndeduoc7@gmail.com", "Duoc2020");
+
+                    clientM.Port = 587;
+                    clientM.EnableSsl = true;
+                    clientM.Host = "smtp.gmail.com";
+                    clientM.Send(msg);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+
+            }
+            finally
+            {
+                if(FlyAsignarProductor.IsOpen == true)
+                {
+                    FlyAsignarProductor.IsOpen = false;
+                }
+            }
+
+
+
+
         }
     }
 }

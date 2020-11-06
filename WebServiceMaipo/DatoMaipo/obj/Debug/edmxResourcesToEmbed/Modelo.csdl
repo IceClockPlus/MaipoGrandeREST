@@ -213,6 +213,7 @@
       <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
       <Parameter Name="PCANTIDAD" Mode="In" Type="Decimal" />
       <Parameter Name="PCALIDAD" Mode="In" Type="String" />
+      <Parameter Name="PESTADO" Mode="In" Type="String" />
       <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
     </FunctionImport>
     <EntitySet Name="PARTICIPACION" EntityType="Model.PARTICIPACION" />
@@ -246,6 +247,7 @@
     <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <NavigationProperty Name="PEDIDO" Relationship="Model.FK_IDCLIENTE_PEDIDO" FromRole="CLIENTE" ToRole="PEDIDO" />
     <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="CLIENTE" ToRole="USUARIO" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="ESTADOPEDIDO">
     <Key>
@@ -285,6 +287,7 @@
     <Property Name="CALIDAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="IDDETALLEPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDPRODUCTOR" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ESTADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDCLIENTE_PEDIDO">
     <End Type="Model.CLIENTE" Multiplicity="1" Role="CLIENTE" />
@@ -385,6 +388,7 @@
     <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="PRODUCTOR" ToRole="OFERTAPRODUCTO" />
     <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCTOR" ToRole="PRODUCCION" />
     <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PRODUCTOR_PARTICIPACION" FromRole="PRODUCTOR" ToRole="PARTICIPACION" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDPRODUCTOR_CONTRATO">
     <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
@@ -526,6 +530,7 @@
     <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <NavigationProperty Name="OFERTASUBASTA" Relationship="Model.FK_IDTRANSPORTISTA_OFERTA" FromRole="TRANSPORTISTA" ToRole="OFERTASUBASTA" />
     <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_TRANSPORTISTA" FromRole="TRANSPORTISTA" ToRole="USUARIO" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDSUBASTA_OFERTA">
     <End Type="Model.SUBASTA" Role="SUBASTA" Multiplicity="1" />

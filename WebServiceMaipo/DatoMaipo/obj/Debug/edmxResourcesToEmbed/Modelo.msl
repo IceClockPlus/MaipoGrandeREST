@@ -34,6 +34,7 @@
     <EntitySetMapping Name="CLIENTE">
       <EntityTypeMapping TypeName="Model.CLIENTE">
         <MappingFragment StoreEntitySet="CLIENTE">
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
           <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
           <ScalarProperty Name="TELEFONOCLIENTE" ColumnName="TELEFONOCLIENTE" />
           <ScalarProperty Name="DIRECCIONCLIENTE" ColumnName="DIRECCIONCLIENTE" />
@@ -67,6 +68,7 @@
     <EntitySetMapping Name="DETALLEPEDIDO">
       <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
         <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
           <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
           <ScalarProperty Name="IDDETALLEPEDIDO" ColumnName="IDDETALLEPEDIDO" />
           <ScalarProperty Name="CALIDAD" ColumnName="CALIDAD" />
@@ -113,6 +115,7 @@
     <EntitySetMapping Name="PRODUCTOR">
       <EntityTypeMapping TypeName="Model.PRODUCTOR">
         <MappingFragment StoreEntitySet="PRODUCTOR">
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
           <ScalarProperty Name="TELEFONOPRODUCTRO" ColumnName="TELEFONOPRODUCTRO" />
           <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
           <ScalarProperty Name="DIRECCIONPRODUCTOR" ColumnName="DIRECCIONPRODUCTOR" />
@@ -176,6 +179,7 @@
     <EntitySetMapping Name="TRANSPORTISTA">
       <EntityTypeMapping TypeName="Model.TRANSPORTISTA">
         <MappingFragment StoreEntitySet="TRANSPORTISTA">
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
           <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
           <ScalarProperty Name="TELEFONOTRANSPORTISTA" ColumnName="TELEFONOTRANSPORTISTA" />
           <ScalarProperty Name="DIRECCIONTRANSPORTISTA" ColumnName="DIRECCIONTRANSPORTISTA" />
