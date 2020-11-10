@@ -31,7 +31,10 @@ namespace LibreriaMaipo.Modelo
             this.OfertasSubasta = new List<OfertaSubasta>();
         }
 
-
+        /// <summary>
+        /// Metodo para agregar subastas a la base de datos
+        /// </summary>
+        /// <returns></returns>
         public bool Agregar()
         {
             try
@@ -50,6 +53,10 @@ namespace LibreriaMaipo.Modelo
 
         }
 
+        /// <summary>
+        /// Metodo para actualizar una subasta registrada
+        /// </summary>
+        /// <returns></returns>
         public bool Update()
         {
             try
@@ -67,7 +74,10 @@ namespace LibreriaMaipo.Modelo
                 return false;
             }
         }
-
+        /// <summary>
+        /// Metodo para eliminar una subasta
+        /// </summary>
+        /// <returns></returns>
         public bool Delete()
         {
             try
@@ -128,6 +138,10 @@ namespace LibreriaMaipo.Modelo
 
         }
 
+        /// <summary>
+        /// Metodo que entrega un listado con todas las subastas registradas
+        /// </summary>
+        /// <returns></returns>
         public List<Subasta> ReadAll()
         {
             List<Subasta> list = new List<Subasta>();
