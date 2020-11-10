@@ -81,6 +81,26 @@ namespace LibreriaMaipo.Modelo
             }
         }
 
+        /// <summary>
+        /// Metodo que entrega un listado de la produccion de un productor
+        /// </summary>
+        /// <returns></returns>
+        public List<Produccion> ReadByIdProductor()
+        {
+            try
+            {
+                List<Produccion> listado = new List<Produccion>();
+                listado = this.ReadAll();
+                listado = listado.Where(p => p.Productor.Id == this.Productor.Id).ToList();
+                return listado;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Produccion>();
+            }
+        }
 
 
     }

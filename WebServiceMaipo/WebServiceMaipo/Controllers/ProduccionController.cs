@@ -58,13 +58,17 @@ namespace WebServiceMaipo.Controllers
                 Usuario user = this.Validate(model.Token);
 
                 List<Produccion> listadoProduccion = new List<Produccion>();
-                listadoProduccion = RepositorioProduccion.ObtenerPorIdProductor(user.TipoUsuario.Id);
+                Produccion produccion = new Produccion();
+                produccion.Productor = (Productor)user.TipoUsuario;
+
+                listadoProduccion = produccion.ReadByIdProductor();
+
                 return listadoProduccion;
             }
             catch (Exception ex)
             {
 
-                return null;
+                return new List<Produccion>();
             }
         }
 
