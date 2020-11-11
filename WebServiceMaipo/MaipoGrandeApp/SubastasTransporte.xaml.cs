@@ -53,6 +53,11 @@ namespace MaipoGrandeApp
             }
         }
 
+        /// <summary>
+        /// Evento del boton para agregar una nueva subasta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAgregarSubasta_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -319,6 +324,15 @@ namespace MaipoGrandeApp
             try
             {
                 var subasta = (Subasta)tablaSubasta.SelectedItem;
+                if(subasta.EstadoSubasta.IdEstadoSubasta == 1)
+                {
+                    BtnAsignarTransportista.IsEnabled = true;
+                }
+                else
+                {
+                    BtnAsignarTransportista.IsEnabled = false;
+
+                }
                 this.CargarTablaOfertas(subasta.IdSubasta);
                 flyOfertasTransportista.IsOpen = true;
             }
@@ -328,6 +342,11 @@ namespace MaipoGrandeApp
             }
         }
 
+        /// <summary>
+        /// Evento del boton para asignar un nuevo transportista
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAsignarTransportista_Click(object sender, RoutedEventArgs e)
         {
             try
