@@ -10,7 +10,7 @@
       Title="RevisarPedidos">
 
     <Grid Background="White" Margin="0,0,-44,0">
-        <DataGrid x:Name="dataPedido" Margin="223,374,136,20" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="dataPedido" Margin="223,374,136,20" AutoGenerateColumns="False" IsReadOnly="True" ToolTip="Seleccione un pedido para revisar">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdItemPedido}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Producto" Binding="{Binding Producto.NombreProducto}" ></DataGridTextColumn>

@@ -3,7 +3,9 @@ using LibreriaMaipo.TiposUsuario;
 using LibreriaMaipo.UsuarioFactory;
 using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -51,6 +53,43 @@ namespace LibreriaMaipo.Modelo
             this.EstadoPedido = new EstadoPedido();
             this.DetallePedido = new List<ItemPedido>();
         }
+
+        /// <summary>
+        /// Metodo para registrar un nuevo pedido
+        /// </summary>
+        /// <returns></returns>
+        public bool Insert()
+        {
+            try
+            {
+                //Objeto para recuperar el resultado
+                System.Data.Objects.ObjectParameter output = new System.Data.Objects.ObjectParameter("pIDPEDIDO", typeof(int));
+
+                using (var db = new DBEntities())
+                {
+                    //Ejecución del metodo para agregar el pedido
+                    db.SP_INSERT_PEDIDO1(FechaPedido, FechaEntrega, Direccion, Cliente.Id, EstadoPedido.IdEstado, Ciudad, Pais, output);
+
+                    //Conversion del valor del objeto output a Int
+                    int idResultado = Convert.ToInt32(output.Value);
+
+                    //Asignar el id del pedido generado al campo correspondiente
+                    this.IdPedido = idResultado;
+
+                    return true;
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+
 
         public bool Read()
         {

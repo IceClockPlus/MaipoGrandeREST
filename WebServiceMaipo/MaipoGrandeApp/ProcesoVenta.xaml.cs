@@ -103,6 +103,7 @@ namespace MaipoGrandeApp
         }
         private void CargarTablaProducto()
         {
+            /*
             RestClient client = new RestClient("http://localhost:54192/api");
             RestRequest request = new RestRequest("/Productos", Method.GET);
             var response = client.Execute(request);
@@ -111,6 +112,7 @@ namespace MaipoGrandeApp
                 var producto = JsonConvert.DeserializeObject<List<Producto>>(response.Content);
                 dataProducto.ItemsSource = producto;
             }
+            */
         }
 
 

@@ -243,6 +243,34 @@
       <Parameter Name="PIDTRANSPORTISTA" Mode="In" Type="Decimal" />
       <Parameter Name="PIDTIPOTRANSPORTE" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <FunctionImport Name="SP_DELETE_PRODUCCION">
+      <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_PEDIDO1">
+      <Parameter Name="PFECHAPEDIDO" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHAENTREGA" Mode="In" Type="DateTime" />
+      <Parameter Name="PDIRECCION" Mode="In" Type="String" />
+      <Parameter Name="PIDCLIENTE" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADOPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PCIUDAD" Mode="In" Type="String" />
+      <Parameter Name="PPAIS" Mode="In" Type="String" />
+      <Parameter Name="PIDPEDIDO" Mode="Out" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_PRODUCCION">
+      <Parameter Name="PPRECIOPREMIUM" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOESTANDAR" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOLOWER" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_PRODUCCION">
+      <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOPREMIUM" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOESTANDAR" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOLOWER" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>

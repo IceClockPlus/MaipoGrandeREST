@@ -57,15 +57,20 @@ namespace MaipoGrandeApp
         {
             try
             {
+                //Obtener pedido del listado
                 Pedido pedido = (Pedido)dataPedido.SelectedItem;
                 if (pedido != null)
                 {
+                    //Creacion de subasta
                     Subasta subasta = new Subasta();
+                    //Aignar pedido a la subasta
                     subasta.Pedido = pedido;
+                    //Definir las fechas
                     subasta.FechaInicio = (DateTime)dateFechaInicio.SelectedDate;
                     subasta.FechaTermino = (DateTime)dateFechaTermino.SelectedDate;
+                    //Asignar el estado abierto a la subasta
                     subasta.EstadoSubasta.IdEstadoSubasta = 1;
-
+                    //Se llama al servicio rest
                     HttpClient client = new HttpClient();
                     var content = new StringContent(JsonConvert.SerializeObject(subasta), Encoding.UTF8, "application/json");
                     var response = client.PostAsync("http://localhost:54192/api/Subasta", content).Result;
@@ -74,13 +79,14 @@ namespace MaipoGrandeApp
                     {
                         //var subasta = JsonConvert.DeserializeObject<Subasta>(response.ToString());
 
-                        MessageBox.Show("Subasta AGregada con exito", "Subasta");
+                        main.Mensaje("Subasta", "Subasta Agregada con exito");
                         LimpiarCampos();
                         CargarTabla();
                     }
                     else
                     {
-                        MessageBox.Show("Subasta no agregada", "Subasta");
+                        main.Mensaje("Aviso", "Subasta no fue agregada");
+
                     }
 
                 }
@@ -408,6 +414,58 @@ namespace MaipoGrandeApp
                 Console.WriteLine(ex);
             }
         }
+
+        private void BtnRevisarSubasta_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Pedido pedido = (Pedido)dataPedido.SelectedItem;
+                List<Subasta> subastas = this.ObtenerSubastas();
+
+                subastas = subastas.Where(sub => sub.Pedido.IdPedido == pedido.IdPedido).ToList();
+
+                if(subastas.Count() >0)
+                {
+                    tablaSubasta.ItemsSource =subastas;
+                }
+                else
+                {
+                    tablaSubasta.ItemsSource = null;
+                    main.Mensaje("Aviso","El pedido "+pedido.IdPedido+" no tiene una subasta asociada");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
+
+        }
+
+        public List<Subasta> ObtenerSubastas()
+        {
+            try
+            {
+                List<Subasta> subastas = new List<Subasta>();
+
+                RestClient client = new RestClient("http://localhost:54192/api");
+                RestRequest request = new RestRequest("/Subasta", Method.GET);
+                var response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                     subastas = JsonConvert.DeserializeObject<List<Subasta>>(response.Content);
+                }
+                return subastas;
+            }
+            catch (Exception ex)
+            {
+                main.Mensaje("Error","Ha ocurrido un error inesperado, intente más tarde");
+                return new List<Subasta>();
+            }
+
+        }
+
 
         /*private void llenarCB() 
         {

@@ -457,6 +457,9 @@
     <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
     <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
   </Function>
+  <Function Name="SP_DELETE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_ELIMINAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PID" Type="number" Mode="In" />
   </Function>
@@ -473,6 +476,23 @@
   <Function Name="SP_INSERT_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
     <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PFECHAPEDIDO" Type="date" Mode="In" />
+    <Parameter Name="PFECHAENTREGA" Type="date" Mode="In" />
+    <Parameter Name="PDIRECCION" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDCLIENTE" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADOPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
+    <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="Out" />
+  </Function>
+  <Function Name="SP_INSERT_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PPRECIOPREMIUM" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOESTANDAR" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOLOWER" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
   </Function>
   <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
@@ -516,6 +536,14 @@
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
     <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
     <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOPREMIUM" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOESTANDAR" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOLOWER" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
   </Function>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />

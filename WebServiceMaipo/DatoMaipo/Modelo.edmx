@@ -462,6 +462,9 @@
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
           <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_DELETE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_ELIMINAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PID" Type="number" Mode="In" />
         </Function>
@@ -478,6 +481,23 @@
         <Function Name="SP_INSERT_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERT_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PFECHAPEDIDO" Type="date" Mode="In" />
+          <Parameter Name="PFECHAENTREGA" Type="date" Mode="In" />
+          <Parameter Name="PDIRECCION" Type="varchar2" Mode="In" />
+          <Parameter Name="PIDCLIENTE" Type="number" Mode="In" />
+          <Parameter Name="PIDESTADOPEDIDO" Type="number" Mode="In" />
+          <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
+          <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="Out" />
+        </Function>
+        <Function Name="SP_INSERT_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PPRECIOPREMIUM" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOESTANDAR" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOLOWER" Type="number" Mode="In" />
+          <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+          <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
@@ -521,6 +541,14 @@
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
           <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOPREMIUM" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOESTANDAR" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOLOWER" Type="number" Mode="In" />
+          <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+          <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
         </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -872,6 +900,34 @@
             <Parameter Name="PFECHAOFERTA" Mode="In" Type="DateTime" />
             <Parameter Name="PIDTRANSPORTISTA" Mode="In" Type="Decimal" />
             <Parameter Name="PIDTIPOTRANSPORTE" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_PRODUCCION">
+            <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERT_PEDIDO1">
+            <Parameter Name="PFECHAPEDIDO" Mode="In" Type="DateTime" />
+            <Parameter Name="PFECHAENTREGA" Mode="In" Type="DateTime" />
+            <Parameter Name="PDIRECCION" Mode="In" Type="String" />
+            <Parameter Name="PIDCLIENTE" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDESTADOPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="PCIUDAD" Mode="In" Type="String" />
+            <Parameter Name="PPAIS" Mode="In" Type="String" />
+            <Parameter Name="PIDPEDIDO" Mode="Out" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERT_PRODUCCION">
+            <Parameter Name="PPRECIOPREMIUM" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOESTANDAR" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOLOWER" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_PRODUCCION">
+            <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOPREMIUM" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOESTANDAR" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOLOWER" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
@@ -1529,6 +1585,10 @@
           <FunctionImportMapping FunctionImportName="SP_INSERT_PARTICIPACION" FunctionName="Model.Store.SP_INSERT_PARTICIPACION" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PARTICIPACION" FunctionName="Model.Store.SP_UPDATE_PARTICIPACION" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_OFERTASUBASTA" FunctionName="Model.Store.SP_UPDATE_OFERTASUBASTA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_PRODUCCION" FunctionName="Model.Store.SP_DELETE_PRODUCCION" />
+          <FunctionImportMapping FunctionImportName="SP_INSERT_PEDIDO1" FunctionName="Model.Store.SP_INSERT_PEDIDO" />
+          <FunctionImportMapping FunctionImportName="SP_INSERT_PRODUCCION" FunctionName="Model.Store.SP_INSERT_PRODUCCION" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_PRODUCCION" FunctionName="Model.Store.SP_UPDATE_PRODUCCION" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

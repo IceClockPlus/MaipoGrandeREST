@@ -230,7 +230,6 @@ E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaip
 E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaipo.csproj.CopyComplete
 E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaipo.dll
 E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaipo.pdb
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\WebServiceMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\WebServiceMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\WebServiceMaipo.pdb
@@ -247,6 +246,7 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsof
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.Managed.Core.targets
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.VisualBasic.Core.targets

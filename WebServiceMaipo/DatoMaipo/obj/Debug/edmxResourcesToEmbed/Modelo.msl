@@ -222,5 +222,9 @@
     <FunctionImportMapping FunctionImportName="SP_INSERT_PARTICIPACION" FunctionName="Model.Store.SP_INSERT_PARTICIPACION" />
     <FunctionImportMapping FunctionImportName="SP_UPDATE_PARTICIPACION" FunctionName="Model.Store.SP_UPDATE_PARTICIPACION" />
     <FunctionImportMapping FunctionImportName="SP_UPDATE_OFERTASUBASTA" FunctionName="Model.Store.SP_UPDATE_OFERTASUBASTA" />
+    <FunctionImportMapping FunctionImportName="SP_DELETE_PRODUCCION" FunctionName="Model.Store.SP_DELETE_PRODUCCION" />
+    <FunctionImportMapping FunctionImportName="SP_INSERT_PEDIDO1" FunctionName="Model.Store.SP_INSERT_PEDIDO" />
+    <FunctionImportMapping FunctionImportName="SP_INSERT_PRODUCCION" FunctionName="Model.Store.SP_INSERT_PRODUCCION" />
+    <FunctionImportMapping FunctionImportName="SP_UPDATE_PRODUCCION" FunctionName="Model.Store.SP_UPDATE_PRODUCCION" />
   </EntityContainerMapping>
 </Mapping>

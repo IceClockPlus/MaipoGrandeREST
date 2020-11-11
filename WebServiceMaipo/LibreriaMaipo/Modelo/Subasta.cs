@@ -186,5 +186,31 @@ namespace LibreriaMaipo.Modelo
         }
 
 
+        public bool ReadByIdPedido()
+        {
+            try
+            {
+                List<Subasta> subastas = new List<Subasta>();
+                subastas = this.ReadAll();
+                var subasta = subastas.Where(s => s.Pedido.IdPedido == this.Pedido.IdPedido).FirstOrDefault();
+                if(subasta != null)
+                {
+                    this.IdSubasta = subasta.IdSubasta;
+                    this.FechaInicio = subasta.FechaInicio;
+                    this.FechaTermino = subasta.FechaTermino;
+                    this.EstadoSubasta = subasta.EstadoSubasta;
+                    this.OfertasSubasta = subasta.OfertasSubasta;
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+
     }
 }
