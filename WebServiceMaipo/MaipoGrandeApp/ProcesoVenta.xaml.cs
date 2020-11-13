@@ -136,9 +136,17 @@ namespace MaipoGrandeApp
 
         private void ObtenerDetallePedido()
         {
-            var detalle = (Pedido)dataPedido.SelectedItem;
+            try
+            {
+                var detalle = (Pedido)dataPedido.SelectedItem;
 
-            dataDetalle.ItemsSource = detalle.DetallePedido;
+                dataDetalle.ItemsSource = detalle.DetallePedido;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
 
 
@@ -148,35 +156,41 @@ namespace MaipoGrandeApp
             try
             {
                 Pedido pedido = (Pedido)dataPedido.SelectedItem;
-                int total = pedido.DetallePedido.Count();
-                int aceptados = pedido.DetallePedido.Where(d => d.Estado == "Aceptado").Count();
-                if(aceptados == total)
+                if(pedido != null)
                 {
-                    pedido.EstadoPedido.IdEstado = 7;
-                    HttpClient cliente = new HttpClient();
-                    var content = new StringContent(JsonConvert.SerializeObject(pedido), Encoding.UTF8, "application/json");
-                    var response = cliente.PutAsync("http://localhost:54192/api/Pedidos", content).Result;
+                    int total = pedido.DetallePedido.Count();
+                    int aceptados = pedido.DetallePedido.Where(d => d.Estado == "Aceptado").Count();
+                    if (aceptados == total)
+                    {
+                        pedido.EstadoPedido.IdEstado = 7;
+                        HttpClient cliente = new HttpClient();
+                        var content = new StringContent(JsonConvert.SerializeObject(pedido), Encoding.UTF8, "application/json");
+                        var response = cliente.PutAsync("http://localhost:54192/api/Pedidos", content).Result;
+                        this.ObtenerDetallePedido();
 
+                    }
+                    else
+                    {
+                        main.Mensaje("Aviso", "Para subastar un transporte, es necesario que todas las solicitudes esten aceptadas");
+                    }
                 }
                 else
                 {
-                    main.Mensaje("Aviso", "Para subastar un transporte, es necesario que todas las solicitudes esten aceptadas");
-                }
+                    main.Mensaje("Aviso", "Debe seleccionar un pedido del listado");
 
-                this.ObtenerDetallePedido();
+                }
             }
             catch (Exception ex)
             {
-                main.Mensaje("Aviso", "Debe seleccionar un pedido del listado");
+                Console.WriteLine(ex.Message);
+                main.Mensaje("Error", "Ha ocurrido un error inesperado. Intente más tarde");
+
             }
             finally
             {
+                this.ObtenerDetallePedido();
                 this.CargarTablaPedido();
             }
-
-
-
-
         }
 
         private void BtnAsignarProductor_Click(object sender, RoutedEventArgs e)
@@ -213,16 +227,50 @@ namespace MaipoGrandeApp
             }
         }
 
+        public float ObtenerPrecio(string calidad)
+        {
+            float precio = 0;
+            var Produccion = (Produccion)DataProduccion.SelectedItem;
+            
+            switch (calidad)
+            {
+                case "premium":
+                    precio = Produccion.PrecioPremium;
+                    break;
+                case "standar":
+                    precio = Produccion.PrecioEstandar;
+                    break;
+                case "lower":
+                    precio = Produccion.PrecioLower;
+                    break;
+            }
+            return precio;
+
+        }
+
+
+        /// <summary>
+        /// Boton que envia la solicitud al productor seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnEnviarSolicitud_Click(object sender, RoutedEventArgs e)
         {
             
 
             try
             {
+                //Obtener item del detalle seleccionado
                 ItemPedido Item = (ItemPedido)dataDetalle.SelectedItem;
-                Item.Estado = "Pendiente";
+                //Obtener la produccion del productor seleccionado
                 var Produccion = (Produccion)DataProduccion.SelectedItem;
+
+                //Modificar el estado 
+                Item.Estado = "Pendiente";
+                //Asignar item al productor
                 Item.Productor = Produccion.Productor;
+                Item.Precio = this.ObtenerPrecio(Item.Calidad);
+                
                 
                 //Realizar llamada a la API
                 HttpClient cliente = new HttpClient();
@@ -267,12 +315,130 @@ namespace MaipoGrandeApp
                     FlyAsignarProductor.IsOpen = false;
                 }
                 dataDetalle.ItemsSource = null;
-
+                CargarTablaPedido();
             }
 
 
 
 
         }
+
+        /// <summary>
+        /// Boton para iniciar un nuevo proceso de venta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnIniciarProceso_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Pedido pedido = (Pedido)dataPedido.SelectedItem;
+                pedido.EstadoPedido.IdEstado = 6;
+                HttpClient cliente = new HttpClient();
+                var content = new StringContent(JsonConvert.SerializeObject(pedido), Encoding.UTF8, "application/json");
+                var response = cliente.PutAsync("http://localhost:54192/api/Pedidos", content).Result;
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    //Obtener los datos de los productores
+                    var productores = this.ObtenerProductores();
+                    //Enviar los correos a los productores registrados
+                    this.NotificarProductores(productores);
+                    //Notificar al usuario del proceso
+                    main.Mensaje("Proceso de Venta", "Se ha iniciado el proceso de venta. Se ha notificado a los productores");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                main.Mensaje("Error", "Ha ocurrido un error inesperado. Intente más tarde");
+
+            }
+            finally
+            {
+                CargarTablaPedido();
+            }
+
+        }
+
+       
+
+        /// <summary>
+        /// Obtener todos los datos de los productores
+        /// </summary>
+        /// <returns></returns>
+        private List<Productor> ObtenerProductores()
+        {
+            try
+            {
+                List<Productor> listadoProductores = new List<Productor>();
+
+                RestClient client = new RestClient("http://localhost:54192/api");
+                RestRequest request = new RestRequest("/Productor", Method.GET);
+                var response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var resultado = JsonConvert.DeserializeObject<List<Productor>>(response.Content);
+                    listadoProductores = resultado.ToList();
+                }
+                return listadoProductores;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Productor>();
+            }
+        }
+
+        /// <summary>
+        /// Enviar correo a los productores
+        /// </summary>
+        /// <param name="productores"></param>
+        private void NotificarProductores(List<Productor> productores)
+        {
+            try
+            {
+                Pedido pedido = (Pedido)dataPedido.SelectedItem;
+                string detalles = string.Empty;
+                //Escribir los detalles del pedido
+                foreach(var item in pedido.DetallePedido)
+                {
+                    detalles = detalles + "- " + item.Producto.NombreProducto + " " + item.Calidad + " :" + item.Cantidad+" Kg." + Environment.NewLine;
+                }
+
+
+                foreach(Productor productor in productores)
+                {
+                    MailMessage msg = new MailMessage();
+                    msg.To.Add(productor.Correo);
+                    msg.Subject = "Nuevo Proceso de Venta";
+                    msg.SubjectEncoding = Encoding.UTF8;
+
+                    msg.Body = "Se le escribe para informarle de un nuevo proceso de venta que se lleva a cabo\r\n Los productos que se necestinan son:\r\n" + detalles;
+                    msg.BodyEncoding = Encoding.UTF8;
+                    msg.IsBodyHtml = true;
+                    msg.From = new MailAddress("aravenapro98@gmail.com");
+
+                    SmtpClient clientM = new SmtpClient();
+
+                    clientM.Credentials = new NetworkCredential("maipograndeduoc7@gmail.com", "Duoc2020");
+
+                    clientM.Port = 587;
+                    clientM.EnableSsl = true;
+                    clientM.Host = "smtp.gmail.com";
+                    clientM.Send(msg);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+
     }
 }

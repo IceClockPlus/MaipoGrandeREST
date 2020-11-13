@@ -48,6 +48,11 @@ namespace LibreriaMaipo.Modelo
         /// </summary>
         [DataMember]
         public string Estado { get; set; }
+        /// <summary>
+        /// Campo que indica el precio unitario asignado al item solicitado
+        /// </summary>
+        [DataMember]
+        public Nullable<float> Precio { get; set; }
 
         public ItemPedido()
         {
@@ -64,6 +69,7 @@ namespace LibreriaMaipo.Modelo
             this.Producto = new Producto();
             this.Productor = new Productor();
             this.Estado = string.Empty;
+            this.Precio = null;
         }
 
 
@@ -88,6 +94,7 @@ namespace LibreriaMaipo.Modelo
                             item.Cantidad = (int)det.CANTIDAD;
                             item.Estado = det.ESTADO;
                             item.Producto = MantenedorProducto.BuscarPorId((int)det.IDPRODUCTO);
+                            item.Precio = (float?)det.PRECIO;
 
                             TipoUsuario productor = factory.createTipoUsuario();
                             productor.ObtenerDatosPorId((int)det.IDPRODUCTOR.GetValueOrDefault());
@@ -133,6 +140,7 @@ namespace LibreriaMaipo.Modelo
                             item.Calidad = det.CALIDAD;
                             item.Cantidad = (int)det.CANTIDAD;
                             item.Estado = det.ESTADO;
+                            item.Precio = (float?)det.PRECIO;
 
                             item.Producto = MantenedorProducto.BuscarPorId((int)det.IDPRODUCTO);
 
@@ -166,7 +174,7 @@ namespace LibreriaMaipo.Modelo
                 using (var db = new DBEntities())
                 {
 
-                    db.SP_UPDATE_DETALLE_PEDIDO(this.IdItemPedido, this.Producto.IdProducto, this.Cantidad, this.Calidad,this.Estado, this.Productor.Id);
+                    db.SP_UPDATE_DETALLE_PEDIDO(this.IdItemPedido, this.Producto.IdProducto, this.Cantidad, this.Calidad,this.Estado, this.Productor.Id, (decimal?)this.Precio);
                     return true;
 
                 }

@@ -30,7 +30,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Seleccion de pedido creación de subasta" FontSize="16" Margin="23,72,636,506"/>
+        <Label Content="Seleccion de pedido creación de subasta" FontSize="16" Margin="23,72,462,506"/>
         <TextBox x:Name="txtID" Controls:TextBoxHelper.Watermark="Id Subasta" HorizontalAlignment="Left" Height="29" Margin="673,403,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118"/>
         <DatePicker x:Name="dateFechaInicio" HorizontalAlignment="Left" Margin="56,325,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.38,0.607"/>
         <DatePicker x:Name="dateFechaTermino" HorizontalAlignment="Left" Margin="302,325,0,0" VerticalAlignment="Top"/>
@@ -105,7 +105,7 @@
             </Controls:Flyout>
 
         </Controls:FlyoutsControl>
-        <Label FontSize="20" Content="Subastas" HorizontalAlignment="Left" Margin="329,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.487,-0.308" Width="103"/>
+        <Label FontSize="20" Content="Subastas" HorizontalAlignment="Left" Margin="42,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.487,-0.308" Width="103"/>
         <Label FontSize="16" Content="Lista de Subastas" HorizontalAlignment="Left" Margin="23,367,0,0" VerticalAlignment="Top"/>
         <Label FontSize="14" Content="Selecciona las fechas para crear una subasta" HorizontalAlignment="Left" Margin="56,261,0,0" VerticalAlignment="Top"/>
 

@@ -215,6 +215,7 @@
       <Parameter Name="PCALIDAD" Mode="In" Type="String" />
       <Parameter Name="PESTADO" Mode="In" Type="String" />
       <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIO" Mode="In" Type="Decimal" />
     </FunctionImport>
     <EntitySet Name="PARTICIPACION" EntityType="Model.PARTICIPACION" />
     <AssociationSet Name="FK_PEDIDO_PARTICIPACION" Association="Model.FK_PEDIDO_PARTICIPACION">
@@ -324,6 +325,7 @@
     <Property Name="IDDETALLEPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDPRODUCTOR" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="ESTADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <Association Name="FK_IDCLIENTE_PEDIDO">
     <End Type="Model.CLIENTE" Multiplicity="1" Role="CLIENTE" />

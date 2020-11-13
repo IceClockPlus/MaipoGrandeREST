@@ -32,6 +32,7 @@ namespace LibreriaMaipo
                         detalle.CANTIDAD = item.Cantidad;
                         detalle.CALIDAD = item.Calidad;
                         detalle.ESTADO = "Pendiente";
+                        detalle.PRECIO = (decimal?)item.Precio;
                         //Agregar entidad a la base de datos
                         db.DETALLEPEDIDO.Add(detalle);
                     }
@@ -66,6 +67,7 @@ namespace LibreriaMaipo
                         item.Cantidad = (int)detalle.CANTIDAD;
                         item.Calidad = detalle.CALIDAD;
                         item.Estado = detalle.ESTADO;
+                        item.Precio = (float?)detalle.PRECIO;
                         item.Producto = new Producto
                         {
                             IdProducto = (int)detalle.IDPRODUCTO,
@@ -126,6 +128,7 @@ namespace LibreriaMaipo
                         item.Cantidad = (int)detalle.CANTIDAD;
                         item.Calidad = detalle.CALIDAD;
                         item.Estado = detalle.ESTADO;
+                        item.Precio = (float?)detalle.PRECIO;
                         item.Producto = new Producto
                         {
                             IdProducto = (int)detalle.IDPRODUCTO,

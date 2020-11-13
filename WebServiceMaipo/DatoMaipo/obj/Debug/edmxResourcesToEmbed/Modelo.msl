@@ -68,6 +68,7 @@
     <EntitySetMapping Name="DETALLEPEDIDO">
       <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
         <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
           <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
           <ScalarProperty Name="IDDETALLEPEDIDO" ColumnName="IDDETALLEPEDIDO" />

@@ -38,6 +38,7 @@
           <Property Name="IDDETALLEPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" />
           <Property Name="ESTADO" Type="varchar2" MaxLength="30" />
+          <Property Name="PRECIO" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="ESTADOPEDIDO">
           <Key>
@@ -527,6 +528,7 @@
           <Parameter Name="PCALIDAD" Type="varchar2" Mode="In" />
           <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+          <Parameter Name="PPRECIO" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_OFERTASUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDOFERTA" Type="number" Mode="In" />
@@ -873,6 +875,7 @@
             <Parameter Name="PCALIDAD" Mode="In" Type="String" />
             <Parameter Name="PESTADO" Mode="In" Type="String" />
             <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <EntitySet Name="PARTICIPACION" EntityType="Model.PARTICIPACION" />
           <AssociationSet Name="FK_PEDIDO_PARTICIPACION" Association="Model.FK_PEDIDO_PARTICIPACION">
@@ -902,7 +905,7 @@
             <Parameter Name="PIDTIPOTRANSPORTE" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_DELETE_PRODUCCION">
-            <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
+          <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_INSERT_PEDIDO1">
             <Parameter Name="PFECHAPEDIDO" Mode="In" Type="DateTime" />
@@ -982,6 +985,7 @@
           <Property Name="IDDETALLEPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDPRODUCTOR" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ESTADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <Association Name="FK_IDCLIENTE_PEDIDO">
           <End Type="Model.CLIENTE" Multiplicity="1" Role="CLIENTE" />
@@ -1431,6 +1435,7 @@
           <EntitySetMapping Name="DETALLEPEDIDO">
             <EntityTypeMapping TypeName="Model.DETALLEPEDIDO">
               <MappingFragment StoreEntitySet="DETALLEPEDIDO">
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
                 <ScalarProperty Name="IDPRODUCTOR" ColumnName="IDPRODUCTOR" />
                 <ScalarProperty Name="IDDETALLEPEDIDO" ColumnName="IDDETALLEPEDIDO" />
