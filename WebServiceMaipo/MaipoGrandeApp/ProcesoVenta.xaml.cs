@@ -148,15 +148,15 @@ namespace MaipoGrandeApp
                 Console.WriteLine(ex.Message);
             }
         }
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Metodo para asignar al pedido el estado de asignacion de transporte
+        /// </summary>
+        public void AsignacionTransportePedido()
         {
-
             try
             {
                 Pedido pedido = (Pedido)dataPedido.SelectedItem;
-                if(pedido != null)
+                if (pedido != null)
                 {
                     int total = pedido.DetallePedido.Count();
                     int aceptados = pedido.DetallePedido.Where(d => d.Estado == "Aceptado").Count();
@@ -166,12 +166,33 @@ namespace MaipoGrandeApp
                         HttpClient cliente = new HttpClient();
                         var content = new StringContent(JsonConvert.SerializeObject(pedido), Encoding.UTF8, "application/json");
                         var response = cliente.PutAsync("http://localhost:54192/api/Pedidos", content).Result;
-                        this.ObtenerDetallePedido();
-
                     }
                     else
                     {
                         main.Mensaje("Aviso", "Para subastar un transporte, es necesario que todas las solicitudes esten aceptadas");
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Pedido pedido = (Pedido)dataPedido.SelectedItem;
+                
+                if(pedido != null)
+                {
+                    if (pedido.EstadoPedido.IdEstado == 6)
+                    {
+                        this.AsignacionTransportePedido();
                     }
                 }
                 else
@@ -193,6 +214,11 @@ namespace MaipoGrandeApp
             }
         }
 
+        /// <summary>
+        /// Despliega el flyout para asignar a los productores
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAsignarProductor_Click(object sender, RoutedEventArgs e)
         {
             //Despliega Flyout de asignacion
@@ -205,7 +231,10 @@ namespace MaipoGrandeApp
 
         }
 
-
+        /// <summary>
+        /// Mostrar la produccion que se puede asignar 
+        /// </summary>
+        /// <param name="idProducto"></param>
         private void CargarProduccion(int idProducto)
         {
             try
@@ -227,6 +256,11 @@ namespace MaipoGrandeApp
             }
         }
 
+        /// <summary>
+        /// Obtener el precio segun la calidad de la produccion
+        /// </summary>
+        /// <param name="calidad"></param>
+        /// <returns></returns>
         public float ObtenerPrecio(string calidad)
         {
             float precio = 0;
@@ -407,7 +441,7 @@ namespace MaipoGrandeApp
                     detalles = detalles + "- " + item.Producto.NombreProducto + " " + item.Calidad + " :" + item.Cantidad+" Kg." + Environment.NewLine;
                 }
 
-
+                //Enviar notificacion a cada productor
                 foreach(Productor productor in productores)
                 {
                     MailMessage msg = new MailMessage();

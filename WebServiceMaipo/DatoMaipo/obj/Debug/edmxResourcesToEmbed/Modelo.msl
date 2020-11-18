@@ -227,5 +227,30 @@
     <FunctionImportMapping FunctionImportName="SP_INSERT_PEDIDO1" FunctionName="Model.Store.SP_INSERT_PEDIDO" />
     <FunctionImportMapping FunctionImportName="SP_INSERT_PRODUCCION" FunctionName="Model.Store.SP_INSERT_PRODUCCION" />
     <FunctionImportMapping FunctionImportName="SP_UPDATE_PRODUCCION" FunctionName="Model.Store.SP_UPDATE_PRODUCCION" />
+    <EntitySetMapping Name="ESTADODOCUMENTO">
+      <EntityTypeMapping TypeName="Model.ESTADODOCUMENTO">
+        <MappingFragment StoreEntitySet="ESTADODOCUMENTO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOCUMENTOVENTA">
+      <EntityTypeMapping TypeName="Model.DOCUMENTOVENTA">
+        <MappingFragment StoreEntitySet="DOCUMENTOVENTA">
+          <ScalarProperty Name="IDESTADODOC" ColumnName="IDESTADODOC" />
+          <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+          <ScalarProperty Name="IMPUESTO" ColumnName="IMPUESTO" />
+          <ScalarProperty Name="PRECIOTRANSPORTE" ColumnName="PRECIOTRANSPORTE" />
+          <ScalarProperty Name="PRECIOPRODUCTO" ColumnName="PRECIOPRODUCTO" />
+          <ScalarProperty Name="FECHAEMISION" ColumnName="FECHAEMISION" />
+          <ScalarProperty Name="IDDOCUMENTO" ColumnName="IDDOCUMENTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_INSERT_DOCUMENTOVENTA" FunctionName="Model.Store.SP_INSERT_DOCUMENTOVENTA" />
+    <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCUMENTOVENTA" FunctionName="Model.Store.SP_UPDATE_DOCUMENTOVENTA" />
   </EntityContainerMapping>
 </Mapping>

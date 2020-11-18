@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="Model.USUARIO" Width="2" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_ID_ROL_USUARIO" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model.CLIENTE" Width="1.5" PointX="5.75" PointY="0.875" />
-        <EntityTypeShape EntityType="Model.ESTADOPEDIDO" Width="1.5" PointX="8.5" PointY="5.375" />
+        <EntityTypeShape EntityType="Model.ESTADOPEDIDO" Width="1.5" PointX="5.75" PointY="5.75" />
         <EntityTypeShape EntityType="Model.PEDIDO" PointX="7.875" PointY="1.25" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.DETALLEPEDIDO" Width="1.5" PointX="10.25" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_IDCLIENTE_PEDIDO" />
@@ -23,7 +23,7 @@
         <EntityTypeShape EntityType="Model.PRODUCTOR" Width="1.5" PointX="2.625" PointY="6.75" />
         <AssociationConnector Association="Model.FK_IDPRODUCTOR_CONTRATO" />
         <AssociationConnector Association="Model.FK_IDUSUARIO_PRODUCTOR" />
-        <EntityTypeShape EntityType="Model.OFERTAPRODUCTO" Width="1.5" PointX="12.25" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.OFERTAPRODUCTO" Width="1.5" PointX="13.25" PointY="7.75" />
         <EntityTypeShape EntityType="Model.SUBASTA" Width="1.5" PointX="6.875" PointY="8.625" />
         <AssociationConnector Association="Model.FK_IDPRODUCTO_OFERTAPROD" />
         <AssociationConnector Association="Model.FK_IDPRODUCTOR_OFERTAPROD" />
@@ -44,6 +44,10 @@
         <EntityTypeShape EntityType="Model.PARTICIPACION" Width="1.5" PointX="15.125" PointY="8.5" />
         <AssociationConnector Association="Model.FK_PEDIDO_PARTICIPACION" />
         <AssociationConnector Association="Model.FK_PRODUCTOR_PARTICIPACION" />
+        <EntityTypeShape EntityType="Model.ESTADODOCUMENTO" Width="1.5" PointX="8.375" PointY="5.875" />
+        <EntityTypeShape EntityType="Model.DOCUMENTOVENTA" Width="1.5" PointX="18.75" PointY="0.5" />
+        <AssociationConnector Association="Model.FK_DOCUMENTO_ESTADO" />
+        <AssociationConnector Association="Model.FK_DOCUMENTO_IDPEDIDO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

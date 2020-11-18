@@ -40,6 +40,27 @@
           <Property Name="ESTADO" Type="varchar2" MaxLength="30" />
           <Property Name="PRECIO" Type="number" Precision="38" Scale="0" />
         </EntityType>
+        <EntityType Name="DOCUMENTOVENTA">
+          <Key>
+            <PropertyRef Name="IDDOCUMENTO" />
+          </Key>
+          <Property Name="IDDOCUMENTO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHAEMISION" Type="date" />
+          <Property Name="PRECIOPRODUCTO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PRECIOTRANSPORTE" Type="number" Precision="38" Scale="0" />
+          <Property Name="IMPUESTO" Type="number" Precision="38" Scale="0" />
+          <Property Name="SUBTOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="TOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDESTADODOC" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADODOCUMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="ESTADOPEDIDO">
           <Key>
             <PropertyRef Name="IDESTADOPEDIDO" />
@@ -186,6 +207,30 @@
           <Property Name="CORREO" Type="varchar2" MaxLength="50" />
           <Property Name="IDPAIS" Type="number" Precision="38" Scale="0" />
         </EntityType>
+        <Association Name="FK_DOCUMENTO_ESTADO">
+          <End Role="ESTADODOCUMENTO" Type="Self.ESTADODOCUMENTO" Multiplicity="1" />
+          <End Role="DOCUMENTOVENTA" Type="Self.DOCUMENTOVENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADODOCUMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTOVENTA">
+              <PropertyRef Name="IDESTADODOC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENTO_IDPEDIDO">
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+          <End Role="DOCUMENTOVENTA" Type="Self.DOCUMENTOVENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IDPEDIDO" />
+            </Principal>
+            <Dependent Role="DOCUMENTOVENTA">
+              <PropertyRef Name="IDPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ESTADOPEDIDO_PEDIDO">
           <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
           <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
@@ -479,6 +524,16 @@
           <Parameter Name="PVIGENTE" Type="char" Mode="In" />
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_INSERT_DOCUMENTOVENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PFECHAEMISION" Type="date" Mode="In" />
+          <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOTRANSPORTE" Type="number" Mode="In" />
+          <Parameter Name="PIMPUESTO" Type="number" Mode="In" />
+          <Parameter Name="PSUBTOTAL" Type="number" Mode="In" />
+          <Parameter Name="PTOTAL" Type="number" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+          <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_INSERT_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
@@ -530,6 +585,17 @@
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
           <Parameter Name="PPRECIO" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_UPDATE_DOCUMENTOVENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
+          <Parameter Name="PFECHAEMISION" Type="date" Mode="In" />
+          <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOTRANSPORTE" Type="number" Mode="In" />
+          <Parameter Name="PIMPUESTO" Type="number" Mode="In" />
+          <Parameter Name="PSUBTOTAL" Type="number" Mode="In" />
+          <Parameter Name="PTOTAL" Type="number" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+          <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_UPDATE_OFERTASUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDOFERTA" Type="number" Mode="In" />
           <Parameter Name="PPRECIOOFERTA" Type="number" Mode="In" />
@@ -556,6 +622,8 @@
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <EntitySet Name="DOCUMENTOVENTA" EntityType="Self.DOCUMENTOVENTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <EntitySet Name="ESTADODOCUMENTO" EntityType="Self.ESTADODOCUMENTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ESTADOSUBASTA" EntityType="Self.ESTADOSUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="OFERTAPRODUCTO" EntityType="Self.OFERTAPRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -571,6 +639,14 @@
           <EntitySet Name="TIPOTRANSPORTE" EntityType="Self.TIPOTRANSPORTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="TRANSPORTISTA" EntityType="Self.TRANSPORTISTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <AssociationSet Name="FK_DOCUMENTO_ESTADO" Association="Self.FK_DOCUMENTO_ESTADO">
+            <End Role="ESTADODOCUMENTO" EntitySet="ESTADODOCUMENTO" />
+            <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENTO_IDPEDIDO" Association="Self.FK_DOCUMENTO_IDPEDIDO">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+          </AssociationSet>
           <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Self.FK_ESTADOPEDIDO_PEDIDO">
             <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
             <End Role="PEDIDO" EntitySet="PEDIDO" />
@@ -932,6 +1008,37 @@
             <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
             <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="ESTADODOCUMENTO" EntityType="Model.ESTADODOCUMENTO" />
+          <EntitySet Name="DOCUMENTOVENTA" EntityType="Model.DOCUMENTOVENTA" />
+          <AssociationSet Name="FK_DOCUMENTO_ESTADO" Association="Model.FK_DOCUMENTO_ESTADO">
+            <End Role="ESTADODOCUMENTO" EntitySet="ESTADODOCUMENTO" />
+            <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENTO_IDPEDIDO" Association="Model.FK_DOCUMENTO_IDPEDIDO">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+          </AssociationSet>
+          <FunctionImport Name="SP_INSERT_DOCUMENTOVENTA">
+            <Parameter Name="PFECHAEMISION" Mode="In" Type="DateTime" />
+            <Parameter Name="PPRECIOPRODUCTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOTRANSPORTE" Mode="In" Type="Decimal" />
+            <Parameter Name="PIMPUESTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PSUBTOTAL" Mode="In" Type="Decimal" />
+            <Parameter Name="PTOTAL" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_DOCUMENTOVENTA">
+            <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PFECHAEMISION" Mode="In" Type="DateTime" />
+            <Parameter Name="PPRECIOPRODUCTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOTRANSPORTE" Mode="In" Type="Decimal" />
+            <Parameter Name="PIMPUESTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PSUBTOTAL" Mode="In" Type="Decimal" />
+            <Parameter Name="PTOTAL" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
           <Key>
@@ -971,6 +1078,7 @@
           <Property Name="PAIS" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="SUBASTA" Relationship="Model.FK_IDPEDIDO_SUBASTA" FromRole="PEDIDO" ToRole="SUBASTA" />
           <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PEDIDO_PARTICIPACION" FromRole="PEDIDO" ToRole="PARTICIPACION" />
+          <NavigationProperty Name="DOCUMENTOVENTA" Relationship="Model.FK_DOCUMENTO_IDPEDIDO" FromRole="PEDIDO" ToRole="DOCUMENTOVENTA" />
         </EntityType>
         <EntityType Name="DETALLEPEDIDO">
           <Key>
@@ -1362,6 +1470,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ESTADODOCUMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DOCUMENTOVENTA" Relationship="Model.FK_DOCUMENTO_ESTADO" FromRole="ESTADODOCUMENTO" ToRole="DOCUMENTOVENTA" />
+        </EntityType>
+        <EntityType Name="DOCUMENTOVENTA">
+          <Key>
+            <PropertyRef Name="IDDOCUMENTO" />
+          </Key>
+          <Property Name="IDDOCUMENTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHAEMISION" Type="DateTime" />
+          <Property Name="PRECIOPRODUCTO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PRECIOTRANSPORTE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IMPUESTO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SUBTOTAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDESTADODOC" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="ESTADODOCUMENTO" Relationship="Model.FK_DOCUMENTO_ESTADO" FromRole="DOCUMENTOVENTA" ToRole="ESTADODOCUMENTO" />
+          <NavigationProperty Name="PEDIDO" Relationship="Model.FK_DOCUMENTO_IDPEDIDO" FromRole="DOCUMENTOVENTA" ToRole="PEDIDO" />
+        </EntityType>
+        <Association Name="FK_DOCUMENTO_ESTADO">
+          <End Type="Model.ESTADODOCUMENTO" Role="ESTADODOCUMENTO" Multiplicity="1" />
+          <End Type="Model.DOCUMENTOVENTA" Role="DOCUMENTOVENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADODOCUMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTOVENTA">
+              <PropertyRef Name="IDESTADODOC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENTO_IDPEDIDO">
+          <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+          <End Type="Model.DOCUMENTOVENTA" Role="DOCUMENTOVENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IDPEDIDO" />
+            </Principal>
+            <Dependent Role="DOCUMENTOVENTA">
+              <PropertyRef Name="IDPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1594,6 +1750,31 @@
           <FunctionImportMapping FunctionImportName="SP_INSERT_PEDIDO1" FunctionName="Model.Store.SP_INSERT_PEDIDO" />
           <FunctionImportMapping FunctionImportName="SP_INSERT_PRODUCCION" FunctionName="Model.Store.SP_INSERT_PRODUCCION" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PRODUCCION" FunctionName="Model.Store.SP_UPDATE_PRODUCCION" />
+          <EntitySetMapping Name="ESTADODOCUMENTO">
+            <EntityTypeMapping TypeName="Model.ESTADODOCUMENTO">
+              <MappingFragment StoreEntitySet="ESTADODOCUMENTO">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUMENTOVENTA">
+            <EntityTypeMapping TypeName="Model.DOCUMENTOVENTA">
+              <MappingFragment StoreEntitySet="DOCUMENTOVENTA">
+                <ScalarProperty Name="IDESTADODOC" ColumnName="IDESTADODOC" />
+                <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="IMPUESTO" ColumnName="IMPUESTO" />
+                <ScalarProperty Name="PRECIOTRANSPORTE" ColumnName="PRECIOTRANSPORTE" />
+                <ScalarProperty Name="PRECIOPRODUCTO" ColumnName="PRECIOPRODUCTO" />
+                <ScalarProperty Name="FECHAEMISION" ColumnName="FECHAEMISION" />
+                <ScalarProperty Name="IDDOCUMENTO" ColumnName="IDDOCUMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_INSERT_DOCUMENTOVENTA" FunctionName="Model.Store.SP_INSERT_DOCUMENTOVENTA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCUMENTOVENTA" FunctionName="Model.Store.SP_UPDATE_DOCUMENTOVENTA" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

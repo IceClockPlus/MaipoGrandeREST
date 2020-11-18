@@ -10,7 +10,7 @@
       Title="SubastasTransporte">
 
     <Grid Background="White">
-        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="128" Margin="23,112,0,0" VerticalAlignment="Top" Width="718" AutoGenerateColumns="False" IsReadOnly="True" >
+        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="141" Margin="23,112,0,0" VerticalAlignment="Top" Width="748" AutoGenerateColumns="False" IsReadOnly="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdPedido}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Fecha inicio" Binding="{Binding FechaPedido}"></DataGridTextColumn>
@@ -32,11 +32,11 @@
 
         <Label Content="Seleccion de pedido creación de subasta" FontSize="16" Margin="23,72,462,506"/>
         <TextBox x:Name="txtID" Controls:TextBoxHelper.Watermark="Id Subasta" HorizontalAlignment="Left" Height="29" Margin="673,403,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118"/>
-        <DatePicker x:Name="dateFechaInicio" HorizontalAlignment="Left" Margin="56,325,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.38,0.607"/>
-        <DatePicker x:Name="dateFechaTermino" HorizontalAlignment="Left" Margin="302,325,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbFechaInicio" Content="Fecha de Inicio" HorizontalAlignment="Left" Margin="56,295,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbFechaTermino" Content="Fecha de Termino" HorizontalAlignment="Left" Margin="302,295,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="tablaSubasta" IsReadOnly="True" HorizontalAlignment="Left" Height="179" Margin="23,403,0,0" VerticalAlignment="Top" Width="637" AutoGenerateColumns="False">
+        <DatePicker x:Name="dateFechaInicio" HorizontalAlignment="Left" Margin="322,306,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.38,0.607"/>
+        <DatePicker x:Name="dateFechaTermino" HorizontalAlignment="Left" Margin="568,306,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbFechaInicio" Content="Fecha de Inicio" HorizontalAlignment="Left" Margin="322,276,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbFechaTermino" Content="Fecha de Termino" HorizontalAlignment="Left" Margin="568,276,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="tablaSubasta" IsReadOnly="True" HorizontalAlignment="Left" Height="155" Margin="23,403,0,0" VerticalAlignment="Top" Width="637" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdSubasta}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Fecha Inicio" Binding="{Binding FechaInicio, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
@@ -52,10 +52,10 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnAgregarSubasta" Content="Agregar" HorizontalAlignment="Left" Margin="669,457,0,0" VerticalAlignment="Top" Width="121" Click="BtnAgregarSubasta_Click"/>
+        <Button x:Name="BtnAgregarSubasta" Content="Agregar" HorizontalAlignment="Left" Margin="23,563,0,0" VerticalAlignment="Top" Width="121" Click="BtnAgregarSubasta_Click"/>
         <Button x:Name="btnCargar" Content="Cargar" HorizontalAlignment="Left" Margin="673,369,0,0" VerticalAlignment="Top" Width="122" Click="btnCargar_Click"/>
-        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="669,505,0,0" VerticalAlignment="Top" Width="122" Click="btnActualizar_Click"/>
-        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="669,553,0,0" VerticalAlignment="Top" Width="122" Click="btnEliminar_Click"/>
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="201,563,0,0" VerticalAlignment="Top" Width="122" Click="btnActualizar_Click"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="376,563,0,0" VerticalAlignment="Top" Width="122" Click="btnEliminar_Click"/>
 
         <Controls:FlyoutsControl d:IsHidden="True" >
             <Controls:Flyout x:Name="flyOfertasTransportista" Width="623" Background="#FFF7955C" Opacity="0.8" Header="Ofertas Transportistas" Margin="177,0,0,214" HorizontalAlignment="Right" FlowDirection="RightToLeft" >
@@ -107,7 +107,9 @@
         </Controls:FlyoutsControl>
         <Label FontSize="20" Content="Subastas" HorizontalAlignment="Left" Margin="42,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.487,-0.308" Width="103"/>
         <Label FontSize="16" Content="Lista de Subastas" HorizontalAlignment="Left" Margin="23,367,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="14" Content="Selecciona las fechas para crear una subasta" HorizontalAlignment="Left" Margin="56,261,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="14" Content="Selecciona las fechas para crear una subasta" HorizontalAlignment="Left" Margin="23,294,0,0" VerticalAlignment="Top"/>
+        <Separator HorizontalAlignment="Left" Height="13" Margin="23,258,0,0" VerticalAlignment="Top" Width="748"/>
+        <Separator HorizontalAlignment="Left" Height="13" Margin="23,349,0,0" VerticalAlignment="Top" Width="748"/>
 
     </Grid>
 </Page>

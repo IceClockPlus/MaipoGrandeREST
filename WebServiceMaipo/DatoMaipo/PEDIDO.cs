@@ -19,6 +19,7 @@ namespace DatoMaipo
             this.DETALLEPEDIDO = new HashSet<DETALLEPEDIDO>();
             this.SUBASTA = new HashSet<SUBASTA>();
             this.PARTICIPACION = new HashSet<PARTICIPACION>();
+            this.DOCUMENTOVENTA = new HashSet<DOCUMENTOVENTA>();
         }
     
         public decimal IDPEDIDO { get; set; }
@@ -35,5 +36,6 @@ namespace DatoMaipo
         public virtual ICollection<DETALLEPEDIDO> DETALLEPEDIDO { get; set; }
         public virtual ICollection<SUBASTA> SUBASTA { get; set; }
         public virtual ICollection<PARTICIPACION> PARTICIPACION { get; set; }
+        public virtual ICollection<DOCUMENTOVENTA> DOCUMENTOVENTA { get; set; }
     }
 }

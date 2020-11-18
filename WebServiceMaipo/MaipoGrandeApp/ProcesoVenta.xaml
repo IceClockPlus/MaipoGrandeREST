@@ -10,7 +10,7 @@
       Title="ProcesoVenta">
 
     <Grid Background="White">
-        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="247" Margin="44,127,0,0" VerticalAlignment="Top" Width="570" AutoGenerateColumns="False" IsReadOnly="True" ToolTip="Seleccione pedido para revisar" >
+        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="157" Margin="44,127,0,0" VerticalAlignment="Top" Width="722" AutoGenerateColumns="False" IsReadOnly="True" ToolTip="Seleccione pedido para revisar" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdPedido}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Fecha inicio" Binding="{Binding FechaPedido}"></DataGridTextColumn>
@@ -22,7 +22,7 @@
                 <DataGridTextColumn Header="Pais" Binding="{Binding Pais}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dataDetalle" IsReadOnly="True" HorizontalAlignment="Left" Height="185" Margin="44,419,0,0" VerticalAlignment="Top" Width="652" AutoGenerateColumns="False">
+        <DataGrid x:Name="dataDetalle" IsReadOnly="True" HorizontalAlignment="Left" Height="151" Margin="44,419,0,0" VerticalAlignment="Top" Width="722" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdItemPedido}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Nombre producto" Binding="{Binding Producto.NombreProducto}"></DataGridTextColumn>
@@ -58,9 +58,9 @@
         </DataGrid>
         <Label x:Name="lbTablaPedidos" Content="Revisión de Pedidos" HorizontalAlignment="Left" Margin="44,91,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="lbTablaDetalle" Content="Tabla Detalle" HorizontalAlignment="Left" Margin="44,383,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="lbProceso" Content="Proceso de Venta" HorizontalAlignment="Left" Margin="314,10,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <ComboBox x:Name="cbxEstadoPedido" HorizontalAlignment="Left" Margin="620,126,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxEstadoPedido_SelectionChanged" Controls:TextBoxHelper.Watermark="Filtro Pedido"/>
-        <Button Content="Revisar" HorizontalAlignment="Left" Margin="646,208,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Label x:Name="lbProceso" Content="Proceso de Venta" HorizontalAlignment="Left" Margin="44,10,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <ComboBox x:Name="cbxEstadoPedido" HorizontalAlignment="Left" Margin="199,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxEstadoPedido_SelectionChanged" Controls:TextBoxHelper.Watermark="Filtro Pedido"/>
+        <Button Content="Revisar" HorizontalAlignment="Left" Margin="70,289,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
 
 
         <Controls:FlyoutsControl d:IsHidden="True">
@@ -82,7 +82,7 @@
 
 
         </Controls:FlyoutsControl>
-        <Button IsEnabled="True" x:Name="BtnIniciarProceso" Content="Iniciar Proceso" HorizontalAlignment="Left" Margin="646,264,0,0" VerticalAlignment="Top" Width="110" Click="BtnIniciarProceso_Click"/>
+        <Button IsEnabled="True" x:Name="BtnIniciarProceso" Content="Iniciar Proceso" HorizontalAlignment="Left" Margin="184,289,0,0" VerticalAlignment="Top" Width="110" Click="BtnIniciarProceso_Click" RenderTransformOrigin="-0.695,-0.983"/>
 
     </Grid>
 </Page>
