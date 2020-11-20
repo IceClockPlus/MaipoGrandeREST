@@ -96,6 +96,95 @@ namespace LibreriaMaipo.Modelo
             }
         }
 
+        /// <summary>
+        /// Obtener el documento de venta de acuerdo a la id del documento
+        /// </summary>
+        /// <returns></returns>
+        public bool Read()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    var doc = db.DOCUMENTOVENTA.Where(d => d.IDDOCUMENTO == this.IdDocumento).FirstOrDefault();
+                    if(doc != null)
+                    {
+                        this.FechaEmision = doc.FECHAEMISION;
+                        this.PrecioProducto = doc.PRECIOPRODUCTO;
+                        this.PrecioTransporte = doc.PRECIOTRANSPORTE;
+                        this.Impuesto = doc.IMPUESTO;
+                        this.Subtotal = doc.SUBTOTAL;
+                        this.Total = doc.TOTAL;
+
+                        int idPedido = (int)doc.PEDIDO.IDPEDIDO;
+
+                        this.Pedido.IdPedido = idPedido;
+                        this.Pedido.Read();
+
+                        int idestadodoc = (int)doc.IDESTADODOC;
+                        this.EstadoDocumento.IdEstado = idestadodoc;
+                        this.EstadoDocumento.Read();
+
+                        return true;
+                    }
+                    return false;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Obtener documento de venta segun la id del pedido asociado
+        /// </summary>
+        /// <returns></returns>
+        public bool ReadByIdPedido()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    var doc = db.DOCUMENTOVENTA.Where(d => d.IDPEDIDO == this.Pedido.IdPedido).FirstOrDefault();
+                    if (doc != null)
+                    {
+                        this.IdDocumento = (int)doc.IDDOCUMENTO;
+                        this.FechaEmision = doc.FECHAEMISION;
+                        this.PrecioProducto = doc.PRECIOPRODUCTO;
+                        this.PrecioTransporte = doc.PRECIOTRANSPORTE;
+                        this.Impuesto = doc.IMPUESTO;
+                        this.Subtotal = doc.SUBTOTAL;
+                        this.Total = doc.TOTAL;
+
+                        int idPedido = (int)doc.PEDIDO.IDPEDIDO;
+
+                        this.Pedido.IdPedido = idPedido;
+                        this.Pedido.Read();
+
+                        int idestadodoc = (int)doc.IDESTADODOC;
+                        this.EstadoDocumento.IdEstado = idestadodoc;
+                        this.EstadoDocumento.Read();
+
+                        return true;
+                    }
+                    return false;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+        }
+
         public List<DocumentoVenta> ReadAll()
         {
             try

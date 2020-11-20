@@ -303,6 +303,15 @@
       <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
       <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <FunctionImport Name="SP_INSERT_DETALLE_PEDIDO">
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PCANTIDAD" Mode="In" Type="Decimal" />
+      <Parameter Name="PCALIDAD" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PESTADO" Mode="In" Type="String" />
+      <Parameter Name="PPRECIO" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>

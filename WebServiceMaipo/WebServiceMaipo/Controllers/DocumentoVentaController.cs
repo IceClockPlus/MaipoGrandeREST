@@ -32,19 +32,98 @@ namespace WebServiceMaipo.Controllers
         }
 
         // GET: api/DocumentoVenta/5
-        public string Get(int id)
+        [HttpGet]
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            try
+            {
+                DocumentoVenta documentoVenta = new DocumentoVenta();
+                documentoVenta.IdDocumento = id;
+                if (documentoVenta.Read())
+                {
+                    return Ok(documentoVenta);
+
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
+
+
+        }
+
+        [HttpGet]
+        [Route("api/DocumentoVentaPedido/{idPedido}")]
+        public IHttpActionResult GetByIdPedido(int idPedido)
+        {
+            try
+            {
+                DocumentoVenta documentoVenta = new DocumentoVenta();
+                documentoVenta.Pedido.IdPedido = idPedido;
+                if (documentoVenta.ReadByIdPedido())
+                {
+                    return Ok(documentoVenta);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
         }
 
         // POST: api/DocumentoVenta
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]DocumentoVenta documento)
         {
+            try
+            {
+                if (documento.Insert())
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
+
         }
 
-        // PUT: api/DocumentoVenta/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/DocumentoVenta/
+        public IHttpActionResult Put([FromBody] DocumentoVenta documento)
         {
+            try
+            {
+                if (documento.Update())
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
         }
 
         // DELETE: api/DocumentoVenta/5

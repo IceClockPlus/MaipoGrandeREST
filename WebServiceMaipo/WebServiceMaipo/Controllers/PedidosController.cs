@@ -25,6 +25,8 @@ namespace WebServiceMaipo.Controllers
                 {
                     return Unauthorized();
                 }
+
+                //Generar el prdido
                 Pedido pedido = new Pedido();
                 pedido.Cliente = (Cliente)user.TipoUsuario;
                 pedido.Ciudad = modelPedido.Ciudad;
@@ -33,6 +35,7 @@ namespace WebServiceMaipo.Controllers
                 pedido.FechaPedido = modelPedido.FechaPedido;
                 pedido.FechaEntrega = modelPedido.FechaEntrega;
 
+                //Obtener los detalles 
                 foreach(var det in modelPedido.DetallePedido)
                 {
                     ItemPedido item = new ItemPedido();

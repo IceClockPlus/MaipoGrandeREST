@@ -519,6 +519,15 @@
     <Parameter Name="PVIGENTE" Type="char" Mode="In" />
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
   </Function>
+  <Function Name="SP_INSERT_DETALLE_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PCANTIDAD" Type="number" Mode="In" />
+    <Parameter Name="PCALIDAD" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+    <Parameter Name="PPRECIO" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_INSERT_DOCUMENTOVENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PFECHAEMISION" Type="date" Mode="In" />
     <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />

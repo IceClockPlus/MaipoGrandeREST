@@ -61,6 +61,8 @@
     <Compile Include="Modelo\Produccion.cs" />
     <Compile Include="Modelo\Subasta.cs" />
     <Compile Include="Modelo\TipoTransporte.cs" />
+    <Compile Include="Proceso\CalculoVenta.cs" />
+    <Compile Include="Proceso\ImpuestoConstants.cs" />
     <Compile Include="Proceso\ProcesoPedido.cs" />
     <Compile Include="RepositorioDetallePedido.cs" />
     <Compile Include="RepositorioEstadoPedido.cs" />

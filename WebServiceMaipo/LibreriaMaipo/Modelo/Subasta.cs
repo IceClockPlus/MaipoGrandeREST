@@ -199,7 +199,7 @@ namespace LibreriaMaipo.Modelo
                     this.FechaInicio = subasta.FechaInicio;
                     this.FechaTermino = subasta.FechaTermino;
                     this.EstadoSubasta = subasta.EstadoSubasta;
-                    this.OfertasSubasta = subasta.OfertasSubasta;
+                    this.OfertasSubasta = OfertaSubasta.ReadByIdSubasta(this.IdSubasta);
                     return true;
                 }
                 return false;

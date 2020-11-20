@@ -556,5 +556,38 @@ namespace DatoMaipo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DOCUMENTOVENTA", pIDDOCUMENTOParameter, pFECHAEMISIONParameter, pPRECIOPRODUCTOParameter, pPRECIOTRANSPORTEParameter, pIMPUESTOParameter, pSUBTOTALParameter, pTOTALParameter, pIDPEDIDOParameter, pIDESTADOParameter);
         }
+    
+        public virtual int SP_INSERT_DETALLE_PEDIDO(Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDPRODUCTO, Nullable<decimal> pCANTIDAD, Nullable<decimal> pCALIDAD, Nullable<decimal> pIDPRODUCTOR, string pESTADO, Nullable<decimal> pPRECIO)
+        {
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDPRODUCTOParameter = pIDPRODUCTO.HasValue ?
+                new ObjectParameter("PIDPRODUCTO", pIDPRODUCTO) :
+                new ObjectParameter("PIDPRODUCTO", typeof(decimal));
+    
+            var pCANTIDADParameter = pCANTIDAD.HasValue ?
+                new ObjectParameter("PCANTIDAD", pCANTIDAD) :
+                new ObjectParameter("PCANTIDAD", typeof(decimal));
+    
+            var pCALIDADParameter = pCALIDAD.HasValue ?
+                new ObjectParameter("PCALIDAD", pCALIDAD) :
+                new ObjectParameter("PCALIDAD", typeof(decimal));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pESTADOParameter = pESTADO != null ?
+                new ObjectParameter("PESTADO", pESTADO) :
+                new ObjectParameter("PESTADO", typeof(string));
+    
+            var pPRECIOParameter = pPRECIO.HasValue ?
+                new ObjectParameter("PPRECIO", pPRECIO) :
+                new ObjectParameter("PPRECIO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_DETALLE_PEDIDO", pIDPEDIDOParameter, pIDPRODUCTOParameter, pCANTIDADParameter, pCALIDADParameter, pIDPRODUCTORParameter, pESTADOParameter, pPRECIOParameter);
+        }
     }
 }
