@@ -22,6 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebServiceMaipo.Models.WS;
 using MailMessage = System.Net.Mail.MailMessage;
 
 namespace MaipoGrandeApp
@@ -90,7 +91,7 @@ namespace MaipoGrandeApp
                     }
                     else
                     {
-                        main.Mensaje("Aviso", "Subasta no fue agregada");
+                        main.Mensaje("Aviso", "Subasta no fue agregada. Intentelo más tarde");
 
                     }
 
@@ -361,6 +362,7 @@ namespace MaipoGrandeApp
 
                     if(response2.StatusCode == HttpStatusCode.OK)
                     {
+                        this.AsignarCostoTransporte(oferta.PrecioOferta);
                         flyOfertasTransportista.IsOpen = false;
                         this.CerrarSubasta();
                         this.CargarTabla();
@@ -383,6 +385,39 @@ namespace MaipoGrandeApp
 
         }
 
+        public void AsignarCostoTransporte(float precioTransporte)
+        {
+            try
+            {
+                Subasta subasta = (Subasta)tablaSubasta.SelectedItem;
+
+                RestClient client = new RestClient("http://localhost:54192/api");
+                RestRequest request = new RestRequest("/DocumentoVentaPedido/{idPedido}", Method.GET);
+                request.AddParameter("idPedido", subasta.Pedido.IdPedido);
+                var response = client.Execute(request);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var documento = JsonConvert.DeserializeObject<DocumentoVenta>(response.Content);
+                    documento.PrecioTransporte = (decimal?)precioTransporte;
+
+                    HttpClient client2 = new HttpClient();
+                    var content = new StringContent(JsonConvert.SerializeObject(documento), Encoding.UTF8, "application/json");
+                    var response2 = client2.PutAsync("http://localhost:54192/api/DocumentoVenta", content).Result;
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualizar subasta para cerrarla
+        /// </summary>
         public void CerrarSubasta()
         {
             try

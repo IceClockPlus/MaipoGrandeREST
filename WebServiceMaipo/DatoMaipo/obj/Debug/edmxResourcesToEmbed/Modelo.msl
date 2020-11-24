@@ -253,5 +253,7 @@
     <FunctionImportMapping FunctionImportName="SP_INSERT_DOCUMENTOVENTA" FunctionName="Model.Store.SP_INSERT_DOCUMENTOVENTA" />
     <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCUMENTOVENTA" FunctionName="Model.Store.SP_UPDATE_DOCUMENTOVENTA" />
     <FunctionImportMapping FunctionImportName="SP_INSERT_DETALLE_PEDIDO" FunctionName="Model.Store.SP_INSERT_DETALLE_PEDIDO" />
+    <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCVENTA_PRECIOS" FunctionName="Model.Store.SP_UPDATE_DOCVENTA_PRECIOS" />
+    <FunctionImportMapping FunctionImportName="SP_UPDATE_PEDIDO_ESTADO" FunctionName="Model.Store.SP_UPDATE_PEDIDO_ESTADO" />
   </EntityContainerMapping>
 </Mapping>

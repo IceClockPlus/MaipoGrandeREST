@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebServiceMaipo.Models.WS;
 
 namespace WebServiceMaipo.Controllers
 {
@@ -130,5 +131,45 @@ namespace WebServiceMaipo.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpPatch]
+        public IHttpActionResult Patch([FromBody] DocumentoVentaPatch documento)
+        {
+            try
+            {
+                DocumentoVenta documentoVenta = new DocumentoVenta();
+
+                documentoVenta.Pedido.IdPedido = documento.IdPedido;
+                if (documentoVenta.ReadByIdPedido())
+                {
+                    documentoVenta.PrecioTransporte = documento.PrecioTransporte;
+                    documentoVenta.PrecioProducto = documento.PrecioProducto;
+                    documentoVenta.Impuesto = documento.Impuesto;
+                    documentoVenta.Subtotal = documento.Subtotal;
+                    documento.Total = documento.Total;
+                    if (documentoVenta.UpdatePrecios())
+                    {
+                        return Ok();
+                    }else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
+
+        }
+       
+
     }
 }

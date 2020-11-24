@@ -52,10 +52,10 @@ namespace WebServiceMaipo.Controllers
                 return Ok();
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Console.WriteLine(ex.Message);
+                return BadRequest();
             }
 
         }
@@ -103,6 +103,31 @@ namespace WebServiceMaipo.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("api/PedidoPutEstado")]
+        public HttpResponseMessage PutPedidoEstado([FromBody] Pedido pedido)
+        {
+            try
+            {
+
+                if (pedido.UpdateEstado())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, pedido);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, pedido);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
+
+
         [HttpGet]
         public IEnumerable<Pedido> GetAll()
         {
@@ -129,10 +154,15 @@ namespace WebServiceMaipo.Controllers
         {
             try
             {
-                Usuario user = this.Validate(model.Token);
                 List<Pedido> pedidos = new List<Pedido>();
 
-                pedidos = RepositorioPedido.ObtenerPedidoPorIdCliente(user.TipoUsuario.Id);
+                Usuario user = this.Validate(model.Token);
+                if(user != null)
+                {
+                    pedidos = RepositorioPedido.ObtenerPedidoPorIdCliente(user.TipoUsuario.Id);
+                }
+                pedidos = pedidos.OrderByDescending(p => p.IdPedido).ToList();
+
                 return pedidos;
 
 

@@ -27,22 +27,62 @@ namespace TestingMaipoGrande
         }
 
         [TestMethod]
-        public void TestCalculoTotalTransporte()
+        public void TestCalculoTotalTransporteAceptada()
         {
             //Arrange
 
-            DocumentoVenta documento = new DocumentoVenta();
-            documento.IdDocumento = 21;
-            documento.Read();
+            Subasta subasta = new Subasta();
+
+            OfertaSubasta ofertaSubasta1 = new OfertaSubasta();
+            ofertaSubasta1.PrecioOferta = 100;
+            ofertaSubasta1.Seleccionado = "1";
+
+            OfertaSubasta ofertaSubasta2 = new OfertaSubasta();
+            ofertaSubasta2.PrecioOferta = 420;
+            ofertaSubasta2.Seleccionado = "0";
+
+            subasta.OfertasSubasta.Add(ofertaSubasta1);
+            subasta.OfertasSubasta.Add(ofertaSubasta2);
+
 
             CalculoVenta calculoVenta = new CalculoVenta();
-            calculoVenta.DocumentoVenta = documento;
+            calculoVenta.Subasta = subasta;
 
             //Act
             decimal totaltransporte = calculoVenta.CalcularCostoTransporte();
 
             //Assert
-            Assert.AreEqual(500, totaltransporte);
+            Assert.AreEqual(100, totaltransporte);
+
+        }
+
+        [TestMethod]
+        public void TestCalculoTotalTransporteInexistente()
+        {
+            //Arrange
+
+            Subasta subasta = new Subasta();
+
+            OfertaSubasta ofertaSubasta1 = new OfertaSubasta();
+            ofertaSubasta1.PrecioOferta = 100;
+            ofertaSubasta1.Seleccionado = "0";
+
+            OfertaSubasta ofertaSubasta2 = new OfertaSubasta();
+            ofertaSubasta2.PrecioOferta = 420;
+            ofertaSubasta2.Seleccionado = "0";
+
+            subasta.OfertasSubasta.Add(ofertaSubasta1);
+            subasta.OfertasSubasta.Add(ofertaSubasta2);
+
+
+            CalculoVenta calculoVenta = new CalculoVenta();
+            calculoVenta.Subasta = subasta;
+
+            //Act
+            decimal totaltransporte = calculoVenta.CalcularCostoTransporte();
+
+            //Assert
+            Assert.AreEqual(0, totaltransporte);
 
         }
 

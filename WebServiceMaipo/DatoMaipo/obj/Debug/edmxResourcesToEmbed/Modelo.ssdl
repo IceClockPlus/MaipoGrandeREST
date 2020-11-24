@@ -600,6 +600,14 @@
     <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
     <Parameter Name="PIDESTADO" Type="number" Mode="In" />
   </Function>
+  <Function Name="SP_UPDATE_DOCVENTA_PRECIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOTRANSPORTE" Type="number" Mode="In" />
+    <Parameter Name="PIMPUESTO" Type="number" Mode="In" />
+    <Parameter Name="PSUBTOTAL" Type="number" Mode="In" />
+    <Parameter Name="PTOTAL" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_UPDATE_OFERTASUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PIDOFERTA" Type="number" Mode="In" />
     <Parameter Name="PPRECIOOFERTA" Type="number" Mode="In" />
@@ -613,6 +621,10 @@
     <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
     <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
     <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_PEDIDO_ESTADO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADO" Type="number" Mode="In" />
   </Function>
   <Function Name="SP_UPDATE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />

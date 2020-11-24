@@ -23,18 +23,19 @@ namespace LibreriaMaipo.TiposUsuario
                 List<TipoUsuario> list = new List<TipoUsuario>();
                 using (var db = new DBEntities())
                 {
-                    var listadoTransportista = db.CLIENTE.ToList();
-                    if (listadoTransportista.Count > 0)
+                    var listadoCliente = db.CLIENTE.ToList();
+                    if (listadoCliente.Count > 0)
                     {
-                        foreach (var t in listadoTransportista)
+                        foreach (var c in listadoCliente)
                         {
-                            Transportista trans = new Transportista();
-                            trans.Id = (int)t.IDCLIENTE;
-                            trans.Nombre = t.NOMBRECLIENTE;
-                            trans.Direccion = t.DIRECCIONCLIENTE;
-                            trans.Telefono = t.TELEFONOCLIENTE;
+                            Cliente cli = new Cliente();
+                            cli.Id = (int)c.IDCLIENTE;
+                            cli.Nombre = c.NOMBRECLIENTE;
+                            cli.Direccion = c.DIRECCIONCLIENTE;
+                            cli.Telefono = c.TELEFONOCLIENTE;
+                            cli.Correo = c.CORREO;
 
-                            list.Add(trans);
+                            list.Add(cli);
 
                         }
                     }
@@ -61,7 +62,7 @@ namespace LibreriaMaipo.TiposUsuario
                     this.Nombre = clienteBuscado.NOMBRECLIENTE;
                     this.Direccion = clienteBuscado.DIRECCIONCLIENTE;
                     this.Telefono = clienteBuscado.TELEFONOCLIENTE;
-
+                    this.Correo = clienteBuscado.CORREO;
                 }
                 catch(Exception ex)
                 {

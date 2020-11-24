@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        xmlns:local="clr-namespace:MaipoGrandeApp"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:MaipoGrandeApp" xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+                       mc:Ignorable="d"
         Title="Menu Principal" Height="700" Width="1000">
     <Grid>
         <Grid x:Name="gridMenu"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="992">
@@ -24,7 +24,7 @@
             <Button x:Name="btnGrafico" HorizontalAlignment="Left" Margin="440,10,0,0" VerticalAlignment="Top" Width="40" Height="37">
                 <Image HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="25" Source="VerticalBars.png" Stretch="Fill" RenderTransformOrigin="-13.611,5.702"/>
             </Button>
-            <Button x:Name="btnReportes" HorizontalAlignment="Left" Margin="874,10,0,0" VerticalAlignment="Top" Width="40" Height="37" RenderTransformOrigin="1.559,0.362">
+            <Button x:Name="btnReportes" HorizontalAlignment="Left" Margin="874,10,0,0" VerticalAlignment="Top" Width="40" Height="37" RenderTransformOrigin="1.559,0.362" Click="btnReportes_Click">
                 <Image Height="27" Width="30" RenderTransformOrigin="0.479,0.511"  Stretch="Fill" Source="Reportes.jpeg"/>
             </Button>
             <Button x:Name="btnSubastas" HorizontalAlignment="Left" Margin="682,10,0,0" VerticalAlignment="Top" Width="40" Height="37" Click="btnSubastas_Click" ToolTip="Ingresar Subastas">
@@ -36,8 +36,11 @@
             <Button x:Name="btnNotificarEstadoVenta" HorizontalAlignment="Left" Margin="504,10,0,0" VerticalAlignment="Top"  Width="40" Height="37" Click="btnNotificarEstadoVenta_Click" ToolTip="Notificar estado pedido">
                 <Image Height="25" Width="25" Source="mail.png" Stretch="Fill"/>
             </Button>
-            <Button x:Name="btnHome" HorizontalAlignment="Left" Margin="34,0,0,0" VerticalAlignment="Top" Width="145" Height="50" BorderBrush="White" Background="White" Click="btnHome_Click">
+            <Button x:Name="btnLogo" HorizontalAlignment="Left" Margin="34,0,0,0" VerticalAlignment="Top" Width="145" Height="50" BorderBrush="White" Background="White">
                 <Image x:Name="LogoMaipoGrande" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="122" Stretch="Fill" Source="maipogrande.PNG"/>
+            </Button>
+            <Button x:Name="btnHome" HorizontalAlignment="Left" Margin="316,0,0,0" VerticalAlignment="Top" Width="61" Height="50" BorderBrush="White" Background="White" Click="btnHome_Click">
+                <Image x:Name="LogoMaipoGrande1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="33" Stretch="Fill" Source="baseline_home_black_18dp.png"/>
             </Button>
         </Grid>
         <Frame x:Name="frameMenu" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="614" Margin="200,55,0,0" VerticalAlignment="Top" Width="792"/>
@@ -54,5 +57,6 @@
             </Border>
             <Border BorderBrush="Black"  BorderThickness="2" HorizontalAlignment="Left" Height="614" VerticalAlignment="Top" Width="195"/>
         </Grid>
+        
     </Grid>
 </Controls:MetroWindow>

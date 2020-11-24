@@ -327,7 +327,7 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\Resources\
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\Resources\IconsNonShared.baml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\AgregarUsuario.g.cs
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\ControlarContratos.g.cs
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\IngresarVenta.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\DocumentoVentaView.g.cs
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MainWindow.g.cs
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MenuPrincipal.g.cs
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\NotificarEstado.g.cs
@@ -341,7 +341,7 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MaipoGrand
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\App.baml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\AgregarUsuario.baml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\ControlarContratos.baml
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\IngresarVenta.baml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\DocumentoVentaView.baml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MainWindow.baml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MenuPrincipal.baml
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\NotificarEstado.baml
@@ -356,3 +356,5 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MaipoGrand
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MaipoGrandeApp.csproj.CopyComplete
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MaipoGrandeApp.exe
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MaipoGrandeApp.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\VistaReportes.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Debug\VistaReportes.baml

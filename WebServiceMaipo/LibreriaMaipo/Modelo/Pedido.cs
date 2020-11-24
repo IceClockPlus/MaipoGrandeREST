@@ -154,6 +154,24 @@ namespace LibreriaMaipo.Modelo
                 Console.WriteLine(ex);
                 return false;
             }
+
+        }
+
+
+        public bool UpdateEstado()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    db.SP_UPDATE_PEDIDO_ESTADO(this.IdPedido, this.EstadoPedido.IdEstado);
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

@@ -312,6 +312,18 @@
       <Parameter Name="PESTADO" Mode="In" Type="String" />
       <Parameter Name="PPRECIO" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_DOCVENTA_PRECIOS">
+      <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOPRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOTRANSPORTE" Mode="In" Type="Decimal" />
+      <Parameter Name="PIMPUESTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PSUBTOTAL" Mode="In" Type="Decimal" />
+      <Parameter Name="PTOTAL" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_PEDIDO_ESTADO">
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>

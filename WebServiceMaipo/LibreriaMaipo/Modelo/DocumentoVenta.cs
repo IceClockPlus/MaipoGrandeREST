@@ -96,6 +96,25 @@ namespace LibreriaMaipo.Modelo
             }
         }
 
+        public bool UpdatePrecios()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    db.SP_UPDATE_DOCVENTA_PRECIOS(this.IdDocumento, this.PrecioProducto, this.PrecioTransporte, this.Impuesto, this.Subtotal, this.Total);
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+
         /// <summary>
         /// Obtener el documento de venta de acuerdo a la id del documento
         /// </summary>

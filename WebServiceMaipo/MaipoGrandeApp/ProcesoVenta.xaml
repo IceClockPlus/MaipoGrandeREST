@@ -57,7 +57,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="lbTablaPedidos" Content="Revisión de Pedidos" HorizontalAlignment="Left" Margin="44,91,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="lbTablaDetalle" Content="Tabla Detalle" HorizontalAlignment="Left" Margin="44,383,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="lbTablaDetalle" Content="Detalle del Pedido" HorizontalAlignment="Left" Margin="44,383,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="lbProceso" Content="Proceso de Venta" HorizontalAlignment="Left" Margin="44,10,0,0" VerticalAlignment="Top" FontSize="22"/>
         <ComboBox x:Name="cbxEstadoPedido" HorizontalAlignment="Left" Margin="199,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxEstadoPedido_SelectionChanged" Controls:TextBoxHelper.Watermark="Filtro Pedido"/>
         <Button Content="Revisar" HorizontalAlignment="Left" Margin="70,289,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>

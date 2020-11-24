@@ -2,7 +2,8 @@
 FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\App.xaml;;
 FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\AgregarUsuario.xaml;;
 FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\ControlarContratos.xaml;;
-FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\IngresarVenta.xaml;;
+FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\DocumentoVentaView.xaml;;
+FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\VistaReportes.xaml;;
 FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\MainWindow.xaml;;
 FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\MenuPrincipal.xaml;;
 FE:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\NotificarEstado.xaml;;

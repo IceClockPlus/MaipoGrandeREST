@@ -40,7 +40,8 @@ namespace WebServiceMaipo.Controllers
             {
                 Usuario user = this.Validate(model.Token);
                 List<ItemPedido> detalles = RepositorioDetallePedido.ListarPorIdProductor(user.TipoUsuario.Id);
-                detalles = detalles.Where(det => det.Estado != "Pendiente").ToList();
+                detalles = detalles.Where(det => det.Estado != "Pendiente").OrderByDescending(det => det.IdItemPedido).ToList();
+                
                 return detalles;
 
             }

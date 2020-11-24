@@ -95,7 +95,7 @@ namespace MaipoGrandeApp
 
         private void btnNotificarEstadoVenta_Click(object sender, RoutedEventArgs e)
         {
-            frameMenu.Content = new NotificarEstado();
+            frameMenu.Content = new DocumentoVentaView(this);
         }
 
         private void btnVenta_Click(object sender, RoutedEventArgs e)
@@ -110,6 +110,14 @@ namespace MaipoGrandeApp
                 frameMenu.Content = new ProcesoVenta(this);
             }
                         
+        }
+
+        private void btnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            if (main.NombreRol == "Ejecutivo")
+            {
+                frameMenu.Content = new VistaReportes(this);
+            }
         }
     }
 }

@@ -605,6 +605,14 @@
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
           <Parameter Name="PIDESTADO" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_UPDATE_DOCVENTA_PRECIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
+          <Parameter Name="PPRECIOTRANSPORTE" Type="number" Mode="In" />
+          <Parameter Name="PIMPUESTO" Type="number" Mode="In" />
+          <Parameter Name="PSUBTOTAL" Type="number" Mode="In" />
+          <Parameter Name="PTOTAL" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_UPDATE_OFERTASUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDOFERTA" Type="number" Mode="In" />
           <Parameter Name="PPRECIOOFERTA" Type="number" Mode="In" />
@@ -618,6 +626,10 @@
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
           <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_PEDIDO_ESTADO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+          <Parameter Name="PIDESTADO" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />
@@ -1056,6 +1068,18 @@
             <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
             <Parameter Name="PESTADO" Mode="In" Type="String" />
             <Parameter Name="PPRECIO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_DOCVENTA_PRECIOS">
+            <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOPRODUCTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PPRECIOTRANSPORTE" Mode="In" Type="Decimal" />
+            <Parameter Name="PIMPUESTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PSUBTOTAL" Mode="In" Type="Decimal" />
+            <Parameter Name="PTOTAL" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_PEDIDO_ESTADO">
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
@@ -1794,6 +1818,8 @@
           <FunctionImportMapping FunctionImportName="SP_INSERT_DOCUMENTOVENTA" FunctionName="Model.Store.SP_INSERT_DOCUMENTOVENTA" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCUMENTOVENTA" FunctionName="Model.Store.SP_UPDATE_DOCUMENTOVENTA" />
           <FunctionImportMapping FunctionImportName="SP_INSERT_DETALLE_PEDIDO" FunctionName="Model.Store.SP_INSERT_DETALLE_PEDIDO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCVENTA_PRECIOS" FunctionName="Model.Store.SP_UPDATE_DOCVENTA_PRECIOS" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_PEDIDO_ESTADO" FunctionName="Model.Store.SP_UPDATE_PEDIDO_ESTADO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

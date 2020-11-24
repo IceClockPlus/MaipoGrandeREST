@@ -9,7 +9,11 @@ namespace LibreriaMaipo.Proceso
 {
     public class CalculoVenta
     {
+        /// <summary>
+        /// Documento de venta a calcular
+        /// </summary>
         public DocumentoVenta DocumentoVenta;
+
 
         public CalculoVenta()
         {
@@ -39,25 +43,13 @@ namespace LibreriaMaipo.Proceso
             {
                 decimal totalTransporte = 0;
 
-                Subasta subasta = new Subasta();
-                subasta.Pedido = DocumentoVenta.Pedido;
-                if (subasta.ReadByIdPedido())
+                if(DocumentoVenta.PrecioTransporte != null)
                 {
-                    foreach(OfertaSubasta oferta in subasta.OfertasSubasta)
-                    {
-                        if (oferta.Seleccionado.Equals("1"))
-                        {
-                            totalTransporte = (decimal)oferta.PrecioOferta;
-                            break;
-                        }
-                    }
-                    return totalTransporte;
-                }
-                else
-                {
-                    return 0;
+                    totalTransporte = (decimal)DocumentoVenta.PrecioTransporte;
                 }
 
+                return totalTransporte;
+                
             }catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);

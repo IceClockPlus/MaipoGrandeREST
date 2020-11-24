@@ -53,6 +53,31 @@ namespace WebServiceMaipo.Controllers
         }
 
         [HttpGet]
+        [Route("api/SubastaPedido/{idPedido}")]
+        public IHttpActionResult GetByPedido(int idPedido)
+        {
+            try
+            {
+                Subasta subasta = new Subasta();
+                subasta.Pedido.IdPedido = idPedido;
+                if (subasta.ReadByIdPedido())
+                {
+                    return Ok(subasta);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return InternalServerError();
+            }
+        }
+
+        [HttpGet]
         [Route("api/SubastaEstado/{idEstado}")]
         public IEnumerable<Subasta> GetSubastaPorEstado(int idEstado)
         {

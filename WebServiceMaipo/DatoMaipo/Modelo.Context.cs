@@ -589,5 +589,47 @@ namespace DatoMaipo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_DETALLE_PEDIDO", pIDPEDIDOParameter, pIDPRODUCTOParameter, pCANTIDADParameter, pCALIDADParameter, pIDPRODUCTORParameter, pESTADOParameter, pPRECIOParameter);
         }
+    
+        public virtual int SP_UPDATE_DOCVENTA_PRECIOS(Nullable<decimal> pIDDOCUMENTO, Nullable<decimal> pPRECIOPRODUCTO, Nullable<decimal> pPRECIOTRANSPORTE, Nullable<decimal> pIMPUESTO, Nullable<decimal> pSUBTOTAL, Nullable<decimal> pTOTAL)
+        {
+            var pIDDOCUMENTOParameter = pIDDOCUMENTO.HasValue ?
+                new ObjectParameter("PIDDOCUMENTO", pIDDOCUMENTO) :
+                new ObjectParameter("PIDDOCUMENTO", typeof(decimal));
+    
+            var pPRECIOPRODUCTOParameter = pPRECIOPRODUCTO.HasValue ?
+                new ObjectParameter("PPRECIOPRODUCTO", pPRECIOPRODUCTO) :
+                new ObjectParameter("PPRECIOPRODUCTO", typeof(decimal));
+    
+            var pPRECIOTRANSPORTEParameter = pPRECIOTRANSPORTE.HasValue ?
+                new ObjectParameter("PPRECIOTRANSPORTE", pPRECIOTRANSPORTE) :
+                new ObjectParameter("PPRECIOTRANSPORTE", typeof(decimal));
+    
+            var pIMPUESTOParameter = pIMPUESTO.HasValue ?
+                new ObjectParameter("PIMPUESTO", pIMPUESTO) :
+                new ObjectParameter("PIMPUESTO", typeof(decimal));
+    
+            var pSUBTOTALParameter = pSUBTOTAL.HasValue ?
+                new ObjectParameter("PSUBTOTAL", pSUBTOTAL) :
+                new ObjectParameter("PSUBTOTAL", typeof(decimal));
+    
+            var pTOTALParameter = pTOTAL.HasValue ?
+                new ObjectParameter("PTOTAL", pTOTAL) :
+                new ObjectParameter("PTOTAL", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DOCVENTA_PRECIOS", pIDDOCUMENTOParameter, pPRECIOPRODUCTOParameter, pPRECIOTRANSPORTEParameter, pIMPUESTOParameter, pSUBTOTALParameter, pTOTALParameter);
+        }
+    
+        public virtual int SP_UPDATE_PEDIDO_ESTADO(Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDESTADO)
+        {
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PEDIDO_ESTADO", pIDPEDIDOParameter, pIDESTADOParameter);
+        }
     }
 }

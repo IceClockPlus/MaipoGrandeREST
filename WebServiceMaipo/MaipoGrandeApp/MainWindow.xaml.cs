@@ -150,9 +150,9 @@ namespace MaipoGrandeApp
             menu.Visibility = Visibility.Visible;
             menu.btnGrafico.Visibility = Visibility.Hidden;
             menu.btnPerfilUsuario.Visibility = Visibility.Hidden;
-            menu.btnReportes.Visibility = Visibility.Hidden;
+            menu.btnReportes.Visibility = Visibility.Visible;
             menu.btnVenta.Visibility = Visibility.Visible;
-            menu.btnNotificarEstadoVenta.Visibility = Visibility.Hidden;
+            menu.btnNotificarEstadoVenta.Visibility = Visibility.Visible;
             menu.btnSubastas.Visibility = Visibility.Visible;
             menu.btnContratos.Visibility = Visibility.Hidden;
             menu.frameMenu.Content = new ProcesoVenta(menu);

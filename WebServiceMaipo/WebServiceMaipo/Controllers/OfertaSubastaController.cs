@@ -26,6 +26,7 @@ namespace WebServiceMaipo.Controllers
                 }
 
                 List<OfertaSubasta> listadoOfertas = RepositorioOfertaSubasta.ListarPorIdTransportista(usr.TipoUsuario.Id);
+                listadoOfertas = listadoOfertas.OrderByDescending(ofer => ofer.FechaOferta).ToList();
                 return listadoOfertas;
             }
             catch (Exception ex)
@@ -103,7 +104,6 @@ namespace WebServiceMaipo.Controllers
                     return NotFound();
                 }
 
-
             }
             catch (Exception ex)
             {
@@ -125,5 +125,10 @@ namespace WebServiceMaipo.Controllers
             return user;
         }
 
+        [HttpPatch]
+        public void Patch()
+        {
+
+        }
     }
 }
