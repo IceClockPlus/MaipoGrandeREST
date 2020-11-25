@@ -255,5 +255,22 @@
     <FunctionImportMapping FunctionImportName="SP_INSERT_DETALLE_PEDIDO" FunctionName="Model.Store.SP_INSERT_DETALLE_PEDIDO" />
     <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCVENTA_PRECIOS" FunctionName="Model.Store.SP_UPDATE_DOCVENTA_PRECIOS" />
     <FunctionImportMapping FunctionImportName="SP_UPDATE_PEDIDO_ESTADO" FunctionName="Model.Store.SP_UPDATE_PEDIDO_ESTADO" />
+    <EntitySetMapping Name="ENCUESTA">
+      <EntityTypeMapping TypeName="Model.ENCUESTA">
+        <MappingFragment StoreEntitySet="ENCUESTA">
+          <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+          <ScalarProperty Name="PROCESOPAGO" ColumnName="PROCESOPAGO" />
+          <ScalarProperty Name="SATISFACCIONPRODUCTO" ColumnName="SATISFACCIONPRODUCTO" />
+          <ScalarProperty Name="TIEMPOENVIO" ColumnName="TIEMPOENVIO" />
+          <ScalarProperty Name="PROCESOSOLICITUD" ColumnName="PROCESOSOLICITUD" />
+          <ScalarProperty Name="VARIEDADCATALOGO" ColumnName="VARIEDADCATALOGO" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+          <ScalarProperty Name="NOMBREREAL" ColumnName="NOMBREREAL" />
+          <ScalarProperty Name="IDENCUESTA" ColumnName="IDENCUESTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_INSERT_ENCUESTA" FunctionName="Model.Store.SP_INSERT_ENCUESTA" />
   </EntityContainerMapping>
 </Mapping>

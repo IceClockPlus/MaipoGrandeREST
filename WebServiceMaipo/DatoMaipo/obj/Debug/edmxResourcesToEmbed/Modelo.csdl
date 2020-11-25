@@ -324,6 +324,22 @@
       <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
       <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <EntitySet Name="ENCUESTA" EntityType="Model.ENCUESTA" />
+    <AssociationSet Name="FK_ENCUESTA_IDPEDIDO" Association="Model.FK_ENCUESTA_IDPEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="ENCUESTA" EntitySet="ENCUESTA" />
+    </AssociationSet>
+    <FunctionImport Name="SP_INSERT_ENCUESTA">
+      <Parameter Name="PNOMBREREAL" Mode="In" Type="String" />
+      <Parameter Name="PCORREO" Mode="In" Type="String" />
+      <Parameter Name="PTELEFONO" Mode="In" Type="Decimal" />
+      <Parameter Name="PVARIEDADCATALOGO" Mode="In" Type="String" />
+      <Parameter Name="PPROCESOSOLICITUD" Mode="In" Type="String" />
+      <Parameter Name="PTIEMPOENVIO" Mode="In" Type="String" />
+      <Parameter Name="PSATISFACCIONPRODUCTO" Mode="In" Type="String" />
+      <Parameter Name="PPROCESOPAGO" Mode="In" Type="String" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>
@@ -364,6 +380,7 @@
     <NavigationProperty Name="SUBASTA" Relationship="Model.FK_IDPEDIDO_SUBASTA" FromRole="PEDIDO" ToRole="SUBASTA" />
     <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PEDIDO_PARTICIPACION" FromRole="PEDIDO" ToRole="PARTICIPACION" />
     <NavigationProperty Name="DOCUMENTOVENTA" Relationship="Model.FK_DOCUMENTO_IDPEDIDO" FromRole="PEDIDO" ToRole="DOCUMENTOVENTA" />
+    <NavigationProperty Name="ENCUESTA" Relationship="Model.FK_ENCUESTA_IDPEDIDO" FromRole="PEDIDO" ToRole="ENCUESTA" />
   </EntityType>
   <EntityType Name="DETALLEPEDIDO">
     <Key>
@@ -799,6 +816,34 @@
         <PropertyRef Name="IDPEDIDO" />
       </Principal>
       <Dependent Role="DOCUMENTOVENTA">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ENCUESTA">
+    <Key>
+      <PropertyRef Name="IDENCUESTA" />
+    </Key>
+    <Property Name="IDENCUESTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBREREAL" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="CORREO" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="VARIEDADCATALOGO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PROCESOSOLICITUD" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="TIEMPOENVIO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="SATISFACCIONPRODUCTO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PROCESOPAGO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="PEDIDO" Relationship="Model.FK_ENCUESTA_IDPEDIDO" FromRole="ENCUESTA" ToRole="PEDIDO" />
+  </EntityType>
+  <Association Name="FK_ENCUESTA_IDPEDIDO">
+    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+    <End Type="Model.ENCUESTA" Role="ENCUESTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="ENCUESTA">
         <PropertyRef Name="IDPEDIDO" />
       </Dependent>
     </ReferentialConstraint>

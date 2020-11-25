@@ -93,6 +93,7 @@ namespace LibreriaMaipo.TiposUsuario
                     this.Nombre = clienteBuscado.NOMBRECLIENTE;
                     this.Direccion = clienteBuscado.DIRECCIONCLIENTE;
                     this.Telefono = clienteBuscado.TELEFONOCLIENTE;
+                    this.Correo = clienteBuscado.CORREO;
                     return true;
                 }
 

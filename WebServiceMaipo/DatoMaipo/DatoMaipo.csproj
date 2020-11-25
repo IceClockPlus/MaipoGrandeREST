@@ -63,6 +63,9 @@
     <Compile Include="DOCUMENTOVENTA.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="ENCUESTA.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="ESTADODOCUMENTO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

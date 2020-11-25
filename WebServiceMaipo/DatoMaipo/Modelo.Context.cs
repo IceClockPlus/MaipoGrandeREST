@@ -48,6 +48,7 @@ namespace DatoMaipo
         public DbSet<PARTICIPACION> PARTICIPACION { get; set; }
         public DbSet<ESTADODOCUMENTO> ESTADODOCUMENTO { get; set; }
         public DbSet<DOCUMENTOVENTA> DOCUMENTOVENTA { get; set; }
+        public DbSet<ENCUESTA> ENCUESTA { get; set; }
     
         public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
         {
@@ -630,6 +631,47 @@ namespace DatoMaipo
                 new ObjectParameter("PIDESTADO", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PEDIDO_ESTADO", pIDPEDIDOParameter, pIDESTADOParameter);
+        }
+    
+        public virtual int SP_INSERT_ENCUESTA(string pNOMBREREAL, string pCORREO, Nullable<decimal> pTELEFONO, string pVARIEDADCATALOGO, string pPROCESOSOLICITUD, string pTIEMPOENVIO, string pSATISFACCIONPRODUCTO, string pPROCESOPAGO, Nullable<decimal> pIDPEDIDO)
+        {
+            var pNOMBREREALParameter = pNOMBREREAL != null ?
+                new ObjectParameter("PNOMBREREAL", pNOMBREREAL) :
+                new ObjectParameter("PNOMBREREAL", typeof(string));
+    
+            var pCORREOParameter = pCORREO != null ?
+                new ObjectParameter("PCORREO", pCORREO) :
+                new ObjectParameter("PCORREO", typeof(string));
+    
+            var pTELEFONOParameter = pTELEFONO.HasValue ?
+                new ObjectParameter("PTELEFONO", pTELEFONO) :
+                new ObjectParameter("PTELEFONO", typeof(decimal));
+    
+            var pVARIEDADCATALOGOParameter = pVARIEDADCATALOGO != null ?
+                new ObjectParameter("PVARIEDADCATALOGO", pVARIEDADCATALOGO) :
+                new ObjectParameter("PVARIEDADCATALOGO", typeof(string));
+    
+            var pPROCESOSOLICITUDParameter = pPROCESOSOLICITUD != null ?
+                new ObjectParameter("PPROCESOSOLICITUD", pPROCESOSOLICITUD) :
+                new ObjectParameter("PPROCESOSOLICITUD", typeof(string));
+    
+            var pTIEMPOENVIOParameter = pTIEMPOENVIO != null ?
+                new ObjectParameter("PTIEMPOENVIO", pTIEMPOENVIO) :
+                new ObjectParameter("PTIEMPOENVIO", typeof(string));
+    
+            var pSATISFACCIONPRODUCTOParameter = pSATISFACCIONPRODUCTO != null ?
+                new ObjectParameter("PSATISFACCIONPRODUCTO", pSATISFACCIONPRODUCTO) :
+                new ObjectParameter("PSATISFACCIONPRODUCTO", typeof(string));
+    
+            var pPROCESOPAGOParameter = pPROCESOPAGO != null ?
+                new ObjectParameter("PPROCESOPAGO", pPROCESOPAGO) :
+                new ObjectParameter("PPROCESOPAGO", typeof(string));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_ENCUESTA", pNOMBREREALParameter, pCORREOParameter, pTELEFONOParameter, pVARIEDADCATALOGOParameter, pPROCESOSOLICITUDParameter, pTIEMPOENVIOParameter, pSATISFACCIONPRODUCTOParameter, pPROCESOPAGOParameter, pIDPEDIDOParameter);
         }
     }
 }

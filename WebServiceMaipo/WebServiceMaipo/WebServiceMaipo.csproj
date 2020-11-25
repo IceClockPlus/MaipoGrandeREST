@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ContratoController.cs" />
     <Compile Include="Controllers\DetallePedidoController.cs" />
     <Compile Include="Controllers\DocumentoVentaController.cs" />
+    <Compile Include="Controllers\EncuestaController.cs" />
     <Compile Include="Controllers\EstadoPedidoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />

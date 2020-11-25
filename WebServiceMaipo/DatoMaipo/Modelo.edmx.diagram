@@ -48,6 +48,8 @@
         <EntityTypeShape EntityType="Model.DOCUMENTOVENTA" Width="1.5" PointX="18.75" PointY="0.5" />
         <AssociationConnector Association="Model.FK_DOCUMENTO_ESTADO" />
         <AssociationConnector Association="Model.FK_DOCUMENTO_IDPEDIDO" />
+        <EntityTypeShape EntityType="Model.ENCUESTA" Width="1.5" PointX="10.125" PointY="15.5" />
+        <AssociationConnector Association="Model.FK_ENCUESTA_IDPEDIDO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

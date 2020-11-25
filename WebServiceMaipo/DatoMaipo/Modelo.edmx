@@ -54,6 +54,21 @@
           <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="IDESTADODOC" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
+        <EntityType Name="ENCUESTA">
+          <Key>
+            <PropertyRef Name="IDENCUESTA" />
+          </Key>
+          <Property Name="IDENCUESTA" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBREREAL" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="VARIEDADCATALOGO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="PROCESOSOLICITUD" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="TIEMPOENVIO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="SATISFACCIONPRODUCTO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="PROCESOPAGO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="ESTADODOCUMENTO">
           <Key>
             <PropertyRef Name="ID" />
@@ -227,6 +242,18 @@
               <PropertyRef Name="IDPEDIDO" />
             </Principal>
             <Dependent Role="DOCUMENTOVENTA">
+              <PropertyRef Name="IDPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ENCUESTA_IDPEDIDO">
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+          <End Role="ENCUESTA" Type="Self.ENCUESTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IDPEDIDO" />
+            </Principal>
+            <Dependent Role="ENCUESTA">
               <PropertyRef Name="IDPEDIDO" />
             </Dependent>
           </ReferentialConstraint>
@@ -543,6 +570,17 @@
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
           <Parameter Name="PIDESTADO" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_INSERT_ENCUESTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PNOMBREREAL" Type="varchar2" Mode="In" />
+          <Parameter Name="PCORREO" Type="varchar2" Mode="In" />
+          <Parameter Name="PTELEFONO" Type="number" Mode="In" />
+          <Parameter Name="PVARIEDADCATALOGO" Type="varchar2" Mode="In" />
+          <Parameter Name="PPROCESOSOLICITUD" Type="varchar2" Mode="In" />
+          <Parameter Name="PTIEMPOENVIO" Type="varchar2" Mode="In" />
+          <Parameter Name="PSATISFACCIONPRODUCTO" Type="varchar2" Mode="In" />
+          <Parameter Name="PPROCESOPAGO" Type="varchar2" Mode="In" />
+          <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_INSERT_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
@@ -644,6 +682,7 @@
           <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="DOCUMENTOVENTA" EntityType="Self.DOCUMENTOVENTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
+          <EntitySet Name="ENCUESTA" EntityType="Self.ENCUESTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ESTADODOCUMENTO" EntityType="Self.ESTADODOCUMENTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
           <EntitySet Name="ESTADOSUBASTA" EntityType="Self.ESTADOSUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -667,6 +706,10 @@
           <AssociationSet Name="FK_DOCUMENTO_IDPEDIDO" Association="Self.FK_DOCUMENTO_IDPEDIDO">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
             <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ENCUESTA_IDPEDIDO" Association="Self.FK_ENCUESTA_IDPEDIDO">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="ENCUESTA" EntitySet="ENCUESTA" />
           </AssociationSet>
           <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Self.FK_ESTADOPEDIDO_PEDIDO">
             <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
@@ -1081,6 +1124,22 @@
             <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
             <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="ENCUESTA" EntityType="Model.ENCUESTA" />
+          <AssociationSet Name="FK_ENCUESTA_IDPEDIDO" Association="Model.FK_ENCUESTA_IDPEDIDO">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="ENCUESTA" EntitySet="ENCUESTA" />
+          </AssociationSet>
+          <FunctionImport Name="SP_INSERT_ENCUESTA">
+            <Parameter Name="PNOMBREREAL" Mode="In" Type="String" />
+            <Parameter Name="PCORREO" Mode="In" Type="String" />
+            <Parameter Name="PTELEFONO" Mode="In" Type="Decimal" />
+            <Parameter Name="PVARIEDADCATALOGO" Mode="In" Type="String" />
+            <Parameter Name="PPROCESOSOLICITUD" Mode="In" Type="String" />
+            <Parameter Name="PTIEMPOENVIO" Mode="In" Type="String" />
+            <Parameter Name="PSATISFACCIONPRODUCTO" Mode="In" Type="String" />
+            <Parameter Name="PPROCESOPAGO" Mode="In" Type="String" />
+            <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
           <Key>
@@ -1121,6 +1180,7 @@
           <NavigationProperty Name="SUBASTA" Relationship="Model.FK_IDPEDIDO_SUBASTA" FromRole="PEDIDO" ToRole="SUBASTA" />
           <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PEDIDO_PARTICIPACION" FromRole="PEDIDO" ToRole="PARTICIPACION" />
           <NavigationProperty Name="DOCUMENTOVENTA" Relationship="Model.FK_DOCUMENTO_IDPEDIDO" FromRole="PEDIDO" ToRole="DOCUMENTOVENTA" />
+          <NavigationProperty Name="ENCUESTA" Relationship="Model.FK_ENCUESTA_IDPEDIDO" FromRole="PEDIDO" ToRole="ENCUESTA" />
         </EntityType>
         <EntityType Name="DETALLEPEDIDO">
           <Key>
@@ -1560,6 +1620,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ENCUESTA">
+          <Key>
+            <PropertyRef Name="IDENCUESTA" />
+          </Key>
+          <Property Name="IDENCUESTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBREREAL" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="VARIEDADCATALOGO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PROCESOSOLICITUD" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TIEMPOENVIO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SATISFACCIONPRODUCTO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PROCESOPAGO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="PEDIDO" Relationship="Model.FK_ENCUESTA_IDPEDIDO" FromRole="ENCUESTA" ToRole="PEDIDO" />
+        </EntityType>
+        <Association Name="FK_ENCUESTA_IDPEDIDO">
+          <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+          <End Type="Model.ENCUESTA" Role="ENCUESTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IDPEDIDO" />
+            </Principal>
+            <Dependent Role="ENCUESTA">
+              <PropertyRef Name="IDPEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1820,6 +1908,23 @@
           <FunctionImportMapping FunctionImportName="SP_INSERT_DETALLE_PEDIDO" FunctionName="Model.Store.SP_INSERT_DETALLE_PEDIDO" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCVENTA_PRECIOS" FunctionName="Model.Store.SP_UPDATE_DOCVENTA_PRECIOS" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PEDIDO_ESTADO" FunctionName="Model.Store.SP_UPDATE_PEDIDO_ESTADO" />
+          <EntitySetMapping Name="ENCUESTA">
+            <EntityTypeMapping TypeName="Model.ENCUESTA">
+              <MappingFragment StoreEntitySet="ENCUESTA">
+                <ScalarProperty Name="IDPEDIDO" ColumnName="IDPEDIDO" />
+                <ScalarProperty Name="PROCESOPAGO" ColumnName="PROCESOPAGO" />
+                <ScalarProperty Name="SATISFACCIONPRODUCTO" ColumnName="SATISFACCIONPRODUCTO" />
+                <ScalarProperty Name="TIEMPOENVIO" ColumnName="TIEMPOENVIO" />
+                <ScalarProperty Name="PROCESOSOLICITUD" ColumnName="PROCESOSOLICITUD" />
+                <ScalarProperty Name="VARIEDADCATALOGO" ColumnName="VARIEDADCATALOGO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="NOMBREREAL" ColumnName="NOMBREREAL" />
+                <ScalarProperty Name="IDENCUESTA" ColumnName="IDENCUESTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_INSERT_ENCUESTA" FunctionName="Model.Store.SP_INSERT_ENCUESTA" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
