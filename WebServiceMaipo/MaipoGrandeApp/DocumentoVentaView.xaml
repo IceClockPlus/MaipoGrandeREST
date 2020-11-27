@@ -63,11 +63,11 @@
             <Label FontSize="13" Content="Pais:" HorizontalAlignment="Left" FontWeight="Bold" Margin="10,194,0,0" VerticalAlignment="Top"/>
             <Label FontSize="13" Content="Estado:" HorizontalAlignment="Left" FontWeight="Bold" Margin="58,194,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.596,0.462" Grid.Column="1" Grid.ColumnSpan="2"/>
             <Label x:Name="txtIdPedido" Content="" HorizontalAlignment="Left" Margin="75,62,0,0" VerticalAlignment="Top" Width="36" Grid.ColumnSpan="2"/>
-            <Label x:Name="txtDireccion" Content="" HorizontalAlignment="Left" Margin="75,107,0,0" VerticalAlignment="Top" Width="Auto" Grid.ColumnSpan="2"/>
-            <Label x:Name="txtCiudad" Content="" HorizontalAlignment="Left" Margin="75,151,0,0" VerticalAlignment="Top" Width="Auto"/>
-            <Label x:Name="txtPais" Content="" HorizontalAlignment="Left" Margin="45,194,0,0" VerticalAlignment="Top" Width="Auto" RenderTransformOrigin="-1.9,0.462"/>
-            <Label x:Name="txtCliente" Content="" HorizontalAlignment="Left" Margin="41,62,0,0" VerticalAlignment="Top" Width="Auto" Grid.Column="2"/>
-            <Label x:Name="txtEstado" Content="" HorizontalAlignment="Left" Margin="41,194,0,0" VerticalAlignment="Top" Width="Auto" RenderTransformOrigin="0.3,4.115" Grid.Column="2"/>
+            <Label x:Name="txtDireccion" Content="" HorizontalAlignment="Left" Margin="75,107,0,0" VerticalAlignment="Top" Width="133" Grid.ColumnSpan="3"/>
+            <Label x:Name="txtCiudad" Content="" HorizontalAlignment="Left" Margin="75,151,0,0" VerticalAlignment="Top" Width="116" Grid.ColumnSpan="3"/>
+            <Label x:Name="txtPais" Content="" HorizontalAlignment="Left" Margin="45,194,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-1.9,0.462" Grid.ColumnSpan="2"/>
+            <Label x:Name="txtCliente" Content="" HorizontalAlignment="Left" Margin="41,62,0,0" VerticalAlignment="Top" Width="62" Grid.Column="2"/>
+            <Label x:Name="txtEstado" Content="" HorizontalAlignment="Left" Margin="41,194,0,0" VerticalAlignment="Top" Width="105" RenderTransformOrigin="0.3,4.115" Grid.Column="2"/>
 
         </Grid>
         <Button x:Name="BtnRevisar" Content="Revisar" HorizontalAlignment="Left" Margin="28,297,0,0" VerticalAlignment="Top" Width="75" Click="BtnRevisar_Click"/>

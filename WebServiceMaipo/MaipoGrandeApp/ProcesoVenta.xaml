@@ -61,6 +61,7 @@
         <Label x:Name="lbProceso" Content="Proceso de Venta" HorizontalAlignment="Left" Margin="44,10,0,0" VerticalAlignment="Top" FontSize="22"/>
         <ComboBox x:Name="cbxEstadoPedido" HorizontalAlignment="Left" Margin="199,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxEstadoPedido_SelectionChanged" Controls:TextBoxHelper.Watermark="Filtro Pedido"/>
         <Button Content="Revisar" HorizontalAlignment="Left" Margin="70,289,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Button IsEnabled="True" x:Name="BtnIniciarProceso" Content="Iniciar Proceso" HorizontalAlignment="Left" Margin="184,289,0,0" VerticalAlignment="Top" Width="110" Click="BtnIniciarProceso_Click" RenderTransformOrigin="-0.695,-0.983"/>
 
 
         <Controls:FlyoutsControl d:IsHidden="True">
@@ -76,7 +77,6 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="BtnEnviarSolicitud" Content="Asignar Productor" Canvas.Left="414" Canvas.Top="232" Width="144" Height="37" Click="BtnEnviarSolicitud_Click"/>
-                    <Button IsEnabled="True" x:Name="BtnIniciarProceso" Content="Iniciar Proceso" HorizontalAlignment="Left" Margin="184,289,0,0" VerticalAlignment="Top" Width="110" Click="BtnIniciarProceso_Click" RenderTransformOrigin="-0.695,-0.983"/>
                 </Canvas>
 
             </Controls:Flyout>

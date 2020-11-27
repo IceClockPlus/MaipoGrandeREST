@@ -340,6 +340,10 @@
       <Parameter Name="PPROCESOPAGO" Mode="In" Type="String" />
       <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_DOCVENTA_ESTADO">
+      <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>

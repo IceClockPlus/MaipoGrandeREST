@@ -673,5 +673,18 @@ namespace DatoMaipo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_ENCUESTA", pNOMBREREALParameter, pCORREOParameter, pTELEFONOParameter, pVARIEDADCATALOGOParameter, pPROCESOSOLICITUDParameter, pTIEMPOENVIOParameter, pSATISFACCIONPRODUCTOParameter, pPROCESOPAGOParameter, pIDPEDIDOParameter);
         }
+    
+        public virtual int SP_UPDATE_DOCVENTA_ESTADO(Nullable<decimal> pIDDOCUMENTO, Nullable<decimal> pIDESTADO)
+        {
+            var pIDDOCUMENTOParameter = pIDDOCUMENTO.HasValue ?
+                new ObjectParameter("PIDDOCUMENTO", pIDDOCUMENTO) :
+                new ObjectParameter("PIDDOCUMENTO", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DOCVENTA_ESTADO", pIDDOCUMENTOParameter, pIDESTADOParameter);
+        }
     }
 }

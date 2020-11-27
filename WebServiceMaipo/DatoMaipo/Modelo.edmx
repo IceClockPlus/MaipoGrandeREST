@@ -643,6 +643,10 @@
           <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
           <Parameter Name="PIDESTADO" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_UPDATE_DOCVENTA_ESTADO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+          <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
+          <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_UPDATE_DOCVENTA_PRECIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
           <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
           <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
@@ -1139,6 +1143,10 @@
             <Parameter Name="PSATISFACCIONPRODUCTO" Mode="In" Type="String" />
             <Parameter Name="PPROCESOPAGO" Mode="In" Type="String" />
             <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_DOCVENTA_ESTADO">
+            <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CLIENTE">
@@ -1925,6 +1933,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_INSERT_ENCUESTA" FunctionName="Model.Store.SP_INSERT_ENCUESTA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_DOCVENTA_ESTADO" FunctionName="Model.Store.SP_UPDATE_DOCVENTA_ESTADO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

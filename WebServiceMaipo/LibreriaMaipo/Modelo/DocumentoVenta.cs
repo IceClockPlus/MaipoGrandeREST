@@ -15,7 +15,7 @@ namespace LibreriaMaipo.Modelo
         public Nullable<decimal> PrecioTransporte { get; set; }
         public Nullable<decimal> Impuesto { get; set; }
         public Nullable<decimal> Subtotal { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public Nullable<int> Total { get; set; }
         public Pedido Pedido { get; set; }
         public EstadoDocumento EstadoDocumento { get; set; }
 
@@ -133,7 +133,7 @@ namespace LibreriaMaipo.Modelo
                         this.PrecioTransporte = doc.PRECIOTRANSPORTE;
                         this.Impuesto = doc.IMPUESTO;
                         this.Subtotal = doc.SUBTOTAL;
-                        this.Total = doc.TOTAL;
+                        this.Total = (int?)doc.TOTAL;
 
                         int idPedido = (int)doc.PEDIDO.IDPEDIDO;
 
@@ -177,7 +177,7 @@ namespace LibreriaMaipo.Modelo
                         this.PrecioTransporte = doc.PRECIOTRANSPORTE;
                         this.Impuesto = doc.IMPUESTO;
                         this.Subtotal = doc.SUBTOTAL;
-                        this.Total = doc.TOTAL;
+                        this.Total = (int?)doc.TOTAL;
 
                         int idPedido = (int)doc.PEDIDO.IDPEDIDO;
 
@@ -223,7 +223,7 @@ namespace LibreriaMaipo.Modelo
                             documento.PrecioTransporte = doc.PRECIOTRANSPORTE;
                             documento.Impuesto = doc.IMPUESTO;
                             documento.Subtotal = doc.SUBTOTAL;
-                            documento.Total= doc.TOTAL;
+                            documento.Total= (int?)doc.TOTAL;
 
                             int idPedido = (int)doc.PEDIDO.IDPEDIDO;
                             documento.Pedido.IdPedido = idPedido;

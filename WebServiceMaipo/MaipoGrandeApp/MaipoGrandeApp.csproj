@@ -216,6 +216,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReporteVentas.rdlc" />
+    <EmbeddedResource Include="ReporteVentasCliente.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\LibreriaMaipo.Modelo.DocumentoVenta.datasource" />
     <None Include="Properties\DataSources\VentasReportes.datasource" />

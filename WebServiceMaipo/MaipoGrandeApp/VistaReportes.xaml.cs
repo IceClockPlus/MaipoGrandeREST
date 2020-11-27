@@ -87,10 +87,10 @@ namespace MaipoGrandeApp
 
 
             _reportViewer.LocalReport.DataSources.Clear();
-            var rpds_model = new ReportDataSource() { Name = "VentasDS", Value = dataset };
+            var rpds_model = new ReportDataSource() { Name = "VentasClienteDS", Value = dataset };
             _reportViewer.LocalReport.DataSources.Add(rpds_model);
 
-            this._reportViewer.LocalReport.ReportEmbeddedResource = "MaipoGrandeApp.ReporteVentas.rdlc";
+            this._reportViewer.LocalReport.ReportEmbeddedResource = "MaipoGrandeApp.ReporteVentasCliente.rdlc";
 
             _reportViewer.Refresh();
             _reportViewer.RefreshReport();

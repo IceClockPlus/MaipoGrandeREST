@@ -116,7 +116,7 @@ namespace LibreriaMaipo.Proceso
                 this.DocumentoVenta.Subtotal = this.CalcularSubtotal();
                 this.DocumentoVenta.Impuesto = this.CalcularImpuesto();
 
-                this.DocumentoVenta.Total = this.CalcularTotal();
+                this.DocumentoVenta.Total = (int?)this.CalcularTotal();
                 return true;
 
             }
