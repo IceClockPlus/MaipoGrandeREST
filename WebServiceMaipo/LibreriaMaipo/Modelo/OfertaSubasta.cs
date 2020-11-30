@@ -1,4 +1,6 @@
-﻿using LibreriaMaipo.TiposUsuario;
+﻿using DatoMaipo;
+using LibreriaMaipo.TiposUsuario;
+using LibreriaMaipo.UsuarioFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace LibreriaMaipo.Modelo
         public DateTime FechaOferta { get; set; }
         public Transportista Transportista { get; set; }
         public TipoTransporte TipoTransporte { get; set; }
+        public int IdSubasta { get; set; }
 
         public OfertaSubasta()
         {
@@ -29,6 +32,82 @@ namespace LibreriaMaipo.Modelo
             this.FechaOferta = DateTime.Today;
             this.Transportista = new Transportista();
             this.TipoTransporte = new TipoTransporte();
+            this.IdSubasta = 0;
         }
+
+
+
+        /// <summary>
+        /// Obtener las ofertas por la id de subasta
+        /// </summary>
+        /// <param name="idSubasta"></param>
+        /// <returns></returns>
+        public static List<OfertaSubasta> ReadByIdSubasta(int idSubasta)
+        {
+            //Creacion de una factory de Transportista
+            TipoUsuarioFactory factory = new TransportistaFactory();
+            List<OfertaSubasta> list = new List<OfertaSubasta>();
+
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    var listadoOfertas = db.OFERTASUBASTA.Where(of => of.IDSUBASTA == idSubasta).ToList();
+                    if(listadoOfertas.Count() > 0)
+                    {
+                        foreach(var ofe in listadoOfertas)
+                        {
+                            OfertaSubasta oferta = new OfertaSubasta();
+                            oferta.IdOferta = (int)ofe.IDOFERTA;
+                            oferta.FechaOferta = ofe.FECHAOFERTA;
+                            oferta.Seleccionado = ofe.SELECCIONADO;
+                            oferta.PrecioOferta = (float)ofe.PRECIOOFERTA;
+                            oferta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
+                            oferta.Transportista.ObtenerDatosPorId((int)ofe.IDTRANSPORTISTA);
+                            oferta.IdSubasta = (int)ofe.IDSUBASTA;
+
+                            TipoTransporte tipo = new TipoTransporte();
+                            tipo.IdTipo = (int)ofe.IDTIPOTRANSPORTE;
+                            tipo.GetById();
+                            oferta.TipoTransporte = tipo;
+
+                            list.Add(oferta);
+                        }
+                    }
+                    return list;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<OfertaSubasta>();
+            }
+        }
+
+        public bool Update()
+        {
+            try
+            {
+                using (var db =  new DBEntities())
+                {
+                    db.SP_UPDATE_OFERTASUBASTA(this.IdOferta, (decimal?)this.PrecioOferta, this.Seleccionado, this.FechaOferta, this.Transportista.Id, this.TipoTransporte.IdTipo);
+
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+
+        }
+
+
     }
 }

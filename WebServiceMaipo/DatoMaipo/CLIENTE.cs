@@ -24,6 +24,7 @@ namespace DatoMaipo
         public string DIRECCIONCLIENTE { get; set; }
         public string TELEFONOCLIENTE { get; set; }
         public decimal IDUSUARIO { get; set; }
+        public string CORREO { get; set; }
     
         public virtual ICollection<PEDIDO> PEDIDO { get; set; }
         public virtual USUARIO USUARIO { get; set; }

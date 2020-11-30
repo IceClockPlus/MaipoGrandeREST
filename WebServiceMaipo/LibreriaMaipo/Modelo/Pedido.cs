@@ -1,8 +1,11 @@
 ﻿using DatoMaipo;
 using LibreriaMaipo.TiposUsuario;
+using LibreriaMaipo.UsuarioFactory;
 using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -51,6 +54,88 @@ namespace LibreriaMaipo.Modelo
             this.DetallePedido = new List<ItemPedido>();
         }
 
+        /// <summary>
+        /// Metodo para registrar un nuevo pedido
+        /// </summary>
+        /// <returns></returns>
+        public bool Insert()
+        {
+            try
+            {
+                //Objeto para recuperar el resultado
+                System.Data.Objects.ObjectParameter output = new System.Data.Objects.ObjectParameter("pIDPEDIDO", typeof(int));
+
+                using (var db = new DBEntities())
+                {
+                    //Ejecución del metodo para agregar el pedido
+                    db.SP_INSERT_PEDIDO1(FechaPedido, FechaEntrega, Direccion, Cliente.Id, EstadoPedido.IdEstado, Ciudad, Pais, output);
+
+                    //Conversion del valor del objeto output a Int
+                    int idResultado = Convert.ToInt32(output.Value);
+
+                    //Asignar el id del pedido generado al campo correspondiente
+                    this.IdPedido = idResultado;
+
+                    return true;
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+
+
+        public bool Read()
+        {
+            TipoUsuarioFactory factory = new ClienteFactory();
+            using (var db = new DBEntities())
+            {
+                try
+                {
+                    //Realizar consulta para obtener datos del pedido
+                    var pedido = db.PEDIDO.Where(p => p.IDPEDIDO == this.IdPedido).FirstOrDefault();
+
+                    //Devolver null si la consulta no entrega resultados
+                    if (pedido != null)
+                    {
+                        this.FechaPedido = pedido.FECHAPEDIDO;
+                        this.FechaEntrega = pedido.FECHAENTREGA;
+                        this.Direccion = pedido.DIRECCIONPEDIDO;
+                        this.Ciudad = pedido.CIUDAD;
+                        this.Pais = pedido.PAIS;
+                        //Crear una instancia cliente con el uso de ClienteFactory
+                        TipoUsuario cli = factory.createTipoUsuario();
+
+                        //Recuperar datos del cliente por su id
+                        cli.ObtenerDatosPorId((int)pedido.IDCLIENTE);
+                        this.Cliente = (Cliente)cli;
+
+                        //Obtener el estado del pedido por su id
+                        EstadoPedido estado = new EstadoPedido();
+                        estado.IdEstado = (int)pedido.IDESTADOPEDIDO;
+                        estado.Read();
+                        this.EstadoPedido = estado;
+
+                        //Obtener el detalle del pedido por id
+                        this.DetallePedido = ItemPedido.ReadByIdPedido(this.IdPedido);
+                        return true;
+                    }
+                    return false;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+        }
 
         public bool Update()
         {
@@ -67,6 +152,24 @@ namespace LibreriaMaipo.Modelo
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                return false;
+            }
+
+        }
+
+
+        public bool UpdateEstado()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    db.SP_UPDATE_PEDIDO_ESTADO(this.IdPedido, this.EstadoPedido.IdEstado);
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
                 return false;
             }
         }

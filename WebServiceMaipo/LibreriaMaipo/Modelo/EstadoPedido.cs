@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatoMaipo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,5 +31,67 @@ namespace LibreriaMaipo.Modelo
             this.IdEstado = 0;
             this.DescripcionEstado = string.Empty;
         }
+
+        /// <summary>
+        /// Obtener datos de estado de pedido segun la id de esta
+        /// </summary>
+        /// <returns></returns>
+        public bool Read()
+        {
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    var estado = db.ESTADOPEDIDO.Where(est => est.IDESTADOPEDIDO == this.IdEstado).FirstOrDefault();
+                    if(estado != null)
+                    {
+                        this.DescripcionEstado = estado.DESCRIPCIONESTADO;
+                        return true;
+                    }
+                    return false;
+                }
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+
+        public List<EstadoPedido> ReadAll()
+        {
+            try
+            {
+                List<EstadoPedido> list = new List<EstadoPedido>();
+                using (var db = new DBEntities())
+                {
+                    var listadoEstados = db.ESTADOPEDIDO.ToList();
+                    if(listadoEstados.Count > 0)
+                    {
+                        foreach(var es in listadoEstados)
+                        {
+                            EstadoPedido estado = new EstadoPedido();
+                            estado.IdEstado = (int)es.IDESTADOPEDIDO;
+                            estado.DescripcionEstado = es.DESCRIPCIONESTADO;
+                            list.Add(estado);
+                        }
+                    }
+
+                    return list;
+
+                }
+
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<EstadoPedido>();
+
+            }
+
+        }
+
+
     }
 }

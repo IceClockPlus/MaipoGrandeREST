@@ -67,9 +67,11 @@ namespace LibreriaMaipo
                         ofertaSubasta.PrecioOferta = (float)oferta.PRECIOOFERTA;
                         ofertaSubasta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
                         ofertaSubasta.Transportista.ObtenerDatosPorId(idTransportista);
+                        ofertaSubasta.IdSubasta = (int)oferta.IDSUBASTA;
 
                         TipoTransporte tipo = new TipoTransporte();
-                        tipo.ObtenerTipoTransportepPorId((int)oferta.IDTIPOTRANSPORTE);
+                        tipo.IdTipo = (int)oferta.IDTIPOTRANSPORTE;
+                        tipo.GetById();
                         ofertaSubasta.TipoTransporte = tipo;
                         listado.Add(ofertaSubasta);
                     }
@@ -111,9 +113,11 @@ namespace LibreriaMaipo
                         ofertaSubasta.PrecioOferta = (float)oferta.PRECIOOFERTA;
                         ofertaSubasta.Transportista = (TiposUsuario.Transportista)factory.createTipoUsuario();
                         ofertaSubasta.Transportista.ObtenerDatosPorId((int)oferta.IDTRANSPORTISTA);
+                        ofertaSubasta.IdSubasta = (int)oferta.IDSUBASTA;
 
                         TipoTransporte tipo = new TipoTransporte();
-                        tipo.ObtenerTipoTransportepPorId((int)oferta.IDTIPOTRANSPORTE);
+                        tipo.IdTipo = (int)oferta.IDTIPOTRANSPORTE;
+                        tipo.GetById();
                         ofertaSubasta.TipoTransporte = tipo;
                         listado.Add(ofertaSubasta);
                     }

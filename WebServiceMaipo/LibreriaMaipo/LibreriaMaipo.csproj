@@ -51,12 +51,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoUsuario.cs" />
+    <Compile Include="Modelo\Contrato.cs" />
+    <Compile Include="Modelo\DocumentoVenta.cs" />
+    <Compile Include="Modelo\Encuesta.cs" />
+    <Compile Include="Modelo\EstadoDocumento.cs" />
     <Compile Include="Modelo\EstadoSubasta.cs" />
     <Compile Include="Modelo\OfertaProducto.cs" />
     <Compile Include="Modelo\OfertaSubasta.cs" />
+    <Compile Include="Modelo\Participacion.cs" />
     <Compile Include="Modelo\Produccion.cs" />
     <Compile Include="Modelo\Subasta.cs" />
     <Compile Include="Modelo\TipoTransporte.cs" />
+    <Compile Include="Proceso\CalculoVenta.cs" />
+    <Compile Include="Proceso\ImpuestoConstants.cs" />
     <Compile Include="Proceso\ProcesoPedido.cs" />
     <Compile Include="RepositorioDetallePedido.cs" />
     <Compile Include="RepositorioEstadoPedido.cs" />
@@ -94,6 +101,8 @@
       <Name>DatoMaipo</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Hashing\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

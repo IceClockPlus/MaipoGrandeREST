@@ -1,0 +1,16 @@
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\MaipoGrandeApp.csprojAssemblyReference.cache
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\Resources\Icons.baml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\Resources\IconsNonShared.baml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\AgregarUsuario.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\ControlarContratos.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\IngresarVenta.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\MainWindow.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\MenuPrincipal.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\NotificarEstado.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\ProcesoVenta.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\Reportes.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\RevisarPedidos.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\SubastasTransporte.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\App.g.cs
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\MaipoGrandeApp_MarkupCompile.cache
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\obj\Release\MaipoGrandeApp_MarkupCompile.lref

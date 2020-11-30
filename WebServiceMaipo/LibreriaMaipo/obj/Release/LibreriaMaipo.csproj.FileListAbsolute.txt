@@ -1,0 +1,14 @@
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\LibreriaMaipo.dll.config
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\LibreriaMaipo.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\LibreriaMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\DatoMaipo.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\EntityFramework.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\Oracle.ManagedDataAccess.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\DatoMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\DatoMaipo.dll.config
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\bin\Release\EntityFramework.xml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Release\LibreriaMaipo.csprojAssemblyReference.cache
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Release\LibreriaMaipo.csproj.CoreCompileInputs.cache
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Release\LibreriaMaipo.csproj.CopyComplete
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Release\LibreriaMaipo.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\LibreriaMaipo\obj\Release\LibreriaMaipo.pdb

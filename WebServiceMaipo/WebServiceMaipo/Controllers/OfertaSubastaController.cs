@@ -26,6 +26,7 @@ namespace WebServiceMaipo.Controllers
                 }
 
                 List<OfertaSubasta> listadoOfertas = RepositorioOfertaSubasta.ListarPorIdTransportista(usr.TipoUsuario.Id);
+                listadoOfertas = listadoOfertas.OrderByDescending(ofer => ofer.FechaOferta).ToList();
                 return listadoOfertas;
             }
             catch (Exception ex)
@@ -33,6 +34,24 @@ namespace WebServiceMaipo.Controllers
                 return null;
             }
 
+
+        }
+
+        [HttpGet]
+        [Route("api/OfertasSubasta/{idSubasta}")]
+        public IEnumerable<OfertaSubasta>GetOfertasByIdSubasta(int idSubasta)
+        {
+            List<OfertaSubasta> ofertas = new List<OfertaSubasta>();
+            try
+            {
+                ofertas = RepositorioOfertaSubasta.ListarOfertaPorIdSubasta(idSubasta);
+                return ofertas;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<OfertaSubasta>();
+            }
 
         }
 
@@ -72,8 +91,27 @@ namespace WebServiceMaipo.Controllers
         }
 
         // PUT: api/OfertaSubasta/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromBody]OfertaSubasta model)
         {
+            try
+            {
+                if (model.Update())
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+
+
         }
 
         // DELETE: api/OfertaSubasta/5
@@ -87,5 +125,10 @@ namespace WebServiceMaipo.Controllers
             return user;
         }
 
+        [HttpPatch]
+        public void Patch()
+        {
+
+        }
     }
 }

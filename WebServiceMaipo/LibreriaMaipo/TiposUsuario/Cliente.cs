@@ -12,9 +12,43 @@ namespace LibreriaMaipo.TiposUsuario
     [DataContract]
     public class Cliente : TipoUsuario
     {
-        public override List<TipoUsuario> ListarTodos()
+        /// <summary>
+        /// Listar todos los clientes registrados
+        /// </summary>
+        /// <returns></returns>
+        public override List<TipoUsuario> ReadAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<TipoUsuario> list = new List<TipoUsuario>();
+                using (var db = new DBEntities())
+                {
+                    var listadoCliente = db.CLIENTE.ToList();
+                    if (listadoCliente.Count > 0)
+                    {
+                        foreach (var c in listadoCliente)
+                        {
+                            Cliente cli = new Cliente();
+                            cli.Id = (int)c.IDCLIENTE;
+                            cli.Nombre = c.NOMBRECLIENTE;
+                            cli.Direccion = c.DIRECCIONCLIENTE;
+                            cli.Telefono = c.TELEFONOCLIENTE;
+                            cli.Correo = c.CORREO;
+
+                            list.Add(cli);
+
+                        }
+                    }
+
+                    return list;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<TipoUsuario>();
+            }
         }
 
         public override void ObtenerDatosPorId(int id)
@@ -28,7 +62,7 @@ namespace LibreriaMaipo.TiposUsuario
                     this.Nombre = clienteBuscado.NOMBRECLIENTE;
                     this.Direccion = clienteBuscado.DIRECCIONCLIENTE;
                     this.Telefono = clienteBuscado.TELEFONOCLIENTE;
-
+                    this.Correo = clienteBuscado.CORREO;
                 }
                 catch(Exception ex)
                 {
@@ -43,7 +77,7 @@ namespace LibreriaMaipo.TiposUsuario
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <returns></returns>
-        public override bool ObtenerDatosPorIdUsuario(int idUsuario)
+        public override bool ReadById(int idUsuario)
         {
             try
             {
@@ -59,6 +93,7 @@ namespace LibreriaMaipo.TiposUsuario
                     this.Nombre = clienteBuscado.NOMBRECLIENTE;
                     this.Direccion = clienteBuscado.DIRECCIONCLIENTE;
                     this.Telefono = clienteBuscado.TELEFONOCLIENTE;
+                    this.Correo = clienteBuscado.CORREO;
                     return true;
                 }
 

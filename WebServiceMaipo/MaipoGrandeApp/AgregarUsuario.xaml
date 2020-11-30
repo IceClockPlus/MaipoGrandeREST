@@ -5,22 +5,32 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MaipoGrandeApp"
       mc:Ignorable="d" 
-      d:DesignHeight="364" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="800"
       Title="AgregarUsuario">
 
     <Grid Background="White">
-        <DataGrid x:Name="dataPerfiles" HorizontalAlignment="Left" Height="195" Margin="22,27,0,0" VerticalAlignment="Top" Width="249"/>
-        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="382,27,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
-        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="538,27,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
-        <Button x:Name="btnCargar" Content="Cargar" HorizontalAlignment="Left" Margin="382,91,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
-        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="538,91,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal"/>
-        <TextBox x:Name="txtAgregarUsuario"  HorizontalAlignment="Left" Height="23" Margin="362,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtAgregarContraseña" HorizontalAlignment="Left" Height="23" Margin="522,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.406,0.585"/>
-        <CheckBox x:Name="CheckHabilitar" Content="Habilitar Usuario" HorizontalAlignment="Left" Margin="522,269,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CbRol" HorizontalAlignment="Left" Margin="362,261,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbRol_SelectionChanged">
-            <ComboBoxItem Content="Seleccionar" HorizontalAlignment="Left" Width="118"/>
-        </ComboBox>
-        <Label x:Name="lbAgregarUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="362,161,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbAgregarContraseña" Content="Contraseña" HorizontalAlignment="Left" Margin="522,161,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataPerfiles" HorizontalAlignment="Left" Height="195" Margin="43,435,0,0" VerticalAlignment="Top" Width="698"  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdUsuario}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre Usuario" Binding="{Binding NombreUsuario}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Habilitado" Binding="{Binding IsHabilitado}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id Rol" Binding="{Binding rol.IdRol}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Correo" Binding="{Binding Correo }"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="43,401,0,0" VerticalAlignment="Top" Width="87" FontWeight="Normal" Click="btnAgregar_Click"/>
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="163,401,0,0" VerticalAlignment="Top" Width="87" FontWeight="Normal"/>
+        <Button x:Name="btnCargar" Content="Cargar" HorizontalAlignment="Left" Margin="395,401,0,0" VerticalAlignment="Top" Width="87" FontWeight="Normal"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="280,401,0,0" VerticalAlignment="Top" Width="87" FontWeight="Normal"/>
+        <TextBox x:Name="txtAgregarUsuario"  HorizontalAlignment="Left" Height="23" Margin="43,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <TextBox x:Name="txtAgregarContraseña" HorizontalAlignment="Left" Height="23" Margin="280,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.406,0.585"/>
+        <ComboBox x:Name="CbRol" HorizontalAlignment="Left" Margin="280,260,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="CbRol_SelectionChanged"/>
+        <Label x:Name="lbAgregarUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="43,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbAgregarContraseña" Content="Contraseña" HorizontalAlignment="Left" Margin="280,161,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCorreo" HorizontalAlignment="Left" Height="23" Margin="43,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <Label x:Name="lbCorreo" Content="Correo" HorizontalAlignment="Left" Margin="43,310,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtHabilitar" HorizontalAlignment="Left" Height="23" Margin="43,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" MaxLines="1"/>
+        <Label x:Name="lbHabilitar" Content="Habilitar" HorizontalAlignment="Left" Margin="43,234,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbRol" Content="Rol" HorizontalAlignment="Left" Margin="280,234,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

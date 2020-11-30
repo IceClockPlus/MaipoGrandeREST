@@ -16,6 +16,7 @@ using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Behaviours;
 using RestSharp;
 using LibreriaMaipo.Modelo;
+using System.Windows.Threading;
 
 namespace MaipoGrandeApp
 {
@@ -24,7 +25,7 @@ namespace MaipoGrandeApp
     /// </summary>
     public partial class MenuPrincipal : MetroWindow
     {
-         public Usuario main;
+        public Usuario main;
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -34,8 +35,21 @@ namespace MaipoGrandeApp
         {
             this.main = usr;
             InitializeComponent();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
         }
 
+        void timer_Tick(object sender, EventArgs e) 
+        {
+            lbHora.Content = DateTime.Now.ToLongTimeString();
+        }
+
+        public async void Mensaje(string titulo, string mensaje) 
+        {
+            await this.ShowMessageAsync(titulo,mensaje);
+        }
         private void btnPerfilUsuario_Click(object sender, RoutedEventArgs e)
         {
             frameMenu.Content = new AgregarUsuario();
@@ -64,8 +78,45 @@ namespace MaipoGrandeApp
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
                 ex.StackTrace.ToString();
+            }
+        }
+
+        private void btnSubastas_Click(object sender, RoutedEventArgs e)
+        {
+            frameMenu.Content = new SubastasTransporte(this);
+        }
+
+        private void btnContratos_Click(object sender, RoutedEventArgs e)
+        {
+            frameMenu.Content = new ControlarContratos(this);
+        }
+
+        private void btnNotificarEstadoVenta_Click(object sender, RoutedEventArgs e)
+        {
+            frameMenu.Content = new DocumentoVentaView(this);
+        }
+
+        private void btnVenta_Click(object sender, RoutedEventArgs e)
+        {
+            frameMenu.Content = new RevisarPedidos(this);
+        }
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            if (main.NombreRol == "Ejecutivo")
+            {
+                frameMenu.Content = new ProcesoVenta(this);
+            }
+                        
+        }
+
+        private void btnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            if (main.NombreRol == "Ejecutivo")
+            {
+                frameMenu.Content = new VistaReportes(this);
             }
         }
     }

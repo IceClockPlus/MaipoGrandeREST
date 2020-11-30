@@ -183,16 +183,23 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccessController.cs" />
+    <Compile Include="Controllers\ContratoController.cs" />
     <Compile Include="Controllers\DetallePedidoController.cs" />
+    <Compile Include="Controllers\DocumentoVentaController.cs" />
+    <Compile Include="Controllers\EncuestaController.cs" />
+    <Compile Include="Controllers\EstadoPedidoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\OfertaSubastaController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
+    <Compile Include="Controllers\ParticipacionController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\ProduccionController.cs" />
     <Compile Include="Controllers\ProductorController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\SubastaController.cs" />
+    <Compile Include="Controllers\TipoTransporteController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -200,6 +207,7 @@
     <Compile Include="Models\WSResponse\SubastaViewResponse.cs" />
     <Compile Include="Models\WS\AccessViewModel.cs" />
     <Compile Include="Models\WS\DetallePedidoModel.cs" />
+    <Compile Include="Models\WS\DocumentoVentaPatch.cs" />
     <Compile Include="Models\WS\OfertaSubastaModelView.cs" />
     <Compile Include="Models\WS\PedidoViewModel.cs" />
     <Compile Include="Models\WS\ProduccionViewModel.cs" />

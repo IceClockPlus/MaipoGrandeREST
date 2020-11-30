@@ -9,6 +9,7 @@
     <Property Name="DIRECCIONCLIENTE" Type="varchar2" MaxLength="40" Nullable="false" />
     <Property Name="TELEFONOCLIENTE" Type="varchar2" MaxLength="12" Nullable="false" />
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="CONTRATO">
     <Key>
@@ -31,13 +32,51 @@
     <Property Name="CALIDAD" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="IDDETALLEPEDIDO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" />
+    <Property Name="ESTADO" Type="varchar2" MaxLength="30" />
+    <Property Name="PRECIO" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="DOCUMENTOVENTA">
+    <Key>
+      <PropertyRef Name="IDDOCUMENTO" />
+    </Key>
+    <Property Name="IDDOCUMENTO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHAEMISION" Type="date" />
+    <Property Name="PRECIOPRODUCTO" Type="number" Precision="38" Scale="0" />
+    <Property Name="PRECIOTRANSPORTE" Type="number" Precision="38" Scale="0" />
+    <Property Name="IMPUESTO" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUBTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDESTADODOC" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ENCUESTA">
+    <Key>
+      <PropertyRef Name="IDENCUESTA" />
+    </Key>
+    <Property Name="IDENCUESTA" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBREREAL" Type="varchar2" MaxLength="60" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="60" Nullable="false" />
+    <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="VARIEDADCATALOGO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="PROCESOSOLICITUD" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="TIEMPOENVIO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="SATISFACCIONPRODUCTO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="PROCESOPAGO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESTADODOCUMENTO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar2" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="ESTADOPEDIDO">
     <Key>
       <PropertyRef Name="IDESTADOPEDIDO" />
     </Key>
     <Property Name="IDESTADOPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="DESCRIPCIONESTADO" Type="varchar2" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="ESTADOSUBASTA">
     <Key>
@@ -75,6 +114,15 @@
     </Key>
     <Property Name="ID_PAIS" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PAIS" Type="varchar2" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PARTICIPACION">
+    <Key>
+      <PropertyRef Name="IDPARTICIPACION" />
+    </Key>
+    <Property Name="IDPARTICIPACION" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDPRODUCTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ESTADOPARTICIPACION" Type="varchar2" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="PEDIDO">
     <Key>
@@ -119,6 +167,7 @@
     <Property Name="DIRECCIONPRODUCTOR" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="TELEFONOPRODUCTRO" Type="varchar2" MaxLength="12" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="ROL">
     <Key>
@@ -153,6 +202,7 @@
     <Property Name="DIRECCIONTRANSPORTISTA" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="TELEFONOTRANSPORTISTA" Type="varchar2" MaxLength="12" Nullable="false" />
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CORREO" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -167,6 +217,42 @@
     <Property Name="CORREO" Type="varchar2" MaxLength="50" />
     <Property Name="IDPAIS" Type="number" Precision="38" Scale="0" />
   </EntityType>
+  <Association Name="FK_DOCUMENTO_ESTADO">
+    <End Role="ESTADODOCUMENTO" Type="Self.ESTADODOCUMENTO" Multiplicity="1" />
+    <End Role="DOCUMENTOVENTA" Type="Self.DOCUMENTOVENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADODOCUMENTO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DOCUMENTOVENTA">
+        <PropertyRef Name="IDESTADODOC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCUMENTO_IDPEDIDO">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="DOCUMENTOVENTA" Type="Self.DOCUMENTOVENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="DOCUMENTOVENTA">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ENCUESTA_IDPEDIDO">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="ENCUESTA" Type="Self.ENCUESTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="ENCUESTA">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ESTADOPEDIDO_PEDIDO">
     <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
@@ -383,6 +469,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PEDIDO_PARTICIPACION">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="PARTICIPACION" Type="Self.PARTICIPACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="PARTICIPACION">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTOR_PARTICIPACION">
+    <End Role="PRODUCTOR" Type="Self.PRODUCTOR" Multiplicity="1" />
+    <End Role="PARTICIPACION" Type="Self.PARTICIPACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="PARTICIPACION">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TIPOTRANSPOR_OFERTA">
     <End Role="TIPOTRANSPORTE" Type="Self.TIPOTRANSPORTE" Multiplicity="1" />
     <End Role="OFERTASUBASTA" Type="Self.OFERTASUBASTA" Multiplicity="*" />
@@ -395,6 +505,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_ACTUALIZAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PPORCCOMISION" Type="number" Mode="In" />
+    <Parameter Name="PVIGENTE" Type="char" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_ACTUALIZAR_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="PID" Type="number" Mode="In" />
     <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
@@ -405,21 +523,172 @@
     <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
     <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
   </Function>
+  <Function Name="SP_ACTUALIZAR_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_DELETE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_ELIMINAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_ELIMINAR_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERTAR_CONTRATO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PFECHACREACION" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PPORCCOMISION" Type="number" Mode="In" />
+    <Parameter Name="PVIGENTE" Type="char" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_DETALLE_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PCANTIDAD" Type="number" Mode="In" />
+    <Parameter Name="PCALIDAD" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+    <Parameter Name="PPRECIO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_DOCUMENTOVENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PFECHAEMISION" Type="date" Mode="In" />
+    <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOTRANSPORTE" Type="number" Mode="In" />
+    <Parameter Name="PIMPUESTO" Type="number" Mode="In" />
+    <Parameter Name="PSUBTOTAL" Type="number" Mode="In" />
+    <Parameter Name="PTOTAL" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_ENCUESTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PNOMBREREAL" Type="varchar2" Mode="In" />
+    <Parameter Name="PCORREO" Type="varchar2" Mode="In" />
+    <Parameter Name="PTELEFONO" Type="number" Mode="In" />
+    <Parameter Name="PVARIEDADCATALOGO" Type="varchar2" Mode="In" />
+    <Parameter Name="PPROCESOSOLICITUD" Type="varchar2" Mode="In" />
+    <Parameter Name="PTIEMPOENVIO" Type="varchar2" Mode="In" />
+    <Parameter Name="PSATISFACCIONPRODUCTO" Type="varchar2" Mode="In" />
+    <Parameter Name="PPROCESOPAGO" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PFECHAPEDIDO" Type="date" Mode="In" />
+    <Parameter Name="PFECHAENTREGA" Type="date" Mode="In" />
+    <Parameter Name="PDIRECCION" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDCLIENTE" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADOPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PCIUDAD" Type="varchar2" Mode="In" />
+    <Parameter Name="PPAIS" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="Out" />
+  </Function>
+  <Function Name="SP_INSERT_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PPRECIOPREMIUM" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOESTANDAR" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOLOWER" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
+  </Function>
   <Function Name="SP_INSERT_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
     <Parameter Name="NOMBREPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="PRECIOESTIMADO" Type="float" Mode="In" />
     <Parameter Name="IMAGENPRODUCTO" Type="varchar2" Mode="In" />
     <Parameter Name="BANNERPRODUCTO" Type="varchar2" Mode="In" />
   </Function>
+  <Function Name="SP_INSERT_SUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PFECHAINICIO" Type="date" Mode="In" />
+    <Parameter Name="PFECHATERMINO" Type="date" Mode="In" />
+    <Parameter Name="PIDESTADOSUBASTA" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PNOMBREUSUARIO" Type="varchar2" Mode="In" />
+    <Parameter Name="PCONTRASENIA" Type="varchar2" Mode="In" />
+    <Parameter Name="PISHABILITADO" Type="char" Mode="In" />
+    <Parameter Name="PIDROL" Type="number" Mode="In" />
+    <Parameter Name="PTOKEN" Type="varchar2" Mode="In" />
+    <Parameter Name="PCORREO" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDPAIS" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_DETALLE_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PCANTIDAD" Type="number" Mode="In" />
+    <Parameter Name="PCALIDAD" Type="varchar2" Mode="In" />
+    <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PPRECIO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_DOCUMENTOVENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
+    <Parameter Name="PFECHAEMISION" Type="date" Mode="In" />
+    <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOTRANSPORTE" Type="number" Mode="In" />
+    <Parameter Name="PIMPUESTO" Type="number" Mode="In" />
+    <Parameter Name="PSUBTOTAL" Type="number" Mode="In" />
+    <Parameter Name="PTOTAL" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_DOCVENTA_ESTADO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_DOCVENTA_PRECIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDDOCUMENTO" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOPRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOTRANSPORTE" Type="number" Mode="In" />
+    <Parameter Name="PIMPUESTO" Type="number" Mode="In" />
+    <Parameter Name="PSUBTOTAL" Type="number" Mode="In" />
+    <Parameter Name="PTOTAL" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_OFERTASUBASTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDOFERTA" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOOFERTA" Type="number" Mode="In" />
+    <Parameter Name="PSELECCIONADO" Type="varchar2" Mode="In" />
+    <Parameter Name="PFECHAOFERTA" Type="date" Mode="In" />
+    <Parameter Name="PIDTRANSPORTISTA" Type="number" Mode="In" />
+    <Parameter Name="PIDTIPOTRANSPORTE" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_PARTICIPACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PID" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PESTADO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_PEDIDO_ESTADO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPEDIDO" Type="number" Mode="In" />
+    <Parameter Name="PIDESTADO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="FERIAVIRTUAL">
+    <Parameter Name="PIDPRODUCCION" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOPREMIUM" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOESTANDAR" Type="number" Mode="In" />
+    <Parameter Name="PPRECIOLOWER" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTOR" Type="number" Mode="In" />
+    <Parameter Name="PIDPRODUCTO" Type="number" Mode="In" />
+  </Function>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="CONTRATO" EntityType="Self.CONTRATO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="DETALLEPEDIDO" EntityType="Self.DETALLEPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="DOCUMENTOVENTA" EntityType="Self.DOCUMENTOVENTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="ENCUESTA" EntityType="Self.ENCUESTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="ESTADODOCUMENTO" EntityType="Self.ESTADODOCUMENTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="ESTADOSUBASTA" EntityType="Self.ESTADOSUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="OFERTAPRODUCTO" EntityType="Self.OFERTAPRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="OFERTASUBASTA" EntityType="Self.OFERTASUBASTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <EntitySet Name="PARTICIPACION" EntityType="Self.PARTICIPACION" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PRODUCCION" EntityType="Self.PRODUCCION" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="FERIAVIRTUAL" store:Type="Tables" />
@@ -429,6 +698,18 @@
     <EntitySet Name="TIPOTRANSPORTE" EntityType="Self.TIPOTRANSPORTE" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="TRANSPORTISTA" EntityType="Self.TRANSPORTISTA" Schema="FERIAVIRTUAL" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="FERIAVIRTUAL" store:Type="Tables" />
+    <AssociationSet Name="FK_DOCUMENTO_ESTADO" Association="Self.FK_DOCUMENTO_ESTADO">
+      <End Role="ESTADODOCUMENTO" EntitySet="ESTADODOCUMENTO" />
+      <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCUMENTO_IDPEDIDO" Association="Self.FK_DOCUMENTO_IDPEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ENCUESTA_IDPEDIDO" Association="Self.FK_ENCUESTA_IDPEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="ENCUESTA" EntitySet="ENCUESTA" />
+    </AssociationSet>
     <AssociationSet Name="FK_ESTADOPEDIDO_PEDIDO" Association="Self.FK_ESTADOPEDIDO_PEDIDO">
       <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
@@ -500,6 +781,14 @@
     <AssociationSet Name="FK_IDUSUARIO_TRANSPORTISTA" Association="Self.FK_IDUSUARIO_TRANSPORTISTA">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="TRANSPORTISTA" EntitySet="TRANSPORTISTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDIDO_PARTICIPACION" Association="Self.FK_PEDIDO_PARTICIPACION">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTOR_PARTICIPACION" Association="Self.FK_PRODUCTOR_PARTICIPACION">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
     </AssociationSet>
     <AssociationSet Name="FK_TIPOTRANSPOR_OFERTA" Association="Self.FK_TIPOTRANSPOR_OFERTA">
       <End Role="TIPOTRANSPORTE" EntitySet="TIPOTRANSPORTE" />

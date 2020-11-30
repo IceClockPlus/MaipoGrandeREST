@@ -57,6 +57,7 @@ namespace LibreriaMaipo
                     user.NombreRol = userDb.ROL.NOMBRE_ROL;
                     user.TipoUsuario = GetTipoUsuario(user.NombreRol, user.IdUsuario);
                     user.Pais = RepositorioPais.BuscarPorId((int)userDb.IDPAIS);
+                    user.Correo = userDb.CORREO;
                 }
                 return user;
 
@@ -69,6 +70,38 @@ namespace LibreriaMaipo
 
 
         }
+
+        public static Usuario Read(int idUsuario)
+        {
+            Usuario user = new Usuario();
+            try
+            {
+                using (var db = new DBEntities())
+                {
+                    var userDb = db.USUARIO.Include("ROL").Where(u => u.ID_USUARIO == idUsuario).FirstOrDefault();
+                    if (userDb == null)
+                    {
+                        return null;
+                    }
+
+                    user.IdUsuario = (int)userDb.ID_USUARIO;
+                    user.NombreUsuario = userDb.NOMBRE_USUARIO;
+                    user.IsHabilitado = userDb.IS_HABILITADO;
+                    user.NombreRol = userDb.ROL.NOMBRE_ROL;
+                    user.TipoUsuario = GetTipoUsuario(user.NombreRol, user.IdUsuario);
+                    user.Pais = RepositorioPais.BuscarPorId((int)userDb.IDPAIS);
+                    user.Correo = userDb.CORREO;
+                }
+                return user;
+
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
 
         public static List<Usuario> ListarTodosUsuario()
         {
@@ -113,17 +146,17 @@ namespace LibreriaMaipo
                     case "Cliente":
                         factory = new ClienteFactory();
                         tipoUsuario = factory.createTipoUsuario();
-                        tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
+                        tipoUsuario.ReadById(idUsr);
                         break;
                     case "Productor":
                         factory = new ProductorFactory();
                         tipoUsuario = factory.createTipoUsuario();
-                        tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
+                        tipoUsuario.ReadById(idUsr);
                         break;
                     case "Transportista":
                         factory = new TransportistaFactory();
                         tipoUsuario = factory.createTipoUsuario();
-                        tipoUsuario.ObtenerDatosPorIdUsuario(idUsr);
+                        tipoUsuario.ReadById(idUsr);
                         break;
                     default:
                         tipoUsuario = null;

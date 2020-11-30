@@ -25,14 +25,17 @@ namespace WebServiceMaipo.Controllers
                 {
                     return Unauthorized();
                 }
+
+                //Generar el prdido
                 Pedido pedido = new Pedido();
                 pedido.Cliente = (Cliente)user.TipoUsuario;
                 pedido.Ciudad = modelPedido.Ciudad;
-                pedido.Direccion = modelPedido.DireccionPedido;
-                pedido.Pais = modelPedido.Pais;
+                pedido.Direccion = user.TipoUsuario.Direccion;
+                pedido.Pais = user.Pais.NombrePais;
                 pedido.FechaPedido = modelPedido.FechaPedido;
                 pedido.FechaEntrega = modelPedido.FechaEntrega;
 
+                //Obtener los detalles 
                 foreach(var det in modelPedido.DetallePedido)
                 {
                     ItemPedido item = new ItemPedido();
@@ -49,10 +52,10 @@ namespace WebServiceMaipo.Controllers
                 return Ok();
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Console.WriteLine(ex.Message);
+                return BadRequest();
             }
 
         }
@@ -100,31 +103,95 @@ namespace WebServiceMaipo.Controllers
             }
         }
 
-        [HttpGet]
-        public void GetAll()
+        [HttpPut]
+        [Route("api/PedidoPutEstado")]
+        public HttpResponseMessage PutPedidoEstado([FromBody] Pedido pedido)
         {
-            /*
             try
             {
-                Pedido ped = new Pedido();
-                var listaPedido = ped.ReadAll();
-                if (listaPedido.Count > 0)
+
+                if (pedido.UpdateEstado())
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, listaPedido);
+                    return Request.CreateResponse(HttpStatusCode.OK, pedido);
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, pedido);
                 }
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
 
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
-            */
         }
+
+
+        [HttpGet]
+        public IEnumerable<Pedido> GetAll()
+        {
+
+            try
+            {
+                List<Pedido> pedidos = new List<Pedido>();
+                pedidos = RepositorioPedido.ReadAll();
+                return pedidos;
+
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Pedido>();
+            }
+            
+
+        }
+
+        [HttpGet]
+        [Route("api/PedidosCliente")]
+        public IEnumerable<Pedido>GetPedidosCliente([FromBody] SecurityViewModel model)
+        {
+            try
+            {
+                List<Pedido> pedidos = new List<Pedido>();
+
+                Usuario user = this.Validate(model.Token);
+                if(user != null)
+                {
+                    pedidos = RepositorioPedido.ObtenerPedidoPorIdCliente(user.TipoUsuario.Id);
+                }
+                pedidos = pedidos.OrderByDescending(p => p.IdPedido).ToList();
+
+                return pedidos;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Pedido>();
+            }
+
+
+        }
+
+        public Usuario Validate(string token)
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                usuario = RepositorioUsuario.GetUsuarioByToken(token);
+
+                return usuario;
+
+            }
+            catch (Exception ex)
+            {
+                return new Usuario();
+            }
+        }
+
 
     }
 }

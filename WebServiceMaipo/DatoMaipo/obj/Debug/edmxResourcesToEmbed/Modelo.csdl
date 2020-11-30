@@ -165,6 +165,185 @@
       <Parameter Name="PCIUDAD" Mode="In" Type="String" />
       <Parameter Name="PPAIS" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_ACTUALIZAR_CONTRATO">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+      <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PPORCCOMISION" Mode="In" Type="Decimal" />
+      <Parameter Name="PVIGENTE" Mode="In" Type="String" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ACTUALIZAR_SUBASTA">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+      <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADOSUBASTA" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ELIMINAR_CONTRATO">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ELIMINAR_SUBASTA">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERTAR_CONTRATO">
+      <Parameter Name="PFECHACREACION" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PPORCCOMISION" Mode="In" Type="Decimal" />
+      <Parameter Name="PVIGENTE" Mode="In" Type="String" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_SUBASTA">
+      <Parameter Name="PFECHAINICIO" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHATERMINO" Mode="In" Type="DateTime" />
+      <Parameter Name="PIDESTADOSUBASTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_USUARIO">
+      <Parameter Name="PNOMBREUSUARIO" Mode="In" Type="String" />
+      <Parameter Name="PCONTRASENIA" Mode="In" Type="String" />
+      <Parameter Name="PISHABILITADO" Mode="In" Type="String" />
+      <Parameter Name="PIDROL" Mode="In" Type="Decimal" />
+      <Parameter Name="PTOKEN" Mode="In" Type="String" />
+      <Parameter Name="PCORREO" Mode="In" Type="String" />
+      <Parameter Name="PIDPAIS" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_DETALLE_PEDIDO">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PCANTIDAD" Mode="In" Type="Decimal" />
+      <Parameter Name="PCALIDAD" Mode="In" Type="String" />
+      <Parameter Name="PESTADO" Mode="In" Type="String" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <EntitySet Name="PARTICIPACION" EntityType="Model.PARTICIPACION" />
+    <AssociationSet Name="FK_PEDIDO_PARTICIPACION" Association="Model.FK_PEDIDO_PARTICIPACION">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTOR_PARTICIPACION" Association="Model.FK_PRODUCTOR_PARTICIPACION">
+      <End Role="PRODUCTOR" EntitySet="PRODUCTOR" />
+      <End Role="PARTICIPACION" EntitySet="PARTICIPACION" />
+    </AssociationSet>
+    <FunctionImport Name="SP_INSERT_PARTICIPACION">
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_PARTICIPACION">
+      <Parameter Name="PID" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PESTADO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_OFERTASUBASTA">
+      <Parameter Name="PIDOFERTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOOFERTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PSELECCIONADO" Mode="In" Type="String" />
+      <Parameter Name="PFECHAOFERTA" Mode="In" Type="DateTime" />
+      <Parameter Name="PIDTRANSPORTISTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDTIPOTRANSPORTE" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_DELETE_PRODUCCION">
+      <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_PEDIDO1">
+      <Parameter Name="PFECHAPEDIDO" Mode="In" Type="DateTime" />
+      <Parameter Name="PFECHAENTREGA" Mode="In" Type="DateTime" />
+      <Parameter Name="PDIRECCION" Mode="In" Type="String" />
+      <Parameter Name="PIDCLIENTE" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADOPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PCIUDAD" Mode="In" Type="String" />
+      <Parameter Name="PPAIS" Mode="In" Type="String" />
+      <Parameter Name="PIDPEDIDO" Mode="Out" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_PRODUCCION">
+      <Parameter Name="PPRECIOPREMIUM" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOESTANDAR" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOLOWER" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_PRODUCCION">
+      <Parameter Name="PIDPRODUCCION" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOPREMIUM" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOESTANDAR" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOLOWER" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <EntitySet Name="ESTADODOCUMENTO" EntityType="Model.ESTADODOCUMENTO" />
+    <EntitySet Name="DOCUMENTOVENTA" EntityType="Model.DOCUMENTOVENTA" />
+    <AssociationSet Name="FK_DOCUMENTO_ESTADO" Association="Model.FK_DOCUMENTO_ESTADO">
+      <End Role="ESTADODOCUMENTO" EntitySet="ESTADODOCUMENTO" />
+      <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCUMENTO_IDPEDIDO" Association="Model.FK_DOCUMENTO_IDPEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="DOCUMENTOVENTA" EntitySet="DOCUMENTOVENTA" />
+    </AssociationSet>
+    <FunctionImport Name="SP_INSERT_DOCUMENTOVENTA">
+      <Parameter Name="PFECHAEMISION" Mode="In" Type="DateTime" />
+      <Parameter Name="PPRECIOPRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOTRANSPORTE" Mode="In" Type="Decimal" />
+      <Parameter Name="PIMPUESTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PSUBTOTAL" Mode="In" Type="Decimal" />
+      <Parameter Name="PTOTAL" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_DOCUMENTOVENTA">
+      <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PFECHAEMISION" Mode="In" Type="DateTime" />
+      <Parameter Name="PPRECIOPRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOTRANSPORTE" Mode="In" Type="Decimal" />
+      <Parameter Name="PIMPUESTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PSUBTOTAL" Mode="In" Type="Decimal" />
+      <Parameter Name="PTOTAL" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_DETALLE_PEDIDO">
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PCANTIDAD" Mode="In" Type="Decimal" />
+      <Parameter Name="PCALIDAD" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDPRODUCTOR" Mode="In" Type="Decimal" />
+      <Parameter Name="PESTADO" Mode="In" Type="String" />
+      <Parameter Name="PPRECIO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_DOCVENTA_PRECIOS">
+      <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOPRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PPRECIOTRANSPORTE" Mode="In" Type="Decimal" />
+      <Parameter Name="PIMPUESTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PSUBTOTAL" Mode="In" Type="Decimal" />
+      <Parameter Name="PTOTAL" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_PEDIDO_ESTADO">
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <EntitySet Name="ENCUESTA" EntityType="Model.ENCUESTA" />
+    <AssociationSet Name="FK_ENCUESTA_IDPEDIDO" Association="Model.FK_ENCUESTA_IDPEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="ENCUESTA" EntitySet="ENCUESTA" />
+    </AssociationSet>
+    <FunctionImport Name="SP_INSERT_ENCUESTA">
+      <Parameter Name="PNOMBREREAL" Mode="In" Type="String" />
+      <Parameter Name="PCORREO" Mode="In" Type="String" />
+      <Parameter Name="PTELEFONO" Mode="In" Type="Decimal" />
+      <Parameter Name="PVARIEDADCATALOGO" Mode="In" Type="String" />
+      <Parameter Name="PPROCESOSOLICITUD" Mode="In" Type="String" />
+      <Parameter Name="PTIEMPOENVIO" Mode="In" Type="String" />
+      <Parameter Name="PSATISFACCIONPRODUCTO" Mode="In" Type="String" />
+      <Parameter Name="PPROCESOPAGO" Mode="In" Type="String" />
+      <Parameter Name="PIDPEDIDO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UPDATE_DOCVENTA_ESTADO">
+      <Parameter Name="PIDDOCUMENTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PIDESTADO" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CLIENTE">
     <Key>
@@ -177,6 +356,7 @@
     <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <NavigationProperty Name="PEDIDO" Relationship="Model.FK_IDCLIENTE_PEDIDO" FromRole="CLIENTE" ToRole="PEDIDO" />
     <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_CLIENTE" FromRole="CLIENTE" ToRole="USUARIO" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="ESTADOPEDIDO">
     <Key>
@@ -202,6 +382,9 @@
     <Property Name="CIUDAD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
     <Property Name="PAIS" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
     <NavigationProperty Name="SUBASTA" Relationship="Model.FK_IDPEDIDO_SUBASTA" FromRole="PEDIDO" ToRole="SUBASTA" />
+    <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PEDIDO_PARTICIPACION" FromRole="PEDIDO" ToRole="PARTICIPACION" />
+    <NavigationProperty Name="DOCUMENTOVENTA" Relationship="Model.FK_DOCUMENTO_IDPEDIDO" FromRole="PEDIDO" ToRole="DOCUMENTOVENTA" />
+    <NavigationProperty Name="ENCUESTA" Relationship="Model.FK_ENCUESTA_IDPEDIDO" FromRole="PEDIDO" ToRole="ENCUESTA" />
   </EntityType>
   <EntityType Name="DETALLEPEDIDO">
     <Key>
@@ -215,6 +398,8 @@
     <Property Name="CALIDAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="IDDETALLEPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDPRODUCTOR" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ESTADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <Association Name="FK_IDCLIENTE_PEDIDO">
     <End Type="Model.CLIENTE" Multiplicity="1" Role="CLIENTE" />
@@ -314,6 +499,8 @@
     <Property Name="TELEFONOPRODUCTRO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="OFERTAPRODUCTO" Relationship="Model.FK_IDPRODUCTOR_OFERTAPROD" FromRole="PRODUCTOR" ToRole="OFERTAPRODUCTO" />
     <NavigationProperty Name="PRODUCCION" Relationship="Model.FK_IDPRODUCTOR_PRODUCCION" FromRole="PRODUCTOR" ToRole="PRODUCCION" />
+    <NavigationProperty Name="PARTICIPACION" Relationship="Model.FK_PRODUCTOR_PARTICIPACION" FromRole="PRODUCTOR" ToRole="PARTICIPACION" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDPRODUCTOR_CONTRATO">
     <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
@@ -455,6 +642,7 @@
     <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <NavigationProperty Name="OFERTASUBASTA" Relationship="Model.FK_IDTRANSPORTISTA_OFERTA" FromRole="TRANSPORTISTA" ToRole="OFERTASUBASTA" />
     <NavigationProperty Name="USUARIO" Relationship="Model.FK_IDUSUARIO_TRANSPORTISTA" FromRole="TRANSPORTISTA" ToRole="USUARIO" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDSUBASTA_OFERTA">
     <End Type="Model.SUBASTA" Role="SUBASTA" Multiplicity="1" />
@@ -550,6 +738,117 @@
       </Principal>
       <Dependent Role="PRODUCCION">
         <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PARTICIPACION">
+    <Key>
+      <PropertyRef Name="IDPARTICIPACION" />
+    </Key>
+    <Property Name="IDPARTICIPACION" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPRODUCTOR" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="ESTADOPARTICIPACION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PEDIDO" Relationship="Model.FK_PEDIDO_PARTICIPACION" FromRole="PARTICIPACION" ToRole="PEDIDO" />
+    <NavigationProperty Name="PRODUCTOR" Relationship="Model.FK_PRODUCTOR_PARTICIPACION" FromRole="PARTICIPACION" ToRole="PRODUCTOR" />
+  </EntityType>
+  <Association Name="FK_PEDIDO_PARTICIPACION">
+    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+    <End Type="Model.PARTICIPACION" Role="PARTICIPACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="PARTICIPACION">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTOR_PARTICIPACION">
+    <End Type="Model.PRODUCTOR" Role="PRODUCTOR" Multiplicity="1" />
+    <End Type="Model.PARTICIPACION" Role="PARTICIPACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOR">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Principal>
+      <Dependent Role="PARTICIPACION">
+        <PropertyRef Name="IDPRODUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ESTADODOCUMENTO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DOCUMENTOVENTA" Relationship="Model.FK_DOCUMENTO_ESTADO" FromRole="ESTADODOCUMENTO" ToRole="DOCUMENTOVENTA" />
+  </EntityType>
+  <EntityType Name="DOCUMENTOVENTA">
+    <Key>
+      <PropertyRef Name="IDDOCUMENTO" />
+    </Key>
+    <Property Name="IDDOCUMENTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHAEMISION" Type="DateTime" />
+    <Property Name="PRECIOPRODUCTO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="PRECIOTRANSPORTE" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="IMPUESTO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="SUBTOTAL" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="IDESTADODOC" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="ESTADODOCUMENTO" Relationship="Model.FK_DOCUMENTO_ESTADO" FromRole="DOCUMENTOVENTA" ToRole="ESTADODOCUMENTO" />
+    <NavigationProperty Name="PEDIDO" Relationship="Model.FK_DOCUMENTO_IDPEDIDO" FromRole="DOCUMENTOVENTA" ToRole="PEDIDO" />
+  </EntityType>
+  <Association Name="FK_DOCUMENTO_ESTADO">
+    <End Type="Model.ESTADODOCUMENTO" Role="ESTADODOCUMENTO" Multiplicity="1" />
+    <End Type="Model.DOCUMENTOVENTA" Role="DOCUMENTOVENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADODOCUMENTO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DOCUMENTOVENTA">
+        <PropertyRef Name="IDESTADODOC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCUMENTO_IDPEDIDO">
+    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+    <End Type="Model.DOCUMENTOVENTA" Role="DOCUMENTOVENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="DOCUMENTOVENTA">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ENCUESTA">
+    <Key>
+      <PropertyRef Name="IDENCUESTA" />
+    </Key>
+    <Property Name="IDENCUESTA" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBREREAL" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="CORREO" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="VARIEDADCATALOGO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PROCESOSOLICITUD" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="TIEMPOENVIO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="SATISFACCIONPRODUCTO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PROCESOPAGO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="IDPEDIDO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <NavigationProperty Name="PEDIDO" Relationship="Model.FK_ENCUESTA_IDPEDIDO" FromRole="ENCUESTA" ToRole="PEDIDO" />
+  </EntityType>
+  <Association Name="FK_ENCUESTA_IDPEDIDO">
+    <End Type="Model.PEDIDO" Role="PEDIDO" Multiplicity="1" />
+    <End Type="Model.ENCUESTA" Role="ENCUESTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="ENCUESTA">
+        <PropertyRef Name="IDPEDIDO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

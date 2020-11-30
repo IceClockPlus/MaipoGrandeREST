@@ -45,6 +45,10 @@ namespace DatoMaipo
         public DbSet<TIPOTRANSPORTE> TIPOTRANSPORTE { get; set; }
         public DbSet<TRANSPORTISTA> TRANSPORTISTA { get; set; }
         public DbSet<PRODUCCION> PRODUCCION { get; set; }
+        public DbSet<PARTICIPACION> PARTICIPACION { get; set; }
+        public DbSet<ESTADODOCUMENTO> ESTADODOCUMENTO { get; set; }
+        public DbSet<DOCUMENTOVENTA> DOCUMENTOVENTA { get; set; }
+        public DbSet<ENCUESTA> ENCUESTA { get; set; }
     
         public virtual int SP_INSERT_PRODUCTO(string nOMBREPRODUCTO, Nullable<decimal> pRECIOESTIMADO, string iMAGENPRODUCTO, string bANNERPRODUCTO)
         {
@@ -131,6 +135,556 @@ namespace DatoMaipo
                 new ObjectParameter("PPAIS", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_PEDIDO", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pDIRECCIONParameter, pIDCLIENTEParameter, pIDESTADOParameter, pCIUDADParameter, pPAISParameter);
+        }
+    
+        public virtual int SP_ACTUALIZAR_CONTRATO(Nullable<decimal> pID, Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pPORCCOMISION, string pVIGENTE, Nullable<decimal> pIDPRODUCTOR)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pPORCCOMISIONParameter = pPORCCOMISION.HasValue ?
+                new ObjectParameter("PPORCCOMISION", pPORCCOMISION) :
+                new ObjectParameter("PPORCCOMISION", typeof(decimal));
+    
+            var pVIGENTEParameter = pVIGENTE != null ?
+                new ObjectParameter("PVIGENTE", pVIGENTE) :
+                new ObjectParameter("PVIGENTE", typeof(string));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_CONTRATO", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pPORCCOMISIONParameter, pVIGENTEParameter, pIDPRODUCTORParameter);
+        }
+    
+        public virtual int SP_ACTUALIZAR_SUBASTA(Nullable<decimal> pID, Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDESTADOSUBASTA)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDESTADOSUBASTAParameter = pIDESTADOSUBASTA.HasValue ?
+                new ObjectParameter("PIDESTADOSUBASTA", pIDESTADOSUBASTA) :
+                new ObjectParameter("PIDESTADOSUBASTA", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAR_SUBASTA", pIDParameter, pFECHACREACIONParameter, pFECHATERMINOParameter, pIDPEDIDOParameter, pIDESTADOSUBASTAParameter);
+        }
+    
+        public virtual int SP_ELIMINAR_CONTRATO(Nullable<decimal> pID)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ELIMINAR_CONTRATO", pIDParameter);
+        }
+    
+        public virtual int SP_ELIMINAR_SUBASTA(Nullable<decimal> pID)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ELIMINAR_SUBASTA", pIDParameter);
+        }
+    
+        public virtual int SP_INSERTAR_CONTRATO(Nullable<System.DateTime> pFECHACREACION, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pPORCCOMISION, string pVIGENTE, Nullable<decimal> pIDPRODUCTOR)
+        {
+            var pFECHACREACIONParameter = pFECHACREACION.HasValue ?
+                new ObjectParameter("PFECHACREACION", pFECHACREACION) :
+                new ObjectParameter("PFECHACREACION", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pPORCCOMISIONParameter = pPORCCOMISION.HasValue ?
+                new ObjectParameter("PPORCCOMISION", pPORCCOMISION) :
+                new ObjectParameter("PPORCCOMISION", typeof(decimal));
+    
+            var pVIGENTEParameter = pVIGENTE != null ?
+                new ObjectParameter("PVIGENTE", pVIGENTE) :
+                new ObjectParameter("PVIGENTE", typeof(string));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTAR_CONTRATO", pFECHACREACIONParameter, pFECHATERMINOParameter, pPORCCOMISIONParameter, pVIGENTEParameter, pIDPRODUCTORParameter);
+        }
+    
+        public virtual int SP_INSERT_SUBASTA(Nullable<System.DateTime> pFECHAINICIO, Nullable<System.DateTime> pFECHATERMINO, Nullable<decimal> pIDESTADOSUBASTA, Nullable<decimal> pIDPEDIDO)
+        {
+            var pFECHAINICIOParameter = pFECHAINICIO.HasValue ?
+                new ObjectParameter("PFECHAINICIO", pFECHAINICIO) :
+                new ObjectParameter("PFECHAINICIO", typeof(System.DateTime));
+    
+            var pFECHATERMINOParameter = pFECHATERMINO.HasValue ?
+                new ObjectParameter("PFECHATERMINO", pFECHATERMINO) :
+                new ObjectParameter("PFECHATERMINO", typeof(System.DateTime));
+    
+            var pIDESTADOSUBASTAParameter = pIDESTADOSUBASTA.HasValue ?
+                new ObjectParameter("PIDESTADOSUBASTA", pIDESTADOSUBASTA) :
+                new ObjectParameter("PIDESTADOSUBASTA", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_SUBASTA", pFECHAINICIOParameter, pFECHATERMINOParameter, pIDESTADOSUBASTAParameter, pIDPEDIDOParameter);
+        }
+    
+        public virtual int SP_INSERT_USUARIO(string pNOMBREUSUARIO, string pCONTRASENIA, string pISHABILITADO, Nullable<decimal> pIDROL, string pTOKEN, string pCORREO, Nullable<decimal> pIDPAIS)
+        {
+            var pNOMBREUSUARIOParameter = pNOMBREUSUARIO != null ?
+                new ObjectParameter("PNOMBREUSUARIO", pNOMBREUSUARIO) :
+                new ObjectParameter("PNOMBREUSUARIO", typeof(string));
+    
+            var pCONTRASENIAParameter = pCONTRASENIA != null ?
+                new ObjectParameter("PCONTRASENIA", pCONTRASENIA) :
+                new ObjectParameter("PCONTRASENIA", typeof(string));
+    
+            var pISHABILITADOParameter = pISHABILITADO != null ?
+                new ObjectParameter("PISHABILITADO", pISHABILITADO) :
+                new ObjectParameter("PISHABILITADO", typeof(string));
+    
+            var pIDROLParameter = pIDROL.HasValue ?
+                new ObjectParameter("PIDROL", pIDROL) :
+                new ObjectParameter("PIDROL", typeof(decimal));
+    
+            var pTOKENParameter = pTOKEN != null ?
+                new ObjectParameter("PTOKEN", pTOKEN) :
+                new ObjectParameter("PTOKEN", typeof(string));
+    
+            var pCORREOParameter = pCORREO != null ?
+                new ObjectParameter("PCORREO", pCORREO) :
+                new ObjectParameter("PCORREO", typeof(string));
+    
+            var pIDPAISParameter = pIDPAIS.HasValue ?
+                new ObjectParameter("PIDPAIS", pIDPAIS) :
+                new ObjectParameter("PIDPAIS", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_USUARIO", pNOMBREUSUARIOParameter, pCONTRASENIAParameter, pISHABILITADOParameter, pIDROLParameter, pTOKENParameter, pCORREOParameter, pIDPAISParameter);
+        }
+    
+        public virtual int SP_UPDATE_DETALLE_PEDIDO(Nullable<decimal> pID, Nullable<decimal> pIDPRODUCTO, Nullable<decimal> pCANTIDAD, string pCALIDAD, string pESTADO, Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pPRECIO)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pIDPRODUCTOParameter = pIDPRODUCTO.HasValue ?
+                new ObjectParameter("PIDPRODUCTO", pIDPRODUCTO) :
+                new ObjectParameter("PIDPRODUCTO", typeof(decimal));
+    
+            var pCANTIDADParameter = pCANTIDAD.HasValue ?
+                new ObjectParameter("PCANTIDAD", pCANTIDAD) :
+                new ObjectParameter("PCANTIDAD", typeof(decimal));
+    
+            var pCALIDADParameter = pCALIDAD != null ?
+                new ObjectParameter("PCALIDAD", pCALIDAD) :
+                new ObjectParameter("PCALIDAD", typeof(string));
+    
+            var pESTADOParameter = pESTADO != null ?
+                new ObjectParameter("PESTADO", pESTADO) :
+                new ObjectParameter("PESTADO", typeof(string));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pPRECIOParameter = pPRECIO.HasValue ?
+                new ObjectParameter("PPRECIO", pPRECIO) :
+                new ObjectParameter("PPRECIO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DETALLE_PEDIDO", pIDParameter, pIDPRODUCTOParameter, pCANTIDADParameter, pCALIDADParameter, pESTADOParameter, pIDPRODUCTORParameter, pPRECIOParameter);
+        }
+    
+        public virtual int SP_INSERT_PARTICIPACION(Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pIDPEDIDO)
+        {
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PARTICIPACION", pIDPRODUCTORParameter, pIDPEDIDOParameter);
+        }
+    
+        public virtual int SP_UPDATE_PARTICIPACION(Nullable<decimal> pID, Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pIDPEDIDO, string pESTADO)
+        {
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(decimal));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pESTADOParameter = pESTADO != null ?
+                new ObjectParameter("PESTADO", pESTADO) :
+                new ObjectParameter("PESTADO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PARTICIPACION", pIDParameter, pIDPRODUCTORParameter, pIDPEDIDOParameter, pESTADOParameter);
+        }
+    
+        public virtual int SP_UPDATE_OFERTASUBASTA(Nullable<decimal> pIDOFERTA, Nullable<decimal> pPRECIOOFERTA, string pSELECCIONADO, Nullable<System.DateTime> pFECHAOFERTA, Nullable<decimal> pIDTRANSPORTISTA, Nullable<decimal> pIDTIPOTRANSPORTE)
+        {
+            var pIDOFERTAParameter = pIDOFERTA.HasValue ?
+                new ObjectParameter("PIDOFERTA", pIDOFERTA) :
+                new ObjectParameter("PIDOFERTA", typeof(decimal));
+    
+            var pPRECIOOFERTAParameter = pPRECIOOFERTA.HasValue ?
+                new ObjectParameter("PPRECIOOFERTA", pPRECIOOFERTA) :
+                new ObjectParameter("PPRECIOOFERTA", typeof(decimal));
+    
+            var pSELECCIONADOParameter = pSELECCIONADO != null ?
+                new ObjectParameter("PSELECCIONADO", pSELECCIONADO) :
+                new ObjectParameter("PSELECCIONADO", typeof(string));
+    
+            var pFECHAOFERTAParameter = pFECHAOFERTA.HasValue ?
+                new ObjectParameter("PFECHAOFERTA", pFECHAOFERTA) :
+                new ObjectParameter("PFECHAOFERTA", typeof(System.DateTime));
+    
+            var pIDTRANSPORTISTAParameter = pIDTRANSPORTISTA.HasValue ?
+                new ObjectParameter("PIDTRANSPORTISTA", pIDTRANSPORTISTA) :
+                new ObjectParameter("PIDTRANSPORTISTA", typeof(decimal));
+    
+            var pIDTIPOTRANSPORTEParameter = pIDTIPOTRANSPORTE.HasValue ?
+                new ObjectParameter("PIDTIPOTRANSPORTE", pIDTIPOTRANSPORTE) :
+                new ObjectParameter("PIDTIPOTRANSPORTE", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_OFERTASUBASTA", pIDOFERTAParameter, pPRECIOOFERTAParameter, pSELECCIONADOParameter, pFECHAOFERTAParameter, pIDTRANSPORTISTAParameter, pIDTIPOTRANSPORTEParameter);
+        }
+    
+        public virtual int SP_DELETE_PRODUCCION(Nullable<decimal> pIDPRODUCCION)
+        {
+            var pIDPRODUCCIONParameter = pIDPRODUCCION.HasValue ?
+                new ObjectParameter("PIDPRODUCCION", pIDPRODUCCION) :
+                new ObjectParameter("PIDPRODUCCION", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DELETE_PRODUCCION", pIDPRODUCCIONParameter);
+        }
+    
+        public virtual int SP_INSERT_PEDIDO1(Nullable<System.DateTime> pFECHAPEDIDO, Nullable<System.DateTime> pFECHAENTREGA, string pDIRECCION, Nullable<decimal> pIDCLIENTE, Nullable<decimal> pIDESTADOPEDIDO, string pCIUDAD, string pPAIS, ObjectParameter pIDPEDIDO)
+        {
+            var pFECHAPEDIDOParameter = pFECHAPEDIDO.HasValue ?
+                new ObjectParameter("PFECHAPEDIDO", pFECHAPEDIDO) :
+                new ObjectParameter("PFECHAPEDIDO", typeof(System.DateTime));
+    
+            var pFECHAENTREGAParameter = pFECHAENTREGA.HasValue ?
+                new ObjectParameter("PFECHAENTREGA", pFECHAENTREGA) :
+                new ObjectParameter("PFECHAENTREGA", typeof(System.DateTime));
+    
+            var pDIRECCIONParameter = pDIRECCION != null ?
+                new ObjectParameter("PDIRECCION", pDIRECCION) :
+                new ObjectParameter("PDIRECCION", typeof(string));
+    
+            var pIDCLIENTEParameter = pIDCLIENTE.HasValue ?
+                new ObjectParameter("PIDCLIENTE", pIDCLIENTE) :
+                new ObjectParameter("PIDCLIENTE", typeof(decimal));
+    
+            var pIDESTADOPEDIDOParameter = pIDESTADOPEDIDO.HasValue ?
+                new ObjectParameter("PIDESTADOPEDIDO", pIDESTADOPEDIDO) :
+                new ObjectParameter("PIDESTADOPEDIDO", typeof(decimal));
+    
+            var pCIUDADParameter = pCIUDAD != null ?
+                new ObjectParameter("PCIUDAD", pCIUDAD) :
+                new ObjectParameter("PCIUDAD", typeof(string));
+    
+            var pPAISParameter = pPAIS != null ?
+                new ObjectParameter("PPAIS", pPAIS) :
+                new ObjectParameter("PPAIS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PEDIDO1", pFECHAPEDIDOParameter, pFECHAENTREGAParameter, pDIRECCIONParameter, pIDCLIENTEParameter, pIDESTADOPEDIDOParameter, pCIUDADParameter, pPAISParameter, pIDPEDIDO);
+        }
+    
+        public virtual int SP_INSERT_PRODUCCION(Nullable<decimal> pPRECIOPREMIUM, Nullable<decimal> pPRECIOESTANDAR, Nullable<decimal> pPRECIOLOWER, Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pIDPRODUCTO)
+        {
+            var pPRECIOPREMIUMParameter = pPRECIOPREMIUM.HasValue ?
+                new ObjectParameter("PPRECIOPREMIUM", pPRECIOPREMIUM) :
+                new ObjectParameter("PPRECIOPREMIUM", typeof(decimal));
+    
+            var pPRECIOESTANDARParameter = pPRECIOESTANDAR.HasValue ?
+                new ObjectParameter("PPRECIOESTANDAR", pPRECIOESTANDAR) :
+                new ObjectParameter("PPRECIOESTANDAR", typeof(decimal));
+    
+            var pPRECIOLOWERParameter = pPRECIOLOWER.HasValue ?
+                new ObjectParameter("PPRECIOLOWER", pPRECIOLOWER) :
+                new ObjectParameter("PPRECIOLOWER", typeof(decimal));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pIDPRODUCTOParameter = pIDPRODUCTO.HasValue ?
+                new ObjectParameter("PIDPRODUCTO", pIDPRODUCTO) :
+                new ObjectParameter("PIDPRODUCTO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_PRODUCCION", pPRECIOPREMIUMParameter, pPRECIOESTANDARParameter, pPRECIOLOWERParameter, pIDPRODUCTORParameter, pIDPRODUCTOParameter);
+        }
+    
+        public virtual int SP_UPDATE_PRODUCCION(Nullable<decimal> pIDPRODUCCION, Nullable<decimal> pPRECIOPREMIUM, Nullable<decimal> pPRECIOESTANDAR, Nullable<decimal> pPRECIOLOWER, Nullable<decimal> pIDPRODUCTOR, Nullable<decimal> pIDPRODUCTO)
+        {
+            var pIDPRODUCCIONParameter = pIDPRODUCCION.HasValue ?
+                new ObjectParameter("PIDPRODUCCION", pIDPRODUCCION) :
+                new ObjectParameter("PIDPRODUCCION", typeof(decimal));
+    
+            var pPRECIOPREMIUMParameter = pPRECIOPREMIUM.HasValue ?
+                new ObjectParameter("PPRECIOPREMIUM", pPRECIOPREMIUM) :
+                new ObjectParameter("PPRECIOPREMIUM", typeof(decimal));
+    
+            var pPRECIOESTANDARParameter = pPRECIOESTANDAR.HasValue ?
+                new ObjectParameter("PPRECIOESTANDAR", pPRECIOESTANDAR) :
+                new ObjectParameter("PPRECIOESTANDAR", typeof(decimal));
+    
+            var pPRECIOLOWERParameter = pPRECIOLOWER.HasValue ?
+                new ObjectParameter("PPRECIOLOWER", pPRECIOLOWER) :
+                new ObjectParameter("PPRECIOLOWER", typeof(decimal));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pIDPRODUCTOParameter = pIDPRODUCTO.HasValue ?
+                new ObjectParameter("PIDPRODUCTO", pIDPRODUCTO) :
+                new ObjectParameter("PIDPRODUCTO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PRODUCCION", pIDPRODUCCIONParameter, pPRECIOPREMIUMParameter, pPRECIOESTANDARParameter, pPRECIOLOWERParameter, pIDPRODUCTORParameter, pIDPRODUCTOParameter);
+        }
+    
+        public virtual int SP_INSERT_DOCUMENTOVENTA(Nullable<System.DateTime> pFECHAEMISION, Nullable<decimal> pPRECIOPRODUCTO, Nullable<decimal> pPRECIOTRANSPORTE, Nullable<decimal> pIMPUESTO, Nullable<decimal> pSUBTOTAL, Nullable<decimal> pTOTAL, Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDESTADO)
+        {
+            var pFECHAEMISIONParameter = pFECHAEMISION.HasValue ?
+                new ObjectParameter("PFECHAEMISION", pFECHAEMISION) :
+                new ObjectParameter("PFECHAEMISION", typeof(System.DateTime));
+    
+            var pPRECIOPRODUCTOParameter = pPRECIOPRODUCTO.HasValue ?
+                new ObjectParameter("PPRECIOPRODUCTO", pPRECIOPRODUCTO) :
+                new ObjectParameter("PPRECIOPRODUCTO", typeof(decimal));
+    
+            var pPRECIOTRANSPORTEParameter = pPRECIOTRANSPORTE.HasValue ?
+                new ObjectParameter("PPRECIOTRANSPORTE", pPRECIOTRANSPORTE) :
+                new ObjectParameter("PPRECIOTRANSPORTE", typeof(decimal));
+    
+            var pIMPUESTOParameter = pIMPUESTO.HasValue ?
+                new ObjectParameter("PIMPUESTO", pIMPUESTO) :
+                new ObjectParameter("PIMPUESTO", typeof(decimal));
+    
+            var pSUBTOTALParameter = pSUBTOTAL.HasValue ?
+                new ObjectParameter("PSUBTOTAL", pSUBTOTAL) :
+                new ObjectParameter("PSUBTOTAL", typeof(decimal));
+    
+            var pTOTALParameter = pTOTAL.HasValue ?
+                new ObjectParameter("PTOTAL", pTOTAL) :
+                new ObjectParameter("PTOTAL", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_DOCUMENTOVENTA", pFECHAEMISIONParameter, pPRECIOPRODUCTOParameter, pPRECIOTRANSPORTEParameter, pIMPUESTOParameter, pSUBTOTALParameter, pTOTALParameter, pIDPEDIDOParameter, pIDESTADOParameter);
+        }
+    
+        public virtual int SP_UPDATE_DOCUMENTOVENTA(Nullable<decimal> pIDDOCUMENTO, Nullable<System.DateTime> pFECHAEMISION, Nullable<decimal> pPRECIOPRODUCTO, Nullable<decimal> pPRECIOTRANSPORTE, Nullable<decimal> pIMPUESTO, Nullable<decimal> pSUBTOTAL, Nullable<decimal> pTOTAL, Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDESTADO)
+        {
+            var pIDDOCUMENTOParameter = pIDDOCUMENTO.HasValue ?
+                new ObjectParameter("PIDDOCUMENTO", pIDDOCUMENTO) :
+                new ObjectParameter("PIDDOCUMENTO", typeof(decimal));
+    
+            var pFECHAEMISIONParameter = pFECHAEMISION.HasValue ?
+                new ObjectParameter("PFECHAEMISION", pFECHAEMISION) :
+                new ObjectParameter("PFECHAEMISION", typeof(System.DateTime));
+    
+            var pPRECIOPRODUCTOParameter = pPRECIOPRODUCTO.HasValue ?
+                new ObjectParameter("PPRECIOPRODUCTO", pPRECIOPRODUCTO) :
+                new ObjectParameter("PPRECIOPRODUCTO", typeof(decimal));
+    
+            var pPRECIOTRANSPORTEParameter = pPRECIOTRANSPORTE.HasValue ?
+                new ObjectParameter("PPRECIOTRANSPORTE", pPRECIOTRANSPORTE) :
+                new ObjectParameter("PPRECIOTRANSPORTE", typeof(decimal));
+    
+            var pIMPUESTOParameter = pIMPUESTO.HasValue ?
+                new ObjectParameter("PIMPUESTO", pIMPUESTO) :
+                new ObjectParameter("PIMPUESTO", typeof(decimal));
+    
+            var pSUBTOTALParameter = pSUBTOTAL.HasValue ?
+                new ObjectParameter("PSUBTOTAL", pSUBTOTAL) :
+                new ObjectParameter("PSUBTOTAL", typeof(decimal));
+    
+            var pTOTALParameter = pTOTAL.HasValue ?
+                new ObjectParameter("PTOTAL", pTOTAL) :
+                new ObjectParameter("PTOTAL", typeof(decimal));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DOCUMENTOVENTA", pIDDOCUMENTOParameter, pFECHAEMISIONParameter, pPRECIOPRODUCTOParameter, pPRECIOTRANSPORTEParameter, pIMPUESTOParameter, pSUBTOTALParameter, pTOTALParameter, pIDPEDIDOParameter, pIDESTADOParameter);
+        }
+    
+        public virtual int SP_INSERT_DETALLE_PEDIDO(Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDPRODUCTO, Nullable<decimal> pCANTIDAD, Nullable<decimal> pCALIDAD, Nullable<decimal> pIDPRODUCTOR, string pESTADO, Nullable<decimal> pPRECIO)
+        {
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDPRODUCTOParameter = pIDPRODUCTO.HasValue ?
+                new ObjectParameter("PIDPRODUCTO", pIDPRODUCTO) :
+                new ObjectParameter("PIDPRODUCTO", typeof(decimal));
+    
+            var pCANTIDADParameter = pCANTIDAD.HasValue ?
+                new ObjectParameter("PCANTIDAD", pCANTIDAD) :
+                new ObjectParameter("PCANTIDAD", typeof(decimal));
+    
+            var pCALIDADParameter = pCALIDAD.HasValue ?
+                new ObjectParameter("PCALIDAD", pCALIDAD) :
+                new ObjectParameter("PCALIDAD", typeof(decimal));
+    
+            var pIDPRODUCTORParameter = pIDPRODUCTOR.HasValue ?
+                new ObjectParameter("PIDPRODUCTOR", pIDPRODUCTOR) :
+                new ObjectParameter("PIDPRODUCTOR", typeof(decimal));
+    
+            var pESTADOParameter = pESTADO != null ?
+                new ObjectParameter("PESTADO", pESTADO) :
+                new ObjectParameter("PESTADO", typeof(string));
+    
+            var pPRECIOParameter = pPRECIO.HasValue ?
+                new ObjectParameter("PPRECIO", pPRECIO) :
+                new ObjectParameter("PPRECIO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_DETALLE_PEDIDO", pIDPEDIDOParameter, pIDPRODUCTOParameter, pCANTIDADParameter, pCALIDADParameter, pIDPRODUCTORParameter, pESTADOParameter, pPRECIOParameter);
+        }
+    
+        public virtual int SP_UPDATE_DOCVENTA_PRECIOS(Nullable<decimal> pIDDOCUMENTO, Nullable<decimal> pPRECIOPRODUCTO, Nullable<decimal> pPRECIOTRANSPORTE, Nullable<decimal> pIMPUESTO, Nullable<decimal> pSUBTOTAL, Nullable<decimal> pTOTAL)
+        {
+            var pIDDOCUMENTOParameter = pIDDOCUMENTO.HasValue ?
+                new ObjectParameter("PIDDOCUMENTO", pIDDOCUMENTO) :
+                new ObjectParameter("PIDDOCUMENTO", typeof(decimal));
+    
+            var pPRECIOPRODUCTOParameter = pPRECIOPRODUCTO.HasValue ?
+                new ObjectParameter("PPRECIOPRODUCTO", pPRECIOPRODUCTO) :
+                new ObjectParameter("PPRECIOPRODUCTO", typeof(decimal));
+    
+            var pPRECIOTRANSPORTEParameter = pPRECIOTRANSPORTE.HasValue ?
+                new ObjectParameter("PPRECIOTRANSPORTE", pPRECIOTRANSPORTE) :
+                new ObjectParameter("PPRECIOTRANSPORTE", typeof(decimal));
+    
+            var pIMPUESTOParameter = pIMPUESTO.HasValue ?
+                new ObjectParameter("PIMPUESTO", pIMPUESTO) :
+                new ObjectParameter("PIMPUESTO", typeof(decimal));
+    
+            var pSUBTOTALParameter = pSUBTOTAL.HasValue ?
+                new ObjectParameter("PSUBTOTAL", pSUBTOTAL) :
+                new ObjectParameter("PSUBTOTAL", typeof(decimal));
+    
+            var pTOTALParameter = pTOTAL.HasValue ?
+                new ObjectParameter("PTOTAL", pTOTAL) :
+                new ObjectParameter("PTOTAL", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DOCVENTA_PRECIOS", pIDDOCUMENTOParameter, pPRECIOPRODUCTOParameter, pPRECIOTRANSPORTEParameter, pIMPUESTOParameter, pSUBTOTALParameter, pTOTALParameter);
+        }
+    
+        public virtual int SP_UPDATE_PEDIDO_ESTADO(Nullable<decimal> pIDPEDIDO, Nullable<decimal> pIDESTADO)
+        {
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PEDIDO_ESTADO", pIDPEDIDOParameter, pIDESTADOParameter);
+        }
+    
+        public virtual int SP_INSERT_ENCUESTA(string pNOMBREREAL, string pCORREO, Nullable<decimal> pTELEFONO, string pVARIEDADCATALOGO, string pPROCESOSOLICITUD, string pTIEMPOENVIO, string pSATISFACCIONPRODUCTO, string pPROCESOPAGO, Nullable<decimal> pIDPEDIDO)
+        {
+            var pNOMBREREALParameter = pNOMBREREAL != null ?
+                new ObjectParameter("PNOMBREREAL", pNOMBREREAL) :
+                new ObjectParameter("PNOMBREREAL", typeof(string));
+    
+            var pCORREOParameter = pCORREO != null ?
+                new ObjectParameter("PCORREO", pCORREO) :
+                new ObjectParameter("PCORREO", typeof(string));
+    
+            var pTELEFONOParameter = pTELEFONO.HasValue ?
+                new ObjectParameter("PTELEFONO", pTELEFONO) :
+                new ObjectParameter("PTELEFONO", typeof(decimal));
+    
+            var pVARIEDADCATALOGOParameter = pVARIEDADCATALOGO != null ?
+                new ObjectParameter("PVARIEDADCATALOGO", pVARIEDADCATALOGO) :
+                new ObjectParameter("PVARIEDADCATALOGO", typeof(string));
+    
+            var pPROCESOSOLICITUDParameter = pPROCESOSOLICITUD != null ?
+                new ObjectParameter("PPROCESOSOLICITUD", pPROCESOSOLICITUD) :
+                new ObjectParameter("PPROCESOSOLICITUD", typeof(string));
+    
+            var pTIEMPOENVIOParameter = pTIEMPOENVIO != null ?
+                new ObjectParameter("PTIEMPOENVIO", pTIEMPOENVIO) :
+                new ObjectParameter("PTIEMPOENVIO", typeof(string));
+    
+            var pSATISFACCIONPRODUCTOParameter = pSATISFACCIONPRODUCTO != null ?
+                new ObjectParameter("PSATISFACCIONPRODUCTO", pSATISFACCIONPRODUCTO) :
+                new ObjectParameter("PSATISFACCIONPRODUCTO", typeof(string));
+    
+            var pPROCESOPAGOParameter = pPROCESOPAGO != null ?
+                new ObjectParameter("PPROCESOPAGO", pPROCESOPAGO) :
+                new ObjectParameter("PPROCESOPAGO", typeof(string));
+    
+            var pIDPEDIDOParameter = pIDPEDIDO.HasValue ?
+                new ObjectParameter("PIDPEDIDO", pIDPEDIDO) :
+                new ObjectParameter("PIDPEDIDO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_ENCUESTA", pNOMBREREALParameter, pCORREOParameter, pTELEFONOParameter, pVARIEDADCATALOGOParameter, pPROCESOSOLICITUDParameter, pTIEMPOENVIOParameter, pSATISFACCIONPRODUCTOParameter, pPROCESOPAGOParameter, pIDPEDIDOParameter);
+        }
+    
+        public virtual int SP_UPDATE_DOCVENTA_ESTADO(Nullable<decimal> pIDDOCUMENTO, Nullable<decimal> pIDESTADO)
+        {
+            var pIDDOCUMENTOParameter = pIDDOCUMENTO.HasValue ?
+                new ObjectParameter("PIDDOCUMENTO", pIDDOCUMENTO) :
+                new ObjectParameter("PIDDOCUMENTO", typeof(decimal));
+    
+            var pIDESTADOParameter = pIDESTADO.HasValue ?
+                new ObjectParameter("PIDESTADO", pIDESTADO) :
+                new ObjectParameter("PIDESTADO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_DOCVENTA_ESTADO", pIDDOCUMENTOParameter, pIDESTADOParameter);
         }
     }
 }

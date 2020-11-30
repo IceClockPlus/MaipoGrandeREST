@@ -63,6 +63,11 @@ namespace LibreriaMaipo
 
         }
 
+        /// <summary>
+        /// Obtener los pedidos del cliente por su id
+        /// </summary>
+        /// <param name="idCliente"></param>
+        /// <returns></returns>
         public static List<Pedido> ObtenerPedidoPorIdCliente(int idCliente)
         {
             List<Pedido> pedidos = new List<Pedido>();
@@ -100,6 +105,54 @@ namespace LibreriaMaipo
 
 
         }
+
+        public static List<Pedido> ReadAll()
+        {
+            try
+            {
+                TipoUsuarioFactory factory = new ClienteFactory();
+
+                List<Pedido> list = new List<Pedido>();
+                using (var db = new DBEntities())
+                {
+                    var listPedido = db.PEDIDO.ToList();
+                    if(listPedido.Count > 0)
+                    {
+                        foreach (var p in listPedido)
+                        {
+                            Pedido pedido = new Pedido();
+                            pedido.IdPedido = (int)p.IDPEDIDO;
+                            pedido.FechaPedido = p.FECHAPEDIDO;
+                            pedido.FechaEntrega = p.FECHAENTREGA;
+                            pedido.Ciudad = p.CIUDAD;
+                            pedido.Direccion = p.DIRECCIONPEDIDO;
+                            pedido.Pais = p.PAIS;
+                            pedido.EstadoPedido = RepositorioEstadoPedido.ObtenerEstadoPedidoById((int)p.IDESTADOPEDIDO);
+                            pedido.DetallePedido = RepositorioDetallePedido.ObtenerDetallePedido(pedido.IdPedido);
+                            //Crear una instancia cliente con el uso de ClienteFactory
+                            TipoUsuario cli = factory.createTipoUsuario();
+                            //Recuperar datos del cliente por su id
+                            cli.ObtenerDatosPorId((int)p.IDCLIENTE);
+                            pedido.Cliente = (Cliente)cli;
+                            //Obtener detalle del pedido
+                            pedido.DetallePedido = RepositorioDetallePedido.ObtenerDetallePedido(pedido.IdPedido);
+
+
+                            list.Add(pedido);
+                        }
+                    }
+                    
+                    return list;
+                }
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Pedido>();
+            }
+        }
+
 
 
         /// <summary>

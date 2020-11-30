@@ -1,0 +1,20 @@
+﻿<Page x:Class="MaipoGrandeApp.VistaReportes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:MaipoGrandeApp" xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+      mc:Ignorable="d" 
+      d:DesignHeight="614" d:DesignWidth="792"
+      Title="IngresarVenta">
+
+    <Grid Background="White">
+        <!--Windows Form Host para la seccion de reportes-->
+        <WindowsFormsHost HorizontalAlignment="Left" Height="498" Margin="10,90,0,0" VerticalAlignment="Top" Width="772">
+            <!--Seccion para la visualizacion de reportes-->
+            <rv:ReportViewer x:Name="_reportViewer"/>
+        </WindowsFormsHost>
+
+    </Grid>
+</Page>

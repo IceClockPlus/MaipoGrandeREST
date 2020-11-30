@@ -1,0 +1,115 @@
+﻿<Page x:Class="MaipoGrandeApp.SubastasTransporte"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:MaipoGrandeApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="614" d:DesignWidth="800"
+      Title="SubastasTransporte">
+
+    <Grid Background="White">
+        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="141" Margin="23,112,0,0" VerticalAlignment="Top" Width="748" AutoGenerateColumns="False" IsReadOnly="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha inicio" Binding="{Binding FechaPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Entrega" Binding="{Binding FechaEntrega}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPedido.DescripcionEstado}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ciudad" Binding="{Binding Ciudad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pais" Binding="{Binding Pais}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnRevisarSubasta" Content="Ver Subasta"  Style="{StaticResource AccentedSquareButtonStyle}" Click="BtnRevisarSubasta_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Seleccion de pedido creación de subasta" FontSize="16" Margin="23,72,462,506"/>
+        <TextBox x:Name="txtID" Controls:TextBoxHelper.Watermark="Id Subasta" HorizontalAlignment="Left" Height="29" Margin="673,403,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118"/>
+        <DatePicker x:Name="dateFechaInicio" HorizontalAlignment="Left" Margin="322,306,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.38,0.607"/>
+        <DatePicker x:Name="dateFechaTermino" HorizontalAlignment="Left" Margin="568,306,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbFechaInicio" Content="Fecha de Inicio" HorizontalAlignment="Left" Margin="322,276,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbFechaTermino" Content="Fecha de Termino" HorizontalAlignment="Left" Margin="568,276,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="tablaSubasta" IsReadOnly="True" HorizontalAlignment="Left" Height="155" Margin="23,403,0,0" VerticalAlignment="Top" Width="637" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdSubasta}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Inicio" Binding="{Binding FechaInicio, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Termino" Binding="{Binding FechaTermino, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Header=" Numero Pedido" Binding="{Binding Pedido.IdPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado Subasta" Binding="{Binding EstadoSubasta.Descripcion}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnVerOfertas" Content="Ver Ofertas" Click="BtnVerOfertas_Click" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="BtnAgregarSubasta" Content="Agregar" HorizontalAlignment="Left" Margin="23,563,0,0" VerticalAlignment="Top" Width="121" Click="BtnAgregarSubasta_Click"/>
+        <Button x:Name="btnCargar" Content="Cargar" HorizontalAlignment="Left" Margin="673,369,0,0" VerticalAlignment="Top" Width="122" Click="btnCargar_Click"/>
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="201,563,0,0" VerticalAlignment="Top" Width="122" Click="btnActualizar_Click"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="376,563,0,0" VerticalAlignment="Top" Width="122" Click="btnEliminar_Click"/>
+
+        <Controls:FlyoutsControl d:IsHidden="True" >
+            <Controls:Flyout x:Name="flyOfertasTransportista" Width="623" Background="#FFF7955C" Opacity="0.8" Header="Ofertas Transportistas" Margin="177,0,0,214" HorizontalAlignment="Right" FlowDirection="RightToLeft" >
+                <Canvas HorizontalAlignment="Left" Height="414" Width="613">
+                    <Button Content="Asignar" x:Name="BtnAsignarTransportista" Canvas.Left="254" Canvas.Top="256" Height="46" Width="94" RenderTransformOrigin="0.452,1.674" Click="BtnAsignarTransportista_Click"></Button>
+                    <DataGrid x:Name="GridOfertas" IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="True" Canvas.Left="10" Canvas.Top="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id Oferta" Binding="{Binding IdOferta}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio" Binding="{Binding PrecioOferta}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Fecha Oferta" Binding="{Binding FechaOferta}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Transportista" Binding="{Binding Transportista.Nombre}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tipo Transporte" Binding="{Binding TipoTransporte.Descripcion}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Seleccionado">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="Text" Value="No" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Seleccionado}" Value="1">
+                                                            <Setter Property="Text" Value="Si" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Canvas>
+            </Controls:Flyout>
+
+
+            <Controls:Flyout x:Name="flyActualizarSubasta" Width="346" Background="#FFF7955C" Opacity="0.8" Header="Actualizar Subasta" Margin="457,0,-3,214" HorizontalAlignment="Right" FlowDirection="RightToLeft" Visibility="Hidden">
+                <Canvas HorizontalAlignment="Left" Height="414" Width="346">
+                    <TextBox x:Name="txtEstadoActualizar" Height="24" Canvas.Left="10" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Estado subasta" Canvas.Top="104" Width="145"/>
+                    <TextBox x:Name="txtIdPedidoActualizar" Height="23" Canvas.Left="188" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Id Pedido" Canvas.Top="104" Width="145"/>
+                    <DatePicker x:Name="dateActualizarInicio" Canvas.Left="188" Canvas.Top="185" Width="145"></DatePicker>
+                    <DatePicker x:Name="dateActualizarTermino" Canvas.Left="10" Canvas.Top="185" RenderTransformOrigin="0.386,0.654"></DatePicker>
+                    <Label x:Name="lbFechaInicio1" Canvas.Left="261" Content="Fecha Inicio" Canvas.Top="159"></Label>
+                    <Label x:Name="lbFechaTermino1" Content="Fecha Termino" Canvas.Left="69" Canvas.Top="159"></Label>
+                    <TextBox x:Name="txtActualizarID" Height="23" Canvas.Left="188" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Id" Canvas.Top="37" Width="146"/>
+                </Canvas>
+            </Controls:Flyout>
+
+        </Controls:FlyoutsControl>
+        <Label FontSize="20" Content="Subastas" HorizontalAlignment="Left" Margin="42,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.487,-0.308" Width="103"/>
+        <Label FontSize="16" Content="Lista de Subastas" HorizontalAlignment="Left" Margin="23,367,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="14" Content="Selecciona las fechas para crear una subasta" HorizontalAlignment="Left" Margin="23,294,0,0" VerticalAlignment="Top"/>
+        <Separator HorizontalAlignment="Left" Height="13" Margin="23,258,0,0" VerticalAlignment="Top" Width="748"/>
+        <Separator HorizontalAlignment="Left" Height="13" Margin="23,349,0,0" VerticalAlignment="Top" Width="748"/>
+
+    </Grid>
+</Page>

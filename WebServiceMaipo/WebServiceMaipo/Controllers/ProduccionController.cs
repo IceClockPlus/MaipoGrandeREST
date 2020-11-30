@@ -13,6 +13,43 @@ namespace WebServiceMaipo.Controllers
     public class ProduccionController : ApiController
     {
         [HttpGet]
+        public IEnumerable<Produccion>ObtenerProduccion(int idProductor)
+        {
+            try
+            {
+                List<Produccion> list = new List<Produccion>();
+                list = RepositorioProduccion.ObtenerPorIdProductor(idProductor);
+                return list;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return (IEnumerable<Produccion>)NotFound();
+            }
+
+        }
+
+        [HttpGet]
+        [Route("api/Produccion/")]
+        public IEnumerable<Produccion> ObtenerProduccion()
+        {
+            try
+            {
+                List<Produccion> list = new List<Produccion>();
+                Produccion produccion = new Produccion();
+                list = produccion.ReadAll();
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return (IEnumerable<Produccion>)NotFound();
+            }
+
+        }
+
+        [HttpGet]
         [Route("api/ProduccionProductor/")]
         public IEnumerable<Produccion> ObtenerProduccionProductor(SecurityViewModel model)
        {
@@ -21,20 +58,26 @@ namespace WebServiceMaipo.Controllers
                 Usuario user = this.Validate(model.Token);
 
                 List<Produccion> listadoProduccion = new List<Produccion>();
-                listadoProduccion = RepositorioProduccion.ObtenerPorIdProductor(user.TipoUsuario.Id);
+                Produccion produccion = new Produccion();
+                produccion.Productor = (Productor)user.TipoUsuario;
+
+                listadoProduccion = produccion.ReadByIdProductor();
+
                 return listadoProduccion;
             }
             catch (Exception ex)
             {
 
-                return null;
+                return new List<Produccion>();
             }
         }
 
    
 
         // POST: api/Produccion
-        public IHttpActionResult RegistrarProduccion([FromBody]ProduccionViewModel model)
+        [HttpPost]
+        [Route("api/ProduccionPost")]
+        public IHttpActionResult Post([FromBody]ProduccionViewModel model)
         {
             try
             {

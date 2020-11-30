@@ -1,0 +1,88 @@
+﻿<Page x:Class="MaipoGrandeApp.ProcesoVenta"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:MaipoGrandeApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="614" d:DesignWidth="792"
+      Title="ProcesoVenta">
+
+    <Grid Background="White">
+        <DataGrid x:Name="dataPedido" HorizontalAlignment="Left" Height="157" Margin="44,127,0,0" VerticalAlignment="Top" Width="722" AutoGenerateColumns="False" IsReadOnly="True" ToolTip="Seleccione pedido para revisar" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha inicio" Binding="{Binding FechaPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Entrega" Binding="{Binding FechaEntrega}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPedido.DescripcionEstado}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ciudad" Binding="{Binding Ciudad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pais" Binding="{Binding Pais}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dataDetalle" IsReadOnly="True" HorizontalAlignment="Left" Height="151" Margin="44,419,0,0" VerticalAlignment="Top" Width="722" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdItemPedido}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre producto" Binding="{Binding Producto.NombreProducto}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad (Kg)" Binding="{Binding Cantidad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Productor Asignado">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Text" Value="{Binding Productor.Nombre}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Productor.Nombre}" Value="">
+                                                <Setter Property="Text" Value="No Asignado" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnAsignarProductor" Click="BtnAsignarProductor_Click" Content="Asignar" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="lbTablaPedidos" Content="Revisión de Pedidos" HorizontalAlignment="Left" Margin="44,91,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="lbTablaDetalle" Content="Detalle del Pedido" HorizontalAlignment="Left" Margin="44,383,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="lbProceso" Content="Proceso de Venta" HorizontalAlignment="Left" Margin="44,10,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <ComboBox x:Name="cbxEstadoPedido" HorizontalAlignment="Left" Margin="199,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxEstadoPedido_SelectionChanged" Controls:TextBoxHelper.Watermark="Filtro Pedido"/>
+        <Button Content="Revisar" HorizontalAlignment="Left" Margin="70,289,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Button IsEnabled="True" x:Name="BtnIniciarProceso" Content="Iniciar Proceso" HorizontalAlignment="Left" Margin="184,289,0,0" VerticalAlignment="Top" Width="110" Click="BtnIniciarProceso_Click" RenderTransformOrigin="-0.695,-0.983"/>
+
+
+        <Controls:FlyoutsControl d:IsHidden="True">
+            <Controls:Flyout x:Name="FlyAsignarProductor" Width="724" Background="#FFF7955C" Opacity="0.8" Header="Asignar Productor" Margin="79,0,-11,214" HorizontalAlignment="Right" FlowDirection="RightToLeft"  >
+                <Canvas HorizontalAlignment="Left" Height="315" Width="724">
+                    <DataGrid x:Name="DataProduccion" IsReadOnly="True"  AutoGenerateColumns="False" Canvas.Left="108">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Productor.Nombre}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Producto" Binding="{Binding Producto.NombreProducto}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio Lower" Binding="{Binding PrecioLower}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio Estandar" Binding="{Binding PrecioEstandar}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio Premium" Binding="{Binding PrecioPremium}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="BtnEnviarSolicitud" Content="Asignar Productor" Canvas.Left="414" Canvas.Top="232" Width="144" Height="37" Click="BtnEnviarSolicitud_Click"/>
+                </Canvas>
+
+            </Controls:Flyout>
+
+
+        </Controls:FlyoutsControl>
+
+    </Grid>
+</Page>

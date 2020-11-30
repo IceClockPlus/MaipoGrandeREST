@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using LibreriaMaipo.Modelo;
 
+
 namespace MaipoGrandeApp
 {
     /// <summary>
@@ -27,9 +28,11 @@ namespace MaipoGrandeApp
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
 
@@ -53,6 +56,7 @@ namespace MaipoGrandeApp
                 //Validar que el usuario este habilitado
                 if (this.VerificarHabilitado(usuario.IsHabilitado) == true)
                 {
+                    MenuPrincipal menu = new MenuPrincipal();
                     //Generar la vista en base al rol del usuario conectado
                     switch (usuario.NombreRol)
                     {
@@ -61,6 +65,9 @@ namespace MaipoGrandeApp
                             break;
                         case "Consultor":
                             this.MostrarVistaConsultor(usuario);
+                            break;
+                        case "Ejecutivo":
+                            this.MostrarVistaEjecutivo(usuario);
                             break;
                         default:
                             await this.ShowMessageAsync("Error", "Usuario no permitido");
@@ -105,6 +112,14 @@ namespace MaipoGrandeApp
             menu.Title = "Administrador";
             menu.Visibility = Visibility.Visible;
             menu.btnReportes.Visibility = Visibility.Hidden;
+            menu.btnPerfilUsuario.Visibility = Visibility.Visible;
+            menu.btnVenta.Visibility = Visibility.Hidden;
+            menu.btnNotificarEstadoVenta.Visibility = Visibility.Hidden;
+            menu.btnSubastas.Visibility = Visibility.Hidden;
+            menu.btnContratos.Visibility = Visibility.Visible;
+            menu.imgEjecutivo.Visibility = Visibility.Hidden;
+            menu.lbRolUsuario.Content = "Administrador";
+            menu.imgAdmin.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -120,7 +135,31 @@ namespace MaipoGrandeApp
             menu.btnGrafico.Visibility = Visibility.Hidden;
             menu.btnPerfilUsuario.Visibility = Visibility.Hidden;
             menu.btnPerfiTransporte.Visibility = Visibility.Hidden;
-            menu.btnTienda.Visibility = Visibility.Hidden;
+            menu.btnVenta.Visibility = Visibility.Hidden;
+            menu.btnVenta.Visibility = Visibility.Hidden;
+            menu.btnNotificarEstadoVenta.Visibility = Visibility.Hidden;
+            menu.btnSubastas.Visibility = Visibility.Hidden;
+            menu.btnContratos.Visibility = Visibility.Hidden;
         }
+
+        public void MostrarVistaEjecutivo(Usuario usr)
+        {
+            this.Visibility = Visibility.Hidden;
+            MenuPrincipal menu = new MenuPrincipal(usr);
+            menu.Title = "Ejecutivo";
+            menu.Visibility = Visibility.Visible;
+            menu.btnGrafico.Visibility = Visibility.Hidden;
+            menu.btnPerfilUsuario.Visibility = Visibility.Hidden;
+            menu.btnReportes.Visibility = Visibility.Visible;
+            menu.btnVenta.Visibility = Visibility.Visible;
+            menu.btnNotificarEstadoVenta.Visibility = Visibility.Visible;
+            menu.btnSubastas.Visibility = Visibility.Visible;
+            menu.btnContratos.Visibility = Visibility.Hidden;
+            menu.frameMenu.Content = new ProcesoVenta(menu);
+            menu.imgEjecutivo.Visibility = Visibility.Visible;
+            menu.lbRolUsuario.Content = "Ejecutivo";
+            menu.imgAdmin.Visibility = Visibility.Hidden;
+        }
+
     }
 }

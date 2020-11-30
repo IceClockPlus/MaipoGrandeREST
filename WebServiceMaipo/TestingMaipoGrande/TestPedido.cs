@@ -17,5 +17,28 @@ namespace TestingMaipoGrande
             Assert.IsNotNull(pedido);
 
         }
+
+        [TestMethod]
+        public void AgregarPedido()
+        {
+            //Arrange
+            Pedido pedido = new Pedido();
+            pedido.FechaPedido = DateTime.Now;
+            pedido.FechaEntrega = null;
+            pedido.EstadoPedido.IdEstado = 1;
+            pedido.Cliente.Id = 19191651;
+            pedido.Direccion = "Direccion Test";
+            pedido.Ciudad = "Ciudad Test";
+            pedido.Pais = "Pais Test";
+
+            //Act
+            bool result = pedido.Insert();
+
+            //Assert
+            Assert.IsTrue(result);
+
+        }
+
+
     }
 }
