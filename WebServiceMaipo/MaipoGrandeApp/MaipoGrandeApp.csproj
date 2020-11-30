@@ -217,7 +217,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte.rdlc" />
     <EmbeddedResource Include="ReporteVentas.rdlc" />
-    <EmbeddedResource Include="ReporteVentasCliente.rdlc" />
+    <EmbeddedResource Include="Reportes\SubReporteVentasCliente.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\LibreriaMaipo.Modelo.DocumentoVenta.datasource" />
     <None Include="Properties\DataSources\VentasReportes.datasource" />
