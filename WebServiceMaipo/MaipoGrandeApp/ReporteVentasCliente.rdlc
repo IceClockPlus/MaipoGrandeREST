@@ -966,7 +966,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>VentasClienteDS</DataSetName>
-        <Top>3.30729cm</Top>
+        <Top>3.20625cm</Top>
         <Left>2.27542cm</Left>
         <Height>3cm</Height>
         <Width>12.65875cm</Width>
@@ -1009,10 +1009,10 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>4.6875in</Height>
+    <Height>5.12629in</Height>
     <Style />
   </Body>
-  <Width>9.5981in</Width>
+  <Width>11.64001in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
