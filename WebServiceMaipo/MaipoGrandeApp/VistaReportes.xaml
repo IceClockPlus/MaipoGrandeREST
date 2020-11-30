@@ -10,7 +10,9 @@
       Title="IngresarVenta">
 
     <Grid Background="White">
+        <!--Windows Form Host para la seccion de reportes-->
         <WindowsFormsHost HorizontalAlignment="Left" Height="498" Margin="10,90,0,0" VerticalAlignment="Top" Width="772">
+            <!--Seccion para la visualizacion de reportes-->
             <rv:ReportViewer x:Name="_reportViewer"/>
         </WindowsFormsHost>
 

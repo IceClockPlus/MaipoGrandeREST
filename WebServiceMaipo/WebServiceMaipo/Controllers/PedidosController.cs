@@ -30,8 +30,8 @@ namespace WebServiceMaipo.Controllers
                 Pedido pedido = new Pedido();
                 pedido.Cliente = (Cliente)user.TipoUsuario;
                 pedido.Ciudad = modelPedido.Ciudad;
-                pedido.Direccion = modelPedido.DireccionPedido;
-                pedido.Pais = modelPedido.Pais;
+                pedido.Direccion = user.TipoUsuario.Direccion;
+                pedido.Pais = user.Pais.NombrePais;
                 pedido.FechaPedido = modelPedido.FechaPedido;
                 pedido.FechaEntrega = modelPedido.FechaEntrega;
 
