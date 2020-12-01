@@ -13,6 +13,19 @@
           </Border>
         </Style>
       </Subreport>
+      <Subreport Name="SubVentasClienteGrafico">
+        <ReportName>SubVentasClienteGrafico</ReportName>
+        <Top>1.87537cm</Top>
+        <Left>14.25787cm</Left>
+        <Height>7.6cm</Height>
+        <Width>7.5cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
     </ReportItems>
     <Height>4.35546in</Height>
     <Style />

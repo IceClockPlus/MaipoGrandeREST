@@ -9,6 +9,7 @@ namespace MaipoGrandeApp
     /// <summary>
     /// Clase para la generacion de reportes de ventas
     /// </summary>
+    /// 
     public class VentasReportes
     {
         public int IdDocumento { get; set; }

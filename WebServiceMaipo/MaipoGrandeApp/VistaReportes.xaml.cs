@@ -35,7 +35,7 @@ namespace MaipoGrandeApp
         public VistaReportes(MenuPrincipal m)
         {
             InitializeComponent();
-            this.ObtenerDocumentosVenta();
+            ObtenerDocumentosVenta();
             _reportViewer.Load += ReportViewer_Load;
             main = m;
         }
@@ -93,14 +93,15 @@ namespace MaipoGrandeApp
             if (ventas == null)
                 ObtenerDocumentosVenta();
             e.DataSources.Add(new ReportDataSource("VentasClienteDS", ventas));
-
+            e.DataSources.Add(new ReportDataSource("VentasGraficoDS", ventas));
         }
+
+
 
         private void ReportViewer_Load(object sender, EventArgs e)
         {
             
             List<VentasReportes> dataset = new List<VentasReportes>();
-            //dataset = this.ObtenerDocumentosVenta();
             dataset = ventas;    
 
             _reportViewer.LocalReport.DataSources.Clear();
@@ -116,18 +117,10 @@ namespace MaipoGrandeApp
             //Llamar evento para llenar los datos de los subinformes
             this._reportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubVentasClienteSubreportProcessing);
 
-            //Llamar eventa para llenar los datos del grafico del subinforme VentaClienteGrafico
 
             _reportViewer.Refresh();
             _reportViewer.RefreshReport();
 
-
-
-
-            
         }
-
-
-
     }
 }

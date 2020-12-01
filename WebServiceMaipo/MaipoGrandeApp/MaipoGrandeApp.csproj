@@ -216,6 +216,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte.rdlc" />
+    <EmbeddedResource Include="Reportes\SubVentasClienteGrafico.rdlc" />
     <EmbeddedResource Include="ReporteVentas.rdlc" />
     <EmbeddedResource Include="Reportes\SubReporteVentasCliente.rdlc" />
     <None Include="packages.config" />
