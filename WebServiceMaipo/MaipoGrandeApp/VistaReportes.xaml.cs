@@ -105,11 +105,11 @@ namespace MaipoGrandeApp
             dataset = ventas;    
 
             _reportViewer.LocalReport.DataSources.Clear();
-            var rpds_model = new ReportDataSource() { Name = "DataVentas", Value = ventas };
+            var rpds_model = new ReportDataSource() { Name = "HistoricoVentaClienteDS", Value = ventas };
             _reportViewer.LocalReport.DataSources.Add(rpds_model);
 
             //Obtener la url de la solucion de escritorio y concatenar con la ubicacion del reporte 
-            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\Reportes\\Reporte.rdlc";
+            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\Reportes\\VentasCliente\\SubVentasClienteHistorico.rdlc";
 
             //Establecer ubicacion del reporte principal
             this._reportViewer.LocalReport.ReportPath = startupPath;
