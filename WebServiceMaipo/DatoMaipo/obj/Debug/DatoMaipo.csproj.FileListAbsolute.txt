@@ -24,6 +24,7 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Debug\DatoMaipo.pdb
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Debug\EntityFramework.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Debug\Oracle.ManagedDataAccess.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\bin\Debug\EntityFramework.xml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.csprojAssemblyReference.cache
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.csproj.CoreCompileInputs.cache
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.csproj.CopyComplete
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\DatoMaipo\obj\Debug\DatoMaipo.dll
