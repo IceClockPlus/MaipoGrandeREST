@@ -26,8 +26,20 @@
           </Border>
         </Style>
       </Subreport>
+      <Subreport Name="SubVentasClienteHistorico">
+        <ReportName>SubVentasClienteHistorico</ReportName>
+        <Top>7.95843cm</Top>
+        <Height>5.80083cm</Height>
+        <Width>19.72057cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
     </ReportItems>
-    <Height>4.59504in</Height>
+    <Height>6.07882in</Height>
     <Style />
   </Body>
   <Width>10.17708in</Width>
@@ -133,6 +145,10 @@
         <Field Name="Impuesto">
           <DataField>Impuesto</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="MesAnno">
+          <DataField>MesAnno</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Pais">
           <DataField>Pais</DataField>

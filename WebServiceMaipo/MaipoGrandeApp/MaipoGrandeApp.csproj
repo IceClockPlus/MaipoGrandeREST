@@ -223,6 +223,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\LibreriaMaipo.Modelo.DocumentoVenta.datasource" />
     <None Include="Properties\DataSources\VentasReportes.datasource" />
+    <None Include="Properties\DataSources\VistaReportes.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

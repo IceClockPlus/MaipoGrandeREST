@@ -349,10 +349,10 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>VentasGraficoDS</DataSetName>
-        <Top>1.95474cm</Top>
-        <Left>1.87537cm</Left>
-        <Height>5.55562cm</Height>
-        <Width>8.10854cm</Width>
+        <Top>0.89641cm</Top>
+        <Left>0.55245cm</Left>
+        <Height>6.61395cm</Height>
+        <Width>9.43146cm</Width>
         <Style>
           <Border>
             <Color>LightGrey</Color>
@@ -363,10 +363,10 @@
         </Style>
       </Chart>
     </ReportItems>
-    <Height>4.53125in</Height>
+    <Height>3.53125in</Height>
     <Style />
   </Body>
-  <Width>5.88901in</Width>
+  <Width>4.24318in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

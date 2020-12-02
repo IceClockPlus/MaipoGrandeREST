@@ -273,6 +273,8 @@ C:\Users\Matias\Desktop\MaipoGrandeREST-master\WebServiceMaipo\MaipoGrandeApp\ob
 C:\Users\Matias\Desktop\MaipoGrandeREST-master\WebServiceMaipo\MaipoGrandeApp\obj\Debug\MaipoGrandeApp.pdb
 C:\Users\Matias\Desktop\MaipoGrandeREST-master\WebServiceMaipo\MaipoGrandeApp\obj\Debug\ProcesoVenta.g.cs
 C:\Users\Matias\Desktop\MaipoGrandeREST-master\WebServiceMaipo\MaipoGrandeApp\obj\Debug\ProcesoVenta.baml
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Web.Mvc.dll
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Web.Http.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\MaipoGrandeApp.exe.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\MaipoGrandeApp.exe
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\MaipoGrandeApp.pdb
@@ -301,8 +303,6 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Win
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\WebServiceMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\DatoMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Web.Optimization.dll
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Web.Mvc.dll
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Web.Http.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Net.Http.Formatting.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\System.Web.Http.WebHost.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\MaipoGrandeApp\bin\Debug\DevExpress.Xpo.v20.2.dll

@@ -8,30 +8,15 @@
             <ChartMember>
               <Group Name="Chart1_CategoryGroup">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!FechaEmision.Value</GroupExpression>
+                  <GroupExpression>=Fields!MesAnno.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!FechaEmision.Value</Value>
+                  <Value>=Fields!MesAnno.Value</Value>
                 </SortExpression>
               </SortExpressions>
-              <ChartMembers>
-                <ChartMember>
-                  <Group Name="Chart1_CategoryGroup1">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!FechaEmision.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <SortExpressions>
-                    <SortExpression>
-                      <Value>=Fields!FechaEmision.Value</Value>
-                    </SortExpression>
-                  </SortExpressions>
-                  <Label>=MonthName(Fields!FechaEmision.Value)</Label>
-                </ChartMember>
-              </ChartMembers>
-              <Label>=Year(Fields!FechaEmision.Value)</Label>
+              <Label>=Fields!MesAnno.Value</Label>
             </ChartMember>
           </ChartMembers>
         </ChartCategoryHierarchy>
@@ -102,7 +87,7 @@
                   <Color>#5c5c5c</Color>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption />
+                  <Caption>Mes/Año</Caption>
                   <Style>
                     <FontSize>9pt</FontSize>
                     <Color>#5c5c5c</Color>
@@ -215,7 +200,7 @@
                   <Color>#5c5c5c</Color>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption />
+                  <Caption>Ventas en Dolares</Caption>
                   <Style>
                     <FontSize>9pt</FontSize>
                     <Color>#5c5c5c</Color>
@@ -342,7 +327,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Título del gráfico</Caption>
+            <Caption>Historial de Ganancia por Cliente</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontSize>9pt</FontSize>
@@ -436,6 +421,10 @@
         <Field Name="Impuesto">
           <DataField>Impuesto</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="MesAnno">
+          <DataField>MesAnno</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Pais">
           <DataField>Pais</DataField>

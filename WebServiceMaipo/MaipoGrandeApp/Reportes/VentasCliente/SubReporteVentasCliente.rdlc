@@ -977,7 +977,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>4.28254in</Height>
+    <Height>1.90754in</Height>
     <Style />
   </Body>
   <Width>5.45251in</Width>
@@ -1027,6 +1027,10 @@
         <Field Name="Impuesto">
           <DataField>Impuesto</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="MesAnno">
+          <DataField>MesAnno</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Pais">
           <DataField>Pais</DataField>
