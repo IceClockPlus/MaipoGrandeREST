@@ -215,11 +215,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\VentasCliente\Reporte.rdlc" />
+    <EmbeddedResource Include="Reportes\VentasCliente\SubVentasClienteGrafico.rdlc" />
+    <EmbeddedResource Include="Reportes\VentasCliente\SubVentasClienteHistorico.rdlc" />
     <EmbeddedResource Include="ReporteVentas.rdlc" />
-    <EmbeddedResource Include="ReporteVentasCliente.rdlc" />
+    <EmbeddedResource Include="Reportes\VentasCliente\SubReporteVentasCliente.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\LibreriaMaipo.Modelo.DocumentoVenta.datasource" />
     <None Include="Properties\DataSources\VentasReportes.datasource" />
+    <None Include="Properties\DataSources\VistaReportes.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -346,8 +350,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reportes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

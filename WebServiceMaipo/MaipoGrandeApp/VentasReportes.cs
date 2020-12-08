@@ -9,13 +9,15 @@ namespace MaipoGrandeApp
     /// <summary>
     /// Clase para la generacion de reportes de ventas
     /// </summary>
+    /// 
     public class VentasReportes
     {
         public int IdDocumento { get; set; }
         public string Cliente { get; set; }
         public string Pais { get; set; }
         public string EstadoDocumento { get; set; }
-        public Nullable<DateTime> FechaEmision { get; set; }
+        public string MesAnno { get; set; }
+        public DateTime FechaEmision { get; set; }
         public Nullable<decimal> PrecioProducto { get; set; }
         public Nullable<decimal> PrecioTransporte { get; set; }
         public Nullable<decimal> Impuesto { get; set; }
@@ -33,7 +35,8 @@ namespace MaipoGrandeApp
             this.Cliente = string.Empty;
             this.Pais = string.Empty;
             this.EstadoDocumento = string.Empty;
-            this.FechaEmision = null;
+            this.MesAnno = string.Empty;
+            this.FechaEmision = DateTime.Now;
             this.PrecioProducto = null;
             this.PrecioTransporte = null;
             this.Impuesto = null;

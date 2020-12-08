@@ -230,6 +230,7 @@ E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaip
 E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaipo.csproj.CopyComplete
 E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaipo.dll
 E:\Proyectos\Portafolio\WebServiceMaipo\WebServiceMaipo\obj\Debug\WebServiceMaipo.pdb
+E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\WebServiceMaipo.dll.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\WebServiceMaipo.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\WebServiceMaipo.pdb
@@ -240,7 +241,6 @@ E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\csi.exe
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\csi.exe.config
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\csi.rsp
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CodeAnalysis.dll
 E:\Proyectos\MaipoGrandeREST\WebServiceMaipo\WebServiceMaipo\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
