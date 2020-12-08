@@ -113,7 +113,7 @@ namespace MaipoGrandeApp
             _reportViewer.LocalReport.DataSources.Add(rpds_model);
 
             //Obtener la url de la solucion de escritorio y concatenar con la ubicacion del reporte 
-            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\Reportes\\VentasCliente\\Reporte.rdlc";
+            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\Reportes\\VentasCliente\\ReporteVenta.rdlc";
 
             //Establecer ubicacion del reporte principal
             this._reportViewer.LocalReport.ReportPath = startupPath;
