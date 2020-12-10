@@ -471,6 +471,7 @@
                               <Value>=Sum(Fields!Total.Value)</Value>
                               <Style>
                                 <FontWeight>Normal</FontWeight>
+                                <Format>0.00'USD';(0.00'USD')</Format>
                                 <Color>#333333</Color>
                               </Style>
                             </TextRun>
@@ -586,6 +587,7 @@
                               <Value>= Sum(Fields!Total.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00'USD';(0.00'USD')</Format>
                                 <Color>#333333</Color>
                               </Style>
                             </TextRun>

@@ -139,8 +139,15 @@ namespace MaipoGrandeApp
             try
             {
                 var detalle = (Pedido)dataPedido.SelectedItem;
+                if(detalle != null)
+                {
+                    dataDetalle.ItemsSource = detalle.DetallePedido;
+                }
+                else
+                {
+                    main.Mensaje("Aviso", "Seleccione un pedido del listado");
+                }
 
-                dataDetalle.ItemsSource = detalle.DetallePedido;
             }
             catch (Exception ex)
             {
@@ -158,8 +165,10 @@ namespace MaipoGrandeApp
                 Pedido pedido = (Pedido)dataPedido.SelectedItem;
                 if (pedido != null)
                 {
+                    //Calcula los items de productos aceptados por los clientes y los compara con el total
                     int total = pedido.DetallePedido.Count();
                     int aceptados = pedido.DetallePedido.Where(d => d.Estado == "Aceptado").Count();
+                    //Si la cantidad de items aceptados por productores es igual al total de estos, se cambia al siguiente estado
                     if (aceptados == total)
                     {
                         pedido.EstadoPedido.IdEstado = 7;
@@ -367,20 +376,39 @@ namespace MaipoGrandeApp
             try
             {
                 Pedido pedido = (Pedido)dataPedido.SelectedItem;
-                pedido.EstadoPedido.IdEstado = 6;
-                HttpClient cliente = new HttpClient();
-                var content = new StringContent(JsonConvert.SerializeObject(pedido), Encoding.UTF8, "application/json");
-                var response = cliente.PutAsync("http://localhost:54192/api/Pedidos", content).Result;
-                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                //Comprobar que se ha seleccionado un pedido del listado
+                if(pedido != null)
                 {
-                    //Obtener los datos de los productores
-                    var productores = this.ObtenerProductores();
-                    //Enviar los correos a los productores registrados
-                    this.NotificarProductores(productores);
-                    //Notificar al usuario del proceso
-                    main.Mensaje("Proceso de Venta", "Se ha iniciado el proceso de venta. Se ha notificado a los productores");
+                    if(pedido.EstadoPedido.IdEstado == 1)
+                    {
+                        pedido.EstadoPedido.IdEstado = 6;
+                        HttpClient cliente = new HttpClient();
+                        var content = new StringContent(JsonConvert.SerializeObject(pedido), Encoding.UTF8, "application/json");
+                        var response = cliente.PutAsync("http://localhost:54192/api/Pedidos", content).Result;
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            //Obtener los datos de los productores
+                            var productores = this.ObtenerProductores();
+                            //Enviar los correos a los productores registrados
+                            this.NotificarProductores(productores);
+                            //Notificar al usuario del proceso
+                            main.Mensaje("Proceso de Venta", "Se ha iniciado el proceso de venta. Se ha notificado a los productores");
 
+                        }
+                    }
+                    else
+                    {
+                        main.Mensaje("Aviso", "El pedido ya ha iniciado su proceso");
+                    }
+
+                    
                 }
+                else
+                {
+                    main.Mensaje("Aviso", "Debe seleccionar un pedido de la lista");
+                }
+
+                
 
             }
             catch (Exception ex)
