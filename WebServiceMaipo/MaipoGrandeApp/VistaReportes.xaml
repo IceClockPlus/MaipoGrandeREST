@@ -15,6 +15,8 @@
             <!--Seccion para la visualizacion de reportes-->
             <rv:ReportViewer x:Name="_reportViewer"/>
         </WindowsFormsHost>
+        <ComboBox x:Name="CbxReportes" HorizontalAlignment="Left" Margin="105,42,0,0" VerticalAlignment="Top" Width="128" SelectionChanged="CbxReportes_SelectionChanged"/>
+        <Label Content="Reporte" HorizontalAlignment="Left" Margin="40,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.908,-0.019"/>
 
     </Grid>
 </Page>
