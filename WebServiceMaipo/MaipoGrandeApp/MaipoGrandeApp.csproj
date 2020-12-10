@@ -215,6 +215,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\EncuestaSatisfaccion\ReporteEncuesta.rdlc" />
+    <EmbeddedResource Include="Reportes\EncuestaSatisfaccion\SubEncuestaGrafico.rdlc" />
+    <EmbeddedResource Include="Reportes\EncuestaSatisfaccion\SubEncuestaTabla.rdlc" />
     <EmbeddedResource Include="Reportes\VentasCliente\ReporteVenta.rdlc" />
     <EmbeddedResource Include="Reportes\VentasCliente\SubVentasClienteGrafico.rdlc" />
     <EmbeddedResource Include="Reportes\VentasCliente\SubVentasClienteHistorico.rdlc" />
@@ -222,6 +225,7 @@
     <EmbeddedResource Include="Reportes\VentasCliente\SubReporteVentasCliente.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\LibreriaMaipo.Modelo.DocumentoVenta.datasource" />
+    <None Include="Properties\DataSources\LibreriaMaipo.Modelo.Encuesta.datasource" />
     <None Include="Properties\DataSources\VentasReportes.datasource" />
     <None Include="Properties\DataSources\VistaReportes.datasource" />
     <None Include="Properties\Settings.settings">
@@ -350,8 +354,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reportes\EncuestaSatisfaccion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
